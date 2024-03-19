@@ -1,0 +1,63 @@
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "tailwindcss/utilities";
+
+@layer components {
+  .fc-scrollgrid {
+    overflow: scroll !important;
+  }
+
+  .fc td,
+  .fc th,
+  table,
+  .fc-next-button,
+  .fc-prev-button {
+    border-style: none !important;
+    outline: none !important;
+    transition: all 0.2s;
+  }
+
+  .fc-button:focus,
+  .fc-button:active {
+    border-style: none !important;
+    outline: none !important;
+  }
+
+  .fc-next-button,
+  .fc-prev-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-size: 28px;
+    background-color: white !important;
+    color: #006a74 !important;
+    border-radius: 8px;
+    transition: all 0.3s;
+  }
+
+  .fc-next-button:hover,
+  .fc-prev-button:hover {
+    color: white !important;
+    background-color: #006a74 !important;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
