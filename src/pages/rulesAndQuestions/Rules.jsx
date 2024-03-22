@@ -44,7 +44,7 @@ function Rules() {
   ];
 
   return (
-    <SectionColContainer>
+    <SectionColContainer items="items-center">
       <Heading
         type="custom"
         fontSize="text-5xl"

@@ -1,12 +1,13 @@
 import Footer from "../../components/Footer";
 import Hero from "../../components/Hero";
+import MainContainer from "../../components/MainContainer";
 import AboutUs from "./AboutUs";
 import BriefInformation from "./BriefInformation";
 import Task from "./Task";
 
 function Homepage() {
   return (
-    <main className="flex flex-col gap-36 overflow-hidden">
+    <MainContainer>
       <Hero
         title="Komite Etik"
         title2="Universitas Yarsi"
@@ -16,7 +17,7 @@ function Homepage() {
       <AboutUs />
       <Task />
       <Footer />
-    </main>
+    </MainContainer>
   );
 }
 

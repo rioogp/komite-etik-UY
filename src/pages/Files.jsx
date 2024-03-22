@@ -1,4 +1,4 @@
-import Image from "../components/Image";
+import ModalComponent from "../components/ModalComponent";
 import FilesTable from "../features/files/FilesTable";
 import usePageTitle from "../hooks/usePageTitle";
 

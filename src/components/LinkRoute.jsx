@@ -6,7 +6,7 @@ function LinkRoute({ children, type, to }) {
 
   const styles = {
     primary: base + " font-medium",
-    secondary: base + " font-semibold text-sm",
+    secondary: base + " font-semibold text-md",
     footer:
       "font-base text-black text-lg hover:text-slate-700 transition duration-200",
   };

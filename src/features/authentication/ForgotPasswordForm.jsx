@@ -1,8 +1,8 @@
 import ContainerFormLayout from "../../components/authentication/ContainerFormLayout";
 import FormRowInput from "../../components/input/FormRowInput";
-import Input from "../../components/input/Input";
-import Button from "../../components/Button";
 import HeadingAuthentication from "../../components/authentication/HeadingAuthentication";
+import { Button, TextField, ThemeProvider } from "@mui/material";
+import { theme } from "../../utils/theme";
 
 function ForgotPasswordForm() {
   return (
@@ -12,13 +12,24 @@ function ForgotPasswordForm() {
         type="primary"
         margin="mb-10"
       />
-
       <FormRowInput>
-        <span className="font-medium text-sm">Email</span>
-        <Input type="text" placeholder="Masukkan Username" />
+        <span className="font-medium text-md">Email</span>
+        <TextField
+          id="outlined-basic"
+          variant="outlined"
+          placeholder="Masukkan email"
+        />
       </FormRowInput>
-
-      <Button type="primary">Kirim</Button>
+      <ThemeProvider theme={theme}>
+        <Button
+          sx={{ marginTop: "20px" }}
+          variant="contained"
+          color="success"
+          className="w-auto h-16"
+        >
+          Kirim
+        </Button>
+      </ThemeProvider>
     </ContainerFormLayout>
   );
 }

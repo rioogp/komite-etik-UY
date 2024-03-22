@@ -2,7 +2,7 @@ import Heading from "../../components/Heading";
 import SectionColContainer from "../../components/SectionColContainer";
 import { container } from "../../utils/variants";
 import CardItem from "./CardItem";
-import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 
 function GeneralQuestions() {
@@ -12,7 +12,7 @@ function GeneralQuestions() {
   });
 
   return (
-    <SectionColContainer>
+    <SectionColContainer items="items-center">
       <Heading
         type="custom"
         fontSize="text-5xl"

@@ -13,6 +13,7 @@ import TitleProvider from "./contexts/TitleContext";
 import HomeLayout from "./components/HomeLayout";
 import Homepage from "./pages/homepage/Homepage";
 import RulesAndQuestions from "./pages/rulesAndQuestions/RulesAndQuestions";
+import Reviews from "./pages/reviews/Reviews";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
             path="/peraturan-dan-pertanyaan"
             element={<RulesAndQuestions />}
           />
+          <Route path="/ulasan" element={<Reviews />} />
         </Route>
       </Routes>
     </BrowserRouter>

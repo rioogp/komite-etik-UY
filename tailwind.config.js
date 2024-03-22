@@ -14,21 +14,6 @@ export default {
         "color-secondary": "#047e8a",
         "heading-primary": "#5ab0b8",
       },
-      keyframes: {
-        slidein: {
-          from: {
-            opacity: "0",
-            transform: "translateY(-10px)",
-          },
-          to: {
-            opacity: "1",
-            transform: "translateY(0)",
-          },
-        },
-      },
-      animation: {
-        slidein: "slidein 1s ease 300ms",
-      },
     },
   },
   plugins: [],

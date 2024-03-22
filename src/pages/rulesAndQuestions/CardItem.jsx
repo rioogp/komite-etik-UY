@@ -4,11 +4,7 @@ import Typography from "@mui/material/Typography";
 import Heading from "../../components/Heading";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { motion } from "framer-motion";
-
-const item = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1 },
-};
+import { item } from "../../utils/variants";
 
 function CardItem() {
   return (

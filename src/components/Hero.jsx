@@ -4,7 +4,7 @@ import Heading from "../components/Heading";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { motion } from "framer-motion";
 
-function Hero({ title, title2, typeImage }) {
+function Hero({ title, title2, typeImage, page, desc }) {
   const navigate = useNavigate();
   const image = `${
     typeImage !== "homepage"
@@ -29,7 +29,7 @@ function Hero({ title, title2, typeImage }) {
   }
 
   const text = title.split(" ");
-  const text2 = title2.split(" ");
+  const text2 = title2 && title2.split(" ");
   const description =
     `Di Universitas Yarsi, kami berkomitmen untuk menjunjung tinggi
   nilai-nilai etika dan moral dalam setiap aspek kehidupan dan kegiatan
@@ -43,15 +43,21 @@ function Hero({ title, title2, typeImage }) {
         <Heading type="heroTitle" color="text-white">
           {textAnimation(text, 0.8)}
         </Heading>
-        <Heading type="heroTitle" color="text-white">
-          {textAnimation(text2, 0.8)}
-        </Heading>
+        {title2 && (
+          <Heading type="heroTitle" color="text-white">
+            {textAnimation(text2, 0.8)}
+          </Heading>
+        )}
         <p className="text-white text-2xl mt-8 mb-8 w-[60rem]">
-          {textAnimation(description, 1.5)}
+          {desc
+            ? textAnimation(desc.split(" "), 1)
+            : textAnimation(description, 1)}
         </p>
-        <Button type="whiteSmall" onClick={() => navigate("/berkas")}>
-          Get Started <IoIosArrowRoundForward size={28} />
-        </Button>
+        {page === "ulasan" || (
+          <Button type="whiteSmall" onClick={() => navigate("/berkas")}>
+            Get Started <IoIosArrowRoundForward size={28} />
+          </Button>
+        )}
       </motion.div>
     </motion.section>
   );

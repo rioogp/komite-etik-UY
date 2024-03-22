@@ -1,12 +1,12 @@
 import Footer from "../../components/Footer";
 import Hero from "../../components/Hero";
-import Card from "./CardItem";
+import MainContainer from "../../components/MainContainer";
 import GeneralQuestions from "./GeneralQuestions";
 import Rules from "./Rules";
 
 function RulesAndQuestions() {
   return (
-    <main className="flex flex-col gap-32 overflow-hidden">
+    <MainContainer>
       <Hero
         title="Peraturan & Pertanyaan"
         title2="Komite Etik Universitas Yarsi"
@@ -15,7 +15,7 @@ function RulesAndQuestions() {
       <Rules />
       <GeneralQuestions />
       <Footer />
-    </main>
+    </MainContainer>
   );
 }
 

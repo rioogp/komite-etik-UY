@@ -1,9 +1,10 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import Button from "./Button";
 import Logo from "./Logo";
 import OutlinedButton from "./OutlinedButton";
 import NavLinkRoute from "./NavLinkRoute";
 import { useEffect, useState } from "react";
+import { Button, ThemeProvider } from "@mui/material";
+import { theme } from "../utils/theme";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -49,14 +50,33 @@ function NavBar() {
             Contact
           </NavLinkRoute>
         </li>
+        <li>
+          <NavLinkRoute style={style} to="/ulasan">
+            Ulasan
+          </NavLinkRoute>
+        </li>
       </ul>
       <div className="flex gap-5">
-        <OutlinedButton onClick={() => navigate("/register")}>
-          Sign Up
-        </OutlinedButton>
-        <Button onClick={() => navigate("/login")} type="primaryHome">
-          Sign In
-        </Button>
+        <ThemeProvider theme={theme}>
+          <Button
+            variant="outlined"
+            color="info"
+            onClick={() => navigate("/register")}
+            className="w-28 h-12"
+          >
+            Sign In
+          </Button>
+        </ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <Button
+            variant="contained"
+            color="success"
+            onClick={() => navigate("/login")}
+            className="w-28 h-12"
+          >
+            Sign In
+          </Button>
+        </ThemeProvider>
       </div>
     </nav>
   );
