@@ -1,12 +1,12 @@
-import { Button, ThemeProvider } from "@mui/material";
-import ContainerFormLayout from "../../components/authentication/ContainerFormLayout";
+import { Button, TextField, ThemeProvider } from "@mui/material";
 import HeadingAuthentication from "../../components/authentication/HeadingAuthentication";
 import FormRowInput from "../../components/FormRowInput";
 import { theme } from "../../utils/theme";
+import Form from "../../components/Form";
 
 function ResetPasswordForm() {
   return (
-    <ContainerFormLayout paddingVertical="py-36">
+    <Form type="regular">
       <HeadingAuthentication
         title="Ubah Password"
         type="primary"
@@ -14,13 +14,21 @@ function ResetPasswordForm() {
       />
 
       <FormRowInput>
-        <span className="font-medium text-sm">Password Baru</span>
-        <Input type="text" placeholder="Masukkan Password Baru" />
+        <span className="font-medium text-md">Password baru</span>
+        <TextField
+          id="outlined-basic"
+          variant="outlined"
+          placeholder="Masukkan username"
+        />
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-sm">Konfirmasi Password Baru</span>
-        <Input type="text" placeholder="Masukkan Konfirmasi Password Baru" />
+        <span className="font-medium text-md">Konfirmasi Password Baru</span>
+        <TextField
+          id="outlined-basic"
+          variant="outlined"
+          placeholder="Masukkan Konfirmasi Password Baru"
+        />
       </FormRowInput>
 
       <ThemeProvider theme={theme}>
@@ -33,7 +41,7 @@ function ResetPasswordForm() {
           Ubah
         </Button>
       </ThemeProvider>
-    </ContainerFormLayout>
+    </Form>
   );
 }
 

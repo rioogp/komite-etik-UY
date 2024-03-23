@@ -1,4 +1,3 @@
-import ContainerFormLayout from "../../components/authentication/ContainerFormLayout";
 import FormRowInput from "../../components/FormRowInput";
 import HeadingAuthentication from "../../components/authentication/HeadingAuthentication";
 import { ThemeProvider } from "@emotion/react";
@@ -14,6 +13,7 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 import { theme } from "../../utils/theme";
 import { useState } from "react";
+import Form from "../../components/Form";
 
 function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,7 +25,7 @@ function RegisterForm() {
   };
 
   return (
-    <ContainerFormLayout paddingVertical="py-16">
+    <Form type="regular">
       <HeadingAuthentication
         title="Lengkapi Data Berikut"
         margin="mb-5"
@@ -139,7 +139,7 @@ function RegisterForm() {
           Daftar
         </Button>
       </ThemeProvider>
-    </ContainerFormLayout>
+    </Form>
   );
 }
 

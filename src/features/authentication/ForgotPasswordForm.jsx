@@ -1,17 +1,18 @@
-import ContainerFormLayout from "../../components/authentication/ContainerFormLayout";
 import FormRowInput from "../../components/FormRowInput";
 import HeadingAuthentication from "../../components/authentication/HeadingAuthentication";
 import { Button, TextField, ThemeProvider } from "@mui/material";
 import { theme } from "../../utils/theme";
+import Form from "../../components/Form";
 
 function ForgotPasswordForm() {
   return (
-    <ContainerFormLayout paddingVertical="py-36">
+    <Form type="regular">
       <HeadingAuthentication
         title="Lupa Password"
         type="primary"
         margin="mb-10"
       />
+
       <FormRowInput>
         <span className="font-medium text-md">Email</span>
         <TextField
@@ -20,6 +21,7 @@ function ForgotPasswordForm() {
           placeholder="Masukkan email"
         />
       </FormRowInput>
+
       <ThemeProvider theme={theme}>
         <Button
           sx={{ marginTop: "20px" }}
@@ -30,7 +32,7 @@ function ForgotPasswordForm() {
           Kirim
         </Button>
       </ThemeProvider>
-    </ContainerFormLayout>
+    </Form>
   );
 }
 

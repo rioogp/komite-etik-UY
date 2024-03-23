@@ -1,5 +1,4 @@
 import LinkRoute from "../../components/LinkRoute";
-import ContainerFormLayout from "../../components/authentication/ContainerFormLayout";
 import HeadingAuthentication from "../../components/authentication/HeadingAuthentication";
 import {
   Button,
@@ -14,6 +13,7 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import { theme } from "../../utils/theme";
 import { useState } from "react";
 import FormRowInput from "../../components/FormRowInput";
+import Form from "../../components/Form";
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,7 +24,7 @@ function LoginForm() {
     event.preventDefault();
   };
   return (
-    <ContainerFormLayout paddingVertical="py-36">
+    <Form type="regular">
       <HeadingAuthentication title="Login" type="primary" margin="mb-12" />
 
       <FormRowInput>
@@ -80,7 +80,7 @@ function LoginForm() {
           Login
         </Button>
       </ThemeProvider>
-    </ContainerFormLayout>
+    </Form>
   );
 }
 

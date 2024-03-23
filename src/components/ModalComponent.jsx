@@ -51,6 +51,7 @@ function ModalWindow({ children }) {
           top: "50%",
           left: "50%",
           transform: "translate(-50%, -50%)",
+          display: "flex",
         }}
       >
         <Box
@@ -67,19 +68,21 @@ function ModalWindow({ children }) {
             px: 7,
             py: 3,
           }}
-          className="flex justify-between items-baseline"
+          className="flex flex-col gap-16"
         >
-          <Box className="flex flex-col justify-center items-start gap-5">
-            <Heading type="custom" fontSize="text-5xl">
-              Modal Title
-            </Heading>
-            <span className="text-xl text-slate-600">Modal Subtitle</span>
-          </Box>
-          <IconButton aria-label="close" onClick={handleClose}>
-            <IoMdClose size={42} />
-          </IconButton>
+          <div className="flex flex-row justify-between items-baseline w-full">
+            <Box className="flex flex-col justify-center items-start gap-5">
+              <Heading type="custom" fontSize="text-5xl">
+                Modal Title
+              </Heading>
+              <span className="text-xl text-slate-600">Modal Subtitle</span>
+            </Box>
+            <IconButton aria-label="close" onClick={handleClose}>
+              <IoMdClose size={42} />
+            </IconButton>
+          </div>
+          {children}
         </Box>
-        <div>{children}</div>
       </motion.div>
     </Modal>,
     document.body
