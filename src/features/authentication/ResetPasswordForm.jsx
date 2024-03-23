@@ -1,7 +1,8 @@
-import Button from "../../components/Button";
+import { Button, ThemeProvider } from "@mui/material";
 import ContainerFormLayout from "../../components/authentication/ContainerFormLayout";
 import HeadingAuthentication from "../../components/authentication/HeadingAuthentication";
 import FormRowInput from "../../components/FormRowInput";
+import { theme } from "../../utils/theme";
 
 function ResetPasswordForm() {
   return (
@@ -22,7 +23,16 @@ function ResetPasswordForm() {
         <Input type="text" placeholder="Masukkan Konfirmasi Password Baru" />
       </FormRowInput>
 
-      <Button type="primary">Ubah</Button>
+      <ThemeProvider theme={theme}>
+        <Button
+          sx={{ marginTop: "20px" }}
+          variant="contained"
+          color="success"
+          className="w-auto h-14"
+        >
+          Ubah
+        </Button>
+      </ThemeProvider>
     </ContainerFormLayout>
   );
 }

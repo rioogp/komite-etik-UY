@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import Button from "../components/Button";
 import Heading from "../components/Heading";
 import { IoIosArrowRoundForward } from "react-icons/io";
 import { motion } from "framer-motion";
+import { Button, ThemeProvider } from "@mui/material";
+import { theme } from "../utils/theme";
 
 function Hero({ title, title2, typeImage, page, desc }) {
   const navigate = useNavigate();
@@ -54,9 +55,23 @@ function Hero({ title, title2, typeImage, page, desc }) {
             : textAnimation(description, 1)}
         </p>
         {page === "ulasan" || (
-          <Button type="whiteSmall" onClick={() => navigate("/berkas")}>
-            Get Started <IoIosArrowRoundForward size={28} />
-          </Button>
+          <ThemeProvider theme={theme}>
+            <Button
+              sx={{
+                marginTop: "20px",
+                fontWeight: "600",
+                fontSize: "20px",
+                textTransform: "none",
+                mt: "50px",
+                mb: "100px",
+              }}
+              variant="contained"
+              color="info"
+              className="w-52 md:w-56 h-14 flex gap-3 justify-center items-center"
+            >
+              Get Started <IoIosArrowRoundForward size={28} />
+            </Button>
+          </ThemeProvider>
         )}
       </motion.div>
     </motion.section>
