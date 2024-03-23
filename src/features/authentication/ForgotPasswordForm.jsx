@@ -1,5 +1,5 @@
 import ContainerFormLayout from "../../components/authentication/ContainerFormLayout";
-import FormRowInput from "../../components/input/FormRowInput";
+import FormRowInput from "../../components/FormRowInput";
 import HeadingAuthentication from "../../components/authentication/HeadingAuthentication";
 import { Button, TextField, ThemeProvider } from "@mui/material";
 import { theme } from "../../utils/theme";

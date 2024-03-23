@@ -1,6 +1,5 @@
 import LinkRoute from "../../components/LinkRoute";
 import ContainerFormLayout from "../../components/authentication/ContainerFormLayout";
-import FormRowInput from "../../components/input/FormRowInput";
 import HeadingAuthentication from "../../components/authentication/HeadingAuthentication";
 import {
   Button,
@@ -14,6 +13,7 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 
 import { theme } from "../../utils/theme";
 import { useState } from "react";
+import FormRowInput from "../../components/FormRowInput";
 
 function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);

@@ -1,8 +1,7 @@
 import Button from "../../components/Button";
 import ContainerFormLayout from "../../components/authentication/ContainerFormLayout";
 import HeadingAuthentication from "../../components/authentication/HeadingAuthentication";
-import FormRowInput from "../../components/input/FormRowInput";
-import Input from "../../components/input/Input";
+import FormRowInput from "../../components/FormRowInput";
 
 function ResetPasswordForm() {
   return (

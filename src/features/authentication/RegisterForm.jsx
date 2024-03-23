@@ -1,6 +1,5 @@
-import Input from "../../components/input/Input";
 import ContainerFormLayout from "../../components/authentication/ContainerFormLayout";
-import FormRowInput from "../../components/input/FormRowInput";
+import FormRowInput from "../../components/FormRowInput";
 import HeadingAuthentication from "../../components/authentication/HeadingAuthentication";
 import { ThemeProvider } from "@emotion/react";
 import {
@@ -137,7 +136,7 @@ function RegisterForm() {
           color="success"
           className="w-auto h-16"
         >
-          Kirim Ulasan
+          Daftar
         </Button>
       </ThemeProvider>
     </ContainerFormLayout>

@@ -1,6 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
-import OutlinedButton from "./OutlinedButton";
 import NavLinkRoute from "./NavLinkRoute";
 import { useEffect, useState } from "react";
 import { Button, ThemeProvider } from "@mui/material";
