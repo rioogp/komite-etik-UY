@@ -1,11 +1,11 @@
 import Logo from "../Logo";
 import SideNav from "./SideNav";
 
-function SideBar({ setTitle }) {
+function SideBar() {
   return (
     <aside className="bg-color-primary flex flex-col gap-6 h-dvh p-7">
       <Logo />
-      <SideNav setTitle={setTitle} />
+      <SideNav />
     </aside>
   );
 }

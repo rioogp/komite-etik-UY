@@ -3,59 +3,41 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import { CiSettings, CiCalendarDate, CiLogout } from "react-icons/ci";
 
 import Image from "../Image";
-import Button from "../Button";
 import NavLinkRoute from "../NavLinkRoute";
+import { ThemeProvider } from "@emotion/react";
+import { theme } from "../../utils/theme";
+import { Button } from "@mui/material";
 
-function SideNav({ setTitle }) {
+function SideNav() {
   const styleNav = ({ isActive }) =>
     isActive
       ? "flex items-center gap-3 font-semibold text-lg py-3 px-6 transition-colors duration-300 bg-white text-black rounded-md"
       : "flex items-center gap-3 font-semibold text-lg py-3 px-6 transition-colors duration-300 hover:text-white hover:bg-color-secondary rounded-md";
-
-  function handleClick(title) {
-    setTitle(title);
-  }
 
   return (
     <div className="font-medium text-neutral-100 text-lg flex flex-col gap-5 tracking-[1px]">
       <span>Menu</span>
       <ul className="p-1 flex flex-col gap-3">
         <li>
-          <NavLinkRoute
-            style={styleNav}
-            to="/berkas"
-            onClick={() => handleClick("Berkas")}
-          >
+          <NavLinkRoute style={styleNav} to="/berkas">
             <LuFileSpreadsheet size={24} />
             <span>Berkas</span>
           </NavLinkRoute>
         </li>
         <li>
-          <NavLinkRoute
-            style={styleNav}
-            to="/rapat"
-            onClick={() => handleClick("Jadwal Pertemuan")}
-          >
+          <NavLinkRoute style={styleNav} to="/rapat">
             <CiCalendarDate size={24} />
             <span>Jadwal Pertemuan</span>
           </NavLinkRoute>
         </li>
         <li>
-          <NavLinkRoute
-            style={styleNav}
-            to="/notifikasi"
-            onClick={() => handleClick("Notifikasi")}
-          >
+          <NavLinkRoute style={styleNav} to="/notifikasi">
             <IoIosNotificationsOutline size={24} />
             <span>Notifikasi</span>
           </NavLinkRoute>
         </li>
         <li>
-          <NavLinkRoute
-            style={styleNav}
-            to="/pengaturan"
-            onClick={() => handleClick("Pengaturan")}
-          >
+          <NavLinkRoute style={styleNav} to="/pengaturan">
             <CiSettings size={24} />
             <span>Pengaturan</span>
           </NavLinkRoute>
@@ -80,10 +62,22 @@ function SideNav({ setTitle }) {
           </div>
         </li>
         <li>
-          <Button type="white">
-            <CiLogout size={24} />
-            Log Out
-          </Button>
+          <ThemeProvider theme={theme}>
+            <Button
+              sx={{
+                marginTop: "20px",
+                fontWeight: "600",
+                fontSize: "20px",
+                textTransform: "none",
+              }}
+              variant="contained"
+              color="info"
+              className="w-full h-12 flex gap-3 justify-center items-center"
+            >
+              <CiLogout size={26} />
+              Log Out
+            </Button>
+          </ThemeProvider>
         </li>
       </ul>
     </div>
