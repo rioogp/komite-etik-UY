@@ -88,7 +88,7 @@ function FiltersButton() {
         onClose={handleClose}
         MenuListProps={{
           style: {
-            width: "125px", // Atur lebar Menu di sini
+            width: "125px",
           },
         }}
       >

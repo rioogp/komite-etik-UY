@@ -69,7 +69,7 @@ function SideNav() {
                     <span>Berkas</span>
                   </NavLinkRoute>
                   <NavLinkRoute style={styleNav} to="/berkas">
-                    <span>Sex</span>
+                    <span>Berkas Selesai</span>
                   </NavLinkRoute>
                 </div>
               </div>
