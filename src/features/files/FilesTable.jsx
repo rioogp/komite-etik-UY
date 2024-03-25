@@ -7,7 +7,8 @@ const tempData = [
   {
     id: 1,
     nama: "John Doe",
-    nama_penelitian: "Pengembangan Teknologi Pendidikan",
+    nama_penelitian:
+      "Tinjauan Terhadap Kode Etik Organisasi: Tantangan dan Peluang di Era Digital",
   },
   {
     id: 2,
@@ -33,10 +34,9 @@ function FilesTable() {
           <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
             Download
           </TableCell>
-          <TableCell
-            sx={{ color: "gray", fontSize: "1.2rem" }}
-            align="center"
-          ></TableCell>
+          <TableCell sx={{ color: "gray", fontSize: "1.2rem" }} align="center">
+            Aksi
+          </TableCell>
         </TableStyle.Header>
         <TableStyle.Body
           data={tempData}

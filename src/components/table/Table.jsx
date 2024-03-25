@@ -92,8 +92,12 @@ const Body = ({ data, render }) => {
       ) : (
         <TableRow>
           <TableCell colSpan={5} align="center">
-            <Typography variant="body1" color="textSecondary">
-              No data to show at the moment
+            <Typography
+              variant="body"
+              color="InfoText"
+              sx={{ fontSize: "20px" }}
+            >
+              Tidak ada data penelitian
             </Typography>
           </TableCell>
         </TableRow>

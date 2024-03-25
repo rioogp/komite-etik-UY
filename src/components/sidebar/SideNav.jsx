@@ -64,12 +64,12 @@ function SideNav() {
                   variant="middle"
                   orientation="vertical"
                 />
-                <div className="w-full flex flex-col gap-7 mt-5">
+                <div className="w-full flex flex-col gap-4 mt-5">
                   <NavLinkRoute style={styleNav} to="/berkas">
                     <span>Berkas</span>
                   </NavLinkRoute>
                   <NavLinkRoute style={styleNav} to="/berkas">
-                    <span>Berkas</span>
+                    <span>Sex</span>
                   </NavLinkRoute>
                 </div>
               </div>
@@ -94,8 +94,8 @@ function SideNav() {
             </NavLinkRoute>
           </li>
 
-          <li className="my-6">
-            <div className="border-t border-white"></div>
+          <li className="my-5">
+            <Divider style={{ background: "white", width: "auto" }} />
           </li>
           <li className="flex flex-col gap-3">
             <span>Profile</span>
