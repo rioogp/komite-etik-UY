@@ -1,12 +1,18 @@
 import { LuFileSpreadsheet } from "react-icons/lu";
-import { IoIosNotificationsOutline } from "react-icons/io";
+import {
+  IoIosArrowDown,
+  IoIosArrowUp,
+  IoIosNotificationsOutline,
+} from "react-icons/io";
 import { CiSettings, CiCalendarDate, CiLogout } from "react-icons/ci";
+import { FaRegFolder } from "react-icons/fa6";
 
 import Image from "../Image";
 import NavLinkRoute from "../NavLinkRoute";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../../utils/theme";
-import { Button } from "@mui/material";
+import { Button, Collapse, Divider } from "@mui/material";
+import { useState } from "react";
 
 function SideNav() {
   const styleNav = ({ isActive }) =>
@@ -14,55 +20,100 @@ function SideNav() {
       ? "flex items-center gap-3 font-semibold text-lg py-3 px-6 transition-colors duration-300 bg-white text-black rounded-md"
       : "flex items-center gap-3 font-semibold text-lg py-3 px-6 transition-colors duration-300 hover:text-white hover:bg-color-secondary rounded-md";
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleCollapse = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <div className="font-medium text-neutral-100 text-lg flex flex-col gap-5 tracking-[1px]">
       <span>Menu</span>
       <ul className="p-1 flex flex-col gap-3">
-        <li>
-          <NavLinkRoute style={styleNav} to="/berkas">
-            <LuFileSpreadsheet size={24} />
-            <span>Berkas</span>
-          </NavLinkRoute>
-        </li>
-        <li>
-          <NavLinkRoute style={styleNav} to="/rapat">
-            <CiCalendarDate size={24} />
-            <span>Jadwal Pertemuan</span>
-          </NavLinkRoute>
-        </li>
-        <li>
-          <NavLinkRoute style={styleNav} to="/notifikasi">
-            <IoIosNotificationsOutline size={24} />
-            <span>Notifikasi</span>
-          </NavLinkRoute>
-        </li>
-        <li>
-          <NavLinkRoute style={styleNav} to="/pengaturan">
-            <CiSettings size={24} />
-            <span>Pengaturan</span>
-          </NavLinkRoute>
-        </li>
-        <li className="my-6">
-          <div className="border-t border-white"></div>
-        </li>
-        <li className="flex flex-col gap-3">
-          <span>Profile</span>
-          <div className="flex flex-row gap-3 items-center">
-            <Image
-              src="https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433_1280.png"
-              alt="profile"
-              type="profile"
-            />
-            <div className="flex flex-col ">
-              <span className="text-semibold text-base">
-                Hafidz Putra Herlyansyah
-              </span>
-              <span className="text-base">hafidzph@gmail.com</span>
+        <ThemeProvider theme={theme}>
+          <li>
+            <Button
+              onClick={toggleCollapse}
+              color="info"
+              sx={{
+                paddingX: "1.7rem",
+                paddingY: "0.55rem",
+                fontSize: "1.150rem",
+                letterSpacing: "1.2px",
+                textTransform: "none",
+                fontWeight: "500",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                "&:hover": {
+                  backgroundColor: "#047e8a",
+                },
+              }}
+              className="w-full hover:bg-color-secondary"
+            >
+              <div className="flex justify-center items-center gap-4">
+                <FaRegFolder size={24} />
+                <span>Pengajuan</span>
+              </div>
+              {isOpen ? <IoIosArrowDown /> : <IoIosArrowUp />}
+            </Button>
+            <Collapse in={isOpen}>
+              <div className="flex flex-row gap-3 h-fit ps-8 pe-5">
+                <Divider
+                  style={{ background: "white", height: "auto" }}
+                  variant="middle"
+                  orientation="vertical"
+                />
+                <div className="w-full flex flex-col gap-7 mt-5">
+                  <NavLinkRoute style={styleNav} to="/berkas">
+                    <span>Berkas</span>
+                  </NavLinkRoute>
+                  <NavLinkRoute style={styleNav} to="/berkas">
+                    <span>Berkas</span>
+                  </NavLinkRoute>
+                </div>
+              </div>
+            </Collapse>
+          </li>
+          <li>
+            <NavLinkRoute style={styleNav} to="/rapat">
+              <CiCalendarDate size={28} />
+              <span>Jadwal Pertemuan</span>
+            </NavLinkRoute>
+          </li>
+          <li>
+            <NavLinkRoute style={styleNav} to="/notifikasi">
+              <IoIosNotificationsOutline size={28} />
+              <span>Notifikasi</span>
+            </NavLinkRoute>
+          </li>
+          <li>
+            <NavLinkRoute style={styleNav} to="/pengaturan">
+              <CiSettings size={28} />
+              <span>Pengaturan</span>
+            </NavLinkRoute>
+          </li>
+
+          <li className="my-6">
+            <div className="border-t border-white"></div>
+          </li>
+          <li className="flex flex-col gap-3">
+            <span>Profile</span>
+            <div className="flex flex-row gap-3 items-center">
+              <Image
+                src="https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433_1280.png"
+                alt="profile"
+                type="profile"
+              />
+              <div className="flex flex-col ">
+                <span className="text-semibold text-base">
+                  Hafidz Putra Herlyansyah
+                </span>
+                <span className="text-base">hafidzph@gmail.com</span>
+              </div>
             </div>
-          </div>
-        </li>
-        <li>
-          <ThemeProvider theme={theme}>
+          </li>
+          <li>
             <Button
               sx={{
                 marginTop: "20px",
@@ -77,8 +128,8 @@ function SideNav() {
               <CiLogout size={26} />
               Log Out
             </Button>
-          </ThemeProvider>
-        </li>
+          </li>
+        </ThemeProvider>
       </ul>
     </div>
   );
