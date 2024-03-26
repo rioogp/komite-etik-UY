@@ -24,7 +24,7 @@ function GeneralQuestions() {
       </Heading>
       <span className="text-xl font-medium mb-20">
         Berikut telah kami rangkum beberapa pertanyaan yang sering ditanyakan
-        terkait layanan kami apkfkenwignweoingioewoigbwoeibgobwegbew.
+        terkait layanan kami.
       </span>
 
       <AnimatePresence>
