@@ -18,7 +18,7 @@ const meetingSchema = new mongoose.Schema({
   },
 });
 
-meetingSchema.statics.canCreate = function (role) {
+meetingSchema.statics.canCreateAndChange = function (role) {
   return role === 'ketua';
 };
 
