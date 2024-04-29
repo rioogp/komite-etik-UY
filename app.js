@@ -4,6 +4,7 @@ const express = require('express');
 const globalErrorHandler = require('./controllers/error.controller');
 const userRouter = require('./routes/user.routes');
 const reviewRouter = require('./routes/review.routes');
+const meetingRouter = require('./routes/meeting.routes');
 
 const app = express();
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -23,6 +24,7 @@ app.use((req, res, next) => {
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
+app.use('/api/v1/meetings', meetingRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
