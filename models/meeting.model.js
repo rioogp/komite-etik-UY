@@ -1,24 +1,30 @@
 const mongoose = require('mongoose');
-const validator = require('validator');
 
 const meetingSchema = new mongoose.Schema({
   nameMeeting: {
     type: String,
-    required: true,
+    required: [true, 'Meeting must be filled'],
     trim: true,
     minlength: 1,
-    unique: true,
-    validate(value) {
-      if (!validator.isAlphanumeric(value)) {
-        throw new Error('Meeting name must be alphanumeric');
-      }
-    },
   },
   meetingSchedule: {
     type: Date,
     required: [true, 'Meeting schedule must be filled'],
   },
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
 });
+
+meetingSchema.statics.canCreateAndChange = function (role) {
+  return role === 'ketua';
+};
+
+meetingSchema.statics.canView = function (role) {
+  return ['admin', 'reviewer', 'ketua'].includes(role);
+};
 
 const Meeting = mongoose.model('Meeting', meetingSchema);
 

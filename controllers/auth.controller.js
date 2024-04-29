@@ -109,13 +109,14 @@ const sendVerificationEmail = async (user, message, res, next) => {
 };
 
 exports.signUp = catchAsync(async (req, res, next) => {
-  const { name, email, username, password, passwordConfirm } = req.body;
+  const { name, email, username, password, passwordConfirm, role } = req.body;
   const newUser = await User.create({
     name,
     email,
     username,
     password,
     passwordConfirm,
+    role,
   });
 
   newUser.createVerificationToken();
