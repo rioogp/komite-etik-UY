@@ -10,7 +10,7 @@ exports.createMeeting = catchAsync(async (req, res, next) => {
     createdBy: _id,
   });
 
-  if (!meeting.canCreate(role)) {
+  if (!Meeting.canCreate(role)) {
     return next(new AppError('Only Ketua can create a meeting', 403));
   }
 
@@ -39,6 +39,30 @@ exports.getMeetings = catchAsync(async (req, res, next) => {
     results: meetings.length,
     data: {
       meetings,
+    },
+  });
+});
+
+exports.getMeeting = catchAsync(async (req, res, next) => {
+  const { role } = req.user;
+  const { id } = req.params;
+
+  const meeting = await Meeting.findById(id).populate('createdBy', 'name');
+
+  if (!meeting) {
+    return next(new AppError('No meeting found with that ID', 404));
+  }
+
+  if (!Meeting.canView(role)) {
+    return next(
+      new AppError('Only Ketua, Admin, and Reviewer can view meetings', 403),
+    );
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      meeting,
     },
   });
 });

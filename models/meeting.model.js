@@ -6,7 +6,6 @@ const meetingSchema = new mongoose.Schema({
     required: [true, 'Meeting must be filled'],
     trim: true,
     minlength: 1,
-    unique: true,
   },
   meetingSchedule: {
     type: Date,
