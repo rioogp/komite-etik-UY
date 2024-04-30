@@ -1,4 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 const express = require('express');
+
 const {
   signUp,
   login,
@@ -7,7 +9,13 @@ const {
   forgotPassword,
   resetPassword,
 } = require('../controllers/auth.controller');
-const { getAllUsers } = require('../controllers/user.controller');
+const {
+  getAllUsers,
+  updatePhoto,
+  uploadUserPhoto,
+  resizeUserPhoto,
+} = require('../controllers/user.controller');
+const { authorize } = require('../middlewares/auth.middleware');
 
 const router = express.Router();
 
@@ -17,6 +25,13 @@ router.post('/login', login);
 router.post('/resend-verify-email', resendVerificationEmail);
 router.post('/forgotPassword', forgotPassword);
 router.patch('/resetPassword/:token', resetPassword);
+router.patch(
+  '/updatePhoto',
+  authorize,
+  uploadUserPhoto,
+  resizeUserPhoto,
+  updatePhoto,
+);
 
 router.route('/').get(getAllUsers);
 
