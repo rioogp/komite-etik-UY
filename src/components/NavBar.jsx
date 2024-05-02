@@ -65,8 +65,6 @@ function NavBar() {
           >
             Sign In
           </Button>
-        </ThemeProvider>
-        <ThemeProvider theme={theme}>
           <Button
             variant="contained"
             color="success"
