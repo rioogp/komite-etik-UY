@@ -180,7 +180,7 @@ function RegisterForm() {
           placeholder="Masukkan konfirmasi password"
           type={showPassword ? "text" : "password"}
           value={values.confirmPassword}
-          error={touched.password && Boolean(errors.password)}
+          error={touched.confirmPassword && Boolean(errors.confirmPassword)}
           onChange={handleChange}
           onBlur={handleBlur}
           endAdornment={

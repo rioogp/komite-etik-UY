@@ -17,8 +17,8 @@ import TitleProvider from "./contexts/TitleContext";
 import HomeLayout from "./components/HomeLayout";
 import Homepage from "./pages/homepage/Homepage";
 import RulesAndQuestions from "./pages/rulesAndQuestions/RulesAndQuestions";
-import Reviews from "./pages/reviews/Reviews";
 import VerificationSuccess from "./pages/VerificationSuccess";
+import Reviews from "./pages/Reviews";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -37,7 +37,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
           <Route path="/verification" element={<VerificationUser />} />
           <Route
             path="/verification/:token"

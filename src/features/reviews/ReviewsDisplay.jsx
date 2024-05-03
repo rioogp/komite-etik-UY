@@ -3,14 +3,32 @@ import Heading from "../../components/Heading";
 import SectionColContainer from "../../components/SectionColContainer";
 import { motion } from "framer-motion";
 import { container } from "../../utils/variants";
-import ReviewCard from "./ReviewCard";
 import { useInView } from "react-intersection-observer";
+import ReviewCard from "./ReviewCard";
+import { useReviews } from "./useReviews";
+import { CircularProgress } from "@mui/material";
 
 function ReviewsDisplay() {
   const { ref, inView } = useInView({
     triggerOnce: true,
     initialInView: true,
   });
+
+  const { reviews, isLoading, error } = useReviews();
+  console.log(typeof reviews);
+  console.log(reviews);
+
+  if (isLoading) {
+    return <CircularProgress />;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!reviews || reviews.length === 0) {
+    return <div>No reviews found</div>;
+  }
 
   return (
     <SectionColContainer items="items-center">
@@ -38,14 +56,9 @@ function ReviewsDisplay() {
           animate={inView ? "show" : "hidden"}
           className="flex flex-row flex-wrap gap-8 justify-center"
         >
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
-          <ReviewCard />
+          {reviews.map((review) => (
+            <ReviewCard review={review} key={review._id} />
+          ))}
         </motion.div>
       </AnimatePresence>
     </SectionColContainer>

@@ -63,7 +63,7 @@ function NavBar() {
             onClick={() => navigate("/register")}
             className="w-28 h-12"
           >
-            Sign In
+            Sign Up
           </Button>
           <Button
             variant="contained"

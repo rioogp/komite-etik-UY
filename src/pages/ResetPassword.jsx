@@ -1,13 +1,15 @@
+import { useParams } from "react-router-dom";
 import AuthenticationLayout from "../components/authentication/AuthenticationLayout";
 import ResetPasswordForm from "../features/authentication/ResetPasswordForm";
 import usePageTitle from "../hooks/usePageTitle";
 
 function ResetPassword() {
+  const { token } = useParams();
   usePageTitle("Ubah Password | Komite Etik");
 
   return (
     <AuthenticationLayout>
-      <ResetPasswordForm />
+      <ResetPasswordForm token={token} />
     </AuthenticationLayout>
   );
 }

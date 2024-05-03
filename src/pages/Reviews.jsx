@@ -1,9 +1,8 @@
-import { TextField } from "@mui/material";
-import Hero from "../../components/Hero";
-import MainContainer from "../../components/MainContainer";
-import ReviewsInput from "./ReviewsInput";
-import ReviewsDisplay from "./ReviewsDisplay";
-import Footer from "../../components/Footer";
+import Hero from "../components/Hero";
+import MainContainer from "../components/MainContainer";
+import Footer from "../components/Footer";
+import ReviewsInput from "../features/reviews/ReviewsInput";
+import ReviewsDisplay from "../features/reviews/ReviewsDisplay";
 
 function Reviews() {
   return (
