@@ -4,9 +4,11 @@ import usePageTitle from "../hooks/usePageTitle";
 import { useOutletContext } from "react-router-dom";
 
 function MeetingSchedule() {
-  const [setTitle] = useOutletContext();
+  const [setValTitle] = useOutletContext();
 
-  setTitle("Jadwal Pertemuan");
+  useEffect(() => {
+    setValTitle("Jadwal Pertemuan");
+  }, []);
   usePageTitle("Jadwal Pertemuan | Komite Etik");
 
   return (

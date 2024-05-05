@@ -1,16 +1,16 @@
 import { useOutletContext } from "react-router-dom";
 import FilesTable from "../features/files/FilesTable";
 import usePageTitle from "../hooks/usePageTitle";
-import ModalComponent from "../components/ModalComponent";
-import CreateFormFiles from "../features/files/CreateFormFiles";
-import { Button, ThemeProvider } from "@mui/material";
-import { theme } from "../utils/theme";
+
 import HeadDashboard from "../components/HeadDashboard";
+import { useEffect } from "react";
 
 function Files() {
-  const [setTitle] = useOutletContext();
+  const [setValTitle] = useOutletContext();
 
-  setTitle("Berkas");
+  useEffect(() => {
+    setValTitle("Berkas");
+  }, []);
   usePageTitle("Berkas | Komite Etik");
 
   return (

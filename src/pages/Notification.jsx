@@ -2,11 +2,14 @@ import { useOutletContext } from "react-router-dom";
 import NotificationList from "../features/notifications/NotificationList";
 import usePageTitle from "../hooks/usePageTitle";
 import HeadDashboard from "../components/HeadDashboard";
+import { useEffect } from "react";
 
 function Notification() {
-  const [setTitle] = useOutletContext();
+  const [setValTitle] = useOutletContext();
 
-  setTitle("Notifikasi");
+  useEffect(() => {
+    setValTitle("Notifikasi");
+  }, []);
   usePageTitle("Notifikasi | Komite Etik");
 
   return (

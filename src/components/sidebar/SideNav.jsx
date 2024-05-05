@@ -12,13 +12,22 @@ import NavLinkRoute from "../NavLinkRoute";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../../utils/theme";
 import { Button, Collapse, Divider } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 function SideNav() {
+  const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
   const styleNav = ({ isActive }) =>
     isActive
       ? "flex items-center gap-3 font-semibold text-lg py-3 px-6 transition-colors duration-300 bg-white text-black rounded-md"
       : "flex items-center gap-3 font-semibold text-lg py-3 px-6 transition-colors duration-300 hover:text-white hover:bg-color-secondary rounded-md";
+
+  function handleLogout() {
+    logout();
+    navigate("/", { replace: true });
+  }
 
   return (
     <div className="font-medium text-neutral-100 text-lg flex flex-col gap-5 tracking-[1px]">
@@ -68,6 +77,7 @@ function SideNav() {
           </li>
           <li>
             <Button
+              onClick={handleLogout}
               sx={{
                 marginTop: "20px",
                 fontWeight: "600",

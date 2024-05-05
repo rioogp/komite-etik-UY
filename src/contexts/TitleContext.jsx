@@ -5,12 +5,13 @@ export const TitleContext = createContext();
 function TitleProvider({ children }) {
   const [title, setTitle] = useState(localStorage.getItem("title") || "Berkas");
 
-  useEffect(() => {
+  const setValTitle = (title) => {
+    setTitle(title);
     localStorage.setItem("title", title);
-  }, [title]);
+  };
 
   return (
-    <TitleContext.Provider value={{ title, setTitle }}>
+    <TitleContext.Provider value={{ title, setValTitle }}>
       {children}
     </TitleContext.Provider>
   );
