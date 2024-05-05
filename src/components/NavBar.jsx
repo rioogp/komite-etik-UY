@@ -63,10 +63,8 @@ function NavBar() {
             onClick={() => navigate("/register")}
             className="w-28 h-12"
           >
-            Sign In
+            Sign Up
           </Button>
-        </ThemeProvider>
-        <ThemeProvider theme={theme}>
           <Button
             variant="contained"
             color="success"

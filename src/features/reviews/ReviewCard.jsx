@@ -5,8 +5,10 @@ import { CgProfile } from "react-icons/cg";
 import { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 
-function ReviewCard() {
+function ReviewCard({ review }) {
   const [expanded, setExpanded] = useState(false);
+
+  const { description, createdAt } = review;
 
   const handleShowMore = () => {
     setExpanded(!expanded);
@@ -16,7 +18,7 @@ function ReviewCard() {
     <motion.div variants={item}>
       <Card
         sx={{
-          maxWidth: 400,
+          width: 300,
           borderRadius: "10px",
           padding: "5px",
         }}
@@ -41,7 +43,7 @@ function ReviewCard() {
               sx={{
                 color: "black",
                 fontWeight: "100",
-                maxWidth: 300,
+                maxWidth: 240,
                 marginTop: "15px",
                 fontSize: "18px",
                 display: "-webkit-box",
@@ -51,9 +53,7 @@ function ReviewCard() {
               }}
               component="div"
             >
-              Kode etik di website Universitas YARSI ditetapkan untuk memberikan
-              panduan dan standar perilaku yang diharapkan dari semua anggota
-              komunitas kampus, termasuk mahasiswa, dosen, dan staf.
+              {description}
             </Typography>
           </Collapse>
           <Button
@@ -79,7 +79,7 @@ function ReviewCard() {
             )}
           </Button>
           <Typography component="span" className="text-lg text-slate-500">
-            23 Nov 2021
+            {createdAt}
           </Typography>
         </CardContent>
       </Card>

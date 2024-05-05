@@ -60,7 +60,7 @@ function FiltersButton() {
   };
 
   return (
-    <div className="flex justify-end">
+    <>
       <Button
         variant="outlined"
         onClick={handleClick}
@@ -105,7 +105,7 @@ function FiltersButton() {
           Terbaru
         </MenuItem>
       </Menu>
-    </div>
+    </>
   );
 }
 
