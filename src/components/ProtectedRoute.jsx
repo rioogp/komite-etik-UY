@@ -18,6 +18,7 @@ function ProtectedRoute({ children }) {
 
       if (currentTime > expirationTime) {
         logout();
+        navigate("/", { replace: true });
       }
     }
   }, [navigate, token]);
