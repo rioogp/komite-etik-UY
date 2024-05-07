@@ -1,15 +1,19 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable import/order */
 const express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
 
 const globalErrorHandler = require('./controllers/error.controller');
 const userRouter = require('./routes/user.routes');
 const reviewRouter = require('./routes/review.routes');
 const meetingRouter = require('./routes/meeting.routes');
+const documentRouter = require('./routes/document.routes');
+const AppError = require('./utils/appError');
 
 const app = express();
-// eslint-disable-next-line import/no-extraneous-dependencies
-const morgan = require('morgan');
-const AppError = require('./utils/appError');
+
+app.use(cors());
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -25,6 +29,7 @@ app.use((req, res, next) => {
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/meetings', meetingRouter);
+app.use('/api/v1/documents', documentRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

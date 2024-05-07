@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 
 const meetingSchema = new mongoose.Schema({
+  emailUser: {
+    type: String,
+    required: [true, 'Email must be filled'],
+    trim: true,
+    minlength: 1,
+    unique: true,
+  },
   nameMeeting: {
     type: String,
     required: [true, 'Meeting must be filled'],

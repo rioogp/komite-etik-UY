@@ -1,5 +1,5 @@
 const express = require('express');
-const { authorize } = require('../middlewares/auth.middleware');
+const { authorize, restrictTo } = require('../middlewares/auth.middleware');
 const {
   createMeeting,
   getMeetings,
@@ -10,12 +10,15 @@ const {
 
 const router = express.Router();
 
-router.route('/').post(authorize, createMeeting).get(authorize, getMeetings);
+router
+  .route('/')
+  .post(authorize, restrictTo('ketua'), createMeeting)
+  .get(authorize, restrictTo('ketua', 'admin', 'reviewer'), getMeetings);
 
 router
   .route('/:id')
   .get(authorize, getMeeting)
-  .post(authorize, updateMeeting)
-  .delete(authorize, deleteMeeting);
+  .post(authorize, restrictTo('ketua'), updateMeeting)
+  .delete(authorize, restrictTo('ketua'), deleteMeeting);
 
 module.exports = router;
