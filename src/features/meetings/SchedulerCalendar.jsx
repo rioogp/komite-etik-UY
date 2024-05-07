@@ -1,27 +1,15 @@
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import "../styles/global.css";
+import "../../styles/global.css";
 import { useEffect } from "react";
 
-function SchedulerCalendar() {
-  const events = [
-    {
-      title: "Meeting",
-      start: "2024-02-26T10:00:00",
-      end: "2024-02-26T11:00:00",
-    },
-    {
-      title: "Meeting",
-      start: "2024-02-07T15:30:00",
-      end: "2024-02-07T16:30:00",
-    },
-    {
-      title: "Meeting",
-      start: "2024-02-29T09:00:00",
-      end: "2024-02-29T10:00:00",
-    },
-  ];
+function SchedulerCalendar({ meetings }) {
+  const events = meetings.map((meeting) => ({
+    title: meeting.nameMeeting,
+    start: meeting.meetingSchedule,
+  }));
 
+  console.log(events);
   useEffect(() => {
     const nextButton = document.querySelector(".fc-next-button");
     const prevButton = document.querySelector(".fc-prev-button");
@@ -47,7 +35,7 @@ function SchedulerCalendar() {
 
     return (
       <div
-        className="bg-color-primary w-fit h-auto 
+        className="bg-color-primary w-fit 
       text-white p-1 md:p-2 text-xs rounded-lg shadow-md flex flex-col flex-wrap overflow-hidden"
       >
         <div>{eventInfo.event.title}</div>

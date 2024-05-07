@@ -15,7 +15,8 @@ export function useLogin() {
 
     onSuccess: (user) => {
       const { token, data } = user;
-      loginContext(token, data.user._id);
+      console.log(user);
+      loginContext(token, data.user._id, data.user.role);
 
       toast.success("Login successful");
 

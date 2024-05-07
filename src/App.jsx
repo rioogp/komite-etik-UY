@@ -21,6 +21,7 @@ import VerificationSuccess from "./pages/VerificationSuccess";
 import Reviews from "./pages/Reviews";
 import ProtectedRoute from "./components/ProtectedRoute";
 import AuthProvider from "./contexts/AuthContext";
+import { FaCheck } from "react-icons/fa6";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -78,20 +79,25 @@ function App() {
 
       <Toaster
         position="top-center"
-        gutter={12}
+        gutter={18}
         containerStyle={{ margin: "8px" }}
         toastOptions={{
           success: {
             duration: 3000,
+            icon: (
+              <div className="w-8 h-8 bg-[#00897c] rounded-md flex justify-center items-center">
+                <FaCheck />
+              </div>
+            ),
           },
           error: {
             duration: 5000,
           },
           style: {
-            fontSize: "16px",
+            fontSize: "20px",
             maxWidth: "500px",
             padding: "16px 24px",
-            backgroundColor: "#babdc2",
+            backgroundColor: "#006A74",
             color: "white",
           },
         }}
