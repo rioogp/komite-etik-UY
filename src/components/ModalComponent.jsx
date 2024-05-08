@@ -60,13 +60,16 @@ function ModalWindow({ children, title, subtitle }) {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 1000,
-            height: 800,
+            width: 950,
+            maxWidth: "90vw",
+            height: 900,
             bgcolor: "background.paper",
             borderRadius: "15px",
             boxShadow: 24,
             px: 7,
             py: 3,
+            display: "flex",
+            flexDirection: "column",
           }}
           className="flex flex-col gap-16"
         >
@@ -81,7 +84,14 @@ function ModalWindow({ children, title, subtitle }) {
               <IoMdClose size={42} />
             </IconButton>
           </div>
-          {children}
+          <Box
+            sx={{
+              maxHeight: "calc(100% - 120px)",
+              overflow: "auto",
+            }}
+          >
+            {children}
+          </Box>
         </Box>
       </motion.div>
     </Modal>,

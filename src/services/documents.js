@@ -24,7 +24,8 @@ export async function downloadDocument(filename) {
       },
       responseType: "blob",
     });
-    const url = window.URL.createObjectURL(response.data); // Respons data sudah dalam bentuk Blob
+
+    const url = window.URL.createObjectURL(response.data);
     const link = document.createElement("a");
     link.href = url;
     link.setAttribute("download", filename);
@@ -35,5 +36,27 @@ export async function downloadDocument(filename) {
     return response;
   } catch (err) {
     throw new Error(err.message);
+  }
+}
+
+export async function uploadDocument(formData) {
+  try {
+    const response = await axios.post(`${API_URL}/documents`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      console.log(error.response.data);
+    } else if (error.request) {
+      console.log(error.request);
+    } else {
+      console.log("Error", error.message);
+    }
+    throw new Error(error);
   }
 }
