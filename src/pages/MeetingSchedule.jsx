@@ -5,6 +5,7 @@ import { useMeetings } from "../features/meetings/useMeetings";
 import SchedulerCalendar from "../features/meetings/SchedulerCalendar";
 import MeetingTable from "../features/meetings/MeetingTable";
 import HeadDashboard from "../components/HeadDashboard";
+import CreateFormMeetings from "../features/meetings/CreateFormMeetings";
 
 function MeetingSchedule() {
   const [setValTitle] = useOutletContext();
@@ -27,8 +28,11 @@ function MeetingSchedule() {
         title="Jadwal Pertemuan"
         subtitle="Ajukan Jadwal Pertemuan Sesuai dengan Kebutuhan"
         add="add"
-        filters="filters"
-      />
+        modalTitle="Atur Jadwal Pertemuan"
+        modalSubtitle="Ajukan jadwal pertemuan sesuai dengan kebutuhan"
+      >
+        <CreateFormMeetings />
+      </HeadDashboard>
       <MeetingTable meetings={meetings} />
     </main>
   );

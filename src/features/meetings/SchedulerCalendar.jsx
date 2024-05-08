@@ -24,42 +24,14 @@ function SchedulerCalendar({ meetings }) {
   }, []);
 
   const renderEventContent = (eventInfo) => {
-    const startTime = new Date(eventInfo.event.start).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-    const endTime = new Date(eventInfo.event.end).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-
     return (
-      <div
-        className="bg-color-primary w-fit 
-      text-white p-1 md:p-2 text-xs rounded-lg shadow-md flex flex-col flex-wrap overflow-hidden"
-      >
-        <div>{eventInfo.event.title}</div>
-        <div className="text-xs">
-          {startTime} - {endTime}
-        </div>
+      <div className="bg-color-primary w-40 h-16 text-white p-1 md:p-2 text-lg rounded-lg shadow-md overflow-hidden">
+        <span className="block overflow-hidden max-w-16 break-word">
+          {eventInfo.event.title}
+        </span>
       </div>
     );
   };
-
-  // useEffect(() => {
-  //   events.forEach((event) => {
-  //     const tableCell = document.querySelector(
-  //       `.fc-daygrid-day[data-date="${event.date}"]`
-  //     );
-  //     const dayNumber = tableCell.querySelector(".fc-daygrid-day-number");
-
-  //     if (tableCell && dayNumber) {
-  //       tableCell.style.backgroundColor = "black";
-  //       tableCell.style.borderRadius = "10px";
-  //       dayNumber.style.color = "white";
-  //     }
-  //   });
-  // }, [events]);
 
   return (
     <div className="flex justify-center items-center">

@@ -16,3 +16,24 @@ export async function getMeetings() {
     throw new Error(err);
   }
 }
+
+export async function createMeeting({ nameMeeting, meetingSchedule }) {
+  try {
+    const response = await axios.post(
+      `${API_URL}/meetings`,
+      {
+        nameMeeting,
+        meetingSchedule,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return response;
+  } catch (err) {
+    throw new Error(err);
+  }
+}

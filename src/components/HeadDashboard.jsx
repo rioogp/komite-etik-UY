@@ -1,13 +1,20 @@
 import { Button, Divider, Menu, MenuItem, ThemeProvider } from "@mui/material";
 import Heading from "./Heading";
 import ModalComponent from "./ModalComponent";
-import CreateFormFiles from "../features/files/CreateFormFiles";
 import { theme } from "../utils/theme";
 import { LuPlus } from "react-icons/lu";
 import { useState } from "react";
 import { IoFilterSharp } from "react-icons/io5";
 
-function HeadDashboard({ title, subtitle, add, filters }) {
+function HeadDashboard({
+  title,
+  subtitle,
+  add,
+  filters,
+  modalTitle,
+  modalSubtitle,
+  children,
+}) {
   return (
     <div className="flex flex-col gap-12 mb-12">
       <div className="flex justify-between items-center">
@@ -35,8 +42,11 @@ function HeadDashboard({ title, subtitle, add, filters }) {
                   Ajukan
                 </Button>
               </ModalComponent.OpenButton>
-              <ModalComponent.ModalWindow>
-                <CreateFormFiles />
+              <ModalComponent.ModalWindow
+                title={modalTitle}
+                subtitle={modalSubtitle}
+              >
+                {children}
               </ModalComponent.ModalWindow>
             </ModalComponent>
           </ThemeProvider>
