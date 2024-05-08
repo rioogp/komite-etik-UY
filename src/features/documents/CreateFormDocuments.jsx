@@ -3,7 +3,7 @@ import Form from "../../components/Form";
 import FormRowInput from "../../components/FormRowInput";
 import { theme } from "../../utils/theme";
 
-function CreateFormFiles() {
+function CreateFormDocuments() {
   return (
     <Form type="modal">
       <div className="flex flex-row justify-between gap-6">
@@ -39,4 +39,4 @@ function CreateFormFiles() {
   );
 }
 
-export default CreateFormFiles;
+export default CreateFormDocuments;

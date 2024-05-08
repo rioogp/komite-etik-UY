@@ -1,5 +1,5 @@
 import { Button, TableCell, ThemeProvider } from "@mui/material";
-import TableStyle from "../../components/table/Table";
+import TableStyle from "../../components/Table";
 import { MdOutlineEdit } from "react-icons/md";
 import { LuTrash2 } from "react-icons/lu";
 import { formatDate } from "../../utils/helpers";

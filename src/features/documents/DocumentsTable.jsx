@@ -1,7 +1,7 @@
 import { TableCell } from "@mui/material";
-// import Table from "../../components/table/Table";
-import FilesRow from "./FilesRow";
-import TableStyle from "../../components/table/Table";
+import TableStyle from "../../components/Table";
+import DocumentsRow from "./DocumentsRow";
+import { useDocumentsByuser } from "./useDocumentsByUser";
 
 const tempData = [
   {
@@ -17,7 +17,15 @@ const tempData = [
   },
 ];
 
-function FilesTable() {
+function DocumentsTable() {
+  const { documents, error, isLoading } = useDocumentsByuser();
+
+  console.log(documents);
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <>
       <TableStyle>
@@ -39,12 +47,14 @@ function FilesTable() {
           </TableCell>
         </TableStyle.Header>
         <TableStyle.Body
-          data={tempData}
-          render={(data) => <FilesRow data={data} key={data.id} />}
+          data={documents}
+          render={(document, index) => (
+            <DocumentsRow data={document} index={index} key={document._id} />
+          )}
         />
       </TableStyle>
     </>
   );
 }
 
-export default FilesTable;
+export default DocumentsTable;

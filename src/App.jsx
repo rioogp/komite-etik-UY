@@ -10,7 +10,6 @@ import ResetPassword from "./pages/ResetPassword";
 import DashboardLayout from "./components/DashboardLayout";
 import VerificationUser from "./pages/VerificationUser";
 import MeetingSchedule from "./pages/MeetingSchedule";
-import Files from "./pages/Files";
 import Notification from "./pages/Notification";
 import Settings from "./pages/Settings";
 import TitleProvider from "./contexts/TitleContext";
@@ -21,6 +20,7 @@ import VerificationSuccess from "./pages/VerificationSuccess";
 import Reviews from "./pages/Reviews";
 import AuthProvider from "./contexts/AuthContext";
 import { FaCheck } from "react-icons/fa6";
+import Documents from "./pages/documents/applicant/Documents";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -55,7 +55,7 @@ function App() {
               }
             >
               <Route path="/rapat" element={<MeetingSchedule />} />
-              <Route path="/berkas" element={<Files />} />
+              <Route path="/berkas" element={<Documents />} />
               <Route path="/notifikasi" element={<Notification />} />
               <Route path="/pengaturan" element={<Settings />} />
             </Route>
