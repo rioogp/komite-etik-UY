@@ -37,3 +37,17 @@ export async function createMeeting({ nameMeeting, meetingSchedule }) {
     throw new Error(err);
   }
 }
+
+export async function deleteMeeting(id) {
+  try {
+    const response = await axios.delete(`${API_URL}/meetings/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return response;
+  } catch (err) {
+    throw new Error(err);
+  }
+}

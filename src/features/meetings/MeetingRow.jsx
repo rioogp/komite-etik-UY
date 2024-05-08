@@ -1,10 +1,14 @@
 import { Button, TableCell } from "@mui/material";
 import TableStyle from "../../components/table/Table";
-import { IoIosInformationCircleOutline } from "react-icons/io";
 import { MdOutlineEdit } from "react-icons/md";
+import { LuTrash2 } from "react-icons/lu";
+
 import { formatDate } from "../../utils/helpers";
+import { useDeleteMeeting } from "./useDeleteMeeting";
 
 function MeetingRow({ meeting }) {
+  const { isPending, deleteMeeting } = useDeleteMeeting();
+
   console.log(meeting);
   return (
     <TableStyle.Row>
@@ -55,7 +59,7 @@ function MeetingRow({ meeting }) {
               "&:hover": { backgroundColor: "#004d54" },
             }}
           >
-            <IoIosInformationCircleOutline size={38} />
+            <MdOutlineEdit size={38} />
           </Button>
           <Button
             variant="contained"
@@ -64,8 +68,10 @@ function MeetingRow({ meeting }) {
               paddingX: 0,
               "&:hover": { backgroundColor: "#004d54" },
             }}
+            disabled={isPending}
+            onClick={() => deleteMeeting(meeting._id)}
           >
-            <MdOutlineEdit size={38} />
+            <LuTrash2 size={38} />
           </Button>
         </div>
       </TableCell>
