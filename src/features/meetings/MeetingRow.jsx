@@ -24,7 +24,9 @@ function MeetingRow({ meeting, index }) {
         {index + 1}
       </TableCell>
 
-      <TableCell sx={{ fontSize: "1.3rem" }}>{meeting.emailUser}</TableCell>
+      <TableCell sx={{ fontSize: "1.3rem" }}>
+        <span className="font-medium">{meeting.emailUser}</span>
+      </TableCell>
 
       <TableCell
         sx={{
@@ -34,7 +36,7 @@ function MeetingRow({ meeting, index }) {
           maxWidth: "400px",
         }}
       >
-        {meeting.nameMeeting}
+        <span className="font-medium">{meeting.emailUser}</span>{" "}
       </TableCell>
 
       <TableCell
@@ -43,7 +45,9 @@ function MeetingRow({ meeting, index }) {
           paddingLeft: "25px",
         }}
       >
-        {formatDate(meeting.meetingSchedule)}
+        <span className="bg-[#ECFDF5] text-[#064E3B] p-2 rounded-lg font-semibold">
+          {formatDate(meeting.meetingSchedule)}
+        </span>
       </TableCell>
 
       <TableCell

@@ -19,7 +19,6 @@ import Homepage from "./pages/homepage/Homepage";
 import RulesAndQuestions from "./pages/rulesAndQuestions/RulesAndQuestions";
 import VerificationSuccess from "./pages/VerificationSuccess";
 import Reviews from "./pages/Reviews";
-import ProtectedRoute from "./components/ProtectedRoute";
 import AuthProvider from "./contexts/AuthContext";
 import { FaCheck } from "react-icons/fa6";
 
@@ -50,11 +49,9 @@ function App() {
 
             <Route
               element={
-                <ProtectedRoute>
-                  <TitleProvider>
-                    <DashboardLayout />
-                  </TitleProvider>
-                </ProtectedRoute>
+                <TitleProvider>
+                  <DashboardLayout />
+                </TitleProvider>
               }
             >
               <Route path="/rapat" element={<MeetingSchedule />} />
