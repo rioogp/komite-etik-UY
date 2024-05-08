@@ -1,23 +1,25 @@
 import { TableCell } from "@mui/material";
-import TableStyle from "../../components/Table";
-import MeetingRow from "./MeetingRow";
-import { useMeetings } from "./useMeetings";
+// import Table from "../../components/table/Table";
+import TableStyle from "../../../components/Table";
+import DocumentsChairRow from "./DocumentsChairRow";
 
 const tempData = [
   {
     id: 1,
     nama: "John Doe",
+    status: "Layak",
     nama_penelitian:
       "Tinjauan Terhadap Kode Etik Organisasi: Tantangan dan Peluang di Era Digital",
   },
   {
     id: 2,
     nama: "Jane Smith",
+    status: "",
     nama_penelitian: "Analisis Data Medis",
   },
 ];
 
-function MeetingTable({ meetings }) {
+function DocumentsChairTable() {
   return (
     <>
       <TableStyle>
@@ -25,28 +27,26 @@ function MeetingTable({ meetings }) {
           <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
             Nomor
           </TableCell>
+
           <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
-            Email
+            Nama Pengaju
           </TableCell>
+
           <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
-            Nama Pertemuan
+            Nama Penelitian
           </TableCell>
-          <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
-            Tanggal Pertemuan
-          </TableCell>
+
           <TableCell sx={{ color: "gray", fontSize: "1.2rem" }} align="center">
             Aksi
           </TableCell>
         </TableStyle.Header>
         <TableStyle.Body
-          data={meetings}
-          render={(meeting, index) => (
-            <MeetingRow meeting={meeting} index={index} key={meeting._id} />
-          )}
+          data={tempData}
+          render={(data) => <DocumentsChairRow data={data} key={data.id} />}
         />
       </TableStyle>
     </>
   );
 }
 
-export default MeetingTable;
+export default DocumentsChairTable;

@@ -15,9 +15,12 @@ import { Button, Collapse, Divider } from "@mui/material";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../features/authentication/useUser";
 
 function SideNav() {
   const { logout, role } = useContext(AuthContext);
+  const { user, isLoading } = useUser();
+
   const navigate = useNavigate();
   const styleNav = ({ isActive }) =>
     isActive
@@ -100,9 +103,9 @@ function SideNav() {
               />
               <div className="flex flex-col ">
                 <span className="text-semibold text-base">
-                  Hafidz Putra Herlyansyah
+                  {isLoading ? "" : user.name}
                 </span>
-                <span className="text-base">hafidzph@gmail.com</span>
+                <span className="text-base">{isLoading ? "" : user.email}</span>
               </div>
             </div>
           </li>

@@ -1,12 +1,12 @@
 import { useOutletContext } from "react-router-dom";
-import FilesTable from "../features/files/FilesTable";
-import usePageTitle from "../hooks/usePageTitle";
 
-import HeadDashboard from "../components/HeadDashboard";
 import { useEffect } from "react";
-import CreateFormFiles from "../features/files/CreateFormFiles";
+import CreateFormDocuments from "../../../features/documents/CreateFormDocuments";
+import usePageTitle from "../../../hooks/usePageTitle";
+import HeadDashboard from "../../../components/HeadDashboard";
+import DocumentsTable from "../../../features/documents/DocumentsTable";
 
-function Files() {
+function Documents() {
   const [setValTitle] = useOutletContext();
 
   useEffect(() => {
@@ -24,11 +24,11 @@ function Files() {
         modalTitle="Pengajuan Penelitian"
         modalSubtitle="Ajukan penelitian yang ingin diajukan"
       >
-        <CreateFormFiles />
+        <CreateFormDocuments />
       </HeadDashboard>
-      <FilesTable />
+      <DocumentsTable />
     </main>
   );
 }
 
-export default Files;
+export default Documents;
