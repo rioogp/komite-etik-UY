@@ -7,7 +7,7 @@ export function useCreateMeeting() {
 
   const { mutate: createMeeting, isPending } = useMutation({
     mutationFn: createMeetingApi,
-    onSuccess: (data) => {
+    onSuccess: () => {
       toast.success("Pertemuan berhasil ditambahkan!");
       queryClient.invalidateQueries("reviews");
     },
