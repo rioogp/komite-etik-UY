@@ -33,11 +33,11 @@ const createSendToken = (user, statusCode, res) => {
   });
 };
 
-const generateEmailMessage = (verificationURL) => `
+const generateEmailMessage = (verificationURL, title, desc) => `
   <!DOCTYPE html>
   <html>
   <head>
-      <title>Verifikasi Email</title>
+      <title>${title}</title>
       <style>
           body {
               font-family: Arial, sans-serif;
@@ -76,8 +76,8 @@ const generateEmailMessage = (verificationURL) => `
   <body>
       <div class="container">
           <h1>Komite Etik Universitas Yarsi</h1>
-          <p>Terima kasih telah mendaftar di website kami. Untuk memverifikasi email Anda, silakan klik tombol di bawah ini:</p>
-          <a href="${verificationURL}">Verifikasi Email</a>
+          <p>${desc}</p>
+          <a href="${verificationURL}">${title}</a>
           <div>
             <p>Salam,</p>
             <p>Team Komite Etik Universitas Yarsi</p>
@@ -98,6 +98,9 @@ const sendVerificationEmail = async (user, message, res, next) => {
     res.status(201).json({
       status: 'success',
       message: 'Verification link successfully sent to your email address',
+      data: {
+        user,
+      },
     });
   } catch (error) {
     user.verificationToken = undefined;
@@ -121,11 +124,13 @@ exports.signUp = catchAsync(async (req, res, next) => {
 
   newUser.createVerificationToken();
 
-  const verificationURL = `${req.protocol}://${req.get(
-    'host',
-  )}/api/v1/users/verify-email/${newUser.verificationToken}`;
+  const verificationURL = `${process.env.CLIENT_URL}verification/${newUser.verificationToken}`;
 
-  const message = generateEmailMessage(verificationURL);
+  const message = generateEmailMessage(
+    verificationURL,
+    'Verifikasi Email',
+    'Terima kasih telah mendaftar di website kami. Untuk memverifikasi email Anda, silakan klik tombol di bawah ini:',
+  );
 
   sendVerificationEmail(newUser, message, res, next);
 });
@@ -169,11 +174,13 @@ exports.resendVerificationEmail = catchAsync(async (req, res, next) => {
   }
 
   user.createVerificationToken();
-  const verificationURL = `${req.protocol}://${req.get(
-    'host',
-  )}/api/v1/users/verify-email/${user.verificationToken}`;
+  const verificationURL = `${process.env.CLIENT_URL}verification/${user.verificationToken}`;
 
-  const message = generateEmailMessage(verificationURL);
+  const message = generateEmailMessage(
+    verificationURL,
+    'Verifikasi Email',
+    'Terima kasih telah mendaftar di website kami. Untuk memverifikasi email Anda, silakan klik tombol di bawah ini:',
+  );
 
   sendVerificationEmail(user, message, res, next);
 });
@@ -204,28 +211,30 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.forgotPassword = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
+
   if (!user) {
     return next(new AppError('There is no user with email address.', 404));
   }
 
   user.createPasswordResetToken();
 
-  const resetURL = `${req.protocol}://${req.get(
-    'host',
-  )}/api/v1/users/resetPassword/${user.passwordResetToken}`;
+  const resetURL = `${process.env.CLIENT_URL}reset-password/${user.passwordResetToken}`;
 
-  const message = `Forgot your password? Submit a PATCH request with your new password and passwordConfirm to: ${resetURL}.\nIf you didn't forget your password, please ignore this email!`;
-
+  const message = generateEmailMessage(
+    resetURL,
+    'Reset Password',
+    'Silakan gunakan tautan di bawah untuk mengatur ulang kata sandi yang terkait dengan akun Anda:',
+  );
   try {
     await sendEmail({
       email: user.email,
-      subject: 'Your password reset token (valid for 10 min)',
+      subject: 'Reset Password',
       message,
     });
 
     res.status(200).json({
       status: 'success',
-      message: 'Token sent to email!',
+      message: 'Reset password link sent to email!',
     });
   } catch (err) {
     user.passwordResetToken = undefined;

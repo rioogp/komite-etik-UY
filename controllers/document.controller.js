@@ -1,0 +1,212 @@
+/* eslint-disable import/no-extraneous-dependencies */
+const multer = require('multer');
+const archiver = require('archiver');
+const fs = require('fs');
+
+const catchAsync = require('../utils/catchAsync');
+const Document = require('../models/document.model');
+const AppError = require('../utils/appError');
+const User = require('../models/user.model');
+
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const uploadPath = `public/documents/user`;
+    console.log(file);
+    cb(null, uploadPath);
+  },
+  filename: (req, file, cb) => {
+    // const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+    cb(null, file.originalname);
+  },
+});
+
+const multerFilter = (req, file, cb) => {
+  if (file.mimetype === 'application/pdf') {
+    cb(null, true);
+  } else {
+    cb(new Error('Only PDF files are allowed!'), false);
+  }
+};
+
+const upload = multer({ storage, fileFilter: multerFilter });
+
+exports.uploadUserDocuments = upload.array('documents', 3);
+
+exports.uploadDocuments = catchAsync(async (req, res, next) => {
+  const { researchName } = req.body;
+  const { name, _id } = req.user;
+  const documents = req.files.map((file) => file.filename);
+
+  const zipPath = `public/documents/user/${researchName.replace(/\s+/g, '_')}-${name.replace(/\s+/g, '_')}.zip`;
+
+  const output = fs.createWriteStream(zipPath);
+  const archive = archiver('zip', {
+    zlib: { level: 9 },
+  });
+
+  output.on('close', async () => {
+    documents.forEach((filename) => {
+      const filePath = `public/documents/user/${filename}`;
+      fs.unlinkSync(filePath);
+    });
+
+    const newDocument = await Document.create({
+      nameUser: name,
+      researchName: researchName,
+      documents: [
+        `${researchName.replace(/\s+/g, '_')}-${name.replace(/\s+/g, '_')}.zip`,
+      ],
+      createdBy: _id,
+    });
+
+    res.status(201).json({
+      status: 'success',
+      message: 'Documents uploaded and zipped successfully',
+      data: newDocument,
+    });
+  });
+
+  archive.on('error', (err) => {
+    throw new AppError(err.message, 500);
+  });
+
+  archive.pipe(output);
+  documents.forEach((filename) => {
+    const filePath = `public/documents/user/${filename}`;
+    archive.file(filePath, { name: filename });
+  });
+
+  archive.finalize();
+});
+
+exports.downloadDocuments = catchAsync(async (req, res, next) => {
+  const { filename } = req.params;
+  const zipFilePath = `public/documents/user/${filename}`;
+  res.download(zipFilePath, filename, (err) => {
+    if (err) {
+      return next(new AppError(err.message, 404));
+    }
+  });
+});
+
+exports.addReviewers = catchAsync(async (req, res, next) => {
+  const { reviewers } = req.body;
+  const { documentId } = req.params;
+
+  const findReviewers = await Promise.all(
+    reviewers.map(async (reviewerName) => {
+      const reviewer = await User.findOne({
+        name: reviewerName,
+        role: 'reviewer',
+      });
+
+      if (!reviewer) {
+        return next(
+          new AppError(`Reviewer with name ${reviewerName} not found`, 404),
+        );
+      }
+
+      return { _id: reviewer._id, name: reviewerName };
+    }),
+  );
+
+  const newDocument = await Document.findByIdAndUpdate(
+    documentId,
+    {
+      $addToSet: {
+        reviewers: {
+          $each: findReviewers,
+        },
+      },
+    },
+    { new: true },
+  );
+
+  res.status(201).json({
+    status: 'success',
+    message: 'Reviewers added successfully',
+    data: newDocument,
+  });
+});
+
+exports.updateReviewerStatus = catchAsync(async (req, res, next) => {
+  const { status, message } = req.body;
+  const { documentId } = req.params;
+  const { _id } = req.user;
+
+  const newDocument = await Document.findOneAndUpdate(
+    {
+      _id: documentId,
+      'reviewers._id': _id,
+    },
+    {
+      $set: {
+        'reviewers.$.status': status,
+        'reviewers.$.message': message,
+      },
+    },
+    { new: true },
+  );
+
+  if (!newDocument) {
+    return next(new AppError('Document or reviewer not found', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    message: 'Reviewer status updated successfully',
+    data: newDocument,
+  });
+});
+
+// exports.uploadDocuments = catchAsync(async (req, res, next) => {
+//   const { researchName } = req.body;
+//   const documents = req.files.map((file) => file.filename);
+//   const newDocument = await Document.create({
+//     researchName: researchName,
+//     status: 'On Process',
+//     documents: documents,
+//     user: req.user.id,
+//   });
+
+//   res.status(201).json({
+//     status: 'success',
+//     message: 'Documents uploaded successfully',
+//     data: newDocument,
+//   });
+// });
+
+exports.getDocuments = catchAsync(async (req, res, next) => {
+  const documents = await Document.find();
+  res.status(200).json({
+    status: 'success',
+    data: { documents },
+  });
+});
+
+exports.getDocumentsByUser = catchAsync(async (req, res, next) => {
+  const { _id } = req.user;
+
+  const documents = await Document.find({ createdBy: _id });
+
+  res.status(200).json({
+    status: 'success',
+    data: { documents },
+  });
+});
+
+exports.sendStatus = catchAsync(async (req, res, next) => {
+  const { documentId } = req.params;
+  const { status } = req.body;
+  const document = await Document.findByIdAndUpdate(
+    documentId,
+    { status },
+    { new: true },
+  );
+
+  res.status(200).json({
+    status: 'success',
+    message: 'Document status send to user',
+    data: { document },
+  });
+});

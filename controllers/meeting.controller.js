@@ -5,15 +5,14 @@ const Meeting = require('../models/meeting.model');
 const createSendMeeting = (meeting, statusCode, res) => {
   res.status(statusCode).json({
     status: 'success',
-    data: {
-      meeting,
-    },
+    meeting,
   });
 };
 
 exports.createMeeting = catchAsync(async (req, res, next) => {
   const { role, _id } = req.user;
   const meeting = await Meeting.create({
+    emailUser: req.user.email,
     nameMeeting: req.body.nameMeeting,
     meetingSchedule: req.body.meetingSchedule,
     createdBy: _id,
