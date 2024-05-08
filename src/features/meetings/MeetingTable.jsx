@@ -40,8 +40,8 @@ function MeetingTable({ meetings }) {
         </TableStyle.Header>
         <TableStyle.Body
           data={meetings}
-          render={(meeting) => (
-            <MeetingRow meeting={meeting} key={meeting._id} />
+          render={(meeting, index) => (
+            <MeetingRow meeting={meeting} index={index} key={meeting._id} />
           )}
         />
       </TableStyle>

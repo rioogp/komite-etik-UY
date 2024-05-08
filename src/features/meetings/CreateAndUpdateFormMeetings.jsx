@@ -10,15 +10,19 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useCreateMeeting } from "./useCreateMeeting";
+import { formatMeetingSchedule } from "../../utils/helpers";
+import { useUpdateMeeting } from "./useUpdateMeeting";
 
 const validationSchema = Yup.object({
   nameMeeting: Yup.string().required("Nama pertemuan wajib diisi").trim(),
   meetingSchedule: Yup.date().required("Tanggal pertemuan wajib dipilih"),
 });
 
-function CreateFormMeetings() {
-  const { createMeeting, isPending } = useCreateMeeting();
-
+function CreateAndUpdateFormMeeting({ id }) {
+  const { createMeeting, isCreating } = useCreateMeeting();
+  const { updateMeeting, isUpdating } = useUpdateMeeting();
+  const isWorking = isCreating || isUpdating;
+  console.log(id);
   const {
     handleSubmit,
     handleBlur,
@@ -38,23 +42,32 @@ function CreateFormMeetings() {
       { setSubmitting, setErrors, resetForm }
     ) => {
       try {
-        const formattedMeetingSchedule = meetingSchedule
-          ? new Date(meetingSchedule)
-          : null;
-        const isoFormattedMeetingSchedule = formattedMeetingSchedule
-          ? formattedMeetingSchedule.toISOString()
-          : null;
+        const isoFormattedMeetingSchedule =
+          formatMeetingSchedule(meetingSchedule);
 
         console.log(isoFormattedMeetingSchedule);
-        createMeeting(
-          {
-            nameMeeting: nameMeeting,
-            meetingSchedule: isoFormattedMeetingSchedule,
-          },
-          {
-            onSettled: () => resetForm(),
-          }
-        );
+        id
+          ? updateMeeting(
+              {
+                newMeetingData: {
+                  nameMeeting,
+                  meetingSchedule: isoFormattedMeetingSchedule,
+                },
+                id,
+              },
+              {
+                onSettled: () => resetForm(),
+              }
+            )
+          : createMeeting(
+              {
+                nameMeeting,
+                meetingSchedule: isoFormattedMeetingSchedule,
+              },
+              {
+                onSettled: () => resetForm(),
+              }
+            );
 
         console.log(values);
       } catch (error) {
@@ -116,13 +129,13 @@ function CreateFormMeetings() {
           variant="contained"
           color="success"
           className="w-44 h-12"
-          disabled={isPending}
+          disabled={isWorking}
         >
-          {isPending ? "Loading..." : "Ajukan"}
+          {isWorking ? "Loading..." : "Ajukan"}
         </Button>
       </ThemeProvider>
     </Form>
   );
 }
 
-export default CreateFormMeetings;
+export default CreateAndUpdateFormMeeting;
