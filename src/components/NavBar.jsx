@@ -1,12 +1,15 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 import NavLinkRoute from "./NavLinkRoute";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Button, ThemeProvider } from "@mui/material";
 import { theme } from "../utils/theme";
+import { AuthContext } from "../contexts/AuthContext";
 
 function NavBar() {
+  const { logout, token } = useContext(AuthContext);
   const navigate = useNavigate();
+
   const style =
     "text-white hover:text-slate-200 w-fit transition duration-300 text-lg";
   const [isScrolled, setIsScrolled] = useState(false);
@@ -57,22 +60,40 @@ function NavBar() {
       </ul>
       <div className="flex gap-5">
         <ThemeProvider theme={theme}>
-          <Button
-            variant="outlined"
-            color="info"
-            onClick={() => navigate("/register")}
-            className="w-28 h-12"
-          >
-            Sign Up
-          </Button>
-          <Button
-            variant="contained"
-            color="success"
-            onClick={() => navigate("/login")}
-            className="w-28 h-12"
-          >
-            Sign In
-          </Button>
+          {token ? (
+            <>
+              <Button variant="outlined" color="info" className="w-38 h-12">
+                Update Profile
+              </Button>
+              <Button
+                variant="contained"
+                color="success"
+                onClick={() => logout()}
+                className="w-28 h-12"
+              >
+                Logout
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                variant="outlined"
+                color="info"
+                onClick={() => navigate("/register")}
+                className="w-28 h-12"
+              >
+                Sign Up
+              </Button>
+              <Button
+                variant="contained"
+                color="success"
+                onClick={() => navigate("/login")}
+                className="w-28 h-12"
+              >
+                Sign In
+              </Button>
+            </>
+          )}
         </ThemeProvider>
       </div>
     </nav>
