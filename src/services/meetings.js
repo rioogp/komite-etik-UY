@@ -51,3 +51,25 @@ export async function deleteMeeting(id) {
     throw new Error(err);
   }
 }
+
+export async function updateMeeting({ nameMeeting, meetingSchedule }, id) {
+  try {
+    const response = await axios.put(
+      `${API_URL}/meetings/${id}`,
+      {
+        nameMeeting,
+        meetingSchedule,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return response;
+  } catch (err) {
+    console.log(err.response);
+    throw new Error(err);
+  }
+}

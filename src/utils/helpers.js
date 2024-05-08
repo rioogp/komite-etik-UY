@@ -7,3 +7,13 @@ export const formatDate = (dateString) => {
   });
   return formattedDate.split("/").reverse().join("/");
 };
+
+export const formatMeetingSchedule = (meetingSchedule) => {
+  const formattedMeetingSchedule = meetingSchedule
+    ? new Date(meetingSchedule)
+    : null;
+  const isoFormattedMeetingSchedule = formattedMeetingSchedule
+    ? formattedMeetingSchedule.toISOString()
+    : null;
+  return isoFormattedMeetingSchedule;
+};

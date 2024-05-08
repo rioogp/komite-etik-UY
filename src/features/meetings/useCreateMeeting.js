@@ -5,7 +5,7 @@ import { createMeeting as createMeetingApi } from "../../services/meetings";
 export function useCreateMeeting() {
   const queryClient = useQueryClient();
 
-  const { mutate: createMeeting, isPending } = useMutation({
+  const { mutate: createMeeting, isPending: isCreating } = useMutation({
     mutationFn: createMeetingApi,
     onSuccess: () => {
       toast.success("Pertemuan berhasil ditambahkan!");
@@ -17,5 +17,5 @@ export function useCreateMeeting() {
     },
   });
 
-  return { createMeeting, isPending };
+  return { createMeeting, isCreating };
 }

@@ -1,12 +1,14 @@
-import { Button, TableCell } from "@mui/material";
+import { Button, TableCell, ThemeProvider } from "@mui/material";
 import TableStyle from "../../components/table/Table";
 import { MdOutlineEdit } from "react-icons/md";
 import { LuTrash2 } from "react-icons/lu";
-
 import { formatDate } from "../../utils/helpers";
 import { useDeleteMeeting } from "./useDeleteMeeting";
+import { theme } from "../../utils/theme";
+import ModalComponent from "../../components/ModalComponent";
+import CreateAndUpdateFormMeeting from "./CreateAndUpdateFormMeetings";
 
-function MeetingRow({ meeting }) {
+function MeetingRow({ meeting, index }) {
   const { isPending, deleteMeeting } = useDeleteMeeting();
 
   console.log(meeting);
@@ -19,7 +21,7 @@ function MeetingRow({ meeting }) {
           paddingLeft: "35px",
         }}
       >
-        {1}
+        {index + 1}
       </TableCell>
 
       <TableCell sx={{ fontSize: "1.3rem" }}>{meeting.emailUser}</TableCell>
@@ -51,16 +53,29 @@ function MeetingRow({ meeting }) {
         align="center"
       >
         <div className="flex flex-col justify-center items-center gap-4">
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#006A74",
-              paddingX: 0,
-              "&:hover": { backgroundColor: "#004d54" },
-            }}
-          >
-            <MdOutlineEdit size={38} />
-          </Button>
+          <ThemeProvider theme={theme}>
+            <ModalComponent>
+              <ModalComponent.OpenButton>
+                <Button
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#006A74",
+                    paddingX: 0,
+                    "&:hover": { backgroundColor: "#004d54" },
+                  }}
+                >
+                  <MdOutlineEdit size={38} />
+                </Button>
+              </ModalComponent.OpenButton>
+              <ModalComponent.ModalWindow
+                title="Ubah Jadwal Pertemuan"
+                subtitle="Ubah jadwal pertemuan sesuai dengan kebutuhan"
+              >
+                <CreateAndUpdateFormMeeting id={meeting._id} />
+              </ModalComponent.ModalWindow>
+            </ModalComponent>
+          </ThemeProvider>
+
           <Button
             variant="contained"
             sx={{
