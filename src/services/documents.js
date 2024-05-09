@@ -92,3 +92,22 @@ export async function addReviewers({ reviewers, id }) {
     throw new Error(error.message);
   }
 }
+
+export async function updateStatusReviewers({ status, message, id }) {
+  try {
+    const response = await axios.patch(
+      `${API_URL}/documents/${id}/status`,
+      { status, message },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.log(error.response.data.message);
+    throw new Error(error.message);
+  }
+}

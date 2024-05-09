@@ -72,7 +72,8 @@ function CreateFormDocuments() {
 
         fileFields.forEach((field) => {
           if (values[field]) {
-            formData.append("documents", values[field]);
+            const fileName = `${field}-${values[field].name}`;
+            formData.append("documents", values[field], fileName);
           }
         });
 

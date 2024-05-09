@@ -23,6 +23,8 @@ import { FaCheck } from "react-icons/fa6";
 import Documents from "./pages/documents/applicant/Documents";
 import Home from "./pages/Home";
 import ApplicantDocuments from "./pages/documents/admin/ApplicantDocuments";
+import ReviewerDocuments from "./pages/documents/admin/ReviewerDocuments";
+import DocumentsReviewer from "./pages/documents/reviewer/DocumentsReviewer";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -33,6 +35,8 @@ const queryClient = new QueryClient({
 });
 
 function App() {
+  const role = localStorage.getItem("role");
+
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
@@ -59,7 +63,9 @@ function App() {
               <Route path="/home" element={<Home />} />
               <Route path="/rapat" element={<MeetingSchedule />} />
               <Route path="/berkas" element={<Documents />} />
+              <Route path="/berkas/reviewer" element={<DocumentsReviewer />} />
               <Route path="/berkas-pengaju" element={<ApplicantDocuments />} />
+              <Route path="/berkas-reviewer" element={<ReviewerDocuments />} />
               <Route path="/notifikasi" element={<Notification />} />
               <Route path="/pengaturan" element={<Settings />} />
             </Route>
