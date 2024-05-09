@@ -64,8 +64,14 @@ function App() {
               <Route path="/rapat" element={<MeetingSchedule />} />
               <Route path="/berkas" element={<Documents />} />
               <Route path="/berkas/reviewer" element={<DocumentsReviewer />} />
-              <Route path="/berkas-pengaju" element={<ApplicantDocuments />} />
-              <Route path="/berkas-reviewer" element={<ReviewerDocuments />} />
+              <Route
+                path="/berkas/admin/pengaju"
+                element={<ApplicantDocuments />}
+              />
+              <Route
+                path="/berkas/admin/reviewer"
+                element={<ReviewerDocuments />}
+              />
               <Route path="/notifikasi" element={<Notification />} />
               <Route path="/pengaturan" element={<Settings />} />
             </Route>

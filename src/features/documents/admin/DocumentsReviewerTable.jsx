@@ -2,24 +2,22 @@ import { TableCell } from "@mui/material";
 // import Table from "../../components/table/Table";
 import TableStyle from "../../../components/Table";
 import DocumentsReviewerRow from "./DocumentsReviewerRow";
-
-const tempData = [
-  {
-    id: 1,
-    nama: "John Doe",
-    status: "Layak",
-    nama_penelitian:
-      "Tinjauan Terhadap Kode Etik Organisasi: Tantangan dan Peluang di Era Digital",
-  },
-  {
-    id: 2,
-    nama: "Jane Smith",
-    status: "",
-    nama_penelitian: "Analisis Data Medis",
-  },
-];
+import { useDocuments } from "../useDocuments";
 
 function DocumentsReviewerTable() {
+  const { isLoading, documents } = useDocuments();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  const filteredDocuments = documents.filter(
+    (doc) =>
+      doc.status === "Sedang Direview" &&
+      doc.reviewers.every(
+        (reviewer) => reviewer.status !== undefined && reviewer.status !== null
+      )
+  );
   return (
     <>
       <TableStyle>
@@ -42,8 +40,8 @@ function DocumentsReviewerTable() {
           </TableCell>
         </TableStyle.Header>
         <TableStyle.Body
-          data={tempData}
-          render={(data) => <DocumentsReviewerRow data={data} key={data.id} />}
+          data={filteredDocuments}
+          render={(data) => <DocumentsReviewerRow data={data} key={data._id} />}
         />
       </TableStyle>
     </>

@@ -1,10 +1,16 @@
-import { Button, TableCell } from "@mui/material";
+import { Button, TableCell, ThemeProvider } from "@mui/material";
 import { FiDownload } from "react-icons/fi";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 
 import TableStyle from "../../../components/Table";
+import { theme } from "../../../utils/theme";
+import ModalComponent from "../../../components/ModalComponent";
+import DocumentDecision from "./DocumentDecision";
+import { useDownloadDocument } from "../useDownloadDocument";
 
 function DocumentsReviewerRow({ data }) {
+  const { isPending, downloadDocument } = useDownloadDocument();
+
   return (
     <TableStyle.Row>
       <TableCell
@@ -19,7 +25,7 @@ function DocumentsReviewerRow({ data }) {
       </TableCell>
 
       <TableCell sx={{ fontSize: "1.1rem", width: "300px" }}>
-        {data.nama}
+        {data.nameUser}
       </TableCell>
 
       <TableCell
@@ -31,7 +37,7 @@ function DocumentsReviewerRow({ data }) {
           width: "500px",
         }}
       >
-        {data.nama_penelitian}
+        {data.researchName}
       </TableCell>
 
       <TableCell
@@ -40,17 +46,32 @@ function DocumentsReviewerRow({ data }) {
           textAlign: "center",
         }}
       >
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: "#006A74",
-            marginLeft: "15px",
-            paddingY: "10px",
-            "&:hover": { backgroundColor: "#02575f" },
-          }}
-        >
-          <IoMdInformationCircleOutline size={26} className="text-white" />
-        </Button>
+        <ThemeProvider theme={theme}>
+          <ModalComponent>
+            <ModalComponent.OpenButton>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "#006A74",
+                  marginLeft: "15px",
+                  paddingY: "10px",
+                  "&:hover": { backgroundColor: "#02575f" },
+                }}
+              >
+                <IoMdInformationCircleOutline
+                  size={26}
+                  className="text-white"
+                />
+              </Button>
+            </ModalComponent.OpenButton>
+            <ModalComponent.ModalWindow
+              title="Status Pengajuan"
+              subtitle="Status pengajuan proposal kamu dibawah ini"
+            >
+              <DocumentDecision reviewers={data.reviewers} id={data._id} />
+            </ModalComponent.ModalWindow>
+          </ModalComponent>
+        </ThemeProvider>
       </TableCell>
 
       <TableCell
@@ -69,6 +90,8 @@ function DocumentsReviewerRow({ data }) {
               paddingY: "10px",
               "&:hover": { backgroundColor: "#02575f" },
             }}
+            onClick={() => downloadDocument(data.documents[0])}
+            disabled={isPending}
           >
             <FiDownload size={25} className="text-white" />
           </Button>
