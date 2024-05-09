@@ -14,6 +14,7 @@ const {
   updatePhoto,
   uploadUserPhoto,
   resizeUserPhoto,
+  getUser,
 } = require('../controllers/user.controller');
 const { authorize } = require('../middlewares/auth.middleware');
 
@@ -34,5 +35,6 @@ router.patch(
 );
 
 router.route('/').get(getAllUsers);
+router.route('/:id').get(getUser);
 
 module.exports = router;
