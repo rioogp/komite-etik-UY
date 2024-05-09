@@ -1,18 +1,37 @@
 import { TableCell } from "@mui/material";
-// import Table from "../../components/table/Table";
 import TableStyle from "../../../components/Table";
-import DocumentsApplicantRow from "./DocumentsApplicantRow";
+import ReviewerDocumentsRow from "./ReviewerDocumentsRow";
 import { useDocuments } from "../useDocuments";
 
-function DocumentsApplicantTable() {
+const tempData = [
+  {
+    id: 1,
+    nama: "John Doe",
+    status: "Layak",
+    nama_penelitian:
+      "Tinjauan Terhadap Kode Etik Organisasi: Tantangan dan Peluang di Era Digital",
+  },
+  {
+    id: 2,
+    nama: "Jane Smith",
+    status: "",
+    nama_penelitian: "Analisis Data Medis",
+  },
+];
+
+function ReviewerDocumentsTable() {
   const { isLoading, documents } = useDocuments();
+  const reviewerId = localStorage.getItem("userId");
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
-  const filteredDocuments = documents.filter(
-    (document) => document.status === "Sedang Diproses"
+  const filteredDocuments = documents.filter((doc) =>
+    doc.reviewers.some(
+      (reviewer) =>
+        reviewer._id === reviewerId && !reviewer.hasOwnProperty("status")
+    )
   );
 
   return (
@@ -30,7 +49,7 @@ function DocumentsApplicantTable() {
           </TableCell>
 
           <TableCell sx={{ color: "gray", fontSize: "1.2rem" }} align="center">
-            Reviewer
+            Status
           </TableCell>
           <TableCell sx={{ color: "gray", fontSize: "1.2rem" }} align="center">
             Aksi
@@ -38,17 +57,11 @@ function DocumentsApplicantTable() {
         </TableStyle.Header>
         <TableStyle.Body
           data={filteredDocuments}
-          render={(document, index) => (
-            <DocumentsApplicantRow
-              data={document}
-              index={index}
-              key={document._id}
-            />
-          )}
+          render={(data) => <ReviewerDocumentsRow data={data} key={data._id} />}
         />
       </TableStyle>
     </>
   );
 }
 
-export default DocumentsApplicantTable;
+export default ReviewerDocumentsTable;

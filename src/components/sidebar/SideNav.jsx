@@ -53,7 +53,7 @@ function SideNav() {
       </NavLinkRoute>,
     ],
     reviewer: [
-      <NavLinkRoute style={styleNav} to="/berkas">
+      <NavLinkRoute style={styleNav} to="/berkas/reviewer">
         <FaRegFolder size={28} />
         <span>Berkas</span>
       </NavLinkRoute>,
@@ -209,7 +209,6 @@ function CollapseButton({ styleNav, userRole }) {
     setIsOpen(!isOpen);
   };
 
-  // Tentukan apakah collapse button harus ditampilkan berdasarkan peran pengguna
   const shouldShowCollapse = userRole === "user" || userRole === "admin";
 
   return (
@@ -264,7 +263,7 @@ function CollapseButton({ styleNav, userRole }) {
                 <NavLinkRoute style={styleNav} to="/berkas-pengaju">
                   <span>Pengaju</span>
                 </NavLinkRoute>
-                <NavLinkRoute style={styleNav} to="/reviewer">
+                <NavLinkRoute style={styleNav} to="/berkas-reviewer">
                   <span>Reviewer</span>
                 </NavLinkRoute>
                 <NavLinkRoute style={styleNav} to="/ketua">
