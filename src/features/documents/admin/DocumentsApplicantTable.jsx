@@ -2,6 +2,7 @@ import { TableCell } from "@mui/material";
 // import Table from "../../components/table/Table";
 import TableStyle from "../../../components/Table";
 import DocumentsApplicantRow from "./DocumentsApplicantRow";
+import { useDocuments } from "../useDocuments";
 
 const tempData = [
   {
@@ -20,6 +21,15 @@ const tempData = [
 ];
 
 function DocumentsApplicantTable() {
+  const { isLoading, documents } = useDocuments();
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  const filteredDocuments = documents.filter(
+    (document) => document.status === "Sedang Diproses"
+  );
+
   return (
     <>
       <TableStyle>
@@ -42,8 +52,14 @@ function DocumentsApplicantTable() {
           </TableCell>
         </TableStyle.Header>
         <TableStyle.Body
-          data={tempData}
-          render={(data) => <DocumentsApplicantRow data={data} key={data.id} />}
+          data={filteredDocuments}
+          render={(document, index) => (
+            <DocumentsApplicantRow
+              data={document}
+              index={index}
+              key={document._id}
+            />
+          )}
         />
       </TableStyle>
     </>

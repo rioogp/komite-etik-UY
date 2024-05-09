@@ -20,7 +20,7 @@ export function useLogin() {
 
       toast.success("Login successful");
 
-      navigate("/berkas", { replace: true });
+      navigate("/home", { replace: true });
     },
 
     onError: (err) => {

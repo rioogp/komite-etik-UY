@@ -16,6 +16,19 @@ export async function getDocumentsByUser() {
   }
 }
 
+export async function getDocuments() {
+  try {
+    const response = await axios.get(`${API_URL}/documents`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return response.data.data.documents;
+  } catch (err) {
+    throw new Error(err.message);
+  }
+}
+
 export async function downloadDocument(filename) {
   try {
     const response = await axios.get(`${API_URL}/documents/${filename}`, {
@@ -58,5 +71,24 @@ export async function uploadDocument(formData) {
       console.log("Error", error.message);
     }
     throw new Error(error);
+  }
+}
+
+export async function addReviewers({ reviewers, id }) {
+  try {
+    const response = await axios.patch(
+      `${API_URL}/documents/${id}/reviewers`,
+      { reviewers },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.log(error.response.data.message);
+    throw new Error(error.message);
   }
 }
