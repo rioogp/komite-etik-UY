@@ -111,3 +111,22 @@ export async function updateStatusReviewers({ status, message, id }) {
     throw new Error(error.message);
   }
 }
+
+export async function sendStatus({ status, id }) {
+  try {
+    const response = await axios.patch(
+      `${API_URL}/documents/${id}/status/send`,
+      { status },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return response;
+  } catch (error) {
+    console.log(error.response.data.message);
+    throw new Error(error.message);
+  }
+}

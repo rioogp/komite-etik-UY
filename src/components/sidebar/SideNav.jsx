@@ -260,10 +260,10 @@ function CollapseButton({ styleNav, userRole }) {
             )}
             {shouldShowCollapse && userRole === "admin" && (
               <>
-                <NavLinkRoute style={styleNav} to="/berkas-pengaju">
+                <NavLinkRoute style={styleNav} to="/berkas/admin/pengaju">
                   <span>Pengaju</span>
                 </NavLinkRoute>
-                <NavLinkRoute style={styleNav} to="/berkas-reviewer">
+                <NavLinkRoute style={styleNav} to="/berkas/admin/reviewer">
                   <span>Reviewer</span>
                 </NavLinkRoute>
                 <NavLinkRoute style={styleNav} to="/ketua">

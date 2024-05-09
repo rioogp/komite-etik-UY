@@ -18,13 +18,15 @@ const tempData = [
 ];
 
 function DocumentsTable() {
-  const { documents, error, isLoading } = useDocumentsByuser();
-
-  console.log(documents);
+  const { documents, isLoading } = useDocumentsByuser();
 
   if (isLoading) {
     return <p>Loading...</p>;
   }
+
+  const filteredDocuments = documents.filter(
+    (doc) => doc.status !== "Layak" && doc.status !== "Tidak Layak"
+  );
 
   return (
     <>
@@ -47,7 +49,7 @@ function DocumentsTable() {
           </TableCell>
         </TableStyle.Header>
         <TableStyle.Body
-          data={documents}
+          data={filteredDocuments}
           render={(document, index) => (
             <DocumentsRow data={document} index={index} key={document._id} />
           )}

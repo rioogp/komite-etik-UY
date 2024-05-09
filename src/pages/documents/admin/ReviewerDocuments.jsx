@@ -8,8 +8,6 @@ function ReviewerDocuments() {
         title="Pengajuan Proposal"
         subtitle="Daftar pengajuan proposal di bawah ini"
         filters="filters"
-        modalTitle="Status Pengajuan"
-        modalSubtitle="Status pengajuan proposal kamu dibawah ini"
       />
       <DocumentsReviewerTable />
     </main>
