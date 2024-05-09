@@ -52,15 +52,6 @@ export async function login({ emailOrUsername, password }) {
   }
 }
 
-export async function getUsers() {
-  try {
-    const response = await axios.get(`${API_URL}/users`);
-    return response.data;
-  } catch (err) {
-    throw new Error(err);
-  }
-}
-
 export async function verifyEmail(token) {
   try {
     const response = await axios.get(`${API_URL}/users/verify-email/${token}`);

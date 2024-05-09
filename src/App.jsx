@@ -21,6 +21,8 @@ import Reviews from "./pages/Reviews";
 import AuthProvider from "./contexts/AuthContext";
 import { FaCheck } from "react-icons/fa6";
 import Documents from "./pages/documents/applicant/Documents";
+import Home from "./pages/Home";
+import ApplicantDocuments from "./pages/documents/admin/ApplicantDocuments";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,8 +56,10 @@ function App() {
                 </TitleProvider>
               }
             >
+              <Route path="/home" element={<Home />} />
               <Route path="/rapat" element={<MeetingSchedule />} />
               <Route path="/berkas" element={<Documents />} />
+              <Route path="/berkas-pengaju" element={<ApplicantDocuments />} />
               <Route path="/notifikasi" element={<Notification />} />
               <Route path="/pengaturan" element={<Settings />} />
             </Route>

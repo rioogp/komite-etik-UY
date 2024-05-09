@@ -87,6 +87,9 @@ function SideNav() {
       <span>Menu</span>
       <ul className="p-1 flex flex-col gap-3">
         <ThemeProvider theme={theme}>
+          <NavLinkRoute style={styleNav} to="/home">
+            <span>Home</span>
+          </NavLinkRoute>
           {roleMenus[role].map((menu, index) => (
             <li key={index}>{menu}</li>
           ))}
@@ -258,7 +261,7 @@ function CollapseButton({ styleNav, userRole }) {
             )}
             {shouldShowCollapse && userRole === "admin" && (
               <>
-                <NavLinkRoute style={styleNav} to="/pengaju">
+                <NavLinkRoute style={styleNav} to="/berkas-pengaju">
                   <span>Pengaju</span>
                 </NavLinkRoute>
                 <NavLinkRoute style={styleNav} to="/reviewer">
