@@ -11,7 +11,6 @@ const User = require('../models/user.model');
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const uploadPath = `public/documents/user`;
-    console.log(file);
     cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
@@ -30,7 +29,7 @@ const multerFilter = (req, file, cb) => {
 
 const upload = multer({ storage, fileFilter: multerFilter });
 
-exports.uploadUserDocuments = upload.array('documents', 3);
+exports.uploadUserDocuments = upload.array('documents', 7);
 
 exports.uploadDocuments = catchAsync(async (req, res, next) => {
   const { researchName } = req.body;
@@ -53,6 +52,7 @@ exports.uploadDocuments = catchAsync(async (req, res, next) => {
     const newDocument = await Document.create({
       nameUser: name,
       researchName: researchName,
+      status: 'Sedang Diproses',
       documents: [
         `${researchName.replace(/\s+/g, '_')}-${name.replace(/\s+/g, '_')}.zip`,
       ],
@@ -117,6 +117,9 @@ exports.addReviewers = catchAsync(async (req, res, next) => {
         reviewers: {
           $each: findReviewers,
         },
+      },
+      $set: {
+        status: 'Sedang Direview',
       },
     },
     { new: true },

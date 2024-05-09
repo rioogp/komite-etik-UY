@@ -20,7 +20,7 @@ router
 
 router.get('/user', authorize, getDocumentsByUser);
 
-router.get('/:filename', authorize, downloadDocuments);
+router.get('/:filename', downloadDocuments);
 router.patch(
   '/:documentId/reviewers',
   authorize,

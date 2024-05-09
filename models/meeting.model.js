@@ -6,11 +6,10 @@ const meetingSchema = new mongoose.Schema({
     required: [true, 'Email must be filled'],
     trim: true,
     minlength: 1,
-    unique: true,
   },
   nameMeeting: {
     type: String,
-    required: [true, 'Meeting must be filled'],
+    required: [true, 'Meeting Name must be filled'],
     trim: true,
     minlength: 1,
   },

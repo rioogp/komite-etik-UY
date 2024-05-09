@@ -18,7 +18,7 @@ router
 router
   .route('/:id')
   .get(authorize, getMeeting)
-  .post(authorize, restrictTo('ketua'), updateMeeting)
+  .put(authorize, restrictTo('ketua'), updateMeeting)
   .delete(authorize, restrictTo('ketua'), deleteMeeting);
 
 module.exports = router;
