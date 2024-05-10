@@ -2,6 +2,8 @@ import { TableCell } from "@mui/material";
 import TableStyle from "../../../components/Table";
 import ReviewerDocumentsRow from "./ReviewerDocumentsRow";
 import { useDocuments } from "../useDocuments";
+import { useContext } from "react";
+import { AuthContext } from "../../../contexts/AuthContext";
 
 const tempData = [
   {
@@ -21,7 +23,7 @@ const tempData = [
 
 function ReviewerDocumentsTable() {
   const { isLoading, documents } = useDocuments();
-  const reviewerId = localStorage.getItem("userId");
+  const { userId } = useContext(AuthContext);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -30,7 +32,7 @@ function ReviewerDocumentsTable() {
   const filteredDocuments = documents.filter((doc) =>
     doc.reviewers.some(
       (reviewer) =>
-        reviewer._id === reviewerId && !reviewer.hasOwnProperty("status")
+        reviewer._id === userId && !reviewer.hasOwnProperty("status")
     )
   );
 

@@ -67,7 +67,7 @@ function SideNav() {
       </NavLinkRoute>,
     ],
     ketua: [
-      <NavLinkRoute style={styleNav} to="/berkas">
+      <NavLinkRoute style={styleNav} to="/berkas/ketua">
         <FaRegFolder size={28} />
         <span>Berkas</span>
       </NavLinkRoute>,

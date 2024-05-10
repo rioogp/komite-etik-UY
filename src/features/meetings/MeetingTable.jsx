@@ -2,6 +2,8 @@ import { TableCell } from "@mui/material";
 import TableStyle from "../../components/Table";
 import MeetingRow from "./MeetingRow";
 import { useMeetings } from "./useMeetings";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const tempData = [
   {
@@ -18,6 +20,7 @@ const tempData = [
 ];
 
 function MeetingTable({ meetings }) {
+  const { role } = useContext(AuthContext);
   return (
     <>
       <TableStyle>
@@ -34,9 +37,14 @@ function MeetingTable({ meetings }) {
           <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
             Tanggal Pertemuan
           </TableCell>
-          <TableCell sx={{ color: "gray", fontSize: "1.2rem" }} align="center">
-            Aksi
-          </TableCell>
+          {role === "ketua" && (
+            <TableCell
+              sx={{ color: "gray", fontSize: "1.2rem" }}
+              align="center"
+            >
+              Aksi
+            </TableCell>
+          )}
         </TableStyle.Header>
         <TableStyle.Body
           data={meetings}

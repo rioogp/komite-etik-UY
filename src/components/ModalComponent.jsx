@@ -60,7 +60,7 @@ function ModalWindow({ children, title, subtitle }) {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 950,
+            width: 1050,
             maxWidth: "90vw",
             height: 900,
             bgcolor: "background.paper",
