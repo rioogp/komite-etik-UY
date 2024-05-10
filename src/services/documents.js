@@ -29,6 +29,19 @@ export async function getDocuments() {
   }
 }
 
+export async function getDocument(id) {
+  try {
+    const response = await axios.get(`${API_URL}/documents/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return response.data.data.document;
+  } catch (e) {
+    throw new Error(err.message);
+  }
+}
+
 export async function downloadDocument(filename) {
   try {
     const response = await axios.get(`${API_URL}/documents/${filename}`, {

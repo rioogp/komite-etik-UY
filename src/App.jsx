@@ -26,6 +26,7 @@ import ApplicantDocuments from "./pages/documents/admin/ApplicantDocuments";
 import ReviewerDocuments from "./pages/documents/admin/ReviewerDocuments";
 import DocumentsReviewer from "./pages/documents/reviewer/DocumentsReviewer";
 import DocumentsDone from "./pages/documents/applicant/DocumentsDone";
+import DocumentsChair from "./pages/documents/ketua/DocumentsChair";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -66,6 +67,7 @@ function App() {
               <Route path="/berkas" element={<Documents />} />
               <Route path="/berkas-selesai" element={<DocumentsDone />} />
               <Route path="/berkas/reviewer" element={<DocumentsReviewer />} />
+              <Route path="/berkas/ketua" element={<DocumentsChair />} />
               <Route
                 path="/berkas/admin/pengaju"
                 element={<ApplicantDocuments />}

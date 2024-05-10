@@ -7,9 +7,12 @@ import { useDeleteMeeting } from "./useDeleteMeeting";
 import { theme } from "../../utils/theme";
 import ModalComponent from "../../components/ModalComponent";
 import CreateAndUpdateFormMeeting from "./CreateAndUpdateFormMeetings";
+import { useContext } from "react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 function MeetingRow({ meeting, index }) {
   const { isPending, deleteMeeting } = useDeleteMeeting();
+  const { role } = useContext(AuthContext);
 
   console.log(meeting);
   return (
@@ -50,50 +53,52 @@ function MeetingRow({ meeting, index }) {
         </span>
       </TableCell>
 
-      <TableCell
-        sx={{
-          fontSize: "1.3rem",
-        }}
-        align="center"
-      >
-        <div className="flex flex-col justify-center items-center gap-4">
-          <ThemeProvider theme={theme}>
-            <ModalComponent>
-              <ModalComponent.OpenButton>
-                <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: "#006A74",
-                    paddingX: 0,
-                    "&:hover": { backgroundColor: "#004d54" },
-                  }}
+      {role === "ketua" && (
+        <TableCell
+          sx={{
+            fontSize: "1.3rem",
+          }}
+          align="center"
+        >
+          <div className="flex flex-col justify-center items-center gap-4">
+            <ThemeProvider theme={theme}>
+              <ModalComponent>
+                <ModalComponent.OpenButton>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      backgroundColor: "#006A74",
+                      paddingX: 0,
+                      "&:hover": { backgroundColor: "#004d54" },
+                    }}
+                  >
+                    <MdOutlineEdit size={38} />
+                  </Button>
+                </ModalComponent.OpenButton>
+                <ModalComponent.ModalWindow
+                  title="Ubah Jadwal Pertemuan"
+                  subtitle="Ubah jadwal pertemuan sesuai dengan kebutuhan"
                 >
-                  <MdOutlineEdit size={38} />
-                </Button>
-              </ModalComponent.OpenButton>
-              <ModalComponent.ModalWindow
-                title="Ubah Jadwal Pertemuan"
-                subtitle="Ubah jadwal pertemuan sesuai dengan kebutuhan"
-              >
-                <CreateAndUpdateFormMeeting id={meeting._id} />
-              </ModalComponent.ModalWindow>
-            </ModalComponent>
-          </ThemeProvider>
+                  <CreateAndUpdateFormMeeting id={meeting._id} />
+                </ModalComponent.ModalWindow>
+              </ModalComponent>
+            </ThemeProvider>
 
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#006A74",
-              paddingX: 0,
-              "&:hover": { backgroundColor: "#004d54" },
-            }}
-            disabled={isPending}
-            onClick={() => deleteMeeting(meeting._id)}
-          >
-            <LuTrash2 size={38} />
-          </Button>
-        </div>
-      </TableCell>
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#006A74",
+                paddingX: 0,
+                "&:hover": { backgroundColor: "#004d54" },
+              }}
+              disabled={isPending}
+              onClick={() => deleteMeeting(meeting._id)}
+            >
+              <LuTrash2 size={38} />
+            </Button>
+          </div>
+        </TableCell>
+      )}
     </TableStyle.Row>
   );
 }

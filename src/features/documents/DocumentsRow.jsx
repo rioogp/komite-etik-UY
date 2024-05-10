@@ -1,9 +1,11 @@
-import { Button, TableCell } from "@mui/material";
+import { Button, TableCell, ThemeProvider } from "@mui/material";
 import TableStyle from "../../components/Table";
 import { FiDownload } from "react-icons/fi";
 import { IoIosInformationCircleOutline } from "react-icons/io";
-import { MdOutlineEdit } from "react-icons/md";
 import { useDownloadDocument } from "./useDownloadDocument";
+import { theme } from "../../utils/theme";
+import ModalComponent from "../../components/ModalComponent";
+import StepProgressBarDocument from "./StepProgressBarDocument";
 
 function DocumentsRow({ data, index }) {
   const { isPending, downloadDocument } = useDownloadDocument();
@@ -60,28 +62,28 @@ function DocumentsRow({ data, index }) {
         }}
         align="center"
       >
-        <div className="flex flex-col justify-center items-center gap-4">
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#006A74",
-              paddingX: 0,
-              "&:hover": { backgroundColor: "#004d54" },
-            }}
-          >
-            <IoIosInformationCircleOutline size={38} />
-          </Button>
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#006A74",
-              paddingX: 0,
-              "&:hover": { backgroundColor: "#004d54" },
-            }}
-          >
-            <MdOutlineEdit size={38} />
-          </Button>
-        </div>
+        <ThemeProvider theme={theme}>
+          <ModalComponent>
+            <ModalComponent.OpenButton>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "#006A74",
+                  paddingX: 0,
+                  "&:hover": { backgroundColor: "#004d54" },
+                }}
+              >
+                <IoIosInformationCircleOutline size={38} />
+              </Button>
+            </ModalComponent.OpenButton>
+            <ModalComponent.ModalWindow
+              title="Detail Proposal"
+              subtitle="Detail kemajuan proposal tersedia untuk ditinjau di bawah ini"
+            >
+              <StepProgressBarDocument id={data._id} />
+            </ModalComponent.ModalWindow>
+          </ModalComponent>
+        </ThemeProvider>
       </TableCell>
     </TableStyle.Row>
   );

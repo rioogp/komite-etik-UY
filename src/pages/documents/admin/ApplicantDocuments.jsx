@@ -19,8 +19,6 @@ function ApplicantDocuments() {
         title="Pengajuan Proposal"
         subtitle="Daftar pengajuan proposal di bawah ini"
         filters="filters"
-        modalTitle="Pilih Reviewer"
-        modalSubtitle="Berikan berkas kepada reviewer untuk di review"
       >
         <CreateFormDocuments />
       </HeadDashboard>

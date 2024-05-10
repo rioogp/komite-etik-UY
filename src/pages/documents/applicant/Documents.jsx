@@ -2,6 +2,7 @@ import CreateFormDocuments from "../../../features/documents/CreateFormDocuments
 import usePageTitle from "../../../hooks/usePageTitle";
 import HeadDashboard from "../../../components/HeadDashboard";
 import DocumentsTable from "../../../features/documents/DocumentsTable";
+import StepProgressBarDocument from "../../../features/documents/StepProgressBarDocument";
 
 function Documents() {
   usePageTitle("Berkas | Komite Etik");

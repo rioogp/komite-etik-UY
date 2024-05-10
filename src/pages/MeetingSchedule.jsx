@@ -1,21 +1,17 @@
-import { useEffect } from "react";
 import usePageTitle from "../hooks/usePageTitle";
-import { useOutletContext } from "react-router-dom";
 import { useMeetings } from "../features/meetings/useMeetings";
 import SchedulerCalendar from "../features/meetings/SchedulerCalendar";
 import MeetingTable from "../features/meetings/MeetingTable";
 import HeadDashboard from "../components/HeadDashboard";
 import CreateAndUpdateFormMeeting from "../features/meetings/CreateAndUpdateFormMeetings";
+import { useContext } from "react";
+import { AuthContext } from "../contexts/AuthContext";
 
 function MeetingSchedule() {
-  const [setValTitle] = useOutletContext();
   const { isLoading, meetings } = useMeetings();
-
+  const { role } = useContext(AuthContext);
   // Ensure hooks are called unconditionally in the component body
   usePageTitle("Jadwal Pertemuan | Komite Etik");
-  useEffect(() => {
-    setValTitle("Jadwal Pertemuan");
-  }, [setValTitle]);
 
   if (isLoading || !meetings) {
     return <div>Loading...</div>;
@@ -27,11 +23,11 @@ function MeetingSchedule() {
       <HeadDashboard
         title="Jadwal Pertemuan"
         subtitle="Ajukan Jadwal Pertemuan Sesuai dengan Kebutuhan"
-        add="add"
+        add={role === "ketua" ? "add" : null}
         modalTitle="Atur Jadwal Pertemuan"
         modalSubtitle="Ajukan jadwal pertemuan sesuai dengan kebutuhan"
       >
-        <CreateAndUpdateFormMeeting />
+        {role === "ketua" && <CreateAndUpdateFormMeeting />}
       </HeadDashboard>
       <MeetingTable meetings={meetings} />
     </main>
