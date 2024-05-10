@@ -162,28 +162,24 @@ exports.updateReviewerStatus = catchAsync(async (req, res, next) => {
   });
 });
 
-// exports.uploadDocuments = catchAsync(async (req, res, next) => {
-//   const { researchName } = req.body;
-//   const documents = req.files.map((file) => file.filename);
-//   const newDocument = await Document.create({
-//     researchName: researchName,
-//     status: 'On Process',
-//     documents: documents,
-//     user: req.user.id,
-//   });
-
-//   res.status(201).json({
-//     status: 'success',
-//     message: 'Documents uploaded successfully',
-//     data: newDocument,
-//   });
-// });
-
 exports.getDocuments = catchAsync(async (req, res, next) => {
   const documents = await Document.find();
   res.status(200).json({
     status: 'success',
     data: { documents },
+  });
+});
+
+exports.getDocument = catchAsync(async (req, res, next) => {
+  const document = await Document.findById(req.params.documentId);
+
+  if (!document) {
+    return next(new AppError('Document not found', 404));
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: { document },
   });
 });
 
