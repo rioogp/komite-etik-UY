@@ -4,7 +4,7 @@ import { CountUp } from "countup.js";
 
 function BriefInformation() {
   return (
-    <div className="flex flex-col items-center justify-center gap-5 border border-slate-200 shadow-xl rounded-3xl mx-24 mt-[-20rem] p-10 bg-white">
+    <div className="hidden xl:flex flex-col items-center justify-center gap-5 border border-slate-200 shadow-xl rounded-3xl mx-24 mt-[-20rem] p-10 bg-white">
       <Heading type="secondary">Informasi Singkat</Heading>
       <span className="text-xl text-slate-500 max-w-3xl text-center">
         Semua yang perlu dilakukan untuk mengonversi, meninjau, dan

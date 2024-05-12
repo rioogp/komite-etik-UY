@@ -46,10 +46,10 @@ function Task() {
 
   return (
     <SectionColContainer items="items-center">
-      <Heading type="custom" fontSize="text-5xl" color="text-black">
+      <Heading type="custom" fontSize="text-4xl md:text-5xl" color="text-black">
         Tugas Komite Etik
       </Heading>
-      <p className="text-slate-500 text-2xl max-w-[90rem] text-center mb-24">
+      <p className="text-slate-500 text-xl md:text-2xl max-w-[90rem] text-center mb-24">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
@@ -61,7 +61,7 @@ function Task() {
           variants={container}
           initial="hidden"
           animate={inView ? "show" : "hidden"}
-          className="flex flex-row flex-wrap gap-x-16 gap-y-36 justify-center items-center"
+          className="flex flex-row flex-wrap gap-x-16 gap-y-14 md:gap-y-36 justify-center items-center"
         >
           {tasks.map((task, index) => (
             <Item
