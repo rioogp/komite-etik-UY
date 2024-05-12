@@ -21,7 +21,11 @@ function CardItem() {
       >
         <CardContent className="flex flex-col gap-10">
           <div className="flex flex-col gap-3">
-            <Heading type="custom" fontSize="text-3xl" color="text-white">
+            <Heading
+              type="custom"
+              fontSize="text-2xl sm:text-3xl"
+              color="text-white"
+            >
               Pertanyaan
             </Heading>
             <Typography

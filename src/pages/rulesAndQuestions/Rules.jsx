@@ -47,14 +47,14 @@ function Rules() {
     <SectionColContainer items="items-center">
       <Heading
         type="custom"
-        fontSize="text-5xl"
+        fontSize="text-4xl md:text-5xl"
         color="text-black"
         width="max-w-[70rem]"
         center="text-center"
       >
         Etika Website: Panduan Etik untuk Pengalaman Online yang Bermartabat
       </Heading>
-      <p className="text-slate-500 text-2xl max-w-[90rem] text-center mb-24">
+      <p className="text-slate-500 text-xl md:text-2xl max-w-[90rem] text-center mb-16 md:mb-24">
         Aturan dan norma-norma yang mengatur interaksi online dengan hormat,
         kejujuran, dan kesadaran akan tanggung jawab kita sebagai pengguna. Kode
         etik ini membentuk pengalaman online yang inklusif, aman, dan
@@ -67,7 +67,7 @@ function Rules() {
           variants={container}
           initial="hidden"
           animate={inView ? "show" : "hidden"}
-          className="flex flex-row flex-wrap gap-x-16 gap-y-36 justify-center items-center"
+          className="flex flex-row flex-wrap gap-x-16 gap-y-2 md:gap-y-4 xl:gap-y-36 justify-center items-center"
         >
           {tasks.map((task, index) => (
             <Item

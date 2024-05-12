@@ -45,7 +45,7 @@ function Hero({ title, title2, typeImage, page, desc }) {
     <motion.section
       className={`${image} bg-no-repeat bg-cover w-full h-fit md:h-auto`}
     >
-      <motion.div className="px-5 md:px-36 pt-32 xl:py-52 flex flex-col justify-center gap-2">
+      <motion.div className="px-5 md:px-24 xl:px-36 pt-32 xl:py-52 flex flex-col justify-center gap-2">
         <Heading type="heroTitle" color="text-white">
           {textAnimation(text, 0.8)}
         </Heading>
@@ -87,7 +87,7 @@ function Hero({ title, title2, typeImage, page, desc }) {
               }}
               variant="contained"
               color="info"
-              className="w-40 sm:w-54 md:w-56 h-14 flex gap-3 justify-center items-center"
+              className="w-40 sm:w-54 md:w-56 h-12 md:h-14 flex gap-3 justify-center items-center"
               onClick={() => navigate("/berkas")}
             >
               Get Started <IoIosArrowRoundForward size={28} />
