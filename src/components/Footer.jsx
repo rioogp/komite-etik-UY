@@ -4,12 +4,12 @@ import LinkRoute from "./LinkRoute";
 
 function Footer() {
   return (
-    <footer className="bg-slate-100 flex flex-col py-32 px-52 gap-28">
+    <footer className="bg-slate-100 flex flex-col py-32 px-14 sm:px-20 md:px-52 gap-16">
       <div className="flex flex-col gap-4">
         <Heading
           Heading
           type="custom"
-          fontSize="text-5xl"
+          fontSize="text-3xl md:text-5xl"
           color="text-slate-800"
         >
           Komite Etik
@@ -17,28 +17,40 @@ function Footer() {
         <Heading
           Heading
           type="custom"
-          fontSize="text-5xl"
+          fontSize="text-3xl md:text-5xl"
           color="text-slate-800"
         >
           Universitas Yarsi
         </Heading>
       </div>
       <Divider />
-      <div className="flex gap-10">
+      <div className="flex flex-col md:flex-row gap-10">
         <div className="flex flex-col basis-2/4">
-          <Heading type="custom" fontSize="text-2xl" color="text-slate-800">
+          <Heading
+            type="custom"
+            fontSize="text-xl md:text-2xl"
+            color="text-slate-800"
+          >
             Catatan
           </Heading>
-          <Heading type="custom" fontSize="text-2xl" color="text-slate-800">
+          <Heading
+            type="custom"
+            fontSize="text-xl md:text-2xl"
+            color="text-slate-800"
+          >
             Etik:
           </Heading>
-          <p className="max-w-[25rem] text-slate-700">
+          <p className="max-w-[25rem] text-md md:text-lg text-slate-700">
             Panduan Perilaku dan Aturan Berlaku untuk Seluruh Anggota Komunitas
             Universitas YARSI tanpa memandang jabatan dan Gelar.
           </p>
         </div>
         <div className="flex flex-col gap-9">
-          <Heading type="custom" fontSize="text-2xl" color="text-slate-800">
+          <Heading
+            type="custom"
+            fontSize="text-xl md:text-2xl"
+            color="text-slate-800"
+          >
             Menu
           </Heading>
           <div className="flex flex-col gap-6">
@@ -51,7 +63,11 @@ function Footer() {
           </div>
         </div>
         <div className="flex flex-col gap-9">
-          <Heading type="custom" fontSize="text-2xl" color="text-slate-800">
+          <Heading
+            type="custom"
+            fontSize="text-xl md:text-2xl"
+            color="text-slate-800"
+          >
             Resources
           </Heading>
           <div className="flex flex-col gap-6">

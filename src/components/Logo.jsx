@@ -1,9 +1,14 @@
 import Image from "./Image";
 
-function Logo() {
+function Logo({ style }) {
   return (
-    <div className="text-center">
-      <Image src="/Logo.png" alt="Logo" type="logo" />
+    <div className={`text-center ${style}`}>
+      <Image
+        src="/Logo.png"
+        alt="Logo"
+        type="logo"
+        className="object-contain w-10 h-full"
+      />
     </div>
   );
 }
