@@ -1,12 +1,21 @@
 import { motion } from "framer-motion";
 import { item } from "../../utils/variants";
-import { Button, Card, CardContent, Collapse, Typography } from "@mui/material";
+import {
+  Button,
+  Card,
+  CardContent,
+  Collapse,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { CgProfile } from "react-icons/cg";
 import { useState } from "react";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { theme } from "../../utils/theme";
 
 function ReviewCard({ review }) {
   const [expanded, setExpanded] = useState(false);
+  const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   const { description, createdAt } = review;
 
@@ -45,7 +54,7 @@ function ReviewCard({ review }) {
                 fontWeight: "100",
                 maxWidth: 240,
                 marginTop: "15px",
-                fontSize: "18px",
+                fontSize: isMediumScreen ? "16px" : "18px",
                 display: "-webkit-box",
                 WebkitBoxOrient: "vertical",
                 overflow: "hidden",

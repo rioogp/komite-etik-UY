@@ -48,13 +48,13 @@ function ReviewsInput() {
     <SectionColContainer>
       <Heading
         type="custom"
-        fontSize="text-5xl"
+        fontSize="text-4xl md:text-5xl"
         color="text-black"
         width="max-w-[70rem]"
       >
         Berikan Ulasan
       </Heading>
-      <span className="text-2xl text-slate-500">
+      <span className="text-slate-500 text-xl md:text-2xl">
         Berikan ulasan anda mengenai website ini.
       </span>
       <ThemeProvider theme={theme}>
