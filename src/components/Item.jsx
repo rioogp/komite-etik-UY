@@ -19,7 +19,7 @@ function Item({ number, title, description }) {
       <Heading type="custom" fontSize="text-2xl">
         {title}
       </Heading>
-      <p className="text-slate-500 text-lg md:text-xl w-[20rem] md:w-[30rem]">
+      <p className="text-slate-500 md:text-xl w-[20rem] md:w-[30rem]">
         {description}
       </p>
     </motion.div>

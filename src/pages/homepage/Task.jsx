@@ -49,7 +49,7 @@ function Task() {
       <Heading type="custom" fontSize="text-4xl md:text-5xl" color="text-black">
         Tugas Komite Etik
       </Heading>
-      <p className="text-slate-500 text-xl md:text-2xl max-w-[90rem] text-center mb-24">
+      <p className="text-slate-500 text-xl md:text-2xl max-w-[90rem] text-center mb-16 md:mb-24">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea

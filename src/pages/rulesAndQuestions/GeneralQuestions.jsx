@@ -15,14 +15,14 @@ function GeneralQuestions() {
     <SectionColContainer items="items-center">
       <Heading
         type="custom"
-        fontSize="text-5xl"
+        fontSize="text-4xl md:text-5xl"
         color="text-black"
         width="max-w-[70rem]"
         center="text-center"
       >
         Pertanyaan <span className="text-color-primary">Umum</span>
       </Heading>
-      <span className="text-xl font-medium mb-20">
+      <span className="text-slate-500 text-xl md:text-2xl max-w-[90rem] text-center mb-16 md:mb-24">
         Berikut telah kami rangkum beberapa pertanyaan yang sering ditanyakan
         terkait layanan kami.
       </span>
@@ -33,7 +33,7 @@ function GeneralQuestions() {
           variants={container}
           initial="hidden"
           animate={inView ? "show" : "hidden"}
-          className="flex flex-row flex-wrap gap-8 justify-center px-10 md:px-40"
+          className="flex flex-row flex-wrap gap-8 justify-center px-5 md:px-32"
         >
           <CardItem />
           <CardItem />

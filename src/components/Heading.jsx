@@ -8,7 +8,7 @@ function Heading({ type, color, children, fontSize, width, center }) {
     hometitle: "font-medium text-3xl md:text-4xl",
     notifTitle: "font-semibold text-lg",
     custom: `font-semibold ${fontSize} ${color} ${width} ${center}`,
-    heroTitle: `font-semibold text-start text-5xl md:text-8xl ${color}`,
+    heroTitle: `font-semibold w-full text-start text-5xl xl:text-8xl ${color}`,
   };
 
   return <h1 className={style[type]}>{children}</h1>;
