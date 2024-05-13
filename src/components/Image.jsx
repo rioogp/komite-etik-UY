@@ -5,6 +5,7 @@ function Image({ type, src, alt }) {
     profile: "rounded-full h-10 w-auto",
     full: "w-full h-[63.7rem] object-cover object-center z-0",
     absolute: "w-[30rem] absolute hidden xl:inline-block bottom-0 left-[5rem]",
+    home: "w-auto h-auto",
   };
 
   return <img src={src} alt={alt} className={style[type]} />;

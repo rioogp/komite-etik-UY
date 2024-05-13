@@ -32,7 +32,7 @@ function DashboardLayout() {
   return token ? (
     <div className="grid grid-cols-[23rem,1fr] grid-rows-[auto,1fr] h-dvh">
       <SideBar />
-      <main className="overflow-scroll flex flex-col px-20 mb-10 py-14">
+      <main className="overflow-auto flex flex-col px-20 mb-10 py-14">
         <Outlet context={[setValTitle]} />
       </main>
     </div>
