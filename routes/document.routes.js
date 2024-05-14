@@ -9,6 +9,7 @@ const {
   getDocumentsByUser,
   sendStatus,
   getDocument,
+  updateDocuments,
 } = require('../controllers/document.controller');
 const { authorize, restrictTo } = require('../middlewares/auth.middleware');
 
@@ -20,8 +21,14 @@ router
   .get(authorize, getDocuments);
 
 router.get('/user', authorize, getDocumentsByUser);
-router.get('/:documentId', authorize, getDocument);
-router.get('/:filename', downloadDocuments);
+
+router
+  .route('/:documentId')
+  .get(getDocument)
+  .patch(authorize, uploadUserDocuments, updateDocuments);
+
+router.get('/download/:filename', downloadDocuments);
+
 router.patch(
   '/:documentId/reviewers',
   authorize,
