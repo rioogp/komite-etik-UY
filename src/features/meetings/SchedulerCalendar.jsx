@@ -25,8 +25,8 @@ function SchedulerCalendar({ meetings }) {
 
   const renderEventContent = (eventInfo) => {
     return (
-      <div className="bg-color-primary w-40 h-16 text-white p-1 md:p-2 text-lg rounded-lg shadow-md overflow-hidden">
-        <span className="block overflow-hidden max-w-16 break-word">
+      <div className="bg-color-primary w-48 h-16 text-white p-1 md:p-2 text-lg rounded-lg shadow-md overflow-hidden">
+        <span className="block overflow-hidden break-word">
           {eventInfo.event.title}
         </span>
       </div>

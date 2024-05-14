@@ -8,10 +8,12 @@ import { MuiFileInput } from "mui-file-input";
 import { useFormik } from "formik";
 import { IoMdClose } from "react-icons/io";
 import { useCreateDocument } from "./useCreateDocument";
-import { uploadDocument } from "../../services/documents";
+import { useUpdateDocument } from "./useUpdateDocument";
 
-function CreateFormDocuments() {
+function CreateUpdateFormDocuments({ id }) {
   const { createDocument, isCreating } = useCreateDocument();
+  const { updateDocument, isUpdating } = useUpdateDocument();
+  console.log(id);
   const {
     handleSubmit,
     setFieldValue,
@@ -22,7 +24,7 @@ function CreateFormDocuments() {
     values,
   } = useFormik({
     initialValues: {
-      namaPenelitian: "",
+      // namaPenelitian: "",
       suratPengantar: null,
       suratRekomendasi: null,
       fileProposal: null,
@@ -32,7 +34,7 @@ function CreateFormDocuments() {
       kuesioner: null,
     },
     validationSchema: Yup.object().shape({
-      namaPenelitian: Yup.string().required("Nama Penelitian wajib diisi"),
+      // namaPenelitian: Yup.string().required("Nama Penelitian wajib diisi"),
       suratPengantar: Yup.mixed().required(
         "Surat Pengantar dari Lembaga/Institusi/Ketua Peneliti wajib diisi"
       ),
@@ -58,7 +60,7 @@ function CreateFormDocuments() {
     onSubmit: (values, { resetForm, setSubmitting }) => {
       try {
         const formData = new FormData();
-        formData.append("researchName", values.namaPenelitian);
+        id ? "" : formData.append("researchName", values.namaPenelitian);
 
         const fileFields = [
           "suratPengantar",
@@ -77,7 +79,9 @@ function CreateFormDocuments() {
           }
         });
 
-        createDocument(formData, { onSettled: () => resetForm() });
+        id
+          ? updateDocument({ formData, id }, { onSettled: () => resetForm() })
+          : createDocument(formData, { onSettled: () => resetForm() });
       } catch (error) {
         console.error("Error in onSubmit:", error);
       } finally {
@@ -88,21 +92,25 @@ function CreateFormDocuments() {
 
   return (
     <Form type="modal" onSubmit={handleSubmit}>
-      <FormRowInput>
-        <span className="font-medium text-lg">Nama Penelitian</span>
-        <TextField
-          id="namaPenelitian"
-          variant="outlined"
-          placeholder="Masukkan nama penelitian"
-          value={values.namaPenelitian}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={touched.namaPenelitian && Boolean(errors.namaPenelitian)}
-        />
-        <span className="text-red-500 text-md font-medium">
-          {touched.namaPenelitian && errors.namaPenelitian}
-        </span>
-      </FormRowInput>
+      {id ? (
+        ""
+      ) : (
+        <FormRowInput>
+          <span className="font-medium text-lg">Nama Penelitian</span>
+          <TextField
+            id="namaPenelitian"
+            variant="outlined"
+            placeholder="Masukkan nama penelitian"
+            value={values.namaPenelitian}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            error={touched.namaPenelitian && Boolean(errors.namaPenelitian)}
+          />
+          <span className="text-red-500 text-md font-medium">
+            {touched.namaPenelitian && errors.namaPenelitian}
+          </span>
+        </FormRowInput>
+      )}
 
       <FormRowInput>
         <span className="font-medium text-lg">
@@ -275,13 +283,19 @@ function CreateFormDocuments() {
           variant="contained"
           color="success"
           className="w-44 h-12"
-          disabled={isCreating}
+          disabled={id ? isUpdating : isCreating}
         >
-          {isCreating ? "Loading..." : "Ajukan"}
+          {id
+            ? isUpdating
+              ? "Loading..."
+              : "Kirim"
+            : isCreating
+            ? "Loading..."
+            : "Ajukan"}
         </Button>
       </ThemeProvider>
     </Form>
   );
 }
 
-export default CreateFormDocuments;
+export default CreateUpdateFormDocuments;

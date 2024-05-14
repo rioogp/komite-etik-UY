@@ -39,7 +39,7 @@ function MeetingRow({ meeting, index }) {
           maxWidth: "400px",
         }}
       >
-        <span className="font-medium">{meeting.emailUser}</span>{" "}
+        <span className="font-medium">{meeting.nameMeeting}</span>{" "}
       </TableCell>
 
       <TableCell
