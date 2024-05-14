@@ -14,7 +14,6 @@ const storage = multer.diskStorage({
     cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
-    // const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
     cb(null, file.originalname);
   },
 });
@@ -71,6 +70,66 @@ exports.uploadDocuments = catchAsync(async (req, res, next) => {
   });
 
   archive.pipe(output);
+  documents.forEach((filename) => {
+    const filePath = `public/documents/user/${filename}`;
+    archive.file(filePath, { name: filename });
+  });
+
+  archive.finalize();
+});
+
+exports.updateDocuments = catchAsync(async (req, res, next) => {
+  const { documentId } = req.params;
+
+  const document = await Document.findById(documentId);
+
+  if (!document) {
+    return next(new AppError('No document found with that ID', 404));
+  }
+
+  let status;
+
+  if (req.user.role === 'ketua') {
+    status = 'Layak';
+  } else {
+    status = 'Sedang Diproses';
+  }
+
+  const oldZipName = document.documents[0];
+  const oldZipPath = `public/documents/user/${oldZipName}`;
+
+  fs.unlinkSync(oldZipPath);
+
+  const newZipPath = oldZipPath;
+  const documents = req.files.map((file) => file.filename);
+
+  const output = fs.createWriteStream(newZipPath);
+  const archive = archiver('zip', {
+    zlib: { level: 9 },
+  });
+
+  output.on('close', async () => {
+    documents.forEach((filename) => {
+      const filePath = `public/documents/user/${filename}`;
+      fs.unlinkSync(filePath);
+    });
+
+    document.status = status;
+    await document.save();
+
+    res.status(200).json({
+      status: 'success',
+      message: 'Documents updated and zipped successfully',
+      data: document,
+    });
+  });
+
+  archive.on('error', (err) => {
+    throw new AppError(`Error occurred while zipping files: ${err}`, 500);
+  });
+
+  archive.pipe(output);
+
   documents.forEach((filename) => {
     const filePath = `public/documents/user/${filename}`;
     archive.file(filePath, { name: filename });

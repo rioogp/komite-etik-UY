@@ -6,14 +6,14 @@ const { format } = require('date-fns');
 
 exports.getReviews = catchAsync(async (req, res) => {
   const totalReviews = await Review.countDocuments();
-  const randomSkip = Math.floor(Math.random() * (totalReviews - 6));
+  const randomSkip = Math.floor(Math.random() * (totalReviews - 10));
   const reviews =
-    totalReviews < 6
+    totalReviews < 10
       ? await Review.find()
       : await Review.aggregate([
           { $sample: { size: totalReviews } },
           { $skip: randomSkip },
-          { $limit: 6 },
+          { $limit: 10 },
         ]);
 
   res.status(200).json({
