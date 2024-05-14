@@ -1,4 +1,3 @@
-import CreateFormDocuments from "../../../features/documents/CreateFormDocuments";
 import usePageTitle from "../../../hooks/usePageTitle";
 import HeadDashboard from "../../../components/HeadDashboard";
 import DocumentsDoneTable from "../../../features/documents/DocumentsDoneTable";
@@ -14,9 +13,7 @@ function DocumentsDone() {
         filters="filters"
         modalTitle="Pengajuan Penelitian"
         modalSubtitle="Ajukan penelitian yang ingin diajukan"
-      >
-        <CreateFormDocuments />
-      </HeadDashboard>
+      />
       <DocumentsDoneTable />
     </main>
   );

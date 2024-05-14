@@ -27,7 +27,7 @@ function ReviewCard({ review }) {
     <motion.div variants={item}>
       <Card
         sx={{
-          width: 300,
+          width: 450,
           borderRadius: "10px",
           padding: "5px",
         }}
@@ -52,7 +52,7 @@ function ReviewCard({ review }) {
               sx={{
                 color: "black",
                 fontWeight: "100",
-                maxWidth: 240,
+                maxWidth: 390,
                 marginTop: "15px",
                 fontSize: isMediumScreen ? "16px" : "18px",
                 display: "-webkit-box",

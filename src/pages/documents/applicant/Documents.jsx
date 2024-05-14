@@ -1,8 +1,7 @@
-import CreateFormDocuments from "../../../features/documents/CreateFormDocuments";
 import usePageTitle from "../../../hooks/usePageTitle";
 import HeadDashboard from "../../../components/HeadDashboard";
 import DocumentsTable from "../../../features/documents/DocumentsTable";
-import StepProgressBarDocument from "../../../features/documents/StepProgressBarDocument";
+import CreateUpdateFormDocuments from "../../../features/documents/CreateUpdateFormDocuments";
 
 function Documents() {
   usePageTitle("Berkas | Komite Etik");
@@ -17,7 +16,7 @@ function Documents() {
         modalTitle="Pengajuan Penelitian"
         modalSubtitle="Ajukan penelitian yang ingin diajukan"
       >
-        <CreateFormDocuments />
+        <CreateUpdateFormDocuments />
       </HeadDashboard>
       <DocumentsTable />
     </main>

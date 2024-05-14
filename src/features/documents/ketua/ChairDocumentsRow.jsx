@@ -4,6 +4,7 @@ import TableStyle from "../../../components/Table";
 import { useDownloadDocument } from "../useDownloadDocument";
 import ModalComponent from "../../../components/ModalComponent";
 import { theme } from "../../../utils/theme";
+import CreateUpdateFormDocuments from "../CreateUpdateFormDocuments";
 
 function ChairDocumentsRow({ data }) {
   const { isPending, downloadDocument } = useDownloadDocument();
@@ -67,22 +68,32 @@ function ChairDocumentsRow({ data }) {
         align="center"
       >
         <div className="flex flex-col justify-center items-center gap-4">
-          <Button
-            variant="contained"
-            sx={{
-              width: "8.2rem",
-              backgroundColor: "#006A74",
-              marginLeft: "15px",
-              paddingY: "10px",
-              fontSize: 16,
-              textTransform: "none",
-              "&:hover": { backgroundColor: "#02575f" },
-            }}
-            onClick={() => downloadDocument(data.documents[0])}
-            disabled={isPending}
-          >
-            Upload
-          </Button>
+          <ThemeProvider theme={theme}>
+            <ModalComponent>
+              <ModalComponent.OpenButton>
+                <Button
+                  variant="contained"
+                  sx={{
+                    width: "8.2rem",
+                    backgroundColor: "#006A74",
+                    marginLeft: "15px",
+                    paddingY: "10px",
+                    fontSize: 16,
+                    textTransform: "none",
+                    "&:hover": { backgroundColor: "#02575f" },
+                  }}
+                >
+                  Upload
+                </Button>
+              </ModalComponent.OpenButton>
+              <ModalComponent.ModalWindow
+                title="Upload File"
+                subtitle="Unggah file yang akan diberikan"
+              >
+                <CreateUpdateFormDocuments id={data._id} />
+              </ModalComponent.ModalWindow>
+            </ModalComponent>
+          </ThemeProvider>
         </div>
       </TableCell>
     </TableStyle.Row>
