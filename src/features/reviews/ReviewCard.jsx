@@ -17,12 +17,11 @@ function ReviewCard({ review }) {
   const [expanded, setExpanded] = useState(false);
   const isMediumScreen = useMediaQuery(theme.breakpoints.down("md"));
 
-  const { description, createdAt } = review;
-
+  const { description, createdAt, name } = review;
   const handleShowMore = () => {
     setExpanded(!expanded);
   };
-
+  console.log(description.length);
   return (
     <motion.div variants={item}>
       <Card
@@ -44,49 +43,75 @@ function ReviewCard({ review }) {
                 fontWeight: "bold",
               }}
             >
-              Anonim
+              {name}
             </Typography>
           </div>
-          <Collapse collapsedSize={150} in={expanded}>
+          {description.length > 173 ? (
+            <>
+              <Collapse collapsedSize={150} in={expanded}>
+                <Typography
+                  sx={{
+                    color: "black",
+                    fontWeight: "100",
+                    maxWidth: 330,
+                    marginTop: "15px",
+                    fontSize: isMediumScreen ? "16px" : "18px",
+                    display: "-webkit-box",
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
+                    WebkitLineClamp: expanded ? "unset" : 5,
+                    wordWrap: "break-word",
+                    whiteSpace: "pre-wrap",
+                  }}
+                  component="div"
+                >
+                  {description}
+                </Typography>
+              </Collapse>
+
+              <Button
+                onClick={handleShowMore}
+                sx={{
+                  color: "black",
+                  display: "flex",
+                  gap: "5px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontWeight: "700",
+                  fontFamily: "'Inter', sans-serif",
+                  textTransform: "none",
+                  padding: "0",
+                  fontSize: "16px",
+                }}
+              >
+                {expanded ? "Show less " : "Show more "}
+                {expanded ? (
+                  <IoIosArrowUp size={18} />
+                ) : (
+                  <IoIosArrowDown size={18} />
+                )}
+              </Button>
+            </>
+          ) : (
             <Typography
               sx={{
                 color: "black",
                 fontWeight: "100",
-                maxWidth: 390,
+                maxWidth: 330,
                 marginTop: "15px",
                 fontSize: isMediumScreen ? "16px" : "18px",
                 display: "-webkit-box",
                 WebkitBoxOrient: "vertical",
                 overflow: "hidden",
-                WebkitLineClamp: expanded ? "unset" : 5,
+                wordWrap: "break-word",
+                whiteSpace: "pre-wrap",
               }}
               component="div"
             >
               {description}
             </Typography>
-          </Collapse>
-          <Button
-            onClick={handleShowMore}
-            sx={{
-              color: "black",
-              display: "flex",
-              gap: "5px",
-              alignItems: "center",
-              justifyContent: "center",
-              fontWeight: "700",
-              fontFamily: "'Inter', sans-serif",
-              textTransform: "none",
-              padding: "0",
-              fontSize: "16px",
-            }}
-          >
-            {expanded ? "Show less " : "Show more "}
-            {expanded ? (
-              <IoIosArrowUp size={18} />
-            ) : (
-              <IoIosArrowDown size={18} />
-            )}
-          </Button>
+          )}
+
           <Typography component="span" className="text-lg text-slate-500">
             {createdAt}
           </Typography>

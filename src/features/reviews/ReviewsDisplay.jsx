@@ -27,7 +27,11 @@ function ReviewsDisplay() {
   }
 
   if (!reviews || reviews.length === 0) {
-    return <div>No reviews found</div>;
+    return (
+      <div className="text-3xl font-semibold text-center">
+        Tidak ada data ulasan tersedia!
+      </div>
+    );
   }
 
   return (

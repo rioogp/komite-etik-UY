@@ -6,11 +6,13 @@ import Heading from "../../components/Heading";
 import SectionColContainer from "../../components/SectionColContainer";
 import { theme } from "../../utils/theme";
 import Form from "../../components/Form";
-import { createReviewQuery } from "./useCreateReview";
+import { useCreateReview } from "./useCreateReview";
 import FormRowInput from "../../components/FormRowInput";
+import { useUser } from "../authentication/useUser";
 
 function ReviewsInput() {
-  const { createReview, isPending } = createReviewQuery();
+  const { createReview, isPending } = useCreateReview();
+  const { isLoading, user } = useUser();
 
   const { handleSubmit, handleBlur, handleChange, errors, touched, values } =
     useFormik({
@@ -21,9 +23,12 @@ function ReviewsInput() {
         description: Yup.string().required("Ulasan harus diisi"),
       }),
       onSubmit: ({ description }, { setSubmitting, setErrors, resetForm }) => {
+        const name = user?.user?.name || "Anonim";
+
         try {
           createReview(
             {
+              name,
               description,
             },
             {
@@ -43,6 +48,10 @@ function ReviewsInput() {
         }
       },
     });
+
+  if (isLoading && user) {
+    return null;
+  }
 
   return (
     <SectionColContainer>

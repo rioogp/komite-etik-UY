@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { createReview as createReviewApi } from "../../services/reviews";
 import toast from "react-hot-toast";
 
-export function createReviewQuery() {
+export function useCreateReview() {
   const queryClient = useQueryClient();
 
   const { mutate: createReview, isPending } = useMutation({
