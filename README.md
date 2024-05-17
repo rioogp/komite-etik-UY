@@ -30,7 +30,7 @@ Pengembangan aplikasi web service dan aplikasi komite etik berbasis website untu
 
 ## Tech Stack
 
-**Client:** React, React Query, TailwindCSS, Material UI, Fullcalendar, React Router, MUI-File-Input, React-Hot-Toast.
+**Client:** React, React Query, TailwindCSS, Material UI, Fullcalendar, React Router, MUI-File-Input, React-Hot-Toast, Axios, Formik, Yup, React-Icons, Framer-Motion.
 
 **Server:** Node JS, Express JS, bcryptjs, Multer, Morgan, Validator, Mongoose, Mongo DB, Nodemailer, JsonWebToken, Archiver.
 
