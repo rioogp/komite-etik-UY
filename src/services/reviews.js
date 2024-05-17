@@ -11,11 +11,11 @@ export async function getReviews() {
   }
 }
 
-export async function createReview({ description }) {
+export async function createReview({ name, description }) {
   try {
     const response = await axios.post(
       `${API_URL}/reviews`,
-      { description },
+      { name, description },
       { headers: { "Content-Type": "application/json" } }
     );
     return response.data.data;
