@@ -3,20 +3,6 @@ import TableStyle from "../../components/Table";
 import DocumentsRow from "./DocumentsRow";
 import { useDocumentsByuser } from "./useDocumentsByUser";
 
-const tempData = [
-  {
-    id: 1,
-    nama: "John Doe",
-    nama_penelitian:
-      "Tinjauan Terhadap Kode Etik Organisasi: Tantangan dan Peluang di Era Digital",
-  },
-  {
-    id: 2,
-    nama: "Jane Smith",
-    nama_penelitian: "Analisis Data Medis",
-  },
-];
-
 function DocumentsTable() {
   const { documents, isLoading } = useDocumentsByuser();
 
@@ -40,6 +26,9 @@ function DocumentsTable() {
           </TableCell>
           <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
             Nama Penelitian
+          </TableCell>
+          <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
+            Status
           </TableCell>
           <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
             Download

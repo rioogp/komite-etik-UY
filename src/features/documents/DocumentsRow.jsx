@@ -6,9 +6,11 @@ import { useDownloadDocument } from "./useDownloadDocument";
 import { theme } from "../../utils/theme";
 import ModalComponent from "../../components/ModalComponent";
 import StepProgressBarDocument from "./StepProgressBarDocument";
+import { steps } from "../../utils/constants";
 
 function DocumentsRow({ data, index }) {
   const { isPending, downloadDocument } = useDownloadDocument();
+  const stepData = steps.find((step) => step.title === data.status);
 
   return (
     <TableStyle.Row>
@@ -34,6 +36,21 @@ function DocumentsRow({ data, index }) {
         }}
       >
         {data.researchName}
+      </TableCell>
+
+      <TableCell
+        sx={{
+          fontWeight: "bold",
+          fontSize: "1.1rem",
+          overflowWrap: "break-word",
+          wordWrap: "break-word",
+          maxWidth: "400px",
+        }}
+      >
+        <div className="flex items-center gap-2">
+          {stepData ? stepData.icon : null}
+          <p className="text-[1.1rem]">{stepData ? stepData.title : null}</p>
+        </div>
       </TableCell>
 
       <TableCell
@@ -80,7 +97,10 @@ function DocumentsRow({ data, index }) {
               title="Detail Proposal"
               subtitle="Detail kemajuan proposal tersedia untuk ditinjau di bawah ini"
             >
-              <StepProgressBarDocument id={data._id} />
+              <StepProgressBarDocument
+                id={data._id}
+                createdAt={data.createdAt}
+              />
             </ModalComponent.ModalWindow>
           </ModalComponent>
         </ThemeProvider>

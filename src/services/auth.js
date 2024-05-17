@@ -48,7 +48,7 @@ export async function login({ emailOrUsername, password }) {
     );
     return response.data;
   } catch (err) {
-    toast.error(err.message);
+    throw new Error(err.message);
   }
 }
 

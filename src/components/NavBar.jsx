@@ -115,22 +115,30 @@ function NavBar() {
                 <IoMdClose size={24} />
               </IconButton>
             </ListItemIcon>
-
+            <StyledListItem button onClick={handleToggleMenu}>
+              <ListItemText primary="Dashboard" onClick={() => navigate("/")} />
+            </StyledListItem>
             <StyledListItem button onClick={handleToggleMenu}>
               <ListItemText
                 primary="Peraturan & Pertanyaan"
                 onClick={() => navigate("/peraturan-dan-pertanyaan")}
               />
             </StyledListItem>
+
             <StyledListItem button onClick={handleToggleMenu}>
-              <ListItemText primary="Contact" />
-            </StyledListItem>
-            <StyledListItem button onClick={handleToggleMenu}>
-              <ListItemText primary="Ulasan" />
+              <ListItemText
+                onClick={() => navigate("/ulasan")}
+                primary="Ulasan"
+              />
             </StyledListItem>
             {token ? (
               <div className="flex">
-                <Button variant="outlined" color="info" className="w-38 h-12">
+                <Button
+                  variant="outlined"
+                  color="info"
+                  onClick={() => navigate("/update-profile")}
+                  className="w-38 h-12"
+                >
                   Update Profile
                 </Button>
                 <Button
@@ -168,15 +176,16 @@ function NavBar() {
 
         <ul className="gap-5 hidden xl:flex">
           <li>
+            <NavLinkRoute style={style} to="/">
+              Dashboard
+            </NavLinkRoute>
+          </li>
+          <li>
             <NavLinkRoute style={style} to="/peraturan-dan-pertanyaan">
               Peraturan & Pertanyaan
             </NavLinkRoute>
           </li>
-          <li>
-            <NavLinkRoute style={style} to="/homepage">
-              Contact
-            </NavLinkRoute>
-          </li>
+
           <li>
             <NavLinkRoute style={style} to="/ulasan">
               Ulasan
@@ -186,7 +195,12 @@ function NavBar() {
         <div className="hidden xl:flex gap-5">
           {token ? (
             <>
-              <Button variant="outlined" color="info" className="w-38 h-12">
+              <Button
+                variant="outlined"
+                color="info"
+                className="w-38 h-12"
+                onClick={() => navigate("/update-profile")}
+              >
                 Update Profile
               </Button>
               <Button

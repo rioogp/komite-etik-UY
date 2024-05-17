@@ -27,6 +27,7 @@ import ReviewerDocuments from "./pages/documents/admin/ReviewerDocuments";
 import DocumentsReviewer from "./pages/documents/reviewer/DocumentsReviewer";
 import DocumentsDone from "./pages/documents/applicant/DocumentsDone";
 import DocumentsChair from "./pages/documents/ketua/DocumentsChair";
+import UpdateProfile from "./pages/UpdateProfile";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -50,6 +51,7 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="/verification" element={<VerificationUser />} />
+            <Route path="/update-profile" element={<UpdateProfile />} />
             <Route
               path="/verification/:token"
               element={<VerificationSuccess />}
@@ -88,7 +90,7 @@ function App() {
                 element={<RulesAndQuestions />}
               />
               <Route path="/ulasan" element={<Reviews />} />
-              {/* <Route path="*" /> */}
+              <Route path="*" />
             </Route>
           </Routes>
         </BrowserRouter>
