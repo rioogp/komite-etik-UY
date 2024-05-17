@@ -6,14 +6,14 @@ const { format } = require('date-fns');
 
 exports.getReviews = catchAsync(async (req, res) => {
   const totalReviews = await Review.countDocuments();
-  const randomSkip = Math.floor(Math.random() * (totalReviews - 10));
+  const randomSkip = Math.floor(Math.random() * (totalReviews - 8));
   const reviews =
-    totalReviews < 10
+    totalReviews < 8
       ? await Review.find()
       : await Review.aggregate([
           { $sample: { size: totalReviews } },
           { $skip: randomSkip },
-          { $limit: 10 },
+          { $limit: 8 },
         ]);
 
   res.status(200).json({
@@ -27,6 +27,7 @@ exports.getReviews = catchAsync(async (req, res) => {
 
 exports.createReview = catchAsync(async (req, res) => {
   const review = await Review.create({
+    name: req.body.name,
     description: req.body.description,
     createdAt: format(req.requestTime, 'dd MMM yy'),
   });

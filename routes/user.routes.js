@@ -35,6 +35,6 @@ router.patch(
 );
 
 router.route('/').get(getAllUsers);
-router.route('/:id').get(getUser);
+router.route('/user').get(authorize, getUser);
 
 module.exports = router;

@@ -6,16 +6,6 @@ const catchAsync = require('../utils/catchAsync');
 const multer = require('multer');
 const sharp = require('sharp');
 
-// const multerStorage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, 'public/img/users');
-//   },
-//   filename: (req, file, cb) => {
-//     const ext = file.mimetype.split('/')[1];
-//     cb(null, `user-${req.user.id}-${Date.now()}.${ext}`);
-//   },
-// });
-
 const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
@@ -57,16 +47,19 @@ exports.getAllUsers = catchAsync(async (req, res) => {
 });
 
 exports.getUser = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.params.id);
+  const user = await User.findById(req.user._id);
 
   if (!user) {
     return next(new AppError('No user found with that ID', 404));
   }
 
+  const photoURL = `http://127.0.0.1:8000/img/users/${user.photo}`;
+
   res.status(200).json({
     status: 'success',
     data: {
       user,
+      photoURL,
     },
   });
 });
