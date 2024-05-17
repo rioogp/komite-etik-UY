@@ -88,7 +88,7 @@ function Hero({ title, title2, typeImage, page, desc }) {
               variant="contained"
               color="info"
               className="w-40 sm:w-54 md:w-56 h-12 md:h-14 flex gap-3 justify-center items-center"
-              onClick={() => navigate("/berkas")}
+              onClick={() => navigate("/home")}
             >
               Get Started <IoIosArrowRoundForward size={28} />
             </Button>

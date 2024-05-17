@@ -90,20 +90,25 @@ function DocumentsDoneRow({ data, index }) {
                 title="Detail Proposal"
                 subtitle="Detail kemajuan proposal tersedia untuk ditinjau di bawah ini"
               >
-                <StepProgressBarDocument id={data._id} />
+                <StepProgressBarDocument
+                  id={data._id}
+                  createdAt={data.createdAt}
+                />
               </ModalComponent.ModalWindow>
             </ModalComponent>
           </ThemeProvider>
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#006A74",
-              paddingX: 0,
-              "&:hover": { backgroundColor: "#004d54" },
-            }}
-          >
-            <MdOutlineEdit size={38} />
-          </Button>
+          {data.status !== "Layak" && (
+            <Button
+              variant="contained"
+              sx={{
+                backgroundColor: "#006A74",
+                paddingX: 0,
+                "&:hover": { backgroundColor: "#004d54" },
+              }}
+            >
+              <MdOutlineEdit size={38} />
+            </Button>
+          )}
         </div>
       </TableCell>
     </TableStyle.Row>

@@ -106,9 +106,11 @@ function SideNav() {
               />
               <div className="flex flex-col ">
                 <span className="text-semibold text-base">
-                  {isLoading ? "" : user.name}
+                  {isLoading ? "" : user.user.name}
                 </span>
-                <span className="text-base">{isLoading ? "" : user.email}</span>
+                <span className="text-base">
+                  {isLoading ? "" : user.user.email}
+                </span>
               </div>
             </div>
           </li>
@@ -265,9 +267,6 @@ function CollapseButton({ styleNav, userRole }) {
                 </NavLinkRoute>
                 <NavLinkRoute style={styleNav} to="/berkas/admin/reviewer">
                   <span>Reviewer</span>
-                </NavLinkRoute>
-                <NavLinkRoute style={styleNav} to="/ketua">
-                  <span>Ketua</span>
                 </NavLinkRoute>
               </>
             )}

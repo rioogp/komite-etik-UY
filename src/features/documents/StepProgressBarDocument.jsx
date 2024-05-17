@@ -27,8 +27,15 @@ const stepStyle = {
   },
 };
 
-function StepProgressBarDocument({ id }) {
+function StepProgressBarDocument({ id, createdAt }) {
   const { isLoading, document } = useDocument(id);
+  const date = new Date(createdAt);
+  const formattedDate = date.toLocaleDateString("id-ID", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -37,22 +44,23 @@ function StepProgressBarDocument({ id }) {
   const currentStepIndex = steps.findIndex(
     (step) => step.title === document.status
   );
-  const filteredSteps = steps
-    .slice(0, currentStepIndex + 1)
-    .filter(
-      (step) =>
-        !(
-          document.status === "Sedang Ditandatangani" &&
-          step.title === "Tidak Layak"
-        )
+
+  const filteredSteps = steps.slice(0, currentStepIndex + 1).filter((step) => {
+    if (document.status === "Layak" && step.title === "Tidak Layak") {
+      return false;
+    }
+    return !(
+      document.status === "Sedang Ditandatangani" &&
+      step.title === "Tidak Layak"
     );
+  });
 
   return (
     <div className="flex flex-col gap-5">
       <div className="bg-color-primary p-5 rounded-md">
         <p className="text-white font-medium">
           Proposal diajukan pada{" "}
-          <span className="font-bold">Senin, 24 Juni 2020</span>
+          <span className="font-bold">{formattedDate}</span>
         </p>
       </div>
       <div className="mt-[-30px] overflow-auto">

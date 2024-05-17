@@ -15,17 +15,14 @@ export function useLogin() {
 
     onSuccess: (user) => {
       const { token, data } = user;
-      console.log(user);
       loginContext(token, data.user._id, data.user.role);
-
       toast.success("Login successful");
 
       navigate("/home", { replace: true });
     },
 
-    onError: (err) => {
-      console.log("ERROR", err);
-      toast.error("Provided email or password are incorrect");
+    onError: () => {
+      toast.error("Username/Email atau Password salah, silahkan coba lagi!");
     },
   });
 
