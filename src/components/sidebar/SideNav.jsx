@@ -61,9 +61,22 @@ function SideNav() {
     ],
     admin: [
       <CollapseButton styleNav={styleNav} userRole={role} />,
-      <NavLinkRoute style={styleNav} to="/notifikasi">
+      <NavLinkRoute
+        style={styleNav}
+        to="/notifikasi"
+        onClick={() => markAsRead()}
+      >
         <IoIosNotificationsOutline size={28} />
         <span>Notifikasi</span>
+        <div className="flex justify-end items-end w-5/12">
+          {isLoadingUnread ? (
+            <CircularProgress />
+          ) : unreadNotifications === 0 ? (
+            ""
+          ) : (
+            <NotificationBadge unreadNotifications={unreadNotifications} />
+          )}
+        </div>
       </NavLinkRoute>,
       <NavLinkRoute style={styleNav} to="/rapat">
         <CiCalendarDate size={28} />
@@ -75,9 +88,22 @@ function SideNav() {
         <FaRegFolder size={28} />
         <span>Berkas</span>
       </NavLinkRoute>,
-      <NavLinkRoute style={styleNav} to="/notifikasi">
+      <NavLinkRoute
+        style={styleNav}
+        to="/notifikasi"
+        onClick={() => markAsRead()}
+      >
         <IoIosNotificationsOutline size={28} />
         <span>Notifikasi</span>
+        <div className="flex justify-end items-end w-5/12">
+          {isLoadingUnread ? (
+            <CircularProgress />
+          ) : unreadNotifications === 0 ? (
+            ""
+          ) : (
+            <NotificationBadge unreadNotifications={unreadNotifications} />
+          )}
+        </div>
       </NavLinkRoute>,
       <NavLinkRoute style={styleNav} to="/rapat">
         <CiCalendarDate size={28} />
@@ -89,9 +115,22 @@ function SideNav() {
         <FaRegFolder size={28} />
         <span>Berkas</span>
       </NavLinkRoute>,
-      <NavLinkRoute style={styleNav} to="/notifikasi">
+      <NavLinkRoute
+        style={styleNav}
+        to="/notifikasi"
+        onClick={() => markAsRead()}
+      >
         <IoIosNotificationsOutline size={28} />
         <span>Notifikasi</span>
+        <div className="flex justify-end items-end w-5/12">
+          {isLoadingUnread ? (
+            <CircularProgress />
+          ) : unreadNotifications === 0 ? (
+            ""
+          ) : (
+            <NotificationBadge unreadNotifications={unreadNotifications} />
+          )}
+        </div>
       </NavLinkRoute>,
       <NavLinkRoute style={styleNav} to="/rapat">
         <CiCalendarDate size={28} />
