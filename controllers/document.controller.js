@@ -7,6 +7,7 @@ const catchAsync = require('../utils/catchAsync');
 const Document = require('../models/document.model');
 const AppError = require('../utils/appError');
 const User = require('../models/user.model');
+const Notification = require('../models/notification.model');
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -34,9 +35,13 @@ exports.uploadDocuments = catchAsync(async (req, res, next) => {
   const { researchName } = req.body;
   const { name, _id } = req.user;
   const documents = req.files.map((file) => file.filename);
+  const admin = await User.findOne({ role: 'admin' });
 
-  const zipPath = `public/documents/user/${researchName.replace(/\s+/g, '_')}-${name.replace(/\s+/g, '_')}.zip`;
-
+  const timestamp = Date.now();
+  const formattedResearchName = researchName.replace(/\s+/g, '_');
+  const formattedName = name.replace(/\s+/g, '_');
+  const zipFileName = `${formattedResearchName}-${formattedName}-${timestamp}.zip`;
+  const zipPath = `public/documents/user/${zipFileName}`;
   const output = fs.createWriteStream(zipPath);
   const archive = archiver('zip', {
     zlib: { level: 9 },
@@ -48,13 +53,23 @@ exports.uploadDocuments = catchAsync(async (req, res, next) => {
       fs.unlinkSync(filePath);
     });
 
+    Notification.create({
+      name: 'Berkas Penelitian Terkirim',
+      description: `Unggahan Anda untuk penelitian '${researchName}' berhasil diterima. Mohon untuk menunggu berkas untuk diproses lebih lanjut.`,
+      user: _id,
+    });
+
+    Notification.create({
+      name: 'Berkas Penelitian Baru DIterima',
+      description: `Unggahan baru untuk penelitian '${researchName}' dari ${name} memerlukan perhatian Anda. Silakan periksa dan lakukan tindakan yang diperlukan.`,
+      user: admin._id,
+    });
+
     const newDocument = await Document.create({
       nameUser: name,
       researchName: researchName,
       status: 'Sedang Diproses',
-      documents: [
-        `${researchName.replace(/\s+/g, '_')}-${name.replace(/\s+/g, '_')}.zip`,
-      ],
+      documents: [zipFileName],
       createdBy: _id,
     });
 
