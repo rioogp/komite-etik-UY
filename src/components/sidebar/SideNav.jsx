@@ -11,15 +11,20 @@ import Image from "../Image";
 import NavLinkRoute from "../NavLinkRoute";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../../utils/theme";
-import { Button, Collapse, Divider } from "@mui/material";
+import { Button, CircularProgress, Collapse, Divider } from "@mui/material";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../features/authentication/useUser";
+import { useUnreadNotifications } from "../../features/notifications/useUnreadNotifications";
+import { useMarkAsRead } from "../../features/notifications/useMarkAsRead";
 
 function SideNav() {
   const { logout, role } = useContext(AuthContext);
   const { user, isLoading } = useUser();
+  const { isLoading: isLoadingUnread, unreadNotifications } =
+    useUnreadNotifications();
+  const { markAsRead } = useMarkAsRead();
 
   const navigate = useNavigate();
   const styleNav = ({ isActive }) =>
@@ -36,16 +41,42 @@ function SideNav() {
     user: [
       <CollapseButton styleNav={styleNav} userRole={role} />,
 
-      <NavLinkRoute style={styleNav} to="/notifikasi">
+      <NavLinkRoute
+        style={styleNav}
+        to="/notifikasi"
+        onClick={() => markAsRead()}
+      >
         <IoIosNotificationsOutline size={28} />
         <span>Notifikasi</span>
+        <div className="flex justify-end items-end w-5/12">
+          {isLoadingUnread ? (
+            <CircularProgress />
+          ) : unreadNotifications === 0 ? (
+            ""
+          ) : (
+            <NotificationBadge unreadNotifications={unreadNotifications} />
+          )}
+        </div>
       </NavLinkRoute>,
     ],
     admin: [
       <CollapseButton styleNav={styleNav} userRole={role} />,
-      <NavLinkRoute style={styleNav} to="/notifikasi">
+      <NavLinkRoute
+        style={styleNav}
+        to="/notifikasi"
+        onClick={() => markAsRead()}
+      >
         <IoIosNotificationsOutline size={28} />
         <span>Notifikasi</span>
+        <div className="flex justify-end items-end w-5/12">
+          {isLoadingUnread ? (
+            <CircularProgress />
+          ) : unreadNotifications === 0 ? (
+            ""
+          ) : (
+            <NotificationBadge unreadNotifications={unreadNotifications} />
+          )}
+        </div>
       </NavLinkRoute>,
       <NavLinkRoute style={styleNav} to="/rapat">
         <CiCalendarDate size={28} />
@@ -57,9 +88,22 @@ function SideNav() {
         <FaRegFolder size={28} />
         <span>Berkas</span>
       </NavLinkRoute>,
-      <NavLinkRoute style={styleNav} to="/notifikasi">
+      <NavLinkRoute
+        style={styleNav}
+        to="/notifikasi"
+        onClick={() => markAsRead()}
+      >
         <IoIosNotificationsOutline size={28} />
         <span>Notifikasi</span>
+        <div className="flex justify-end items-end w-5/12">
+          {isLoadingUnread ? (
+            <CircularProgress />
+          ) : unreadNotifications === 0 ? (
+            ""
+          ) : (
+            <NotificationBadge unreadNotifications={unreadNotifications} />
+          )}
+        </div>
       </NavLinkRoute>,
       <NavLinkRoute style={styleNav} to="/rapat">
         <CiCalendarDate size={28} />
@@ -71,9 +115,22 @@ function SideNav() {
         <FaRegFolder size={28} />
         <span>Berkas</span>
       </NavLinkRoute>,
-      <NavLinkRoute style={styleNav} to="/notifikasi">
+      <NavLinkRoute
+        style={styleNav}
+        to="/notifikasi"
+        onClick={() => markAsRead()}
+      >
         <IoIosNotificationsOutline size={28} />
         <span>Notifikasi</span>
+        <div className="flex justify-end items-end w-5/12">
+          {isLoadingUnread ? (
+            <CircularProgress />
+          ) : unreadNotifications === 0 ? (
+            ""
+          ) : (
+            <NotificationBadge unreadNotifications={unreadNotifications} />
+          )}
+        </div>
       </NavLinkRoute>,
       <NavLinkRoute style={styleNav} to="/rapat">
         <CiCalendarDate size={28} />
@@ -135,73 +192,14 @@ function SideNav() {
       </ul>
     </div>
   );
-  // return (
-  //   <div className="font-medium text-neutral-100 text-lg flex flex-col gap-5 tracking-[1px]">
-  //     <span>Menu</span>
-  //     <ul className="p-1 flex flex-col gap-3">
-  //       <ThemeProvider theme={theme}>
-  //         <li>
-  //           <CollapseButton styleNav={styleNav} />
-  //         </li>
-  //         <li>
-  //           <NavLinkRoute style={styleNav} to="/rapat">
-  //             <CiCalendarDate size={28} />
-  //             <span>Jadwal Pertemuan</span>
-  //           </NavLinkRoute>
-  //         </li>
-  //         <li>
-  //           <NavLinkRoute style={styleNav} to="/notifikasi">
-  //             <IoIosNotificationsOutline size={28} />
-  //             <span>Notifikasi</span>
-  //           </NavLinkRoute>
-  //         </li>
-  //         <li>
-  //           <NavLinkRoute style={styleNav} to="/pengaturan">
-  //             <CiSettings size={28} />
-  //             <span>Pengaturan</span>
-  //           </NavLinkRoute>
-  //         </li>
+}
 
-  //         <li className="my-5">
-  //           <Divider style={{ background: "white", width: "auto" }} />
-  //         </li>
-  //         <li className="flex flex-col gap-3">
-  //           <span>Profile</span>
-  //           <div className="flex flex-row gap-3 items-center">
-  //             <Image
-  //               src="https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433_1280.png"
-  //               alt="profile"
-  //               type="profile"
-  //             />
-  //             <div className="flex flex-col ">
-  //               <span className="text-semibold text-base">
-  //                 Hafidz Putra Herlyansyah
-  //               </span>
-  //               <span className="text-base">hafidzph@gmail.com</span>
-  //             </div>
-  //           </div>
-  //         </li>
-  //         <li>
-  //           <Button
-  //             onClick={handleLogout}
-  //             sx={{
-  //               marginTop: "20px",
-  //               fontWeight: "600",
-  //               fontSize: "20px",
-  //               textTransform: "none",
-  //             }}
-  //             variant="contained"
-  //             color="info"
-  //             className="w-full h-12 flex gap-3 justify-center items-center"
-  //           >
-  //             <CiLogout size={26} />
-  //             Log Out
-  //           </Button>
-  //         </li>
-  //       </ThemeProvider>
-  //     </ul>
-  //   </div>
-  // );
+function NotificationBadge({ unreadNotifications }) {
+  return (
+    <span className="bg-white text-black w-10 h-7 rounded-lg text-md text-center">
+      {unreadNotifications}
+    </span>
+  );
 }
 
 function CollapseButton({ styleNav, userRole }) {
