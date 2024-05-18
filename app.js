@@ -9,6 +9,7 @@ const userRouter = require('./routes/user.routes');
 const reviewRouter = require('./routes/review.routes');
 const meetingRouter = require('./routes/meeting.routes');
 const documentRouter = require('./routes/document.routes');
+const notificationRouter = require('./routes/notification.routes');
 const AppError = require('./utils/appError');
 const path = require('path');
 
@@ -32,6 +33,7 @@ app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/meetings', meetingRouter);
 app.use('/api/v1/documents', documentRouter);
+app.use('/api/v1/notifications', notificationRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
