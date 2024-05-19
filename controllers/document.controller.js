@@ -60,7 +60,7 @@ exports.uploadDocuments = catchAsync(async (req, res, next) => {
     });
 
     Notification.create({
-      name: 'Berkas Penelitian Baru DIterima',
+      name: 'Berkas Penelitian Baru Diterima',
       description: `Unggahan baru untuk penelitian '${researchName}' dari ${name} memerlukan perhatian Anda. Silakan periksa dan lakukan tindakan yang diperlukan.`,
       user: admin._id,
     });
@@ -106,6 +106,11 @@ exports.updateDocuments = catchAsync(async (req, res, next) => {
 
   if (req.user.role === 'ketua') {
     status = 'Layak';
+    await Notification.create({
+      name: 'Dokumen Dinyatakan Layak',
+      description: `Dokumen penelitian '${document.researchName}' telah dinyatakan layak. Anda dapat melanjutkan proses selanjutnya.`,
+      user: document.createdBy,
+    });
   } else {
     status = 'Sedang Diproses';
   }
@@ -180,6 +185,12 @@ exports.addReviewers = catchAsync(async (req, res, next) => {
         );
       }
 
+      await Notification.create({
+        name: 'Berkas Penelitian untuk Direview',
+        description: `Anda telah ditugaskan untuk mereview dokumen penelitian. Segera cek di Berkas!`,
+        user: reviewer._id,
+      });
+
       return { _id: reviewer._id, name: reviewerName };
     }),
   );
@@ -210,6 +221,11 @@ exports.updateReviewerStatus = catchAsync(async (req, res, next) => {
   const { status, message } = req.body;
   const { documentId } = req.params;
   const { _id } = req.user;
+  const admin = await User.findOne({ role: 'admin' });
+
+  if (!admin) {
+    return next(new AppError('Admin user not found', 404));
+  }
 
   const newDocument = await Document.findOneAndUpdate(
     {
@@ -228,6 +244,14 @@ exports.updateReviewerStatus = catchAsync(async (req, res, next) => {
   if (!newDocument) {
     return next(new AppError('Document or reviewer not found', 404));
   }
+
+  const { researchName, nameUser } = newDocument;
+
+  await Notification.create({
+    name: 'Reviewer Memberikan Ulasan Baru',
+    description: `Reviewer '${req.user.name}' telah memperbarui status untuk penelitian '${researchName}' dari ${nameUser}. Silakan periksa dan lakukan tindakan yang diperlukan.`,
+    user: admin._id,
+  });
 
   res.status(200).json({
     status: 'success',
@@ -271,15 +295,42 @@ exports.getDocumentsByUser = catchAsync(async (req, res, next) => {
 exports.sendStatus = catchAsync(async (req, res, next) => {
   const { documentId } = req.params;
   const { status } = req.body;
+  const ketua = await User.findOne({ role: 'ketua' });
+
   const document = await Document.findByIdAndUpdate(
     documentId,
     { status },
     { new: true },
   );
 
+  switch (status) {
+    case 'Tidak Layak':
+      await Notification.create({
+        name: 'Dokumen Tidak Layak',
+        description: `Dokumen penelitian '${document.researchName}' telah dinyatakan tidak layak. Silakan periksa dan perbaiki masalah yang ada.`,
+        user: document.createdBy,
+      });
+      break;
+    case 'Sedang Ditandatangani':
+      await Notification.create({
+        name: 'Dokumen Sedang Ditandatangani',
+        description: `Dokumen penelitian '${document.researchName}' sedang ditandatangani oleh Ketua. Silakan tunggu konfirmasi lebih lanjut.`,
+        user: document.createdBy,
+      });
+
+      await Notification.create({
+        name: 'Dokumen Menunggu untuk Ditandatangani',
+        description: `Dokumen penelitian '${document.researchName}' menunggu untuk ditandatangani. Silakan proses lebih lanjut pada halaman berkas.`,
+        user: ketua._id,
+      });
+      break;
+
+    default:
+      return next(new AppError('Something went wrong', 500));
+  }
+
   res.status(200).json({
     status: 'success',
-    message: 'Document status send to user',
     data: { document },
   });
 });
