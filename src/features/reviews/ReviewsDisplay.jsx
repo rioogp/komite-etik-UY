@@ -15,11 +15,13 @@ function ReviewsDisplay() {
   });
 
   const { reviews, isLoading, error } = useReviews();
-  console.log(typeof reviews);
-  console.log(reviews);
 
   if (isLoading) {
-    return <CircularProgress />;
+    return (
+      <div className="w-full text-center">
+        <CircularProgress size={60} />
+      </div>
+    );
   }
 
   if (error) {

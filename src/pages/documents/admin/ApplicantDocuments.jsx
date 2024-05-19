@@ -1,15 +1,9 @@
 import { useOutletContext } from "react-router-dom";
-import { useEffect } from "react";
 import usePageTitle from "../../../hooks/usePageTitle";
 import HeadDashboard from "../../../components/HeadDashboard";
 import DocumentsApplicantTable from "../../../features/documents/admin/DocumentsApplicantTable";
 
 function ApplicantDocuments() {
-  const [setValTitle] = useOutletContext();
-
-  useEffect(() => {
-    setValTitle("Berkas");
-  }, []);
   usePageTitle("Berkas Pengaju | Komite Etik");
 
   return (

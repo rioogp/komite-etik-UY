@@ -18,6 +18,7 @@ import { theme } from "../utils/theme";
 import { AuthContext } from "../contexts/AuthContext";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
+import useTokenValidation from "../hooks/useTokenValidation";
 
 const StyledListItem = styled(ListItem)(({ theme }) => ({
   "&:hover": {
@@ -36,6 +37,8 @@ function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const location = useLocation();
+
+  useTokenValidation(token, logout);
 
   useEffect(() => {
     window.scrollTo({

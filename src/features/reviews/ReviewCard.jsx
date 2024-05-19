@@ -21,7 +21,7 @@ function ReviewCard({ review }) {
   const handleShowMore = () => {
     setExpanded(!expanded);
   };
-  console.log(description.length);
+
   return (
     <motion.div variants={item}>
       <Card

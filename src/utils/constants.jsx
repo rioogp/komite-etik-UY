@@ -3,7 +3,7 @@ export const steps = [
     title: "Sedang Diproses",
     icon: (
       <svg
-        class="w-[42px] h-[42px] text-gray-800 dark:text-white bg-gray-400 rounded-full p-2"
+        className="w-[42px] h-[42px] text-gray-800 dark:text-white bg-gray-400 rounded-full p-2"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="100"
@@ -13,16 +13,16 @@ export const steps = [
       >
         <path
           stroke="#9CA3AF"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
           d="M21 13v-2a1 1 0 0 0-1-1h-.757l-.707-1.707.535-.536a1 1 0 0 0 0-1.414l-1.414-1.414a1 1 0 0 0-1.414 0l-.536.535L14 4.757V4a1 1 0 0 0-1-1h-2a1 1 0 0 0-1 1v.757l-1.707.707-.536-.535a1 1 0 0 0-1.414 0L4.929 6.343a1 1 0 0 0 0 1.414l.536.536L4.757 10H4a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h.757l.707 1.707-.535.536a1 1 0 0 0 0 1.414l1.414 1.414a1 1 0 0 0 1.414 0l.536-.535 1.707.707V20a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-.757l1.707-.708.536.536a1 1 0 0 0 1.414 0l1.414-1.414a1 1 0 0 0 0-1.414l-.535-.536.707-1.707H20a1 1 0 0 0 1-1Z"
         />
         <path
           stroke="#9CA3AF"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
           d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"
         />
       </svg>
@@ -53,7 +53,7 @@ export const steps = [
     title: "Tidak Layak",
     icon: (
       <svg
-        class="ms-[-5px] w-[44px] h-[44px]  text-gray-800 dark:text-white"
+        className="ms-[-5px] w-[44px] h-[44px] text-gray-800 dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="red"
@@ -63,9 +63,9 @@ export const steps = [
       >
         <path
           stroke="white"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
           d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
         />
       </svg>
@@ -77,7 +77,7 @@ export const steps = [
     title: "Sedang Ditandatangani",
     icon: (
       <svg
-        className=" w-[42px] h-[42px] text-gray-800 dark:text-white bg-yellow-500 rounded-full p-2"
+        className="w-[42px] h-[42px] text-gray-800 dark:text-white bg-yellow-500 rounded-full p-2"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -87,9 +87,9 @@ export const steps = [
       >
         <path
           stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
           d="M10.779 17.779 4.36 19.918 6.5 13.5m4.279 4.279 8.364-8.643a3.027 3.027 0 0 0-2.14-5.165 3.03 3.03 0 0 0-2.14.886L6.5 13.5m4.279 4.279L6.499 13.5m2.14 2.14 6.213-6.504M12.75 7.04 17 11.28"
         />
       </svg>
@@ -101,7 +101,7 @@ export const steps = [
     title: "Layak",
     icon: (
       <svg
-        class="w-[44px] h-[44px] text-gray-800 dark:text-white"
+        className="w-[44px] h-[44px] text-gray-800 dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="100"
@@ -110,9 +110,9 @@ export const steps = [
         viewBox="0 0 24 24"
       >
         <path
-          fill-rule="evenodd"
+          fillRule="evenodd"
           d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm13.707-1.293a1 1 0 0 0-1.414-1.414L11 12.586l-1.793-1.793a1 1 0 0 0-1.414 1.414l2.5 2.5a1 1 0 0 0 1.414 0l4-4Z"
-          clip-rule="evenodd"
+          clipRule="evenodd"
         />
       </svg>
     ),
