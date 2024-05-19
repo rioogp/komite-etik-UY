@@ -1,8 +1,12 @@
 import { useEffect, useRef } from "react";
 import Heading from "../../components/Heading";
 import { CountUp } from "countup.js";
+import { useStatistics } from "../../features/statistics/useStatistics";
+import { CircularProgress } from "@mui/material";
 
 function BriefInformation() {
+  const { isLoading, statistics } = useStatistics();
+
   return (
     <div className="hidden xl:flex flex-col items-center justify-center gap-5 border border-slate-200 shadow-xl rounded-3xl mx-24 mt-[-20rem] p-10 bg-white">
       <Heading type="secondary">Informasi Singkat</Heading>
@@ -11,9 +15,24 @@ function BriefInformation() {
         menyelesaikan lebih banyak administrasi.
       </span>
       <div className="flex flex-row gap-40 flex-wrap items-center justify-center">
-        <InfoBox number="44" label="Pengguna Aktif" />
-        <InfoBox number="70" label="Persentase Selesai" />
-        <InfoBox number="900" label="Berkas Ter-unggah" />
+        {isLoading ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <InfoBox
+              number={statistics.activeUsersCount}
+              label="Pengguna Aktif"
+            />
+            <InfoBox
+              number={statistics.uploadedFilesCount}
+              label="Persentase Selesai"
+            />
+            <InfoBox
+              number={statistics.completedDocumentsCount}
+              label="Berkas Ter-unggah"
+            />
+          </>
+        )}
       </div>
     </div>
   );

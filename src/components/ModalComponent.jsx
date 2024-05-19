@@ -90,7 +90,7 @@ function ModalWindow({ children, title, subtitle }) {
               overflow: "auto",
             }}
           >
-            {children}
+            {cloneElement(children, { onClose: handleClose })}
           </Box>
         </Box>
       </motion.div>

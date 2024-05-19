@@ -10,7 +10,7 @@ import { IoMdClose } from "react-icons/io";
 import { useCreateDocument } from "./useCreateDocument";
 import { useUpdateDocument } from "./useUpdateDocument";
 
-function CreateUpdateFormDocuments({ id }) {
+function CreateUpdateFormDocuments({ id, onClose }) {
   const { createDocument, isCreating } = useCreateDocument();
   const { updateDocument, isUpdating } = useUpdateDocument();
   console.log(id);
@@ -120,6 +120,8 @@ function CreateUpdateFormDocuments({ id }) {
         id
           ? updateDocument({ formData, id }, { onSettled: () => resetForm() })
           : createDocument(formData, { onSettled: () => resetForm() });
+          
+        onClose();
       } catch (error) {
         console.error("Error in onSubmit:", error);
       } finally {
