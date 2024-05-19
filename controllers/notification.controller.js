@@ -4,7 +4,7 @@ const catchAsync = require('../utils/catchAsync');
 exports.getNotifications = catchAsync(async (req, res) => {
   const notifications = await Notification.find({
     user: req.user.id,
-  });
+  }).sort({ createdAt: -1 });
 
   res.status(200).json({
     status: 'success',
