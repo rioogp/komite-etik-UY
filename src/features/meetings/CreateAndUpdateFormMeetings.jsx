@@ -18,7 +18,7 @@ const validationSchema = Yup.object({
   meetingSchedule: Yup.date().required("Tanggal pertemuan wajib dipilih"),
 });
 
-function CreateAndUpdateFormMeeting({ id }) {
+function CreateAndUpdateFormMeeting({ id, onClose }) {
   const { createMeeting, isCreating } = useCreateMeeting();
   const { updateMeeting, isUpdating } = useUpdateMeeting();
   const isWorking = isCreating || isUpdating;
@@ -69,7 +69,7 @@ function CreateAndUpdateFormMeeting({ id }) {
               }
             );
 
-        console.log(values);
+        onClose();
       } catch (error) {
         if (
           error.response &&

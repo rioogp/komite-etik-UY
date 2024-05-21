@@ -69,7 +69,10 @@ function App() {
               <Route path="/berkas" element={<Documents />} />
               <Route path="/berkas-selesai" element={<DocumentsDone />} />
               <Route path="/berkas/reviewer" element={<DocumentsReviewer />} />
-              <Route path="/berkas/ketua" element={<DocumentsChair />} />
+              <Route
+                path="/berkas/admin/konfirmasi-berkas"
+                element={<DocumentsChair />}
+              />
               <Route
                 path="/berkas/admin/pengaju"
                 element={<ApplicantDocuments />}

@@ -13,7 +13,7 @@ import { useUpdateDocument } from "./useUpdateDocument";
 function CreateUpdateFormDocuments({ id, onClose }) {
   const { createDocument, isCreating } = useCreateDocument();
   const { updateDocument, isUpdating } = useUpdateDocument();
-  console.log(id);
+
   const {
     handleSubmit,
     setFieldValue,
@@ -120,7 +120,7 @@ function CreateUpdateFormDocuments({ id, onClose }) {
         id
           ? updateDocument({ formData, id }, { onSettled: () => resetForm() })
           : createDocument(formData, { onSettled: () => resetForm() });
-          
+
         onClose();
       } catch (error) {
         console.error("Error in onSubmit:", error);

@@ -32,6 +32,7 @@ function RegisterForm() {
         name: "",
         username: "",
         email: "",
+        instance: "",
         password: "",
         confirmPassword: "",
         agreed: false,
@@ -42,6 +43,7 @@ function RegisterForm() {
         email: Yup.string()
           .email("Email tidak valid")
           .required("Email harus diisi"),
+        instance: Yup.string().required("Instansi harus diisi"),
         password: Yup.string()
           .min(8, "Password minimal 8 karakter")
           .required("Password harus diisi"),
@@ -54,7 +56,7 @@ function RegisterForm() {
         ),
       }),
       onSubmit: (
-        { name, username, email, password, confirmPassword },
+        { name, username, email, instance, password, confirmPassword },
         { setSubmitting, setErrors, resetForm }
       ) => {
         try {
@@ -62,6 +64,7 @@ function RegisterForm() {
             {
               name,
               email,
+              instance,
               username,
               password,
               passwordConfirm: confirmPassword,
@@ -138,6 +141,22 @@ function RegisterForm() {
         />
         <span className="text-red-500 text-md font-medium">
           {touched.email && errors.email}
+        </span>
+      </FormRowInput>
+
+      <FormRowInput>
+        <span className="font-medium text-md">Instansi</span>
+        <TextField
+          id="instance"
+          variant="outlined"
+          placeholder="Masukkan nama instansi"
+          value={values.instance}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          error={touched.instance && Boolean(errors.instance)}
+        />
+        <span className="text-red-500 text-md font-medium">
+          {touched.instance && errors.instance}
         </span>
       </FormRowInput>
 

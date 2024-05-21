@@ -46,13 +46,17 @@ function StepProgressBarDocument({ id, createdAt }) {
   );
 
   const filteredSteps = steps.slice(0, currentStepIndex + 1).filter((step) => {
-    if (document.status === "Layak" && step.title === "Tidak Layak") {
+    if (
+      document.status === "Layak" ||
+      document.status === "Sedang Ditandatangani"
+    ) {
+      return !["Tidak Layak", "Perbaikan"].includes(step.title);
+    } else if (document.status === "Perbaikan") {
+      return !["Tidak Layak"].includes(step.title);
+    } else {
       return false;
     }
-    return !(
-      document.status === "Sedang Ditandatangani" &&
-      step.title === "Tidak Layak"
-    );
+    return true;
   });
 
   return (

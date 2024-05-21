@@ -6,6 +6,7 @@ const API_URL = "http://localhost:8000/api/v1";
 export async function signup({
   name,
   email,
+  instance,
   username,
   password,
   passwordConfirm,
@@ -16,6 +17,7 @@ export async function signup({
       {
         name,
         email,
+        instance,
         username,
         password,
         passwordConfirm,

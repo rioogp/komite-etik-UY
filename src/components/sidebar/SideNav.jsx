@@ -1,11 +1,11 @@
-import { LuFileSpreadsheet } from "react-icons/lu";
 import {
   IoIosArrowDown,
   IoIosArrowUp,
   IoIosNotificationsOutline,
 } from "react-icons/io";
-import { CiSettings, CiCalendarDate, CiLogout } from "react-icons/ci";
+import { CiCalendarDate, CiLogout } from "react-icons/ci";
 import { FaRegFolder } from "react-icons/fa6";
+import { PiSquaresFour } from "react-icons/pi";
 
 import Image from "../Image";
 import NavLinkRoute from "../NavLinkRoute";
@@ -111,10 +111,6 @@ function SideNav() {
       </NavLinkRoute>,
     ],
     ketua: [
-      <NavLinkRoute style={styleNav} to="/berkas/ketua">
-        <FaRegFolder size={28} />
-        <span>Berkas</span>
-      </NavLinkRoute>,
       <NavLinkRoute
         style={styleNav}
         to="/notifikasi"
@@ -145,6 +141,8 @@ function SideNav() {
       <ul className="p-1 flex flex-col gap-3">
         <ThemeProvider theme={theme}>
           <NavLinkRoute style={styleNav} to="/home">
+            <PiSquaresFour size={28} />
+
             <span>Home</span>
           </NavLinkRoute>
           {roleMenus[role].map((menu, index) => (
@@ -265,6 +263,12 @@ function CollapseButton({ styleNav, userRole }) {
                 </NavLinkRoute>
                 <NavLinkRoute style={styleNav} to="/berkas/admin/reviewer">
                   <span>Reviewer</span>
+                </NavLinkRoute>
+                <NavLinkRoute
+                  style={styleNav}
+                  to="/berkas/admin/konfirmasi-berkas"
+                >
+                  <span>Konfirmasi Berkas</span>
                 </NavLinkRoute>
               </>
             )}

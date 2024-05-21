@@ -12,7 +12,7 @@ export function useUpdatePhotoProfile() {
       toast.success("Foto profil berhasil diperbarui!");
     },
 
-    onError: (err) => {
+    onError: () => {
       toast.error("Terjadi kesalahan saat memperbarui foto profil!");
     },
   });
