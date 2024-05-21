@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail, 'Please enter a valid email address'],
   },
+  instance: {
+    type: String,
+    required: [true, 'Please enter an instance'],
+    trim: true,
+  },
   photo: {
     type: String,
     default: 'default.jpg',
