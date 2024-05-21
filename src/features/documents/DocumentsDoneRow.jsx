@@ -7,6 +7,7 @@ import { useDownloadDocument } from "./useDownloadDocument";
 import { theme } from "../../utils/theme";
 import ModalComponent from "../../components/ModalComponent";
 import StepProgressBarDocument from "./StepProgressBarDocument";
+import CreateUpdateFormDocuments from "./CreateUpdateFormDocuments";
 
 function DocumentsDoneRow({ data, index }) {
   const { isPending, downloadDocument } = useDownloadDocument();
@@ -96,19 +97,32 @@ function DocumentsDoneRow({ data, index }) {
                 />
               </ModalComponent.ModalWindow>
             </ModalComponent>
+
+            {data.status !== "Layak" && data.status !== "Tidak Layak" && (
+              <>
+                <ModalComponent>
+                  <ModalComponent.OpenButton>
+                    <Button
+                      variant="contained"
+                      sx={{
+                        backgroundColor: "#006A74",
+                        paddingX: 0,
+                        "&:hover": { backgroundColor: "#004d54" },
+                      }}
+                    >
+                      <MdOutlineEdit size={38} />
+                    </Button>
+                  </ModalComponent.OpenButton>
+                  <ModalComponent.ModalWindow
+                    title="Perbaikan Pengajuan"
+                    subtitle="Unggah file perbaikan yang ingin diajukan"
+                  >
+                    <CreateUpdateFormDocuments id={data._id} />
+                  </ModalComponent.ModalWindow>
+                </ModalComponent>
+              </>
+            )}
           </ThemeProvider>
-          {data.status !== "Layak" && (
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#006A74",
-                paddingX: 0,
-                "&:hover": { backgroundColor: "#004d54" },
-              }}
-            >
-              <MdOutlineEdit size={38} />
-            </Button>
-          )}
         </div>
       </TableCell>
     </TableStyle.Row>

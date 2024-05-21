@@ -86,6 +86,7 @@ function UpdateStatusFormDocuments({ id }) {
           >
             <MenuItem value={"none"}>Pilih status</MenuItem>
             <MenuItem value={"Layak"}>Layak</MenuItem>
+            <MenuItem value={"Perbaikan"}>Perbaikan</MenuItem>
             <MenuItem value={"Tidak Layak"}>Tidak Layak</MenuItem>
           </Select>
           <span className="text-red-500 text-md font-medium">

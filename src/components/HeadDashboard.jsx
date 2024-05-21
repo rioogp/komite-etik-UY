@@ -5,6 +5,7 @@ import { theme } from "../utils/theme";
 import { LuPlus } from "react-icons/lu";
 import { useState } from "react";
 import { IoFilterSharp } from "react-icons/io5";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 function HeadDashboard({
   title,
@@ -60,6 +61,8 @@ function HeadDashboard({
 
 function FiltersButton() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [filterText, setFilterText] = useState("Filters");
+  const navigate = useNavigate();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -67,6 +70,15 @@ function FiltersButton() {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleMenuItemClick = (filter) => {
+    setFilterText(filter);
+    handleClose();
+    navigate({
+      pathname: window.location.pathname,
+      search: `?filter=${filter.toLowerCase()}`,
+    });
   };
 
   return (
@@ -90,7 +102,7 @@ function FiltersButton() {
         className="w-32 h-12"
       >
         <IoFilterSharp size={20} />
-        Filters
+        {filterText}{" "}
       </Button>
       <Menu
         anchorEl={anchorEl}
@@ -103,13 +115,13 @@ function FiltersButton() {
         }}
       >
         <MenuItem
-          onClick={handleClose}
+          onClick={() => handleMenuItemClick("Terlama")}
           sx={{ fontSize: "18px", fontWeight: "600" }}
         >
           Terlama
         </MenuItem>
         <MenuItem
-          onClick={handleClose}
+          onClick={() => handleMenuItemClick("Terbaru")}
           sx={{ fontSize: "18px", fontWeight: "600" }}
         >
           Terbaru

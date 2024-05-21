@@ -8,6 +8,7 @@ import EditReviewerFormDocuments from "./EditReviewerFormDocuments";
 
 function DocumentsApplicantRow({ data, index }) {
   const { isPending, downloadDocument } = useDownloadDocument();
+
   return (
     <TableStyle.Row>
       <TableCell

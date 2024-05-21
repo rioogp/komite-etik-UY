@@ -4,7 +4,15 @@ import Image from "../components/Image";
 
 function Home() {
   return (
-    <section className="flex flex-col gap-14">
+    <section className="flex flex-col gap-12">
+      <div className="flex flex-col gap-2">
+        <Heading type="custom" fontSize="text-4xl">
+          Form Template Surat{" "}
+        </Heading>
+        <span className="text-xl text-gray-500">Sumber Daya</span>
+      </div>
+      <Divider />
+
       <div className="flex flex-col gap-2">
         <Heading type="custom" fontSize="text-4xl">
           Tugas dan Tanggung Jawab Komite Etik

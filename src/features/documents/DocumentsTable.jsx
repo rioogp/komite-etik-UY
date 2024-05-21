@@ -11,7 +11,10 @@ function DocumentsTable() {
   }
 
   const filteredDocuments = documents.filter(
-    (doc) => doc.status !== "Layak" && doc.status !== "Tidak Layak"
+    (doc) =>
+      doc.status !== "Layak" &&
+      doc.status !== "Tidak Layak" &&
+      doc.status !== "Perbaikan"
   );
 
   return (

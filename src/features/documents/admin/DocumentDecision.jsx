@@ -3,12 +3,14 @@ import Heading from "../../../components/Heading";
 import { theme } from "../../../utils/theme";
 import { Button } from "@mui/material";
 import { useSendStatus } from "../useSendStatus";
+import { useNavigate } from "react-router-dom";
 
 function DocumentDecision({ reviewers, id }) {
   const { sendStatus, isUpdating } = useSendStatus();
+  const navigate = useNavigate();
 
   return (
-    <section className="flex flex-col gap-10 overflow-auto">
+    <section className="flex flex-col gap-10">
       <div className="flex flex-col gap-5">
         <Heading type="custom" fontSize="text-3xl">
           Status
@@ -43,22 +45,36 @@ function DocumentDecision({ reviewers, id }) {
             sx={{ textTransform: "none", fontSize: 16 }}
             variant="contained"
             color="success"
-            className="w-44 h-12"
+            className="w-52 h-14"
             disabled={isUpdating}
             onClick={() => sendStatus({ status: "Tidak Layak", id })}
           >
-            Kirim Ke Pengaju
+            Kirim Ke Pengaju (Tidak Layak)
           </Button>
 
           <Button
             sx={{ textTransform: "none", fontSize: 16 }}
             variant="contained"
             color="success"
-            className="w-44 h-12"
+            className="w-52 h-14"
             disabled={isUpdating}
-            onClick={() => sendStatus({ status: "Sedang Ditandatangani", id })}
+            onClick={() => sendStatus({ status: "Perbaikan", id })}
           >
-            Kirim Ke Ketua
+            Kirim Ke Pengaju (Perbaikan)
+          </Button>
+
+          <Button
+            sx={{ textTransform: "none", fontSize: 16 }}
+            variant="contained"
+            color="success"
+            className="w-52 h-14"
+            disabled={isUpdating}
+            onClick={() => {
+              sendStatus({ status: "Sedang Ditandatangani", id });
+              navigate("/berkas/admin/konfirmasi-berkas");
+            }}
+          >
+            Tandatangani Dokumen
           </Button>
         </ThemeProvider>
       </div>
