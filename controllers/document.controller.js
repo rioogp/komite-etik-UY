@@ -104,7 +104,7 @@ exports.updateDocuments = catchAsync(async (req, res, next) => {
 
   let status;
 
-  if (req.user.role === 'ketua') {
+  if (req.user.role === 'admin') {
     status = 'Layak';
     await Notification.create({
       name: 'Dokumen Dinyatakan Layak',
@@ -113,6 +113,7 @@ exports.updateDocuments = catchAsync(async (req, res, next) => {
     });
   } else {
     status = 'Sedang Diproses';
+    document.reviewers = [];
   }
 
   const oldZipName = document.documents[0];
@@ -261,7 +262,7 @@ exports.updateReviewerStatus = catchAsync(async (req, res, next) => {
 });
 
 exports.getDocuments = catchAsync(async (req, res, next) => {
-  const documents = await Document.find();
+  const documents = await Document.find().sort({ createdAt: -1 });
   res.status(200).json({
     status: 'success',
     data: { documents },
@@ -284,7 +285,9 @@ exports.getDocument = catchAsync(async (req, res, next) => {
 exports.getDocumentsByUser = catchAsync(async (req, res, next) => {
   const { _id } = req.user;
 
-  const documents = await Document.find({ createdBy: _id });
+  const documents = await Document.find({ createdBy: _id }).sort({
+    createdAt: -1,
+  });
 
   res.status(200).json({
     status: 'success',
@@ -295,7 +298,7 @@ exports.getDocumentsByUser = catchAsync(async (req, res, next) => {
 exports.sendStatus = catchAsync(async (req, res, next) => {
   const { documentId } = req.params;
   const { status } = req.body;
-  const ketua = await User.findOne({ role: 'ketua' });
+  const admin = await User.findOne({ role: 'admin' });
 
   const document = await Document.findByIdAndUpdate(
     documentId,
@@ -311,6 +314,13 @@ exports.sendStatus = catchAsync(async (req, res, next) => {
         user: document.createdBy,
       });
       break;
+    case 'Perbaikan':
+      await Notification.create({
+        name: 'Dokumen Butuh Perbaikan',
+        description: `Dokumen penelitian '${document.researchName}' butuh perbaikan. Silakan periksa dan perbaiki masalah yang ada.`,
+        user: document.createdBy,
+      });
+      break;
     case 'Sedang Ditandatangani':
       await Notification.create({
         name: 'Dokumen Sedang Ditandatangani',
@@ -321,7 +331,7 @@ exports.sendStatus = catchAsync(async (req, res, next) => {
       await Notification.create({
         name: 'Dokumen Menunggu untuk Ditandatangani',
         description: `Dokumen penelitian '${document.researchName}' menunggu untuk ditandatangani. Silakan proses lebih lanjut pada halaman berkas.`,
-        user: ketua._id,
+        user: admin._id,
       });
       break;
 
