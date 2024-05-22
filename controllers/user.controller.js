@@ -85,3 +85,42 @@ exports.updatePhoto = catchAsync(async (req, res, next) => {
     },
   });
 });
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  const { currentPassword, password, passwordConfirm } = req.body;
+
+  const user = await User.findById(req.user._id).select('+password');
+
+  if (!(await user.correctPassword(currentPassword, user.password))) {
+    return next(new AppError('Your current password is wrong', 401));
+  }
+
+  user.password = password;
+  user.passwordConfirm = passwordConfirm;
+  await user.save({ validateBeforeSave: false });
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user,
+    },
+  });
+});
+
+exports.updateName = catchAsync(async (req, res, next) => {
+  const user = await User.findByIdAndUpdate(
+    req.user.id,
+    { name: req.body.name },
+    {
+      new: true,
+      runValidators: true,
+    },
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user,
+    },
+  });
+});
