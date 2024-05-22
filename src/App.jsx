@@ -38,8 +38,6 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const role = localStorage.getItem("role");
-
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />

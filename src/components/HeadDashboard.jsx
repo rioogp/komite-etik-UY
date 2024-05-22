@@ -5,7 +5,7 @@ import { theme } from "../utils/theme";
 import { LuPlus } from "react-icons/lu";
 import { useState } from "react";
 import { IoFilterSharp } from "react-icons/io5";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function HeadDashboard({
   title,
@@ -61,7 +61,7 @@ function HeadDashboard({
 
 function FiltersButton() {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [filterText, setFilterText] = useState("Filters");
+  const [filterText, setFilterText] = useState("Terlama");
   const navigate = useNavigate();
 
   const handleClick = (event) => {
@@ -102,7 +102,7 @@ function FiltersButton() {
         className="w-32 h-12"
       >
         <IoFilterSharp size={20} />
-        {filterText}{" "}
+        {filterText}
       </Button>
       <Menu
         anchorEl={anchorEl}

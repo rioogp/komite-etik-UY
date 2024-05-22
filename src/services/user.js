@@ -42,3 +42,43 @@ export async function updatePhotoProfile(formData) {
     throw new Error(err);
   }
 }
+
+export async function updateName({ name }) {
+  try {
+    const response = await axios.patch(
+      `${API_URL}/users/updateName`,
+      { name },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return response.data.data;
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+
+export async function updatePassword({
+  currentPassword,
+  password,
+  passwordConfirm,
+}) {
+  try {
+    const response = await axios.patch(
+      `${API_URL}/users/updatePassword`,
+      { currentPassword, password, passwordConfirm },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return response.data.data;
+  } catch (err) {
+    throw new Error(err.response.data.message);
+  }
+}

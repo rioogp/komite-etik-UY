@@ -5,7 +5,6 @@ import ModalComponent from "../../components/ModalComponent";
 import EditPhotoProfileForm from "./EditPhotoProfileForm";
 
 function ProfileCard({ user }) {
-  console.log(user.photoURL);
   return (
     <section className="bg-color-primary w-[45rem] h-full pt-10 pb-60 flex flex-col gap-8 rounded-lg">
       <div className="flex flex-col justify-center items-center gap-5">
