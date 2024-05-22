@@ -19,10 +19,19 @@ import { useSignup } from "./useSignup";
 
 function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
   const { signup, isPending } = useSignup();
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
   const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleClickShowPasswordConfirm = () =>
+    setShowPasswordConfirm((show) => !show);
+
+  const handleMouseDownPasswordConfirm = (event) => {
     event.preventDefault();
   };
 
@@ -197,7 +206,7 @@ function RegisterForm() {
         <OutlinedInput
           id="confirmPassword"
           placeholder="Masukkan konfirmasi password"
-          type={showPassword ? "text" : "password"}
+          type={showPasswordConfirm ? "text" : "password"}
           value={values.confirmPassword}
           error={touched.confirmPassword && Boolean(errors.confirmPassword)}
           onChange={handleChange}
@@ -206,8 +215,8 @@ function RegisterForm() {
             <InputAdornment position="end">
               <IconButton
                 aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
+                onClick={handleClickShowPasswordConfirm}
+                onMouseDown={handleMouseDownPasswordConfirm}
                 edge="end"
               >
                 {showPassword ? (

@@ -11,6 +11,7 @@ function UpdateProfile() {
   if (isLoading) {
     return <div>Loading...</div>;
   }
+
   return (
     <main className="py-14 px-10 flex flex-col gap-8">
       <div className="flex justify-start items-center gap-8">
@@ -18,7 +19,7 @@ function UpdateProfile() {
           variant="none"
           color="info"
           className="w-12 h-12"
-          onClick={useMoveBack()}
+          onClick={useMoveBack}
         >
           <IoMdArrowBack size={30} />
         </Button>
@@ -35,7 +36,7 @@ function UpdateProfile() {
       <Divider />
       <div className="flex w-full gap-16">
         <ProfileCard user={user} />
-        <EditProfileForm />
+        <EditProfileForm name={user.user.name} />
       </div>
     </main>
   );
