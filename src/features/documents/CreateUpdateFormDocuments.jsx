@@ -87,12 +87,6 @@ function CreateUpdateFormDocuments({ id, onClose }) {
             cv: Yup.mixed().required(
               "Curriculum Vitae Peneliti Utama atau Ketua Pelaksana wajib diisi"
             ),
-            penjelasanPersetujuan: Yup.mixed().required(
-              "Penjelasan untuk Persetujuan Subjek wajib diisi"
-            ),
-            kuesioner: Yup.mixed().required(
-              "Kuesioner/Pedoman Wawancara FGD wajib diisi"
-            ),
           }
     ),
     onSubmit: (values, { resetForm, setSubmitting }) => {
