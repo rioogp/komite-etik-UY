@@ -21,7 +21,7 @@ const stepStyle = {
       borderColor: "black",
       marginLeft: "8.5px",
       height: "110px",
-      marginY: "-55px",
+      marginY: "-50px",
       backgroundColor: "black",
     },
   },
@@ -53,10 +53,16 @@ function StepProgressBarDocument({ id, createdAt }) {
       return !["Tidak Layak", "Perbaikan"].includes(step.title);
     } else if (document.status === "Perbaikan") {
       return !["Tidak Layak"].includes(step.title);
+    } else if (
+      document.status === "Sedang Diproses" ||
+      document.status === "Sedang Direview"
+    ) {
+      return true;
+    } else if (document.status === "Tidak Layak") {
+      return true;
     } else {
       return false;
     }
-    return true;
   });
 
   return (
