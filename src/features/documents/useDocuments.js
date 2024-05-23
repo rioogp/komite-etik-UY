@@ -1,11 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 import { getDocuments } from "../../services/documents";
 
-export function useDocuments() {
-  const { isLoading, data: documents } = useQuery({
+export function useDocuments(filter = "terlama") {
+  const {
+    isLoading,
+    data: documents,
+    refetch,
+  } = useQuery({
     queryKey: ["documents"],
-    queryFn: getDocuments,
+    queryFn: () => getDocuments(filter),
   });
 
-  return { isLoading, documents };
+  return { isLoading, documents, refetch };
 }

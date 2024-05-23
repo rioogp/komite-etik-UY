@@ -1,10 +1,10 @@
 import { TableCell } from "@mui/material";
 import TableStyle from "../../components/Table";
-import { useDocumentsByuser } from "./useDocumentsByUser";
 import DocumentsDoneRow from "./DocumentsDoneRow";
+import useFilteredDocuments from "../../hooks/useFilteredDocuments";
 
 function DocumentsDoneTable() {
-  const { documents, isLoading } = useDocumentsByuser();
+  const { documents, isLoading } = useFilteredDocuments();
 
   if (isLoading) {
     return <p>Loading...</p>;
