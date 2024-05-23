@@ -2,10 +2,10 @@ import { TableCell } from "@mui/material";
 // import Table from "../../components/table/Table";
 import TableStyle from "../../../components/Table";
 import DocumentsReviewerRow from "./DocumentsReviewerRow";
-import { useDocuments } from "../useDocuments";
+import useFilteredDocuments from "../../../hooks/useFilteredDocuments";
 
 function DocumentsReviewerTable() {
-  const { isLoading, documents } = useDocuments();
+  const { documents, isLoading } = useFilteredDocuments(false);
 
   if (isLoading) {
     return <div>Loading...</div>;

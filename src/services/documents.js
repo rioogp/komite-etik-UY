@@ -2,23 +2,25 @@ import axios from "axios";
 
 const API_URL = process.env.REACT_APP_API_URL;
 
-export async function getDocumentsByUser() {
+export async function getDocumentsByUser(filter) {
   try {
-    const response = await axios.get(`${API_URL}/documents/user`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
-
+    const response = await axios.get(
+      `${API_URL}/documents/user?filter=${filter}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
     return response.data.data.documents;
   } catch (err) {
     throw new Error(err.message);
   }
 }
 
-export async function getDocuments() {
+export async function getDocuments(filter) {
   try {
-    const response = await axios.get(`${API_URL}/documents`, {
+    const response = await axios.get(`${API_URL}/documents?filter=${filter}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },

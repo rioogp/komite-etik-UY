@@ -6,6 +6,7 @@ import { LuPlus } from "react-icons/lu";
 import { useState } from "react";
 import { IoFilterSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
+import SortBy from "./SortBy";
 
 function HeadDashboard({
   title,
@@ -54,80 +55,8 @@ function HeadDashboard({
         )}
       </div>
       <Divider />
-      {filters && <FiltersButton />}
+      {filters && <SortBy />}
     </div>
-  );
-}
-
-function FiltersButton() {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [filterText, setFilterText] = useState("Terlama");
-  const navigate = useNavigate();
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleMenuItemClick = (filter) => {
-    setFilterText(filter);
-    handleClose();
-    navigate({
-      pathname: window.location.pathname,
-      search: `?filter=${filter.toLowerCase()}`,
-    });
-  };
-
-  return (
-    <>
-      <Button
-        variant="outlined"
-        onClick={handleClick}
-        sx={{
-          borderColor: "#D0D5DD",
-          color: "#161616",
-          textTransform: "none",
-          fontSize: "16px",
-          borderRadius: "7px",
-          fontWeight: "medium",
-          display: "flex",
-          gap: "6px",
-          "&:hover": {
-            borderColor: "#e3e5e8",
-          },
-        }}
-        className="w-32 h-12"
-      >
-        <IoFilterSharp size={20} />
-        {filterText}
-      </Button>
-      <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-        MenuListProps={{
-          style: {
-            width: "125px",
-          },
-        }}
-      >
-        <MenuItem
-          onClick={() => handleMenuItemClick("Terlama")}
-          sx={{ fontSize: "18px", fontWeight: "600" }}
-        >
-          Terlama
-        </MenuItem>
-        <MenuItem
-          onClick={() => handleMenuItemClick("Terbaru")}
-          sx={{ fontSize: "18px", fontWeight: "600" }}
-        >
-          Terbaru
-        </MenuItem>
-      </Menu>
-    </>
   );
 }
 

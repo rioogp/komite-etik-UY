@@ -1,28 +1,12 @@
 import { TableCell } from "@mui/material";
 import TableStyle from "../../../components/Table";
 import ReviewerDocumentsRow from "./ReviewerDocumentsRow";
-import { useDocuments } from "../useDocuments";
 import { useContext } from "react";
 import { AuthContext } from "../../../contexts/AuthContext";
-
-const tempData = [
-  {
-    id: 1,
-    nama: "John Doe",
-    status: "Layak",
-    nama_penelitian:
-      "Tinjauan Terhadap Kode Etik Organisasi: Tantangan dan Peluang di Era Digital",
-  },
-  {
-    id: 2,
-    nama: "Jane Smith",
-    status: "",
-    nama_penelitian: "Analisis Data Medis",
-  },
-];
+import useFilteredDocuments from "../../../hooks/useFilteredDocuments";
 
 function ReviewerDocumentsTable() {
-  const { isLoading, documents } = useDocuments();
+  const { documents, isLoading } = useFilteredDocuments(false);
   const { userId } = useContext(AuthContext);
 
   if (isLoading) {

@@ -5,9 +5,12 @@ import { IoMdArrowBack } from "react-icons/io";
 import { useUser } from "../features/authentication/useUser";
 import EditProfileForm from "../features/authentication/EditProfileForm";
 import { useMoveBack } from "../hooks/useMoveBack";
+import { useNavigate } from "react-router-dom";
 
 function UpdateProfile() {
   const { user, isLoading } = useUser();
+  const navigate = useNavigate();
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -19,7 +22,7 @@ function UpdateProfile() {
           variant="none"
           color="info"
           className="w-12 h-12"
-          onClick={useMoveBack}
+          onClick={() => navigate(-1)}
         >
           <IoMdArrowBack size={30} />
         </Button>

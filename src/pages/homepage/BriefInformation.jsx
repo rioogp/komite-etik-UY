@@ -24,11 +24,11 @@ function BriefInformation() {
               label="Pengguna Aktif"
             />
             <InfoBox
-              number={statistics.uploadedFilesCount}
+              number={statistics.completedDocumentsCount}
               label="Persentase Selesai"
             />
             <InfoBox
-              number={statistics.completedDocumentsCount}
+              number={statistics.uploadedFilesCount}
               label="Berkas Ter-unggah"
             />
           </>

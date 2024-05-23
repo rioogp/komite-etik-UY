@@ -3,9 +3,10 @@ import { TableCell } from "@mui/material";
 import TableStyle from "../../../components/Table";
 import DocumentsApplicantRow from "./DocumentsApplicantRow";
 import { useDocuments } from "../useDocuments";
+import useFilteredDocuments from "../../../hooks/useFilteredDocuments";
 
 function DocumentsApplicantTable() {
-  const { isLoading, documents } = useDocuments();
+  const { documents, isLoading } = useFilteredDocuments(false);
 
   if (isLoading) {
     return <div>Loading...</div>;
