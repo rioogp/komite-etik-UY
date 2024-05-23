@@ -15,6 +15,8 @@ const {
   uploadUserPhoto,
   resizeUserPhoto,
   getUser,
+  updatePassword,
+  updateName,
 } = require('../controllers/user.controller');
 const { authorize } = require('../middlewares/auth.middleware');
 
@@ -26,6 +28,8 @@ router.post('/login', login);
 router.post('/resend-verify-email', resendVerificationEmail);
 router.post('/forgotPassword', forgotPassword);
 router.patch('/resetPassword/:token', resetPassword);
+router.patch('/updatePassword', authorize, updatePassword);
+router.patch('/updateName', authorize, updateName);
 router.patch(
   '/updatePhoto',
   authorize,
