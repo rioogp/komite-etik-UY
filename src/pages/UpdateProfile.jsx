@@ -4,7 +4,6 @@ import ProfileCard from "../features/authentication/ProfileCard";
 import { IoMdArrowBack } from "react-icons/io";
 import { useUser } from "../features/authentication/useUser";
 import EditProfileForm from "../features/authentication/EditProfileForm";
-import { useMoveBack } from "../hooks/useMoveBack";
 import { useNavigate } from "react-router-dom";
 
 function UpdateProfile() {
