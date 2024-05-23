@@ -262,10 +262,22 @@ exports.updateReviewerStatus = catchAsync(async (req, res, next) => {
 });
 
 exports.getDocuments = catchAsync(async (req, res, next) => {
-  const documents = await Document.find().sort({ createdAt: -1 });
+  const filter = req.query.filter || 'terbaru';
+  let sortOption;
+
+  if (filter === 'terbaru') {
+    sortOption = { createdAt: -1 };
+  } else if (filter === 'terlama') {
+    sortOption = { createdAt: 1 };
+  }
+
+  const documents = await Document.find().sort(sortOption);
+
   res.status(200).json({
     status: 'success',
-    data: { documents },
+    data: {
+      documents,
+    },
   });
 });
 
@@ -284,17 +296,25 @@ exports.getDocument = catchAsync(async (req, res, next) => {
 
 exports.getDocumentsByUser = catchAsync(async (req, res, next) => {
   const { _id } = req.user;
+  const { filter } = req.query;
 
-  const documents = await Document.find({ createdBy: _id }).sort({
-    createdAt: -1,
-  });
+  let sortOption;
+
+  if (filter === 'terbaru') {
+    sortOption = { createdAt: -1 };
+  } else if (filter === 'terlama') {
+    sortOption = { createdAt: 1 };
+  }
+
+  const documents = await Document.find({ createdBy: _id }).sort(sortOption);
 
   res.status(200).json({
     status: 'success',
-    data: { documents },
+    data: {
+      documents,
+    },
   });
 });
-
 exports.sendStatus = catchAsync(async (req, res, next) => {
   const { documentId } = req.params;
   const { status } = req.body;

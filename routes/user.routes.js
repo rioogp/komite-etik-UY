@@ -29,7 +29,7 @@ router.post('/resend-verify-email', resendVerificationEmail);
 router.post('/forgotPassword', forgotPassword);
 router.patch('/resetPassword/:token', resetPassword);
 router.patch('/updatePassword', authorize, updatePassword);
-router.patch('updateName', authorize, updateName);
+router.patch('/updateName', authorize, updateName);
 router.patch(
   '/updatePhoto',
   authorize,

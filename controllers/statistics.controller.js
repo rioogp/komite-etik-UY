@@ -9,8 +9,10 @@ const getUploadedFilesCount = async () => {
   return documents.reduce((acc, doc) => acc + doc.documents.length, 0);
 };
 
-const getCompletedDocumentsCount = async () =>
-  await Document.countDocuments({ status: 'Layak' });
+const getCompletedDocumentsCount = async () => {
+  const statuses = ['Layak', 'Tidak Layak'];
+  return await Document.countDocuments({ status: { $in: statuses } });
+};
 
 exports.getStatistics = catchAsync(async (req, res, next) => {
   const activeUsersCount = await getActiveUsersCount();
