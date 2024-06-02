@@ -28,7 +28,6 @@ exports.createMeeting = catchAsync(async (req, res, next) => {
 exports.getMeetings = catchAsync(async (req, res, next) => {
   const { role } = req.user;
 
-  // Periksa apakah pengguna memiliki izin untuk melihat daftar meeting
   if (!Meeting.canView(role)) {
     return next(
       new AppError('Only Ketua, Admin, and Reviewer can view meetings', 403),

@@ -64,6 +64,84 @@ exports.getUser = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.getUserById = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(new AppError('No user found with that ID', 404));
+  }
+
+  const userId = await User.findById(req.params.id);
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      user: userId,
+    },
+  });
+});
+
+exports.updateUser = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(new AppError('No user found with that ID', 404));
+  }
+
+  user.name = req.body.name;
+  user.username = req.body.username;
+  user.email = req.body.email;
+  user.instance = req.body.instance;
+  user.role = req.body.role;
+
+  if (req.body.password) {
+    user.password = req.body.password;
+    user.passwordConfirm = req.body.password;
+  }
+
+  await user.save();
+
+  res.status(200).json({
+    status: 'success',
+    message: 'Successfully updated user data',
+  });
+});
+
+exports.deleteUser = catchAsync(async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+
+  if (!user) {
+    return next(new AppError('No user found with that ID', 404));
+  }
+
+  await User.findByIdAndDelete(req.params.id);
+
+  res.status(204).json({
+    status: 'success',
+    message: 'User deleted successfully',
+  });
+});
+
+exports.createUser = catchAsync(async (req, res, next) => {
+  const newUser = await User.create({
+    name: req.body.name,
+    username: req.body.username,
+    email: req.body.email,
+    instance: req.body.instance,
+    role: req.body.role,
+    verified: true,
+    password: req.body.password,
+    passwordConfirm: req.body.password,
+  });
+
+  res.status(201).json({
+    status: 'success',
+    data: {
+      user: newUser,
+    },
+  });
+});
+
 exports.updatePhoto = catchAsync(async (req, res, next) => {
   const user = await User.findByIdAndUpdate(
     req.user.id,

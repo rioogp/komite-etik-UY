@@ -315,6 +315,7 @@ exports.getDocumentsByUser = catchAsync(async (req, res, next) => {
     },
   });
 });
+
 exports.sendStatus = catchAsync(async (req, res, next) => {
   const { documentId } = req.params;
   const { status } = req.body;
