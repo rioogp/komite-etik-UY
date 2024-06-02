@@ -26,7 +26,9 @@ function CreateUpdateFormMember({ onClose, id }) {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const { createUser, isCreating } = useCreateUser();
   const { updateUser, isUpdating } = useUpdateUser();
-  const { user, isLoading } = useUserById(id);
+  const { user, isLoading } = id
+    ? useUserById(id)
+    : { user: null, isLoading: false };
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
