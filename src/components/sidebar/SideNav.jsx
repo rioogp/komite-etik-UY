@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../features/authentication/useUser";
 import { useUnreadNotifications } from "../../features/notifications/useUnreadNotifications";
 import { useMarkAsRead } from "../../features/notifications/useMarkAsRead";
+import { IoDocumentTextOutline } from "react-icons/io5";
 
 function SideNav() {
   const { logout, role } = useContext(AuthContext);
@@ -60,6 +61,10 @@ function SideNav() {
       </NavLinkRoute>,
     ],
     admin: [
+      <NavLinkRoute style={styleNav} to="/admin/members">
+        <IoDocumentTextOutline size={28} />
+        <span>Data Anggota</span>
+      </NavLinkRoute>,
       <CollapseButton styleNav={styleNav} userRole={role} />,
       <NavLinkRoute
         style={styleNav}
@@ -84,7 +89,7 @@ function SideNav() {
       </NavLinkRoute>,
     ],
     reviewer: [
-      <NavLinkRoute style={styleNav} to="/berkas/reviewer">
+      <NavLinkRoute style={styleNav} to="/reviewer/berkas">
         <FaRegFolder size={28} />
         <span>Berkas</span>
       </NavLinkRoute>,
@@ -258,15 +263,15 @@ function CollapseButton({ styleNav, userRole }) {
             )}
             {shouldShowCollapse && userRole === "admin" && (
               <>
-                <NavLinkRoute style={styleNav} to="/berkas/admin/pengaju">
+                <NavLinkRoute style={styleNav} to="/admin/berkas/pengaju">
                   <span>Pengaju</span>
                 </NavLinkRoute>
-                <NavLinkRoute style={styleNav} to="/berkas/admin/reviewer">
+                <NavLinkRoute style={styleNav} to="/admin/berkas/reviewer">
                   <span>Reviewer</span>
                 </NavLinkRoute>
                 <NavLinkRoute
                   style={styleNav}
-                  to="/berkas/admin/konfirmasi-berkas"
+                  to="/admin/berkas/konfirmasi-berkas"
                 >
                   <span>Konfirmasi Berkas</span>
                 </NavLinkRoute>

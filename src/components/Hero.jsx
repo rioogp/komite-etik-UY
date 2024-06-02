@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Button, ThemeProvider, useMediaQuery } from "@mui/material";
 import { theme } from "../utils/theme";
 
-function Hero({ title, title2, typeImage, page, desc }) {
+function Hero({ title, title2, typeImage, button, desc }) {
   const navigate = useNavigate();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.between("sm", "md"));
@@ -59,7 +59,7 @@ function Hero({ title, title2, typeImage, page, desc }) {
             ? textAnimation(desc.split(" "), 1)
             : textAnimation(description, 1)}
         </p>
-        {page === "ulasan" || (
+        {button === "true" || (
           <ThemeProvider theme={theme}>
             <Button
               sx={{

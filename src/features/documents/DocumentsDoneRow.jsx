@@ -8,9 +8,11 @@ import { theme } from "../../utils/theme";
 import ModalComponent from "../../components/ModalComponent";
 import StepProgressBarDocument from "./StepProgressBarDocument";
 import CreateUpdateFormDocuments from "./CreateUpdateFormDocuments";
+import { steps } from "../../utils/constants";
 
 function DocumentsDoneRow({ data, index }) {
   const { isPending, downloadDocument } = useDownloadDocument();
+  const stepData = steps.find((step) => step.title === data.status);
 
   return (
     <TableStyle.Row>
@@ -39,12 +41,17 @@ function DocumentsDoneRow({ data, index }) {
       </TableCell>
       <TableCell
         sx={{
-          fontSize: "1.2rem",
           fontWeight: "bold",
-          textTransform: "uppercase",
+          fontSize: "1.1rem",
+          overflowWrap: "break-word",
+          wordWrap: "break-word",
+          maxWidth: "400px",
         }}
       >
-        {data.status}
+        <div className="flex flex-row items-center gap-2">
+          {stepData ? stepData.icon : null}
+          <p className="text-[1.1rem]">{stepData ? stepData.title : null}</p>
+        </div>
       </TableCell>
       <TableCell
         sx={{

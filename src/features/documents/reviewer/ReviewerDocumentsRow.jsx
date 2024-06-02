@@ -61,8 +61,8 @@ function ReviewerDocumentsRow({ data }) {
               </Button>
             </ModalComponent.OpenButton>
             <ModalComponent.ModalWindow
-              title="Pilih Reviewer"
-              subtitle="Berikan berkas kepada Reviewer untuk di review"
+              title="Status Berkas"
+              subtitle="Berikan status berkas untuk berkas ini"
             >
               <UpdateStatusFormDocuments id={data._id} />
             </ModalComponent.ModalWindow>

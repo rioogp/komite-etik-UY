@@ -28,6 +28,8 @@ import DocumentsReviewer from "./pages/documents/reviewer/DocumentsReviewer";
 import DocumentsDone from "./pages/documents/applicant/DocumentsDone";
 import DocumentsChair from "./pages/documents/ketua/DocumentsChair";
 import UpdateProfile from "./pages/UpdateProfile";
+import AboutUs from "./pages/AboutUs";
+import MemberData from "./pages/MemberData";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -66,19 +68,20 @@ function App() {
               <Route path="/rapat" element={<MeetingSchedule />} />
               <Route path="/berkas" element={<Documents />} />
               <Route path="/berkas-selesai" element={<DocumentsDone />} />
-              <Route path="/berkas/reviewer" element={<DocumentsReviewer />} />
+              <Route path="/reviewer/berkas" element={<DocumentsReviewer />} />
               <Route
-                path="/berkas/admin/konfirmasi-berkas"
+                path="/admin/berkas/konfirmasi-berkas"
                 element={<DocumentsChair />}
               />
               <Route
-                path="/berkas/admin/pengaju"
+                path="/admin/berkas/pengaju"
                 element={<ApplicantDocuments />}
               />
               <Route
-                path="/berkas/admin/reviewer"
+                path="/admin/berkas/reviewer"
                 element={<ReviewerDocuments />}
               />
+              <Route path="/admin/members" element={<MemberData />} />
               <Route path="/notifikasi" element={<Notification />} />
               <Route path="/pengaturan" element={<Settings />} />
             </Route>
@@ -86,6 +89,7 @@ function App() {
               <Route index element={<Homepage />} />
               <Route index element={<Navigate replace to="homepage" />} />
               <Route path="/homepage" element={<Homepage />} />
+              <Route path="/tentang" element={<AboutUs />} />
               <Route
                 path="/peraturan-dan-pertanyaan"
                 element={<RulesAndQuestions />}

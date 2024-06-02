@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { useVerification } from "../features/authentication/useVerification";
 
 function VerificationUser() {
-  const [timer, setTimer] = useState(5);
+  const [timer, setTimer] = useState(60);
   const { resendVerification } = useVerification();
   const email = localStorage.getItem("email");
 
@@ -26,7 +26,7 @@ function VerificationUser() {
 
   const handleResendEmail = () => {
     if (timer === 0) {
-      setTimer(5);
+      setTimer(60);
       resendVerification({ email });
     } else {
       toast.error("Anda tidak dapat mengirim ulang email saat ini.");

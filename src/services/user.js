@@ -82,3 +82,80 @@ export async function updatePassword({
     throw new Error(err.response.data.message);
   }
 }
+
+export async function createUser({
+  name,
+  username,
+  email,
+  instance,
+  role,
+  password,
+}) {
+  try {
+    const response = await axios.post(
+      `${API_URL}/users`,
+      { name, username, email, instance, role, password },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return response.data.data;
+  } catch (err) {
+    throw new Error(err.response.data.message);
+  }
+}
+
+export async function updateUser({
+  name,
+  username,
+  email,
+  instance,
+  role,
+  password,
+  id,
+}) {
+  try {
+    const response = await axios.patch(
+      `${API_URL}/users/${id}`,
+      { name, username, email, instance, role, password },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    return response.data.data;
+  } catch (err) {
+    throw new Error(err.response);
+  }
+}
+
+export async function getUserById(id) {
+  try {
+    const response = await axios.get(`${API_URL}/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return response.data.data.user;
+  } catch (err) {
+    throw new Error(err);
+  }
+}
+
+export async function deleteUser(id) {
+  try {
+    const response = await axios.delete(`${API_URL}/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+    return response.data;
+  } catch (err) {
+    throw new Error(err);
+  }
+}

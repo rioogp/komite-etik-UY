@@ -16,7 +16,7 @@ export function useLogin() {
     onSuccess: (user) => {
       const { token, data } = user;
       loginContext(token, data.user._id, data.user.role);
-      toast.success("Login successful");
+      toast.success("Login Berhasil");
 
       navigate("/home", { replace: true });
     },

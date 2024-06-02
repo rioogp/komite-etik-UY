@@ -1,9 +1,6 @@
 import { TableCell } from "@mui/material";
 import TableStyle from "../../components/Table";
 import DocumentsRow from "./DocumentsRow";
-import { useDocumentsByuser } from "./useDocumentsByUser";
-import { useSearchParams } from "react-router-dom";
-import { useEffect } from "react";
 import useFilteredDocuments from "../../hooks/useFilteredDocuments";
 
 function DocumentsTable() {
