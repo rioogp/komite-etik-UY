@@ -15,6 +15,7 @@ function HeadDashboard({
   filters,
   modalTitle,
   modalSubtitle,
+  buttonAddTitle,
   children,
 }) {
   return (
@@ -41,7 +42,7 @@ function HeadDashboard({
                   className="w-38 h-14 flex gap-5"
                 >
                   <LuPlus size={22} />
-                  Ajukan
+                  {buttonAddTitle}
                 </Button>
               </ModalComponent.OpenButton>
               <ModalComponent.ModalWindow

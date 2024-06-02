@@ -10,7 +10,6 @@ import { AuthContext } from "../contexts/AuthContext";
 function MeetingSchedule() {
   const { isLoading, meetings } = useMeetings();
   const { role } = useContext(AuthContext);
-  // Ensure hooks are called unconditionally in the component body
   usePageTitle("Jadwal Pertemuan | Komite Etik");
 
   if (isLoading || !meetings) {
@@ -24,6 +23,7 @@ function MeetingSchedule() {
         title="Jadwal Pertemuan"
         subtitle="Ajukan Jadwal Pertemuan Sesuai dengan Kebutuhan"
         add={role === "ketua" ? "add" : null}
+        buttonAddTitle="Ajukan"
         modalTitle="Atur Jadwal Pertemuan"
         modalSubtitle="Ajukan jadwal pertemuan sesuai dengan kebutuhan"
       >

@@ -10,7 +10,7 @@ function Reviews() {
       <Hero
         title="Ulasan"
         typeImage="homepage"
-        page="ulasan"
+        button="true"
         desc="Kami ingin mendengar dari Anda! Berikan ulasan Anda tentang pengalaman Anda menggunakan website kami. Kami sangat menghargai setiap komentar yang Anda berikan dan akan menggunakan informasi tersebut untuk terus meningkatkan layanan kami."
       />
       <ReviewsInput />

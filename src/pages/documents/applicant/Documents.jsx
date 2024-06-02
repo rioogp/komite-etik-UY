@@ -13,6 +13,7 @@ function Documents() {
         subtitle="Berkas penelitian yang sudah diunggah di bawah ini"
         add="add"
         filters="filters"
+        buttonAddTitle="Ajukan"
         modalTitle="Pengajuan Penelitian"
         modalSubtitle="Ajukan penelitian yang ingin diajukan"
       >

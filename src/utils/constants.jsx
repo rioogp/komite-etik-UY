@@ -46,13 +46,13 @@ export const steps = [
     title: "Tidak Layak",
     icon: (
       <svg
-        className="ms-[-5px] w-[44px] h-[44px] text-gray-800 dark:text-white"
+        className="ms-[-6px] w-[44px] h-[44px] text-gray-800 dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="red"
-        width="100"
-        height="100"
-        viewBox="0 4 20 20"
+        width="120"
+        height="120"
+        viewBox="0 3 20 20"
       >
         <path
           stroke="white"

@@ -134,6 +134,12 @@ function NavBar() {
                 primary="Ulasan"
               />
             </StyledListItem>
+            <StyledListItem button onClick={handleToggleMenu}>
+              <ListItemText
+                onClick={() => navigate("/tentang")}
+                primary="Tentang"
+              />
+            </StyledListItem>
             {token ? (
               <div className="flex">
                 <Button
@@ -192,6 +198,11 @@ function NavBar() {
           <li>
             <NavLinkRoute style={style} to="/ulasan">
               Ulasan
+            </NavLinkRoute>
+          </li>
+          <li>
+            <NavLinkRoute style={style} to="/tentang">
+              Tentang
             </NavLinkRoute>
           </li>
         </ul>

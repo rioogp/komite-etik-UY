@@ -1,6 +1,7 @@
 import { Divider } from "@mui/material";
 import Heading from "../components/Heading";
 import Image from "../components/Image";
+import LetterFormTable from "../features/dashboard/LetterFormTable";
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
         <span className="text-xl text-gray-500">Sumber Daya</span>
       </div>
       <Divider />
+      <LetterFormTable />
 
       <div className="flex flex-col gap-2">
         <Heading type="custom" fontSize="text-4xl">

@@ -7,12 +7,12 @@ export function useVerification() {
   const { mutate: verifyEmail } = useMutation({
     mutationFn: verifyEmailApi,
     onSuccess: () => {
-      toast.success("Email berhasil diverifikasi!");
+      // toast.success("Email berhasil diverifikasi!");
     },
     onError: (error) => {
-      toast.error(
-        error.message || "Terjadi kesalahan saat memverifikasi email."
-      );
+      // toast.error(
+      //   error.message || "Terjadi kesalahan saat memverifikasi email."
+      // );
     },
   });
 
