@@ -17,8 +17,12 @@ const {
   getUser,
   updatePassword,
   updateName,
+  createUser,
+  getUserById,
+  updateUser,
+  deleteUser,
 } = require('../controllers/user.controller');
-const { authorize } = require('../middlewares/auth.middleware');
+const { authorize, restrictTo } = require('../middlewares/auth.middleware');
 
 const router = express.Router();
 
@@ -38,7 +42,17 @@ router.patch(
   updatePhoto,
 );
 
-router.route('/').get(getAllUsers);
+router
+  .route('/')
+  .get(getAllUsers)
+  .post(authorize, restrictTo('admin'), createUser);
+
 router.route('/user').get(authorize, getUser);
+
+router
+  .route('/:id')
+  .get(getUserById)
+  .patch(authorize, restrictTo('admin'), updateUser)
+  .delete(authorize, restrictTo('admin'), deleteUser);
 
 module.exports = router;
