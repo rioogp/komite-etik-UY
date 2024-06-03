@@ -1,5 +1,5 @@
 
-![Logo](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/th5xamgrr6se0x5ro4g6.png)
+![Logo](Logo_K-etik.png)
 
 
 # Komte Etik Universitas YARSI
@@ -8,17 +8,49 @@ Pengembangan aplikasi web service dan aplikasi komite etik berbasis website untu
 
 
 
-## Fitur
-
-- Login
+## Tampilan dan Fitur
+### Pengusul / Administrator / Reviewer / Ketua
+- Halaman Utama
+- Peraturan dan Pertanyaan
+- Ulasan
+- Tentang
 - Register
-- Unggah Berkas
-- Profile
+- Login
+- Lupa Kata Sandi
+- Verifikasi Email
+- Ubah Kata Sandi dari Lupa Kata Sandi
+- Dashboard
+- Notifikasi
+- Logout
 
+### Pengusul
+- Unggah Berkas Proposal
+- Lihat Berkas Proposal
+- Filter Berkas Proposal
+- Detail Berkas Proposal
+- Memperbaharui Berkas Proposal
+- Unduh Berkas Proposal
+
+### Administrator
+- Lihat Berkas Proposal
+- Filter Berkas Proposal
+- Detail Berkas Proposal
+- Pilih Reviewer
+- Pilih Status Pengajuan (Kirim ke Pengusul / Tidak Layak) / (Kirim ke Pengusul / Perbaikan) / (Tanda Tangani Dokumen)
+- Unduh Berkas Proposal
+- Unggah Berkas Proposal yang sudah Ditandatangin Manual oleh Ketua
+- Manajemen Pengguna (Menambahkan / Memperbaharui)
+
+### Reviewer
+- Lihat Berkas Proposal
+- Memberikan Status Layak / Tidak Layak pada Berkas Proposal
+
+### Ketua
+- Manajemen Penjadwalan Pertemuan (Menambahkan / Memperbaharui / Menghapus)
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](Landing-Page.png)
 
 ## Color Reference
 
