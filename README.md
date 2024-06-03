@@ -36,7 +36,7 @@ Pengembangan aplikasi web service dan aplikasi komite etik berbasis website untu
 - Filter Berkas Proposal
 - Detail Berkas Proposal
 - Pilih Reviewer
-- Pilih Status Pengajuan (Kirim ke Pengusul / Tidak Layak) / (Kirim ke Pengusul / Perbaikan) / (Tanda Tangani Dokumen)
+- Pilih Status Pengajuan (Kirim ke Pengusul / Tidak Layak) / (Kirim ke Pengusul / Perbaikan) / (Tandatangan Dokumen)
 - Unduh Berkas Proposal
 - Unggah Berkas Proposal yang sudah Ditandatangin Manual oleh Ketua
 - Manajemen Pengguna (Menambahkan / Memperbaharui)
