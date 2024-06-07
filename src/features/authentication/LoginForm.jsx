@@ -66,10 +66,10 @@ function LoginForm() {
 
   return (
     <Form type="regular" onSubmit={handleSubmit}>
-      <HeadingAuthentication title="Login" type="primary" margin="mb-12" />
+      <HeadingAuthentication title="Login" type="primary" margin="mb-8" />
 
       <FormRowInput>
-        <span className="font-medium text-md">Username</span>
+        <span className="font-medium text-sm">Email/Username</span>
         <TextField
           id="emailOrUsername"
           variant="outlined"
@@ -77,15 +77,16 @@ function LoginForm() {
           value={values.emailOrUsername}
           onChange={handleChange}
           onBlur={handleBlur}
+          InputProps={{ sx: { height: "2.9rem", fontSize: 14 } }}
           error={touched.emailOrUsername && Boolean(errors.emailOrUsername)}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.emailOrUsername && errors.emailOrUsername}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-md">Password</span>
+        <span className="font-medium text-sm">Password</span>
         <OutlinedInput
           placeholder="Masukkan password"
           id="password"
@@ -93,6 +94,7 @@ function LoginForm() {
           value={values.password}
           onChange={handleChange}
           onBlur={handleBlur}
+          style={{ height: "2.9rem", fontSize: 14 }}
           error={touched.password && Boolean(errors.password)}
           endAdornment={
             <InputAdornment position="end">
@@ -103,20 +105,20 @@ function LoginForm() {
                 edge="end"
               >
                 {showPassword ? (
-                  <IoIosEyeOff size={28} />
+                  <IoIosEyeOff size={24} />
                 ) : (
-                  <IoIosEye size={28} />
+                  <IoIosEye size={24} />
                 )}
               </IconButton>
             </InputAdornment>
           }
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.password && errors.password}
         </span>
       </FormRowInput>
 
-      <span className="text-md">
+      <span className="text-sm">
         Belum punya akun? Daftar&nbsp;
         <LinkRoute to="/register" type="secondary">
           di sini
@@ -128,10 +130,15 @@ function LoginForm() {
       <ThemeProvider theme={theme}>
         <Button
           type="submit"
-          sx={{ marginTop: "20px", minHeight: "3.5rem" }}
+          sx={{
+            marginTop: "20px",
+            minHeight: "3rem",
+            fontSize: "14px",
+            textTransform: "none",
+          }}
           variant="contained"
           color="success"
-          className="w-auto h-16"
+          className="w-auto h-12"
           disabled={isPending}
         >
           {isPending ? "Loading..." : "Login"}

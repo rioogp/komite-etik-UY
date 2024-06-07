@@ -8,9 +8,9 @@ function BriefInformation() {
   const { isLoading, statistics } = useStatistics();
 
   return (
-    <div className="hidden xl:flex flex-col items-center justify-center gap-5 border border-slate-200 shadow-xl rounded-3xl mx-24 mt-[-20rem] p-10 bg-white">
+    <div className="hidden xl:flex flex-col items-center justify-center gap-5 border border-slate-200 shadow-xl rounded-3xl mx-24 mt-[-16rem] p-7 bg-white">
       <Heading type="secondary">Informasi Singkat</Heading>
-      <span className="text-xl text-slate-500 max-w-3xl text-center">
+      <span className="text-lg text-slate-500 max-w-3xl text-center">
         Semua yang perlu dilakukan untuk mengonversi, meninjau, dan
         menyelesaikan lebih banyak administrasi.
       </span>
@@ -62,10 +62,10 @@ function InfoBox({ number, label }) {
   return (
     <div className="flex flex-col gap-4 justify-center items-center">
       <span
-        className="text-7xl text-color-secondary font-bold"
+        className="text-5xl text-color-secondary font-bold"
         ref={numberRef}
       ></span>
-      <span className="text-xl font-semibold">{label}</span>
+      <span className="text-lg font-semibold">{label}</span>
     </div>
   );
 }

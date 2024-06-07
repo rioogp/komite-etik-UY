@@ -10,7 +10,7 @@ function NotificationList() {
 
   console.log(notifications);
   return (
-    <div className="flex flex-col gap-10 px-5">
+    <div className="flex flex-col gap-10 px-1 md:px-5">
       {notifications.length > 0 ? (
         notifications.map((notification) => (
           <NotificationItem
@@ -19,7 +19,7 @@ function NotificationList() {
           />
         ))
       ) : (
-        <div className="text-center text-black text-xl font-semibold">
+        <div className="text-center text-black text-base md:text-xl font-semibold">
           Tidak ada notifikasi terkini
         </div>
       )}

@@ -3,7 +3,6 @@ import TableStyle from "../../components/Table";
 import { FiDownload } from "react-icons/fi";
 import { IoIosInformationCircleOutline } from "react-icons/io";
 import { MdOutlineEdit } from "react-icons/md";
-import { useDownloadDocument } from "./useDownloadDocument";
 import { theme } from "../../utils/theme";
 import ModalComponent from "../../components/ModalComponent";
 import StepProgressBarDocument from "./StepProgressBarDocument";
@@ -11,14 +10,13 @@ import CreateUpdateFormDocuments from "./CreateUpdateFormDocuments";
 import { steps } from "../../utils/constants";
 
 function DocumentsDoneRow({ data, index }) {
-  const { isPending, downloadDocument } = useDownloadDocument();
   const stepData = steps.find((step) => step.title === data.status);
 
   return (
     <TableStyle.Row>
       <TableCell
         sx={{
-          fontSize: "1rem",
+          fontSize: "0.9rem",
           paddingY: "50px",
           paddingLeft: "35px",
         }}
@@ -26,12 +24,12 @@ function DocumentsDoneRow({ data, index }) {
         {index + 1}
       </TableCell>
 
-      <TableCell sx={{ fontSize: "1.1rem" }}>{data.nameUser}</TableCell>
+      <TableCell sx={{ fontSize: "0.9rem" }}>{data.nameUser}</TableCell>
 
       <TableCell
         sx={{
           fontWeight: "bold",
-          fontSize: "1.1rem",
+          fontSize: "0.8rem",
           overflowWrap: "break-word",
           wordWrap: "break-word",
           maxWidth: "400px",
@@ -42,7 +40,7 @@ function DocumentsDoneRow({ data, index }) {
       <TableCell
         sx={{
           fontWeight: "bold",
-          fontSize: "1.1rem",
+          fontSize: "0.9rem",
           overflowWrap: "break-word",
           wordWrap: "break-word",
           maxWidth: "400px",
@@ -50,32 +48,34 @@ function DocumentsDoneRow({ data, index }) {
       >
         <div className="flex flex-row items-center gap-2">
           {stepData ? stepData.icon : null}
-          <p className="text-[1.1rem]">{stepData ? stepData.title : null}</p>
+          <p className="text-[0.8rem]">{stepData ? stepData.title : null}</p>
         </div>
       </TableCell>
       <TableCell
         sx={{
-          fontSize: "1.1rem",
+          fontSize: "0.9rem",
         }}
       >
         <Button
           variant="contained"
           sx={{
             backgroundColor: "#547268",
-            marginLeft: "15px",
+            minWidth: "2.9rem",
             paddingY: "10px",
+            marginLeft: "10px",
             "&:hover": { backgroundColor: "#455952" },
           }}
-          onClick={() => downloadDocument(data.documents[0])}
-          disabled={isPending}
+          onClick={() => {
+            window.location.href = data.documents[0];
+          }}
         >
-          <FiDownload size={25} className="text-white" />
+          <FiDownload size={16} className="text-white" />
         </Button>
       </TableCell>
 
       <TableCell
         sx={{
-          fontSize: "1.1rem",
+          fontSize: "0.9rem",
         }}
         align="center"
       >
@@ -88,14 +88,16 @@ function DocumentsDoneRow({ data, index }) {
                   sx={{
                     backgroundColor: "#006A74",
                     paddingX: 0,
+                    paddingY: "8px",
+                    minWidth: "2.9rem",
                     "&:hover": { backgroundColor: "#004d54" },
                   }}
                 >
-                  <IoIosInformationCircleOutline size={38} />
+                  <IoIosInformationCircleOutline size={22} />
                 </Button>
               </ModalComponent.OpenButton>
               <ModalComponent.ModalWindow
-                title="Detail Proposal"
+                title="Detail Progres Penelitian"
                 subtitle="Detail kemajuan proposal tersedia untuk ditinjau di bawah ini"
               >
                 <StepProgressBarDocument
@@ -114,10 +116,12 @@ function DocumentsDoneRow({ data, index }) {
                       sx={{
                         backgroundColor: "#006A74",
                         paddingX: 0,
+                        paddingY: "8px",
+                        minWidth: "2.9rem",
                         "&:hover": { backgroundColor: "#004d54" },
                       }}
                     >
-                      <MdOutlineEdit size={38} />
+                      <MdOutlineEdit size={22} />
                     </Button>
                   </ModalComponent.OpenButton>
                   <ModalComponent.ModalWindow

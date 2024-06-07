@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../../../utils/theme";
 import {
+  Box,
   Button,
   MenuItem,
   OutlinedInput,
@@ -64,32 +65,106 @@ function UpdateStatusFormDocuments({ id }) {
             onChange={handleChange}
             onBlur={handleBlur}
             error={touched.message && Boolean(errors.message)}
-            className="text-[100px]"
-            sx={{ width: "600px" }}
+            InputProps={{
+              sx: {
+                fontSize: 14,
+                width: "600px",
+                "@media (max-width: 767.95px)": {
+                  fontSize: 12,
+                  width: "250px",
+                },
+              },
+            }}
           />
-          <span className="text-red-500 text-md font-medium">
+          <span className="text-red-500 text-sm font-medium">
             {touched.message && errors.message}
           </span>
         </FormRowInput>
         <FormRowInput>
-          <span className="font-medium text-lg">Status</span>
-          <Select
-            id="status"
-            name="status"
-            onChange={handleChange}
-            input={<OutlinedInput />}
-            onBlur={handleBlur}
-            placeholder="Pilih status"
-            error={touched.status && Boolean(errors.status)}
-            defaultValue="none"
-            sx={{ width: "600px" }}
+          <span className="font-medium text-md">Status</span>
+          <Box
+            sx={{
+              width: "600px",
+              "@media (max-width: 767.95px)": {
+                width: "250px",
+              },
+            }}
           >
-            <MenuItem value={"none"}>Pilih status</MenuItem>
-            <MenuItem value={"Layak"}>Layak</MenuItem>
-            <MenuItem value={"Perbaikan"}>Perbaikan</MenuItem>
-            <MenuItem value={"Tidak Layak"}>Tidak Layak</MenuItem>
-          </Select>
-          <span className="text-red-500 text-md font-medium">
+            <Select
+              id="status"
+              name="status"
+              onChange={handleChange}
+              input={<OutlinedInput />}
+              onBlur={handleBlur}
+              placeholder="Pilih status"
+              error={touched.status && Boolean(errors.status)}
+              defaultValue="none"
+              displayEmpty
+              sx={{
+                height: "2.8rem",
+                fontSize: 14,
+                color: "#a8a5a2",
+                "& .MuiOutlinedInput-root": {
+                  "@media (max-width: 767.95px)": {
+                    fontSize: 12,
+                  },
+                },
+              }}
+              fullWidth
+            >
+              <MenuItem
+                sx={{
+                  height: "2.8rem",
+                  fontSize: 14,
+                  "@media (max-width: 767.95px)": {
+                    fontSize: 12,
+                  },
+                }}
+                disabled
+                value={"none"}
+              >
+                Pilih status
+              </MenuItem>
+
+              <MenuItem
+                sx={{
+                  height: "2.8rem",
+                  fontSize: 14,
+                  "@media (max-width: 767.95px)": {
+                    fontSize: 12,
+                  },
+                }}
+                value={"Layak"}
+              >
+                Layak
+              </MenuItem>
+              <MenuItem
+                sx={{
+                  height: "2.8rem",
+                  fontSize: 14,
+                  "@media (max-width: 767.95px)": {
+                    fontSize: 12,
+                  },
+                }}
+                value={"Perbaikan"}
+              >
+                Perbaikan
+              </MenuItem>
+              <MenuItem
+                sx={{
+                  height: "2.8rem",
+                  fontSize: 14,
+                  "@media (max-width: 767.95px)": {
+                    fontSize: 12,
+                  },
+                }}
+                value={"Tidak Layak"}
+              >
+                Tidak Layak
+              </MenuItem>
+            </Select>
+          </Box>
+          <span className="text-red-500 text-sm font-medium">
             {touched.status && errors.status}
           </span>
         </FormRowInput>
@@ -97,10 +172,10 @@ function UpdateStatusFormDocuments({ id }) {
       <ThemeProvider theme={theme}>
         <Button
           type="submit"
-          sx={{ marginTop: "20px" }}
+          sx={{ marginTop: "20px", fontSize: 13, textTransform: "none" }}
           variant="contained"
           color="success"
-          className="w-44 h-12"
+          className="w-40 h-10"
           disabled={isUpdating}
         >
           {isUpdating ? "Updating" : "Kirim"}

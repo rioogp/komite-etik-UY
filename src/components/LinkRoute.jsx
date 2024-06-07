@@ -6,9 +6,9 @@ function LinkRoute({ children, type, to }) {
 
   const styles = {
     primary: base + " font-medium",
-    secondary: base + " font-semibold text-md",
+    secondary: base + " font-semibold text-sm",
     footer:
-      "font-base text-black text-lg hover:text-slate-700 transition duration-200",
+      "font-base text-black text-sm md:text-md hover:text-slate-700 transition duration-200",
   };
 
   if (to)

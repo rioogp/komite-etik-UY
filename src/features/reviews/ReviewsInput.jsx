@@ -54,16 +54,16 @@ function ReviewsInput() {
   }
 
   return (
-    <SectionColContainer>
+    <SectionColContainer style="px-2 md:px-10 ">
       <Heading
         type="custom"
-        fontSize="text-4xl md:text-5xl"
+        fontSize="text-3xl md:text-4xl"
         color="text-black"
         width="max-w-[70rem]"
       >
         Berikan Ulasan
       </Heading>
-      <span className="text-slate-500 text-xl md:text-2xl">
+      <span className="text-slate-500 text-lg md:text-xl">
         Berikan ulasan anda mengenai website ini.
       </span>
       <ThemeProvider theme={theme}>
@@ -78,7 +78,6 @@ function ReviewsInput() {
               onChange={handleChange}
               onBlur={handleBlur}
               error={touched.description && Boolean(errors.description)}
-              className="text-[100px]"
             />
             <span className="text-red-500 text-md font-medium">
               {touched.description && errors.description}
@@ -90,7 +89,10 @@ function ReviewsInput() {
               type="submit"
               variant="contained"
               color="success"
-              className="w-auto h-14"
+              sx={{
+                fontSize: "12px",
+              }}
+              className="w-auto h-12"
               disabled={isPending}
             >
               {isPending ? "Loading..." : "Kirim Ulasan"}

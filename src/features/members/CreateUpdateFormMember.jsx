@@ -121,7 +121,7 @@ function CreateUpdateFormMember({ onClose, id }) {
   return (
     <Form type="modal" onSubmit={handleSubmit}>
       <FormRowInput>
-        <span className="font-medium text-lg">Nama Anggota</span>
+        <span className="font-medium text-sm">Nama Anggota</span>
         <TextField
           fullWidth
           id="name"
@@ -131,14 +131,23 @@ function CreateUpdateFormMember({ onClose, id }) {
           value={values.name}
           onChange={handleChange}
           error={touched.name && Boolean(errors.name)}
+          InputProps={{
+            sx: {
+              height: "2.8rem",
+              fontSize: 14,
+              "@media (max-width: 767.95px)": {
+                fontSize: 12,
+              },
+            },
+          }}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.name && errors.name}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-lg">Username</span>
+        <span className="font-medium text-sm">Username</span>
         <TextField
           fullWidth
           id="username"
@@ -147,15 +156,24 @@ function CreateUpdateFormMember({ onClose, id }) {
           margin="normal"
           value={values.username}
           onChange={handleChange}
+          InputProps={{
+            sx: {
+              height: "2.8rem",
+              fontSize: 14,
+              "@media (max-width: 767.95px)": {
+                fontSize: 12,
+              },
+            },
+          }}
           error={touched.username && Boolean(errors.username)}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.username && errors.username}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-lg">Email</span>
+        <span className="font-medium text-sm">Email</span>
         <TextField
           fullWidth
           id="email"
@@ -164,15 +182,24 @@ function CreateUpdateFormMember({ onClose, id }) {
           margin="normal"
           value={values.email}
           onChange={handleChange}
+          InputProps={{
+            sx: {
+              height: "2.8rem",
+              fontSize: 14,
+              "@media (max-width: 767.95px)": {
+                fontSize: 12,
+              },
+            },
+          }}
           error={touched.email && Boolean(errors.email)}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.email && errors.email}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-lg">Instansi</span>
+        <span className="font-medium text-sm">Instansi</span>
         <TextField
           fullWidth
           id="instance"
@@ -181,9 +208,18 @@ function CreateUpdateFormMember({ onClose, id }) {
           margin="normal"
           value={values.instance}
           onChange={handleChange}
+          InputProps={{
+            sx: {
+              height: "2.8rem",
+              fontSize: 14,
+              "@media (max-width: 767.95px)": {
+                fontSize: 12,
+              },
+            },
+          }}
           error={touched.instance && Boolean(errors.instance)}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.instance && errors.instance}
         </span>
       </FormRowInput>
@@ -201,22 +237,62 @@ function CreateUpdateFormMember({ onClose, id }) {
             value={values.role}
             onChange={handleChange}
             placeholder="Pilih Role"
+            style={{
+              height: "2.8rem",
+              fontSize: 14,
+              color: "#a8a5a2",
+              "@media (max-width: 767.95px)": {
+                fontSize: 12,
+              },
+            }}
             displayEmpty
           >
-            <MenuItem value="" disabled>
+            <MenuItem
+              value=""
+              disabled
+              style={{
+                height: "2.8rem",
+                fontSize: 14,
+                "@media (max-width: 767.95px)": {
+                  fontSize: 12,
+                },
+              }}
+            >
               Pilih Role
             </MenuItem>
-            <MenuItem value="ketua">Ketua</MenuItem>
-            <MenuItem value="reviewer">Reviewer</MenuItem>
+            <MenuItem
+              value="ketua"
+              style={{
+                height: "2.8rem",
+                fontSize: 14,
+                "@media (max-width: 767.95px)": {
+                  fontSize: 12,
+                },
+              }}
+            >
+              Ketua
+            </MenuItem>
+            <MenuItem
+              value="reviewer"
+              style={{
+                height: "2.8rem",
+                fontSize: 14,
+                "@media (max-width: 767.95px)": {
+                  fontSize: 12,
+                },
+              }}
+            >
+              Reviewer
+            </MenuItem>
           </Select>
         </FormControl>
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.role && errors.role}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-md">Password</span>
+        <span className="font-medium text-sm">Password</span>
         <OutlinedInput
           placeholder="Masukkan password"
           id="password"
@@ -225,6 +301,13 @@ function CreateUpdateFormMember({ onClose, id }) {
           onChange={handleChange}
           onBlur={handleBlur}
           error={touched.password && Boolean(errors.password)}
+          style={{
+            height: "2.8rem",
+            fontSize: 14,
+            "@media (max-width: 767.95px)": {
+              fontSize: 12,
+            },
+          }}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -242,7 +325,7 @@ function CreateUpdateFormMember({ onClose, id }) {
             </InputAdornment>
           }
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.password && errors.password}
         </span>
       </FormRowInput>
@@ -250,10 +333,10 @@ function CreateUpdateFormMember({ onClose, id }) {
       <ThemeProvider theme={theme}>
         <Button
           type="submit"
-          sx={{ marginTop: "20px" }}
+          sx={{ marginTop: "20px", fontSize: 12 }}
           variant="contained"
           color="success"
-          className="w-44 h-12"
+          className="w-36 h-10"
           disabled={id ? isUpdating : isCreating}
         >
           {id

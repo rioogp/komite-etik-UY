@@ -19,7 +19,7 @@ function MeetingRow({ meeting, index }) {
     <TableStyle.Row>
       <TableCell
         sx={{
-          fontSize: "1.3rem",
+          fontSize: "0.9rem",
           paddingY: "50px",
           paddingLeft: "35px",
         }}
@@ -27,13 +27,13 @@ function MeetingRow({ meeting, index }) {
         {index + 1}
       </TableCell>
 
-      <TableCell sx={{ fontSize: "1.3rem" }}>
+      <TableCell sx={{ fontSize: "0.9rem" }}>
         <span className="font-medium">{meeting.emailUser}</span>
       </TableCell>
 
       <TableCell
         sx={{
-          fontSize: "1.3rem",
+          fontSize: "0.9rem",
           overflowWrap: "break-word",
           wordWrap: "break-word",
           maxWidth: "400px",
@@ -44,7 +44,7 @@ function MeetingRow({ meeting, index }) {
 
       <TableCell
         sx={{
-          fontSize: "1.3rem",
+          fontSize: "0.9rem",
           paddingLeft: "25px",
         }}
       >
@@ -56,7 +56,7 @@ function MeetingRow({ meeting, index }) {
       {role === "ketua" && (
         <TableCell
           sx={{
-            fontSize: "1.3rem",
+            fontSize: "0.9rem",
           }}
           align="center"
         >
@@ -72,7 +72,7 @@ function MeetingRow({ meeting, index }) {
                       "&:hover": { backgroundColor: "#004d54" },
                     }}
                   >
-                    <MdOutlineEdit size={38} />
+                    <MdOutlineEdit size={26} />
                   </Button>
                 </ModalComponent.OpenButton>
                 <ModalComponent.ModalWindow
@@ -94,7 +94,7 @@ function MeetingRow({ meeting, index }) {
               disabled={isPending}
               onClick={() => deleteMeeting(meeting._id)}
             >
-              <LuTrash2 size={38} />
+              <LuTrash2 size={24} />
             </Button>
           </div>
         </TableCell>

@@ -26,6 +26,7 @@ function MeetingSchedule() {
         buttonAddTitle="Ajukan"
         modalTitle="Atur Jadwal Pertemuan"
         modalSubtitle="Ajukan jadwal pertemuan sesuai dengan kebutuhan"
+        position="justify-end"
       >
         {role === "ketua" && <CreateAndUpdateFormMeeting />}
       </HeadDashboard>

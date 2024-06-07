@@ -13,10 +13,12 @@ function AboutUs() {
         button="true"
         typeImage="homepage"
       />
-      <SectionColContainer>
-        <div className="px-20 flex flex-col gap-10">
-          <Heading type="secondary">Apa itu web K-Etik?</Heading>
-          <p className="text-2xl leading-relaxed text-gray-600">
+      <SectionColContainer style="px-5 md:px-16">
+        <div className="flex flex-col gap-10">
+          <Heading type="custom" fontSize="text-2xl md:text-3xl">
+            Apa itu web K-Etik?
+          </Heading>
+          <p className="text-lg md:text-xl leading-relaxed text-gray-600">
             Website Kode Etik Universitas YARSI adalah platform resmi yang
             menyediakan informasi lengkap mengenai pedoman etika yang harus
             diikuti oleh seluruh civitas akademika universitas. Situs ini
@@ -35,16 +37,18 @@ function AboutUs() {
           </p>
         </div>
       </SectionColContainer>
-      <SectionColContainer>
-        <div className="px-20 flex flex-col gap-10">
-          <Heading type="secondary">Penyusun</Heading>
-          <p className="text-2xl leading-relaxed text-gray-600">
+      <SectionColContainer style="px-5 md:px-16">
+        <div className="flex flex-col gap-10">
+          <Heading type="custom" fontSize="text-2xl md:text-3xl">
+            Penyusun
+          </Heading>
+          <p className="text-lg md:text-xl leading-relaxed text-gray-600">
             Komite Etik Penelitian Universitas YARSI disusun berdasarkan Surat
             Keputusan Rektor Universitas YARSI Nomor: 039/REK/KEP/VIII/2019
             tanggal 19 Agustus 2019 tentang Komite Etik Penelitian Universitas
             YARSI yang beranggotakan sebagai berikut:
           </p>
-          <ol class="list-decimal px-7 text-2xl flex flex-col gap-10 text-gray-600">
+          <ol class="list-decimal px-7 text-lg md:text-xl flex flex-col gap-10 text-gray-600">
             <li>
               Prof. dr. Hj. Qomariah RS., MS., PKK., AIFM., Sp.KKLP - Ketua
             </li>
@@ -73,37 +77,37 @@ function AboutUs() {
           </ol>
         </div>
       </SectionColContainer>
-      <SectionColContainer>
-        <div className="px-20 flex flex-col gap-24">
+      <SectionColContainer style="px-2 md:px-10">
+        <div className="flex flex-col gap-24">
           <div className="text-center flex flex-col gap-5">
-            <span className="text-color-secondary font-bold text-xl">
+            <span className="text-color-secondary font-bold text-md">
               Who Makes Website
             </span>
-            <h1 className="font-bold text-5xl">Meet Our Team</h1>
+            <h1 className="font-bold text-3xl md:text-4xl">Meet Our Team</h1>
           </div>
-          <div className="flex items-center justify-evenly px-10">
+          <div className="flex flex-wrap gap-y-10 gap-x-3 items-center justify-evenly px-10">
             <div className="flex flex-col items-start justify-center gap-14">
-              <img class="object-cover h-52 w-96 rounded-3xl" src="/ahay.jpg" />
-              <span className="font-bold text-2xl">
+              <img class="object-cover h-44 w-72 rounded-3xl" src="/ahay.jpg" />
+              <span className="font-bold text-xl">
                 Hafidz Putra Herlyansyah
               </span>
-              <span className="font-bold text-lg text-color-secondary">
+              <span className="font-bold text-md text-color-secondary">
                 Full Stack Developer
               </span>
             </div>
-            <div className="flex flex-col items-start justify-center gap-10">
-              <img class="object-cover h-52 w-96 rounded-3xl" src="/ahay.jpg" />
-              <span className="font-bold text-2xl max-w-[22rem]">
+            <div className="flex flex-col flex-wrap items-start justify-center gap-10">
+              <img class="object-cover h-44 w-72 rounded-3xl" src="/ahay.jpg" />
+              <span className="font-bold text-xl max-w-[16rem]">
                 Paramaresthi Windriyani, S.Kom., M.Eng.
               </span>
-              <span className="font-bold text-lg text-color-secondary">
+              <span className="font-bold text-md text-color-secondary">
                 Mentor
               </span>
             </div>
             <div className="flex flex-col items-start justify-center gap-14">
-              <img class="object-cover h-52 w-96 rounded-3xl" src="/ahay.jpg" />
-              <span className="font-bold text-2xl">Rio Griya Putra</span>
-              <span className="font-bold text-lg text-color-secondary">
+              <img class="object-cover h-44 w-72 rounded-3xl" src="/ahay.jpg" />
+              <span className="font-bold text-xl">Rio Griya Putra</span>
+              <span className="font-bold text-md text-color-secondary">
                 UI/UX Designer
               </span>
             </div>

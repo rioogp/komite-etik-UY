@@ -8,12 +8,7 @@ function Logo({ style }) {
       onClick={() => navigate("/")}
       className={`text-center ${style} cursor-pointer`}
     >
-      <Image
-        src="/Logo.png"
-        alt="Logo"
-        type="logo"
-        className="object-contain w-10 h-full"
-      />
+      <Image src="/Logo.png" alt="Logo" type="logo" />
     </div>
   );
 }

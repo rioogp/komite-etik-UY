@@ -32,7 +32,7 @@ function NavBar() {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const style =
-    "text-white hover:text-slate-200 w-fit transition duration-300 text-lg";
+    "text-white hover:text-slate-200 w-fit transition duration-300 text-sm";
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -66,8 +66,10 @@ function NavBar() {
   return (
     <ThemeProvider theme={theme}>
       <nav
-        className={`flex items-center justify-between px-3 md:px-12 py-5 fixed w-full z-10 ${
-          isScrolled ? "bg-color-secondary" : "bg-transparent"
+        className={`flex items-center justify-between px-3 md:px-12 py-3 fixed w-full z-10 ${
+          isScrolled
+            ? "bg-color-secondary/90 backdrop-blur-md"
+            : "bg-transparent"
         }`}
       >
         <Logo style="hidden sm:flex" />
@@ -145,6 +147,9 @@ function NavBar() {
                 <Button
                   variant="outlined"
                   color="info"
+                  sx={{
+                    textTransform: "none",
+                  }}
                   onClick={() => navigate("/update-profile")}
                   className="w-38 h-12"
                 >
@@ -153,6 +158,9 @@ function NavBar() {
                 <Button
                   variant="contained"
                   color="success"
+                  sx={{
+                    textTransform: "none",
+                  }}
                   onClick={() => logout()}
                   className="w-28 h-12"
                 >
@@ -161,10 +169,12 @@ function NavBar() {
               </div>
             ) : (
               <div className="flex gap-5 px-4">
-                {" "}
                 <Button
                   variant="outlined"
                   color="info"
+                  sx={{
+                    textTransform: "none",
+                  }}
                   onClick={() => navigate("/register")}
                   className="w-28 h-12"
                 >
@@ -173,6 +183,9 @@ function NavBar() {
                 <Button
                   variant="contained"
                   color="success"
+                  sx={{
+                    textTransform: "none",
+                  }}
                   onClick={() => navigate("/login")}
                   className="w-28 h-12"
                 >
@@ -212,7 +225,11 @@ function NavBar() {
               <Button
                 variant="outlined"
                 color="info"
-                className="w-38 h-12"
+                sx={{
+                  fontSize: "11.5px",
+                  textTransform: "none",
+                }}
+                className="w-26 h-9"
                 onClick={() => navigate("/update-profile")}
               >
                 Update Profile
@@ -220,8 +237,12 @@ function NavBar() {
               <Button
                 variant="contained"
                 color="success"
+                sx={{
+                  fontSize: "11.5px",
+                  textTransform: "none",
+                }}
                 onClick={() => logout()}
-                className="w-28 h-12"
+                className="w-24 h-9"
               >
                 Logout
               </Button>
@@ -231,16 +252,24 @@ function NavBar() {
               <Button
                 variant="outlined"
                 color="info"
+                sx={{
+                  fontSize: "11.5px",
+                  textTransform: "none",
+                }}
                 onClick={() => navigate("/register")}
-                className="w-28 h-12"
+                className="w-24 h-9"
               >
                 Sign Up
               </Button>
               <Button
                 variant="contained"
                 color="success"
+                sx={{
+                  fontSize: "11.5px",
+                  textTransform: "none",
+                }}
                 onClick={() => navigate("/login")}
-                className="w-28 h-12"
+                className="w-24 h-9"
               >
                 Sign In
               </Button>

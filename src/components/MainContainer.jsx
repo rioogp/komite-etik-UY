@@ -1,6 +1,6 @@
 function MainContainer({ children }) {
   return (
-    <main className="flex flex-col gap-32 overflow-hidden">{children}</main>
+    <main className="flex flex-col gap-28 overflow-hidden">{children}</main>
   );
 }
 

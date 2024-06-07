@@ -11,8 +11,8 @@ import { useCreateDocument } from "./useCreateDocument";
 import { useUpdateDocument } from "./useUpdateDocument";
 
 function CreateUpdateFormDocuments({ id, onClose }) {
-  const { createDocument, isCreating } = useCreateDocument();
-  const { updateDocument, isUpdating } = useUpdateDocument();
+  const { createDocument, isCreating } = useCreateDocument(onClose);
+  const { updateDocument, isUpdating } = useUpdateDocument(onClose);
 
   const {
     handleSubmit,
@@ -25,6 +25,7 @@ function CreateUpdateFormDocuments({ id, onClose }) {
   } = useFormik({
     initialValues: id
       ? {
+          formSurat: null,
           suratPengantar: null,
           suratRekomendasi: null,
           fileProposal: null,
@@ -35,6 +36,7 @@ function CreateUpdateFormDocuments({ id, onClose }) {
         }
       : {
           namaPenelitian: "",
+          formSurat: null,
           suratPengantar: null,
           suratRekomendasi: null,
           fileProposal: null,
@@ -46,6 +48,7 @@ function CreateUpdateFormDocuments({ id, onClose }) {
     validationSchema: Yup.object().shape(
       id
         ? {
+            formSurat: Yup.mixed().required("Form Surat Kelayakan wajib diisi"),
             suratPengantar: Yup.mixed().required(
               "Surat Pengantar dari Lembaga/Institusi/Ketua Peneliti wajib diisi"
             ),
@@ -61,17 +64,13 @@ function CreateUpdateFormDocuments({ id, onClose }) {
             cv: Yup.mixed().required(
               "Curriculum Vitae Peneliti Utama atau Ketua Pelaksana wajib diisi"
             ),
-            penjelasanPersetujuan: Yup.mixed().required(
-              "Penjelasan untuk Persetujuan Subjek wajib diisi"
-            ),
-            kuesioner: Yup.mixed().required(
-              "Kuesioner/Pedoman Wawancara FGD wajib diisi"
-            ),
           }
         : {
             namaPenelitian: Yup.string().required(
               "Nama Penelitian wajib diisi"
             ),
+            formSurat: Yup.mixed().required("Form Surat Kelayakan wajib diisi"),
+
             suratPengantar: Yup.mixed().required(
               "Surat Pengantar dari Lembaga/Institusi/Ketua Peneliti wajib diisi"
             ),
@@ -95,6 +94,7 @@ function CreateUpdateFormDocuments({ id, onClose }) {
         id ? "" : formData.append("researchName", values.namaPenelitian);
 
         const fileFields = [
+          "formSurat",
           "suratPengantar",
           "suratRekomendasi",
           "fileProposal",
@@ -114,8 +114,6 @@ function CreateUpdateFormDocuments({ id, onClose }) {
         id
           ? updateDocument({ formData, id }, { onSettled: () => resetForm() })
           : createDocument(formData, { onSettled: () => resetForm() });
-
-        onClose();
       } catch (error) {
         console.error("Error in onSubmit:", error);
       } finally {
@@ -130,7 +128,7 @@ function CreateUpdateFormDocuments({ id, onClose }) {
         ""
       ) : (
         <FormRowInput>
-          <span className="font-medium text-lg">Nama Penelitian</span>
+          <span className="font-medium text-sm">Nama Penelitian (*)</span>
           <TextField
             id="namaPenelitian"
             variant="outlined"
@@ -138,17 +136,58 @@ function CreateUpdateFormDocuments({ id, onClose }) {
             value={values.namaPenelitian}
             onChange={handleChange}
             onBlur={handleBlur}
+            InputProps={{
+              sx: {
+                height: "2.8rem",
+                fontSize: 14,
+                "@media (max-width: 767.95px)": {
+                  fontSize: 12,
+                },
+              },
+            }}
             error={touched.namaPenelitian && Boolean(errors.namaPenelitian)}
           />
-          <span className="text-red-500 text-md font-medium">
+          <span className="text-red-500 text-sm font-medium">
             {touched.namaPenelitian && errors.namaPenelitian}
           </span>
         </FormRowInput>
       )}
 
       <FormRowInput>
-        <span className="font-medium text-lg">
-          Surat Pengantar dari Lembaga/Institusi/Ketua Peneliti
+        <span className="font-medium text-sm">
+          Form Surat Kelayakan Komite Etik (*)
+        </span>
+
+        <MuiFileInput
+          id="formSurat"
+          clearIconButtonProps={{
+            title: "Remove",
+            children: <IoMdClose size={30} />,
+          }}
+          value={values.formSurat}
+          placeholder="Masukkan Form Surat Kelayakan Komite Etik"
+          onChange={(value) => setFieldValue("formSurat", value)}
+          inputProps={{ accept: ".pdf" }}
+          onBlur={handleBlur}
+          InputProps={{
+            sx: {
+              height: "2.8rem",
+              fontSize: 14,
+              "@media (max-width: 767.95px)": {
+                fontSize: 11,
+              },
+            },
+          }}
+          error={touched.formSurat && Boolean(errors.formSurat)}
+        />
+        <span className="text-red-500 text-sm font-medium">
+          {touched.formSurat && errors.formSurat}
+        </span>
+      </FormRowInput>
+
+      <FormRowInput>
+        <span className="font-medium text-sm">
+          Surat Pengantar dari Lembaga/Institusi/Ketua Peneliti (*)
         </span>
 
         <MuiFileInput
@@ -162,16 +201,25 @@ function CreateUpdateFormDocuments({ id, onClose }) {
           onChange={(value) => setFieldValue("suratPengantar", value)}
           inputProps={{ accept: ".pdf" }}
           onBlur={handleBlur}
+          InputProps={{
+            sx: {
+              height: "2.8rem",
+              fontSize: 14,
+              "@media (max-width: 767.95px)": {
+                fontSize: 11,
+              },
+            },
+          }}
           error={touched.suratPengantar && Boolean(errors.suratPengantar)}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.suratPengantar && errors.suratPengantar}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-lg">
-          Surat Rekomendasi dari Kepala Unit/Kepala Pusat/Kepala Lembaga
+        <span className="font-medium text-sm">
+          Surat Rekomendasi dari Kepala Unit/Kepala Pusat/Kepala Lembaga (*)
         </span>
 
         <MuiFileInput
@@ -185,16 +233,25 @@ function CreateUpdateFormDocuments({ id, onClose }) {
             children: <IoMdClose size={30} />,
           }}
           onBlur={handleBlur}
+          InputProps={{
+            sx: {
+              height: "2.8rem",
+              fontSize: 14,
+              "@media (max-width: 767.95px)": {
+                fontSize: 11,
+              },
+            },
+          }}
           error={touched.suratRekomendasi && Boolean(errors.suratRekomendasi)}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.suratRekomendasi && errors.suratRekomendasi}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-lg">
-          File Proposal yang sudah disahkan oleh Institusi/Lembaga
+        <span className="font-medium text-sm">
+          File Proposal yang sudah disahkan oleh Institusi/Lembaga (*)
         </span>
 
         <MuiFileInput
@@ -208,15 +265,24 @@ function CreateUpdateFormDocuments({ id, onClose }) {
           onChange={(value) => setFieldValue("fileProposal", value)}
           inputProps={{ accept: ".pdf" }}
           onBlur={handleBlur}
+          InputProps={{
+            sx: {
+              height: "2.8rem",
+              fontSize: 14,
+              "@media (max-width: 767.95px)": {
+                fontSize: 11,
+              },
+            },
+          }}
           error={touched.fileProposal && Boolean(errors.fileProposal)}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.fileProposal && errors.fileProposal}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-lg">Protokol Penelitian</span>
+        <span className="font-medium text-sm">Protokol Penelitian (*)</span>
 
         <MuiFileInput
           id="protokolPenelitian"
@@ -229,18 +295,27 @@ function CreateUpdateFormDocuments({ id, onClose }) {
           onChange={(value) => setFieldValue("protokolPenelitian", value)}
           inputProps={{ accept: ".pdf" }}
           onBlur={handleBlur}
+          InputProps={{
+            sx: {
+              height: "2.8rem",
+              fontSize: 14,
+              "@media (max-width: 767.95px)": {
+                fontSize: 11,
+              },
+            },
+          }}
           error={
             touched.protokolPenelitian && Boolean(errors.protokolPenelitian)
           }
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.protokolPenelitian && errors.protokolPenelitian}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-lg">
-          Curriculum Vitae Peneliti Utama atau Ketua Pelaksana
+        <span className="font-medium text-sm">
+          Curriculum Vitae Peneliti Utama atau Ketua Pelaksana (*)
         </span>
 
         <MuiFileInput
@@ -254,15 +329,24 @@ function CreateUpdateFormDocuments({ id, onClose }) {
           onChange={(value) => setFieldValue("cv", value)}
           inputProps={{ accept: ".pdf" }}
           onBlur={handleBlur}
+          InputProps={{
+            sx: {
+              height: "2.8rem",
+              fontSize: 14,
+              "@media (max-width: 767.95px)": {
+                fontSize: 11,
+              },
+            },
+          }}
           error={touched.cv && Boolean(errors.cv)}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.cv && errors.cv}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-lg">
+        <span className="font-medium text-sm">
           Penjelasan untuk Persetujuan Subjek
         </span>
 
@@ -277,18 +361,27 @@ function CreateUpdateFormDocuments({ id, onClose }) {
           onChange={(value) => setFieldValue("penjelasanPersetujuan", value)}
           inputProps={{ accept: ".pdf" }}
           onBlur={handleBlur}
+          InputProps={{
+            sx: {
+              height: "2.8rem",
+              fontSize: 14,
+              "@media (max-width: 767.95px)": {
+                fontSize: 11,
+              },
+            },
+          }}
           error={
             touched.penjelasanPersetujuan &&
             Boolean(errors.penjelasanPersetujuan)
           }
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.penjelasanPersetujuan && errors.penjelasanPersetujuan}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-lg">
+        <span className="font-medium text-sm">
           Kuesioner/Pedoman Wawancara FGD
         </span>
 
@@ -301,11 +394,22 @@ function CreateUpdateFormDocuments({ id, onClose }) {
           value={values.kuesioner}
           placeholder="Masukkan Kuesioner/Pedoman Wawancara"
           onChange={(value) => setFieldValue("kuesioner", value)}
-          inputProps={{ accept: ".pdf" }}
+          inputProps={{
+            accept: ".pdf",
+          }}
           onBlur={handleBlur}
+          InputProps={{
+            sx: {
+              height: "2.8rem",
+              fontSize: 14,
+              "@media (max-width: 767.95px)": {
+                fontSize: 11,
+              },
+            },
+          }}
           error={touched.kuesioner && Boolean(errors.kuesioner)}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.kuesioner && errors.kuesioner}
         </span>
       </FormRowInput>
@@ -313,10 +417,10 @@ function CreateUpdateFormDocuments({ id, onClose }) {
       <ThemeProvider theme={theme}>
         <Button
           type="submit"
-          sx={{ marginTop: "20px" }}
+          sx={{ marginTop: "20px", fontSize: 12 }}
           variant="contained"
           color="success"
-          className="w-44 h-12"
+          className="w-36 h-10"
           disabled={id ? isUpdating : isCreating}
         >
           {id

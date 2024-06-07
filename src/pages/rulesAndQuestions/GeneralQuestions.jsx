@@ -12,17 +12,17 @@ function GeneralQuestions() {
   });
 
   return (
-    <SectionColContainer items="items-center">
+    <SectionColContainer style="px-2 md:px-16 items-center">
       <Heading
         type="custom"
-        fontSize="text-4xl md:text-5xl"
+        fontSize="text-2xl md:text-4xl"
         color="text-black"
         width="max-w-[70rem]"
         center="text-center"
       >
         Pertanyaan <span className="text-color-primary">Umum</span>
       </Heading>
-      <span className="text-slate-500 text-xl md:text-2xl max-w-[90rem] text-center mb-16 md:mb-24">
+      <span className="text-slate-500 text-md md:text-lg max-w-[90rem] text-center mb-10 md:mb-20">
         Berikut telah kami rangkum beberapa pertanyaan yang sering ditanyakan
         terkait layanan kami.
       </span>
@@ -33,7 +33,7 @@ function GeneralQuestions() {
           variants={container}
           initial="hidden"
           animate={inView ? "show" : "hidden"}
-          className="flex flex-row flex-wrap gap-8 justify-center px-5 md:px-32"
+          className="flex flex-row flex-wrap gap-8 justify-center px-5 md:px-24"
         >
           <CardItem />
           <CardItem />

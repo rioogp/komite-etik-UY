@@ -23,9 +23,9 @@ function EditNameForm({ name }) {
   });
 
   return (
-    <Form type="base" onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <FormRowInput>
-        <span className="font-medium text-md">Nama</span>
+        <span className="font-medium text-sm">Nama</span>
         <TextField
           id="name"
           value={values.name}
@@ -33,15 +33,21 @@ function EditNameForm({ name }) {
           placeholder="Masukkan nama"
           onChange={handleChange}
           onBlur={handleBlur}
+          InputProps={{ sx: { height: "2.9rem", fontSize: 14 } }}
         />
       </FormRowInput>
       <div className="flex justify-end">
         <Button
           type="submit"
-          sx={{ marginTop: "10px", width: "15rem" }}
+          sx={{
+            marginTop: "10px",
+            width: "13rem",
+            textTransform: "none",
+            fontSize: 13,
+            height: "2.7rem",
+          }}
           variant="contained"
           color="success"
-          className="w-auto h-14"
           disabled={isUpdating}
         >
           {isUpdating ? "Loading..." : "Simpan Perubahan"}

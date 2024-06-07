@@ -9,9 +9,9 @@ function DashboardLayout() {
   useTokenValidation(token, logout);
 
   return token ? (
-    <div className="grid grid-cols-[23rem,1fr] grid-rows-[auto,1fr] h-dvh">
+    <div className="lg:grid lg:grid-cols-[18rem,1fr] lg:grid-rows-[auto,1fr] h-dvh">
       <SideBar />
-      <main className="overflow-auto flex flex-col px-20 mb-10 py-14">
+      <main className="overflow-auto flex flex-col px-5 md:px-12 pt-7 md:pt-12">
         <Outlet />
       </main>
     </div>

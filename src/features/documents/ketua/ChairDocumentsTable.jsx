@@ -20,22 +20,21 @@ function ChairDocumentsTable() {
     <>
       <TableStyle>
         <TableStyle.Header>
-          <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
+          <TableCell sx={{ color: "gray", fontSize: "0.9rem" }}>
             Nomor
           </TableCell>
-          <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
+          <TableCell sx={{ color: "gray", fontSize: "0.9rem" }}>
             Nama Pengaju
           </TableCell>
-          <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
+          <TableCell sx={{ color: "gray", fontSize: "0.9rem" }}>
             Nama Penelitian
           </TableCell>
-          <TableCell sx={{ color: "gray", fontSize: "1.2rem" }} align="center">
-            Download
+          <TableCell sx={{ color: "gray", fontSize: "0.9rem" }} align="center">
+            Aksi
           </TableCell>
-          <TableCell
-            sx={{ color: "gray", fontSize: "1.2rem" }}
-            align="center"
-          ></TableCell>
+          <TableCell sx={{ color: "gray", fontSize: "0.9rem" }} align="center">
+            Tindakan
+          </TableCell>
         </TableStyle.Header>
         <TableStyle.Body
           data={filteredDocuments}

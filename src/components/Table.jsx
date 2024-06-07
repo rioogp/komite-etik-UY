@@ -40,7 +40,7 @@ const Body = ({ data, render }) => {
             <Typography
               variant="body"
               color="InfoText"
-              sx={{ fontSize: "20px" }}
+              sx={{ fontSize: "14px" }}
             >
               Tidak ada data penelitian
             </Typography>

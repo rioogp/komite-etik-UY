@@ -6,16 +6,13 @@ import TableStyle from "../../../components/Table";
 import { theme } from "../../../utils/theme";
 import ModalComponent from "../../../components/ModalComponent";
 import DocumentDecision from "./DocumentDecision";
-import { useDownloadDocument } from "../useDownloadDocument";
 
 function DocumentsReviewerRow({ data }) {
-  const { isPending, downloadDocument } = useDownloadDocument();
-
   return (
     <TableStyle.Row>
       <TableCell
         sx={{
-          fontSize: "1rem",
+          fontSize: "0.9rem",
           paddingY: "50px",
           paddingLeft: "35px",
           width: "200px",
@@ -24,14 +21,14 @@ function DocumentsReviewerRow({ data }) {
         {1}
       </TableCell>
 
-      <TableCell sx={{ fontSize: "1.1rem", width: "300px" }}>
+      <TableCell sx={{ fontSize: "0.86rem", width: "300px" }}>
         {data.nameUser}
       </TableCell>
 
       <TableCell
         sx={{
           fontWeight: "bold",
-          fontSize: "1.1rem",
+          fontSize: "0.85rem",
           overflowWrap: "break-word",
           wordWrap: "break-word",
           width: "500px",
@@ -42,7 +39,7 @@ function DocumentsReviewerRow({ data }) {
 
       <TableCell
         sx={{
-          fontSize: "1.1rem",
+          fontSize: "0.9rem",
           textAlign: "center",
         }}
       >
@@ -53,13 +50,14 @@ function DocumentsReviewerRow({ data }) {
                 variant="contained"
                 sx={{
                   backgroundColor: "#006A74",
-                  marginLeft: "15px",
+                  marginLeft: "7px",
                   paddingY: "10px",
+                  minWidth: "2.4rem",
                   "&:hover": { backgroundColor: "#02575f" },
                 }}
               >
                 <IoMdInformationCircleOutline
-                  size={26}
+                  size={18}
                   className="text-white"
                 />
               </Button>
@@ -76,7 +74,7 @@ function DocumentsReviewerRow({ data }) {
 
       <TableCell
         sx={{
-          fontSize: "1.1rem",
+          fontSize: "0.9rem",
           width: "200px",
         }}
         align="center"
@@ -86,14 +84,16 @@ function DocumentsReviewerRow({ data }) {
             variant="contained"
             sx={{
               backgroundColor: "#006A74",
-              marginLeft: "15px",
+              marginLeft: "7px",
               paddingY: "10px",
+              minWidth: "2.5rem",
               "&:hover": { backgroundColor: "#02575f" },
             }}
-            onClick={() => downloadDocument(data.documents[0])}
-            disabled={isPending}
+            onClick={() => {
+              window.location.href = data.documents[0];
+            }}
           >
-            <FiDownload size={25} className="text-white" />
+            <FiDownload size={18} className="text-white" />
           </Button>
         </div>
       </TableCell>

@@ -12,7 +12,7 @@ function RulesAndQuestions() {
         title2="Komite Etik Universitas Yarsi"
         typeImage="peraturan"
       />
-      <Rules />
+      {/* <Rules /> */}
       <GeneralQuestions />
       <Footer />
     </MainContainer>

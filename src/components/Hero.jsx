@@ -45,7 +45,7 @@ function Hero({ title, title2, typeImage, button, desc }) {
     <motion.section
       className={`${image} bg-no-repeat bg-cover w-full h-fit md:h-auto`}
     >
-      <motion.div className="px-5 md:px-24 xl:px-36 pt-32 xl:py-52 flex flex-col justify-center gap-2">
+      <motion.div className="px-5 md:px-24 xl:px-30 pt-24 xl:py-44 flex flex-col justify-center gap-2">
         <Heading type="heroTitle" color="text-white">
           {textAnimation(text, 0.8)}
         </Heading>
@@ -54,7 +54,7 @@ function Hero({ title, title2, typeImage, button, desc }) {
             {textAnimation(text2, 0.8)}
           </Heading>
         )}
-        <p className="text-white text-sm md:text-2xl mt-8 mb-8 max-w-[60rem]">
+        <p className="text-white text-xs md:text-lg mt-8 mb-8 max-w-[60rem]">
           {desc
             ? textAnimation(desc.split(" "), 1)
             : textAnimation(description, 1)}
@@ -65,13 +65,14 @@ function Hero({ title, title2, typeImage, button, desc }) {
               sx={{
                 marginTop: "20px",
                 fontWeight: "600",
+
                 fontSize: isSmallScreen
-                  ? "0.875rem"
+                  ? "0.6rem"
                   : isMediumScreen
-                  ? "1rem"
+                  ? "0.8rem"
                   : isLargeScreen
-                  ? "1.25rem"
-                  : "1rem",
+                  ? "0.9rem"
+                  : "0.9rem",
                 "& .MuiButton-startIcon": {
                   marginRight: isSmallScreen
                     ? "0.25rem"
@@ -82,15 +83,15 @@ function Hero({ title, title2, typeImage, button, desc }) {
                     : "0.5rem",
                 },
                 textTransform: "none",
-                mt: "50px",
-                mb: "100px",
+                mt: "40px",
+                mb: "50px",
               }}
               variant="contained"
               color="info"
-              className="w-40 sm:w-54 md:w-56 h-12 md:h-14 flex gap-3 justify-center items-center"
+              className="w-36 sm:w-44 md:w-48 h-8 md:h-11 flex gap-3 justify-center items-center"
               onClick={() => navigate("/home")}
             >
-              Get Started <IoIosArrowRoundForward size={28} />
+              Get Started <IoIosArrowRoundForward size={25} />
             </Button>
           </ThemeProvider>
         )}

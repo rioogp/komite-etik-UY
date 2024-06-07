@@ -1,7 +1,7 @@
 import { Step, StepLabel, Stepper } from "@mui/material";
-import { IoMdTime } from "react-icons/io";
 import { steps } from "../../utils/constants";
 import { useDocument } from "./useDocument";
+import { styled } from "@mui/material/styles";
 
 const stepStyle = {
   padding: 2,
@@ -9,9 +9,9 @@ const stepStyle = {
     "& .MuiStepConnector-line": {
       width: "0.5px",
       borderColor: "black",
-      marginLeft: "8.5px",
-      height: "110px",
-      marginY: "-55px",
+      marginLeft: "4px",
+      height: "90px",
+      marginY: "-24px",
       backgroundColor: "black",
     },
   },
@@ -19,9 +19,9 @@ const stepStyle = {
     "& .MuiStepConnector-line": {
       width: "0.5px",
       borderColor: "black",
-      marginLeft: "8.5px",
-      height: "110px",
-      marginY: "-50px",
+      marginLeft: "4px",
+      height: "90px",
+      marginY: "-26px",
       backgroundColor: "black",
     },
   },
@@ -66,14 +66,14 @@ function StepProgressBarDocument({ id, createdAt }) {
   });
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 px-5 md:px-10">
       <div className="bg-color-primary p-5 rounded-md">
-        <p className="text-white font-medium">
+        <p className="text-white text-sm font-medium">
           Proposal diajukan pada{" "}
           <span className="font-bold">{formattedDate}</span>
         </p>
       </div>
-      <div className="mt-[-30px] overflow-auto">
+      <div className="mt-[-10px] overflow-auto">
         <Stepper
           orientation="vertical"
           activeStep={currentStepIndex}
@@ -81,10 +81,13 @@ function StepProgressBarDocument({ id, createdAt }) {
         >
           {filteredSteps.map((label, index) => (
             <Step key={label}>
-              <StepLabel icon={label.icon}>
-                <div className="flex flex-col gap-1 pt-10">
-                  <span className="font-bold text-xl">{label.title}</span>
-                  <div className="max-w-[42rem] text-lg">
+              <StepLabel
+                style={{ marginTop: "-20px", zIndex: "999" }}
+                icon={label.icon}
+              >
+                <div className="flex flex-col gap-1 pt-5">
+                  <span className="font-bold text-md">{label.title}</span>
+                  <div className="max-w-[42rem] text-sm">
                     {label.description}
                   </div>
                 </div>

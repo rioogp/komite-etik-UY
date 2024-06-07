@@ -90,7 +90,7 @@ function EditPasswordForm() {
   return (
     <Form type="base" onSubmit={handleSubmit}>
       <FormRowInput>
-        <span className="font-medium text-md">Password Lama</span>
+        <span className="font-medium text-sm">Password Lama</span>
         <OutlinedInput
           placeholder="Masukkan password"
           id="currentPassword"
@@ -99,6 +99,7 @@ function EditPasswordForm() {
           onChange={handleChange}
           onBlur={handleBlur}
           error={touched.currentPassword && Boolean(errors.currentPassword)}
+          style={{ height: "2.9rem", fontSize: 14 }}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -108,21 +109,21 @@ function EditPasswordForm() {
                 edge="end"
               >
                 {showCurrentPassword ? (
-                  <IoIosEyeOff size={28} />
+                  <IoIosEyeOff size={24} />
                 ) : (
-                  <IoIosEye size={28} />
+                  <IoIosEye size={24} />
                 )}
               </IconButton>
             </InputAdornment>
           }
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.currentPassword && errors.currentPassword}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-md">Password Baru</span>
+        <span className="font-medium text-sm">Password Baru</span>
         <OutlinedInput
           placeholder="Masukkan password"
           id="password"
@@ -131,6 +132,7 @@ function EditPasswordForm() {
           onChange={handleChange}
           onBlur={handleBlur}
           error={touched.password && Boolean(errors.password)}
+          style={{ height: "2.9rem", fontSize: 14 }}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -140,21 +142,21 @@ function EditPasswordForm() {
                 edge="end"
               >
                 {showPassword ? (
-                  <IoIosEyeOff size={28} />
+                  <IoIosEyeOff size={24} />
                 ) : (
-                  <IoIosEye size={28} />
+                  <IoIosEye size={24} />
                 )}
               </IconButton>
             </InputAdornment>
           }
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.password && errors.password}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-md">Konfirmasi Password Baru</span>
+        <span className="font-medium text-sm">Konfirmasi Password Baru</span>
         <OutlinedInput
           placeholder="Masukkan konfirmasi password baru"
           id="confirmPassword"
@@ -163,6 +165,7 @@ function EditPasswordForm() {
           onChange={handleChange}
           onBlur={handleBlur}
           error={touched.confirmPassword && Boolean(errors.confirmPassword)}
+          style={{ height: "2.9rem", fontSize: 14 }}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -172,15 +175,15 @@ function EditPasswordForm() {
                 edge="end"
               >
                 {showPasswordConfirm ? (
-                  <IoIosEyeOff size={28} />
+                  <IoIosEyeOff size={24} />
                 ) : (
-                  <IoIosEye size={28} />
+                  <IoIosEye size={24} />
                 )}
               </IconButton>
             </InputAdornment>
           }
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.confirmPassword && errors.confirmPassword}
         </span>
       </FormRowInput>
@@ -188,7 +191,13 @@ function EditPasswordForm() {
       <div className="flex justify-end">
         <Button
           type="submit"
-          sx={{ marginTop: "20px", minHeight: "3.5rem", width: "15rem" }}
+          sx={{
+            marginTop: "20px",
+            minHeight: "3rem",
+            width: "13rem",
+            fontSize: 13,
+            textTransform: "none",
+          }}
           variant="contained"
           color="success"
           className="w-auto h-12"

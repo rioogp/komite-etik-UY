@@ -35,18 +35,18 @@ function SortBy() {
           borderColor: "#D0D5DD",
           color: "#161616",
           textTransform: "none",
-          fontSize: "16px",
+          fontSize: "12px",
           borderRadius: "7px",
           fontWeight: "medium",
           display: "flex",
-          gap: "6px",
+          gap: "4px",
           "&:hover": {
             borderColor: "#e3e5e8",
           },
         }}
-        className="w-32 h-12"
+        className="w-24 h-10"
       >
-        <IoFilterSharp size={20} />
+        <IoFilterSharp size={16} />
         {filterText}
       </Button>
       <Menu

@@ -2,19 +2,16 @@ import { Button, TableCell, ThemeProvider } from "@mui/material";
 import { FiDownload } from "react-icons/fi";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import TableStyle from "../../../components/Table";
-import { useDownloadDocument } from "../useDownloadDocument";
 import ModalComponent from "../../../components/ModalComponent";
 import UpdateStatusFormDocuments from "./UpdateStatusFormDocuments";
 import { theme } from "../../../utils/theme";
 
 function ReviewerDocumentsRow({ data }) {
-  const { isPending, downloadDocument } = useDownloadDocument();
-  console.log(data.documents[0]);
   return (
     <TableStyle.Row>
       <TableCell
         sx={{
-          fontSize: "1rem",
+          fontSize: "0.9rem",
           paddingY: "50px",
           paddingLeft: "35px",
           width: "200px",
@@ -23,14 +20,14 @@ function ReviewerDocumentsRow({ data }) {
         {1}
       </TableCell>
 
-      <TableCell sx={{ fontSize: "1.1rem", width: "300px" }}>
+      <TableCell sx={{ fontSize: "0.86rem", width: "300px" }}>
         {data.nameUser}
       </TableCell>
 
       <TableCell
         sx={{
           fontWeight: "bold",
-          fontSize: "1.1rem",
+          fontSize: "0.85rem",
           overflowWrap: "break-word",
           wordWrap: "break-word",
           width: "500px",
@@ -41,7 +38,7 @@ function ReviewerDocumentsRow({ data }) {
 
       <TableCell
         sx={{
-          fontSize: "1.1rem",
+          fontSize: "0.9rem",
           textAlign: "center",
         }}
       >
@@ -52,12 +49,13 @@ function ReviewerDocumentsRow({ data }) {
                 variant="contained"
                 sx={{
                   backgroundColor: "#006A74",
-                  marginLeft: "15px",
+                  marginLeft: "2px",
                   paddingY: "10px",
+                  minWidth: "2.5rem",
                   "&:hover": { backgroundColor: "#02575f" },
                 }}
               >
-                <IoMdCheckmarkCircleOutline size={26} className="text-white" />
+                <IoMdCheckmarkCircleOutline size={18} className="text-white" />
               </Button>
             </ModalComponent.OpenButton>
             <ModalComponent.ModalWindow
@@ -72,7 +70,7 @@ function ReviewerDocumentsRow({ data }) {
 
       <TableCell
         sx={{
-          fontSize: "1.1rem",
+          fontSize: "0.9rem",
           width: "200px",
         }}
         align="center"
@@ -82,14 +80,16 @@ function ReviewerDocumentsRow({ data }) {
             variant="contained"
             sx={{
               backgroundColor: "#006A74",
-              marginLeft: "15px",
+              marginLeft: "4px",
               paddingY: "10px",
+              minWidth: "2.5rem",
               "&:hover": { backgroundColor: "#02575f" },
             }}
-            onClick={() => downloadDocument(data.documents[0])}
-            disabled={isPending}
+            onClick={() => {
+              window.location.href = data.documents[0];
+            }}
           >
-            <FiDownload size={25} className="text-white" />
+            <FiDownload size={18} className="text-white" />
           </Button>
         </div>
       </TableCell>
