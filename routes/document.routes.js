@@ -2,7 +2,6 @@ const express = require('express');
 const {
   uploadDocuments,
   uploadUserDocuments,
-  downloadDocuments,
   addReviewers,
   updateReviewerStatus,
   getDocuments,
@@ -26,8 +25,6 @@ router
   .route('/:documentId')
   .get(getDocument)
   .patch(authorize, uploadUserDocuments, updateDocuments);
-
-router.get('/download/:filename', downloadDocuments);
 
 router.patch(
   '/:documentId/reviewers',

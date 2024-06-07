@@ -1,23 +1,24 @@
 /* eslint-disable import/no-extraneous-dependencies */
 const multer = require('multer');
 const archiver = require('archiver');
-const fs = require('fs');
+const { Storage } = require('@google-cloud/storage');
 
+const path = require('path');
 const catchAsync = require('../utils/catchAsync');
 const Document = require('../models/document.model');
 const AppError = require('../utils/appError');
 const User = require('../models/user.model');
 const Notification = require('../models/notification.model');
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadPath = `public/documents/user`;
-    cb(null, uploadPath);
-  },
-  filename: (req, file, cb) => {
-    cb(null, file.originalname);
-  },
+const serviceKeyPath = path.resolve(__dirname, '../config/service.json');
+
+const storageBucket = new Storage({
+  keyFilename: serviceKeyPath,
 });
+
+const bucket = storageBucket.bucket('komite_etik');
+
+const multerStorage = multer.memoryStorage();
 
 const multerFilter = (req, file, cb) => {
   if (file.mimetype === 'application/pdf') {
@@ -27,70 +28,83 @@ const multerFilter = (req, file, cb) => {
   }
 };
 
-const upload = multer({ storage, fileFilter: multerFilter });
+const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
 
-exports.uploadUserDocuments = upload.array('documents', 7);
+exports.uploadUserDocuments = upload.array('documents', 8);
 
 exports.uploadDocuments = catchAsync(async (req, res, next) => {
   const { researchName } = req.body;
   const { name, _id } = req.user;
-  const documents = req.files.map((file) => file.filename);
   const admin = await User.findOne({ role: 'admin' });
 
   const timestamp = Date.now();
   const formattedResearchName = researchName.replace(/\s+/g, '_');
   const formattedName = name.replace(/\s+/g, '_');
   const zipFileName = `${formattedResearchName}-${formattedName}-${timestamp}.zip`;
-  const zipPath = `public/documents/user/${zipFileName}`;
-  const output = fs.createWriteStream(zipPath);
+
   const archive = archiver('zip', {
     zlib: { level: 9 },
   });
 
-  output.on('close', async () => {
-    documents.forEach((filename) => {
-      const filePath = `public/documents/user/${filename}`;
-      fs.unlinkSync(filePath);
+  const buffers = [];
+  archive.on('data', (data) => buffers.push(data));
+
+  req.files.forEach((file) => {
+    archive.append(file.buffer, { name: file.originalname });
+  });
+
+  archive.finalize();
+
+  archive.on('end', async () => {
+    const buffer = Buffer.concat(buffers);
+
+    const blob = bucket.file(zipFileName);
+    const blobStream = blob.createWriteStream({
+      resumable: false,
     });
 
-    Notification.create({
-      name: 'Berkas Penelitian Terkirim',
-      description: `Unggahan Anda untuk penelitian '${researchName}' berhasil diterima. Mohon untuk menunggu berkas untuk diproses lebih lanjut.`,
-      user: _id,
+    blobStream.on('error', (err) => {
+      throw new AppError(err.message, 500);
     });
 
-    Notification.create({
-      name: 'Berkas Penelitian Baru Diterima',
-      description: `Unggahan baru untuk penelitian '${researchName}' dari ${name} memerlukan perhatian Anda. Silakan periksa dan lakukan tindakan yang diperlukan.`,
-      user: admin._id,
+    blobStream.on('finish', async () => {
+      await blob.makePublic();
+
+      const publicUrl = `https://storage.googleapis.com/${bucket.name}/${zipFileName}`;
+
+      await Notification.create({
+        name: 'Berkas Penelitian Terkirim',
+        description: `Unggahan Anda untuk penelitian '${researchName}' berhasil diterima. Mohon untuk menunggu berkas untuk diproses lebih lanjut.`,
+        user: _id,
+      });
+
+      await Notification.create({
+        name: 'Berkas Penelitian Baru Diterima',
+        description: `Unggahan baru untuk penelitian '${researchName}' dari ${name} memerlukan perhatian Anda. Silakan periksa dan lakukan tindakan yang diperlukan.`,
+        user: admin._id,
+      });
+
+      const newDocument = await Document.create({
+        nameUser: name,
+        researchName: researchName,
+        status: 'Sedang Diproses',
+        documents: [publicUrl],
+        createdBy: _id,
+      });
+
+      res.status(201).json({
+        status: 'success',
+        message: 'Documents uploaded, zipped, and made public successfully',
+        data: newDocument,
+      });
     });
 
-    const newDocument = await Document.create({
-      nameUser: name,
-      researchName: researchName,
-      status: 'Sedang Diproses',
-      documents: [zipFileName],
-      createdBy: _id,
-    });
-
-    res.status(201).json({
-      status: 'success',
-      message: 'Documents uploaded and zipped successfully',
-      data: newDocument,
-    });
+    blobStream.end(buffer);
   });
 
   archive.on('error', (err) => {
     throw new AppError(err.message, 500);
   });
-
-  archive.pipe(output);
-  documents.forEach((filename) => {
-    const filePath = `public/documents/user/${filename}`;
-    archive.file(filePath, { name: filename });
-  });
-
-  archive.finalize();
 });
 
 exports.updateDocuments = catchAsync(async (req, res, next) => {
@@ -116,56 +130,66 @@ exports.updateDocuments = catchAsync(async (req, res, next) => {
     document.reviewers = [];
   }
 
-  const oldZipName = document.documents[0];
-  const oldZipPath = `public/documents/user/${oldZipName}`;
+  const oldZipName = document.documents[0].split('/').pop();
+  const oldZipFile = bucket.file(oldZipName);
 
-  fs.unlinkSync(oldZipPath);
+  const [zipExists] = await oldZipFile.exists();
+  if (!zipExists) {
+    return next(
+      new AppError('Zip file not found in Google Cloud Storage', 404),
+    );
+  }
 
-  const newZipPath = oldZipPath;
-  const documents = req.files.map((file) => file.filename);
+  const zipFileName = `Updated-${oldZipName}`;
+  const newZipFile = bucket.file(zipFileName);
 
-  const output = fs.createWriteStream(newZipPath);
   const archive = archiver('zip', {
     zlib: { level: 9 },
   });
 
-  output.on('close', async () => {
-    documents.forEach((filename) => {
-      const filePath = `public/documents/user/${filename}`;
-      fs.unlinkSync(filePath);
+  const buffers = [];
+  archive.on('data', (data) => buffers.push(data));
+
+  req.files.forEach((file) => {
+    archive.append(file.buffer, { name: file.originalname });
+  });
+
+  archive.finalize();
+
+  archive.on('end', async () => {
+    const buffer = Buffer.concat(buffers);
+
+    const blobStream = newZipFile.createWriteStream({
+      resumable: false,
     });
 
-    document.status = status;
-    await document.save();
-
-    res.status(200).json({
-      status: 'success',
-      message: 'Documents updated and zipped successfully',
-      data: document,
+    blobStream.on('error', (err) => {
+      throw new AppError(err.message, 500);
     });
+
+    blobStream.on('finish', async () => {
+      await newZipFile.makePublic();
+
+      const publicUrl = `https://storage.googleapis.com/${bucket.name}/${zipFileName}`;
+
+      document.status = status;
+      document.documents = [publicUrl];
+      await document.save();
+
+      await oldZipFile.delete();
+
+      res.status(200).json({
+        status: 'success',
+        message: 'Documents updated and zipped successfully',
+        data: document,
+      });
+    });
+
+    blobStream.end(buffer);
   });
 
   archive.on('error', (err) => {
     throw new AppError(`Error occurred while zipping files: ${err}`, 500);
-  });
-
-  archive.pipe(output);
-
-  documents.forEach((filename) => {
-    const filePath = `public/documents/user/${filename}`;
-    archive.file(filePath, { name: filename });
-  });
-
-  archive.finalize();
-});
-
-exports.downloadDocuments = catchAsync(async (req, res, next) => {
-  const { filename } = req.params;
-  const zipFilePath = `public/documents/user/${filename}`;
-  res.download(zipFilePath, filename, (err) => {
-    if (err) {
-      return next(new AppError(err.message, 404));
-    }
   });
 });
 

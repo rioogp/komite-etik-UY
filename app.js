@@ -15,7 +15,6 @@ const AppError = require('./utils/appError');
 const path = require('path');
 
 const app = express();
-app.use('/img/users', express.static(path.join(__dirname, 'public/img/users')));
 
 app.use(cors());
 
