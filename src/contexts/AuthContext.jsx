@@ -1,14 +1,8 @@
 import React, { createContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode"; // Perhatikan impor ini harus sesuai
+import { getCookie } from "../utils/helpers";
 
 export const AuthContext = createContext();
-
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(";").shift();
-  return "";
-}
 
 function setCookie(name, value) {
   document.cookie = name + "=" + (value || "") + "; path=/";

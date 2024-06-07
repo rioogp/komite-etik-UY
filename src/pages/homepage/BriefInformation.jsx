@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import Heading from "../../components/Heading";
-import { CountUp } from "countup.js";
+import CountUp from "react-countup";
 import { useStatistics } from "../../features/statistics/useStatistics";
 import { CircularProgress } from "@mui/material";
 
@@ -24,8 +24,11 @@ function BriefInformation() {
               label="Pengguna Aktif"
             />
             <InfoBox
-              number={statistics.completedDocumentsCount}
+              number={parseFloat(
+                statistics.percentageCompleted.replace("%", "")
+              )}
               label="Persentase Selesai"
+              isPercentage
             />
             <InfoBox
               number={statistics.uploadedFilesCount}
@@ -38,34 +41,28 @@ function BriefInformation() {
   );
 }
 
-function InfoBox({ number, label }) {
-  const numberRef = useRef(null);
-  const countUpRef = useRef(null);
-
-  useEffect(() => {
-    const num = parseFloat(number);
-
-    if (numberRef.current) {
-      if (countUpRef.current) {
-        countUpRef.current.reset();
-        countUpRef.current = null;
-      }
-
-      countUpRef.current = new CountUp(numberRef.current, num, {
-        startVal: 0,
-        duration: 2,
-      });
-      countUpRef.current.start();
-    }
-  }, [number, label]);
-
+function InfoBox({ number, label, isPercentage }) {
   return (
     <div className="flex flex-col gap-4 justify-center items-center">
-      <span
-        className="text-5xl text-color-secondary font-bold"
-        ref={numberRef}
-      ></span>
-      <span className="text-lg font-semibold">{label}</span>
+      <CountUp
+        end={number}
+        duration={2}
+        start={0}
+        suffix={isPercentage ? "%" : ""}
+        decimals={isPercentage ? 1 : 0}
+        decimal=","
+        separator=""
+      >
+        {({ countUpRef }) => (
+          <>
+            <span
+              className="text-5xl text-color-secondary font-bold"
+              ref={countUpRef}
+            ></span>
+            <span className="text-lg font-semibold">{label}</span>
+          </>
+        )}
+      </CountUp>
     </div>
   );
 }

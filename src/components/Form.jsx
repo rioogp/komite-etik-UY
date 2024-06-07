@@ -4,13 +4,16 @@ function Form({ type, onSubmit, children }) {
     "w-full flex flex-col justify-between gap-2 px-5 md:px-10 pb-5";
   const baseStyles = "text-base";
 
+  let formStyles = baseStyles;
+
+  if (type === "regular") {
+    formStyles = regularStyles;
+  } else if (type === "modal") {
+    formStyles = modalStyles;
+  }
+
   return (
-    <form
-      className={`${
-        type === null ? "" : type === "regular" ? regularStyles : modalStyles
-      } ${baseStyles}`}
-      onSubmit={onSubmit}
-    >
+    <form className={`${formStyles}`} onSubmit={onSubmit}>
       {children}
     </form>
   );

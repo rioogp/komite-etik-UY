@@ -5,11 +5,11 @@ import { useFormik } from "formik";
 import { useUpdatePhotoProfile } from "./useUpdateProfile";
 import { useEffect, useState } from "react";
 
-function EditPhotoProfileForm({ user }) {
-  const { updatePhoto, isUpdating } = useUpdatePhotoProfile();
-  const [preview, setPreview] = useState(user ? user.photoURL : null);
+function EditPhotoProfileForm({ user, onClose }) {
+  const { updatePhoto, isUpdating } = useUpdatePhotoProfile(onClose);
+  const [preview, setPreview] = useState(user.user.photo);
 
-  const { values, handleSubmit, setFieldValue } = useFormik({
+  const { handleSubmit, setFieldValue } = useFormik({
     initialValues: {
       photo: null,
     },
@@ -29,8 +29,8 @@ function EditPhotoProfileForm({ user }) {
   };
 
   useEffect(() => {
-    if (user && user.photoURL) {
-      setPreview(user.photoURL);
+    if (user && user.user.photo) {
+      setPreview(user.user.photo);
     }
   }, [user, setFieldValue]);
 
@@ -55,10 +55,10 @@ function EditPhotoProfileForm({ user }) {
         <ThemeProvider theme={theme}>
           <Button
             type="submit"
-            sx={{ textTransform: "none", fontSize: "16px" }}
+            sx={{ textTransform: "none", fontSize: 14 }}
             variant="contained"
             color="success"
-            className="w-56 h-14"
+            className="w-52 h-12"
             disabled={isUpdating}
           >
             {isUpdating ? "Loading..." : "Simpan Perubahan"}

@@ -34,20 +34,20 @@ function VerificationUser() {
   };
 
   return (
-    <section className="my-20 mx-[35rem] text-center">
+    <section className="my-20 mx-[1rem] md:mx-[6rem] lg:mx-[25rem] text-center">
       <Heading type="primary">Verifikasi Email</Heading>
-      <span className="text-7xl text-color-primary font-semibold">
+      <span className="text-4xl md:text-6xl text-center text-color-primary font-semibold">
         {formatTime(timer)}
       </span>
-      <p className="text-lg mt-10">
+      <p className="text-sm md:text-base mt-10">
         Silakan periksa kotak masuk email Anda untuk menemukan instruksi lebih
         lanjut mengenai proses verifikasi pendaftaran.
       </p>
       <div className="flex items-center justify-center mt-20 gap-2">
-        <p className="text-lg">Email belum terkirim?</p>
+        <p className="text-sm md:text-base">Email belum terkirim?</p>
         <button
           onClick={handleResendEmail}
-          className="text-color-primary text-lg"
+          className="text-color-primary text-sm md:text-base"
         >
           Kirim Ulang
         </button>
