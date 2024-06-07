@@ -9,7 +9,6 @@ function SchedulerCalendar({ meetings }) {
     start: meeting.meetingSchedule,
   }));
 
-  console.log(events);
   useEffect(() => {
     const nextButton = document.querySelector(".fc-next-button");
     const prevButton = document.querySelector(".fc-prev-button");
@@ -25,8 +24,8 @@ function SchedulerCalendar({ meetings }) {
 
   const renderEventContent = (eventInfo) => {
     return (
-      <div className="bg-color-primary w-48 h-16 text-white p-1 md:p-2 text-lg rounded-lg shadow-md overflow-hidden">
-        <span className="block overflow-hidden break-word">
+      <div className="bg-color-primary w-fit h-fit text-white p-1 md:p-2 md:text-xs rounded-lg shadow-md overflow-hidden">
+        <span className="block overflow-hidden whitespace-normal overflow-wrap-anywhere max-w-[8rem]">
           {eventInfo.event.title}
         </span>
       </div>
@@ -35,7 +34,7 @@ function SchedulerCalendar({ meetings }) {
 
   return (
     <div className="flex justify-center items-center">
-      <div className="w-[95%] h-fit text-center p-10 border-2 border-gray-200 rounded-xl shadow-lg">
+      <div className="w-full h-fit text-center text-xs p-5 border-2 border-gray-200 rounded-xl shadow-lg">
         <FullCalendar
           plugins={[dayGridPlugin]}
           initialView="dayGridMonth"

@@ -105,7 +105,7 @@ function RegisterForm() {
       />
 
       <FormRowInput>
-        <span className="font-medium text-md">Nama</span>
+        <span className="font-medium text-sm">Nama</span>
         <TextField
           id="name"
           name="name"
@@ -114,15 +114,16 @@ function RegisterForm() {
           value={values.name}
           onChange={handleChange}
           onBlur={handleBlur}
+          InputProps={{ sx: { height: "2.9rem", fontSize: 14 } }}
           error={touched.name && Boolean(errors.name)}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.name && errors.name}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-md">Username</span>
+        <span className="font-medium text-sm">Username</span>
         <TextField
           id="username"
           variant="outlined"
@@ -130,15 +131,16 @@ function RegisterForm() {
           value={values.username}
           onChange={handleChange}
           onBlur={handleBlur}
+          InputProps={{ sx: { height: "2.9rem", fontSize: 14 } }}
           error={touched.username && Boolean(errors.username)}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.username && errors.username}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-md">Email</span>
+        <span className="font-medium text-sm">Email</span>
         <TextField
           id="email"
           variant="outlined"
@@ -146,15 +148,16 @@ function RegisterForm() {
           value={values.email}
           onChange={handleChange}
           onBlur={handleBlur}
+          InputProps={{ sx: { height: "2.9rem", fontSize: 14 } }}
           error={touched.email && Boolean(errors.email)}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.email && errors.email}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-md">Instansi</span>
+        <span className="font-medium text-sm">Instansi</span>
         <TextField
           id="instance"
           variant="outlined"
@@ -162,15 +165,16 @@ function RegisterForm() {
           value={values.instance}
           onChange={handleChange}
           onBlur={handleBlur}
+          InputProps={{ sx: { height: "2.9rem", fontSize: 14 } }}
           error={touched.instance && Boolean(errors.instance)}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.instance && errors.instance}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-md">Password</span>
+        <span className="font-medium text-sm">Password</span>
         <OutlinedInput
           placeholder="Masukkan password"
           id="password"
@@ -178,6 +182,7 @@ function RegisterForm() {
           value={values.password}
           onChange={handleChange}
           onBlur={handleBlur}
+          style={{ height: "2.9rem", fontSize: 14 }}
           error={touched.password && Boolean(errors.password)}
           endAdornment={
             <InputAdornment position="end">
@@ -196,13 +201,13 @@ function RegisterForm() {
             </InputAdornment>
           }
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.password && errors.password}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-md">Konfirmasi Password</span>
+        <span className="font-medium text-sm">Konfirmasi Password</span>
         <OutlinedInput
           id="confirmPassword"
           placeholder="Masukkan konfirmasi password"
@@ -211,6 +216,7 @@ function RegisterForm() {
           error={touched.confirmPassword && Boolean(errors.confirmPassword)}
           onChange={handleChange}
           onBlur={handleBlur}
+          style={{ height: "2.9rem", fontSize: 14 }}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -228,7 +234,7 @@ function RegisterForm() {
             </InputAdornment>
           }
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.confirmPassword && errors.confirmPassword}
         </span>
       </FormRowInput>
@@ -243,27 +249,32 @@ function RegisterForm() {
           sx={{
             color: "#006A74",
             "& .MuiSvgIcon-root": {
-              height: "30px",
-              width: "30px",
+              height: "25px",
+              width: "25px",
             },
             "&.Mui-checked": {
               color: "#047e8a",
             },
           }}
         />
-        <span className="text-md">
+        <span className="text-sm">
           Saya menyatakan bahwa data yang saya isi adalah benar dan saya
           bertanggung jawab penuh atas yang saya isi
         </span>
       </label>
-      <span className="text-red-500 text-md font-medium">
+      <span className="text-red-500 text-sm font-medium">
         {touched.agreed && errors.agreed}
       </span>
 
       <ThemeProvider theme={theme}>
         <Button
           type="submit"
-          sx={{ marginTop: "20px", minHeight: "3.5rem" }}
+          sx={{
+            marginTop: "20px",
+            minHeight: "3rem",
+            fontSize: "14px",
+            textTransform: "none",
+          }}
           variant="contained"
           color="success"
           className="w-auto h-16"

@@ -12,6 +12,7 @@ function MemberData() {
         buttonAddTitle="Tambah"
         modalTitle="Tambah Anggota"
         modalSubtitle="Tambahkan data nama dan posisi dibawah ini"
+        position="justify-end"
       >
         <CreateUpdateFormMember />
       </HeadDashboard>

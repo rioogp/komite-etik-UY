@@ -1,10 +1,8 @@
-import axios from "axios";
-
-const API_URL = process.env.REACT_APP_API_URL;
+import axiosInstance from "../utils/axiosInstance";
 
 export async function getReviews() {
   try {
-    const response = await axios.get(`${API_URL}/reviews`);
+    const response = await axiosInstance.get(`/reviews`);
     return response.data.data.reviews;
   } catch (err) {
     throw new Error(err);
@@ -13,8 +11,8 @@ export async function getReviews() {
 
 export async function createReview({ name, description }) {
   try {
-    const response = await axios.post(
-      `${API_URL}/reviews`,
+    const response = await axiosInstance.post(
+      `/reviews`,
       { name, description },
       { headers: { "Content-Type": "application/json" } }
     );

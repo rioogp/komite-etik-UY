@@ -17,15 +17,20 @@ function HeadDashboard({
   modalSubtitle,
   buttonAddTitle,
   children,
+  position,
 }) {
   return (
     <div className="flex flex-col gap-12 mb-12">
-      <div className="flex justify-between items-center">
-        <div className="flex flex-col gap-3">
-          <Heading type="custom" fontSize="text-4xl">
+      <div
+        className={`flex flex-wrap gap-y-5 ${position} md:justify-between items-center`}
+      >
+        <div className="flexflex-col gap-3">
+          <Heading type="custom" fontSize="text-xl md:text-2xl">
             {title}
           </Heading>
-          <span className="text-xl text-slate-500">{subtitle}</span>
+          <span className="text-sm md:text-base text-slate-500">
+            {subtitle}
+          </span>
         </div>
         {add && (
           <ThemeProvider theme={theme}>
@@ -35,13 +40,13 @@ function HeadDashboard({
                   sx={{
                     marginTop: "20px",
                     textTransform: "none",
-                    fontSize: "20px",
+                    fontSize: "12px",
                   }}
                   variant="contained"
                   color="success"
-                  className="w-38 h-14 flex gap-5"
+                  className="w-28 h-10 flex gap-3"
                 >
-                  <LuPlus size={22} />
+                  <LuPlus size={20} />
                   {buttonAddTitle}
                 </Button>
               </ModalComponent.OpenButton>

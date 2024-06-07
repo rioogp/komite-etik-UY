@@ -7,11 +7,13 @@ import { ThemeProvider } from "@emotion/react";
 import { theme } from "../../../utils/theme";
 import { Button, MenuItem, OutlinedInput, Select } from "@mui/material";
 import { useUpdateReviewers } from "./useUpdateReviewers";
+import { useState } from "react";
 
 function EditReviewerFormDocuments({ id }) {
   const { isLoading, users } = useUsers();
   const { updateReviewers, isUpdating } = useUpdateReviewers();
-  console.log(id);
+  const [placeholderValue, setPlaceholderValue] = useState("Pilih Reviewer");
+
   const { values, handleSubmit, handleChange, handleBlur, touched, errors } =
     useFormik({
       initialValues: {
@@ -55,25 +57,61 @@ function EditReviewerFormDocuments({ id }) {
     <Form type="modal" onSubmit={handleSubmit}>
       <div className="flex flex-row justify-between gap-6">
         <FormRowInput>
-          <span className="font-medium text-lg">Reviewer</span>
+          <span className="font-medium text-md">Reviewer</span>
           <Select
             id="reviewers"
             name="reviewers"
             multiple
             value={values.reviewers}
             onChange={handleChange}
-            renderValue={(selected) => selected.join(", ")}
+            renderValue={(selected) =>
+              selected.length === 0 ? placeholderValue : selected.join(", ")
+            }
             input={<OutlinedInput />}
             onBlur={handleBlur}
+            style={{
+              height: "2.8rem",
+              fontSize: 14,
+              color: "#6e6d6c",
+              "@media (max-width: 767.95px)": {
+                fontSize: 12,
+              },
+            }}
+            displayEmpty
             error={touched.reviewers && Boolean(errors.reviewers)}
+            onOpen={() => setPlaceholderValue("")}
+            onClose={() => setPlaceholderValue("Pilih Reviewer")}
           >
+            <MenuItem
+              value=""
+              disabled
+              style={{
+                height: "2.8rem",
+                fontSize: 14,
+                "@media (max-width: 767.95px)": {
+                  fontSize: 12,
+                },
+              }}
+            >
+              Pilih Reviewer
+            </MenuItem>
             {reviewers.map((reviewer) => (
-              <MenuItem id="reviewers" key={reviewer._id} value={reviewer.name}>
+              <MenuItem
+                style={{
+                  height: "2.8rem",
+                  fontSize: 14,
+                  "@media (max-width: 767.95px)": {
+                    fontSize: 12,
+                  },
+                }}
+                key={reviewer._id}
+                value={reviewer.name}
+              >
                 {reviewer.name}
               </MenuItem>
             ))}
           </Select>
-          <span className="text-red-500 text-md font-medium">
+          <span className="text-red-500 text-sm font-medium">
             {touched.reviewers && errors.reviewers}
           </span>
         </FormRowInput>
@@ -81,10 +119,10 @@ function EditReviewerFormDocuments({ id }) {
       <ThemeProvider theme={theme}>
         <Button
           type="submit"
-          sx={{ marginTop: "20px" }}
+          sx={{ marginTop: "20px", fontSize: 13, textTransform: "none" }}
           variant="contained"
           color="success"
-          className="w-44 h-12"
+          className="w-40 h-10"
           disabled={isUpdating}
         >
           {isUpdating ? "Updating..." : "Kirim"}

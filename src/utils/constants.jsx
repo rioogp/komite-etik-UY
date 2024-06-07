@@ -3,7 +3,7 @@ export const steps = [
     title: "Sedang Diproses",
     icon: (
       <svg
-        className="w-[42px] h-[42px] text-gray-800 dark:text-white bg-orange-600 rounded-full p-2"
+        className="w-[32px] h-[32px] text-gray-800 dark:text-white bg-orange-600 rounded-full p-2"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -30,7 +30,7 @@ export const steps = [
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        className="ms-[1px] w-[40px] h-[40px] bi bi-search bg-blue-500 rounded-full p-1.5 relative"
+        className="ms-[1px] w-[32px] h-[32px] bi bi-search bg-blue-500 rounded-full p-1.5 relative"
       >
         <path
           fill="white"
@@ -46,7 +46,7 @@ export const steps = [
     title: "Tidak Layak",
     icon: (
       <svg
-        className="ms-[-6px] w-[44px] h-[44px] text-gray-800 dark:text-white"
+        className="ms-[-4px] w-[34px] h-[34px] text-gray-800 dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="red"
@@ -70,7 +70,7 @@ export const steps = [
     title: "Perbaikan",
     icon: (
       <svg
-        className="w-[42px] h-[42px] text-gray-800 dark:text-white bg-gray-400 rounded-full p-2"
+        className="ms-[1.5px] w-[30px] h-[30px] text-gray-800 dark:text-white bg-gray-400 rounded-full p-2"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="100"
@@ -101,7 +101,7 @@ export const steps = [
     title: "Sedang Ditandatangani",
     icon: (
       <svg
-        className="w-[42px] h-[42px] text-gray-800 dark:text-white bg-yellow-500 rounded-full p-2"
+        className="w-[32px] h-[32px] text-gray-800 dark:text-white bg-yellow-500 rounded-full p-2"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -125,7 +125,7 @@ export const steps = [
     title: "Layak",
     icon: (
       <svg
-        className="w-[44px] h-[44px] text-gray-800 dark:text-white"
+        className="ms-[-2px] w-[36px] h-[36px] text-gray-800 dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="100"

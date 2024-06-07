@@ -14,7 +14,7 @@ function MembersRow({ data, index }) {
     <TableStyle.Row>
       <TableCell
         sx={{
-          fontSize: "1.3rem",
+          fontSize: "0.9rem",
           paddingY: "50px",
           paddingLeft: "35px",
           width: "400px",
@@ -24,64 +24,57 @@ function MembersRow({ data, index }) {
       </TableCell>
 
       <TableCell
-        sx={{ fontSize: "1.2rem", width: "900px", fontWeight: "bold" }}
+        sx={{ fontSize: "0.8rem", width: "900px", fontWeight: "bold" }}
       >
         {data.name}
       </TableCell>
 
       <TableCell
         sx={{
-          fontSize: "1.2rem",
+          fontSize: "0.8rem",
 
-          width: "300px",
+          width: "500px",
         }}
       >
         {data.role === "reviewer" ? "Reviewer" : "Ketua Komite"}
       </TableCell>
 
-      <TableCell
-        sx={{
-          fontSize: "1.1rem",
-          width: "40px",
-        }}
-        align="center"
-      >
-        <ThemeProvider theme={theme}>
-          <div className="flex flex-col gap-4">
-            <ModalComponent>
-              <ModalComponent.OpenButton>
-                <Button
-                  variant="contained"
-                  sx={{
-                    backgroundColor: "#006A74",
-                    paddingX: 0,
-                    "&:hover": { backgroundColor: "#004d54" },
-                  }}
-                >
-                  <MdOutlineEdit size={32} />
-                </Button>
-              </ModalComponent.OpenButton>
-              <ModalComponent.ModalWindow
-                title="Update Anggota"
-                subtitle="Update data anggota dibawah ini"
+      <TableCell align="center">
+        <div className="flex flex-col gap-4">
+          <ModalComponent>
+            <ModalComponent.OpenButton>
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: "#006A74",
+                  paddingY: "8px",
+                  minWidth: "2.9rem",
+                  "&:hover": { backgroundColor: "#004d54" },
+                }}
               >
-                <CreateUpdateFormMember id={data._id} />
-              </ModalComponent.ModalWindow>
-            </ModalComponent>
-            <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#006A74",
-                paddingX: 0,
-                "&:hover": { backgroundColor: "#004d54" },
-              }}
-              disabled={isPending}
-              onClick={() => deleteUser(data._id)}
+                <MdOutlineEdit size={22} />
+              </Button>
+            </ModalComponent.OpenButton>
+            <ModalComponent.ModalWindow
+              title="Update Anggota"
+              subtitle="Update data anggota dibawah ini"
             >
-              <FaRegTrashAlt size={28} />
-            </Button>
-          </div>
-        </ThemeProvider>
+              <CreateUpdateFormMember id={data._id} />
+            </ModalComponent.ModalWindow>
+          </ModalComponent>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#006A74",
+              paddingX: 0,
+              "&:hover": { backgroundColor: "#004d54" },
+            }}
+            disabled={isPending}
+            onClick={() => deleteUser(data._id)}
+          >
+            <FaRegTrashAlt size={22} />
+          </Button>
+        </div>
       </TableCell>
     </TableStyle.Row>
   );

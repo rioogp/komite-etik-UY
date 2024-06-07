@@ -118,7 +118,7 @@ function App() {
             duration: 5000,
           },
           style: {
-            fontSize: "20px",
+            fontSize: "14px",
             maxWidth: "500px",
             padding: "16px 24px",
             backgroundColor: "#006A74",

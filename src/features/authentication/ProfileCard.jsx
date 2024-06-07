@@ -6,27 +6,33 @@ import EditPhotoProfileForm from "./EditPhotoProfileForm";
 
 function ProfileCard({ user }) {
   return (
-    <section className="bg-color-primary w-[45rem] h-full pt-10 pb-60 flex flex-col gap-8 rounded-lg">
+    <section className="bg-color-primary w-[20rem] sm:w-[24rem] md:w-[42rem] h-fit md:h-full pt-10 pb-28 md:pb-60 flex flex-col gap-8 rounded-lg">
       <div className="flex flex-col justify-center items-center gap-5">
         <Avatar
           alt="User Image"
           src={user.photoURL}
-          sx={{ width: 160, height: 160 }}
+          sx={{ width: 120, height: 120 }}
         />
         <div className="text-center flex flex-col gap-3">
-          <span className="text-4xl text-white">{user.user.name}</span>
-          <span className="text-white text-xl font-light">Pengguna</span>
+          <span className="text-xl md:text-2xl text-white">
+            {user.user.name}
+          </span>
+          <span className="text-white text-sm md:text-base font-light">
+            Pengguna
+          </span>
         </div>
       </div>
       <Divider style={{ background: "white", width: "auto" }} />
       <div className="flex flex-col gap-6 px-8">
-        <span className="text-white text-2xl">Contact</span>
+        <span className="text-white text-lg md:text-xl">Contact</span>
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start">
-            <MdOutlineEmail size={28} color="white" />
-            <span className="text-white text-xl ml-2">Email</span>
+            <MdOutlineEmail size={22} color="white" />
+            <span className="text-white text-sm md:text-base ml-2">Email</span>
           </div>
-          <span className="text-white text-xl">{user.user.email}</span>
+          <span className="text-white text-sm md:text-base">
+            {user.user.email}
+          </span>
         </div>
         <ThemeProvider theme={theme}>
           <ModalComponent>
@@ -34,14 +40,14 @@ function ProfileCard({ user }) {
               <Button
                 sx={{
                   fontWeight: "600",
-                  fontSize: 18,
+                  fontSize: 13,
                   textTransform: "none",
                   color: "#006A74",
+                  height: "2.5rem",
                 }}
                 variant="contained"
                 color="info"
                 className="w-full h-12"
-                onClick={() => navigate("/home")}
               >
                 Update Foto Profile
               </Button>

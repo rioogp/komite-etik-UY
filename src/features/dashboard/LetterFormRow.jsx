@@ -7,7 +7,7 @@ function LetterFormRow({ data }) {
     <TableStyle.Row>
       <TableCell
         sx={{
-          fontSize: "1.2rem",
+          fontSize: "0.9rem",
           paddingY: "50px",
           paddingLeft: "35px",
           width: "150px",
@@ -16,28 +16,29 @@ function LetterFormRow({ data }) {
         {data.id}
       </TableCell>
 
-      <TableCell sx={{ fontSize: "1.2rem", width: "full" }}>
+      <TableCell sx={{ fontSize: "0.9rem", width: "full" }}>
         {data.name}
       </TableCell>
 
       <TableCell
         sx={{
-          fontSize: "1.1rem",
           textAlign: "center",
         }}
       >
-        <Button
-          variant="contained"
-          sx={{
-            width: "3.8rem",
-            backgroundColor: "#006A74",
-            marginLeft: "15px",
-            paddingY: "10px",
-            "&:hover": { backgroundColor: "#004a51" },
-          }}
-        >
-          <FiDownload size={26} className="text-white" />
-        </Button>
+        <a href={data.url} download>
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#006A74",
+              marginLeft: "15px",
+              paddingY: "10px",
+              minWidth: "2.8rem",
+              "&:hover": { backgroundColor: "#004a51" },
+            }}
+          >
+            <FiDownload size={16} className="text-white" />
+          </Button>
+        </a>
       </TableCell>
     </TableStyle.Row>
   );

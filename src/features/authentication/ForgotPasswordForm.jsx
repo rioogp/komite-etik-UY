@@ -54,7 +54,7 @@ function ForgotPasswordForm() {
       />
 
       <FormRowInput>
-        <span className="font-medium text-md">Email</span>
+        <span className="font-medium text-sm">Email</span>
         <TextField
           id="email"
           variant="outlined"
@@ -62,9 +62,10 @@ function ForgotPasswordForm() {
           value={values.email}
           onChange={handleChange}
           onBlur={handleBlur}
+          InputProps={{ sx: { height: "2.9rem", fontSize: 14 } }}
           error={touched.email && Boolean(errors.email)}
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.email && errors.email}
         </span>
       </FormRowInput>
@@ -72,7 +73,12 @@ function ForgotPasswordForm() {
       <ThemeProvider theme={theme}>
         <Button
           type="submit"
-          sx={{ marginTop: "20px" }}
+          sx={{
+            marginTop: "20px",
+            height: "3rem",
+            fontSize: "14px",
+            textTransform: "none",
+          }}
           variant="contained"
           color="success"
           className="w-auto h-16"

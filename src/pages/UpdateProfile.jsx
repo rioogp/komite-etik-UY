@@ -15,28 +15,28 @@ function UpdateProfile() {
   }
 
   return (
-    <main className="py-14 px-10 flex flex-col gap-8">
-      <div className="flex justify-start items-center gap-8">
+    <main className="py-8 px-2 md:px-5 flex flex-col gap-8">
+      <div className="flex justify-start items-center gap-4 md:gap-8">
         <Button
           variant="none"
           color="info"
           className="w-12 h-12"
           onClick={() => navigate(-1)}
         >
-          <IoMdArrowBack size={30} />
+          <IoMdArrowBack size={28} />
         </Button>
 
         <div>
-          <Heading type="custom" fontSize="text-4xl">
+          <Heading type="custom" fontSize="text-3xl">
             Profile
           </Heading>
-          <span className="text-color-primary text-lg font-medium">
+          <span className="text-color-primary text-sm md:text-md font-medium">
             Jadikan profil Anda lebih menarik
           </span>
         </div>
       </div>
       <Divider />
-      <div className="flex w-full gap-16">
+      <div className="flex flex-col md:flex-row justify-center items-center w-full gap-16">
         <ProfileCard user={user} />
         <EditProfileForm name={user.user.name} />
       </div>

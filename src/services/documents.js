@@ -1,16 +1,9 @@
-import axios from "axios";
-
-const API_URL = process.env.REACT_APP_API_URL;
+import axiosInstance from "../utils/axiosInstance";
 
 export async function getDocumentsByUser(filter) {
   try {
-    const response = await axios.get(
-      `${API_URL}/documents/user?filter=${filter}`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
+    const response = await axiosInstance.get(
+      `/documents/user?filter=${filter}`
     );
     return response.data.data.documents;
   } catch (err) {
@@ -20,11 +13,7 @@ export async function getDocumentsByUser(filter) {
 
 export async function getDocuments(filter) {
   try {
-    const response = await axios.get(`${API_URL}/documents?filter=${filter}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response = await axiosInstance.get(`/documents?filter=${filter}`);
     return response.data.data.documents;
   } catch (err) {
     throw new Error(err.message);
@@ -33,38 +22,8 @@ export async function getDocuments(filter) {
 
 export async function getDocument(id) {
   try {
-    const response = await axios.get(`${API_URL}/documents/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response = await axiosInstance.get(`/documents/${id}`);
     return response.data.data.document;
-  } catch (e) {
-    throw new Error(err.message);
-  }
-}
-
-export async function downloadDocument(filename) {
-  try {
-    const response = await axios.get(
-      `${API_URL}/documents/download/${filename}`,
-      {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-        responseType: "blob",
-      }
-    );
-
-    const url = window.URL.createObjectURL(response.data);
-    const link = document.createElement("a");
-    link.href = url;
-    link.setAttribute("download", filename);
-    document.body.appendChild(link);
-    link.click();
-    link.parentNode.removeChild(link);
-
-    return response;
   } catch (err) {
     throw new Error(err.message);
   }
@@ -72,10 +31,9 @@ export async function downloadDocument(filename) {
 
 export async function uploadDocument(formData) {
   try {
-    const response = await axios.post(`${API_URL}/documents`, formData, {
+    const response = await axiosInstance.post(`/documents`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
 
@@ -94,13 +52,11 @@ export async function uploadDocument(formData) {
 
 export async function updateDocument({ formData, id }) {
   try {
-    const response = await axios.patch(`${API_URL}/documents/${id}`, formData, {
+    const response = await axiosInstance.patch(`/documents/${id}`, formData, {
       headers: {
         "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
-
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -116,13 +72,12 @@ export async function updateDocument({ formData, id }) {
 
 export async function addReviewers({ reviewers, id }) {
   try {
-    const response = await axios.patch(
-      `${API_URL}/documents/${id}/reviewers`,
+    const response = await axiosInstance.patch(
+      `/documents/${id}/reviewers`,
       { reviewers },
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );
@@ -135,13 +90,12 @@ export async function addReviewers({ reviewers, id }) {
 
 export async function updateStatusReviewers({ status, message, id }) {
   try {
-    const response = await axios.patch(
-      `${API_URL}/documents/${id}/status`,
+    const response = await axiosInstance.patch(
+      `/documents/${id}/status`,
       { status, message },
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );
@@ -154,13 +108,12 @@ export async function updateStatusReviewers({ status, message, id }) {
 
 export async function sendStatus({ status, id }) {
   try {
-    const response = await axios.patch(
-      `${API_URL}/documents/${id}/status/send`,
+    const response = await axiosInstance.patch(
+      `/documents/${id}/status/send`,
       { status },
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );

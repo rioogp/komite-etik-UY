@@ -20,11 +20,19 @@ import { useState } from "react";
 function ResetPasswordForm({ token }) {
   const { resetPassword, isPending } = useResetPassword();
   const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleClickShowPasswordConfirm = () =>
+    setShowPasswordConfirm((show) => !show);
+
+  const handleMouseDownPasswordConfirm = (event) => {
+    event.preventDefault();
+  };
 
   const { handleSubmit, handleBlur, handleChange, errors, touched, values } =
     useFormik({
@@ -77,7 +85,7 @@ function ResetPasswordForm({ token }) {
       />
 
       <FormRowInput>
-        <span className="font-medium text-md">Password</span>
+        <span className="font-medium text-sm">Password</span>
         <OutlinedInput
           placeholder="Masukkan password"
           id="password"
@@ -86,6 +94,7 @@ function ResetPasswordForm({ token }) {
           onChange={handleChange}
           onBlur={handleBlur}
           error={touched.password && Boolean(errors.password)}
+          style={{ height: "2.9rem", fontSize: 14 }}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -103,30 +112,31 @@ function ResetPasswordForm({ token }) {
             </InputAdornment>
           }
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.password && errors.password}
         </span>
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-md">Konfirmasi Password</span>
+        <span className="font-medium text-sm">Konfirmasi Password</span>
         <OutlinedInput
           id="passwordConfirm"
           placeholder="Masukkan konfirmasi password"
-          type={showPassword ? "text" : "password"}
+          type={showPasswordConfirm ? "text" : "password"}
           value={values.passwordConfirm}
           error={touched.passwordConfirm && Boolean(errors.passwordConfirm)}
           onChange={handleChange}
           onBlur={handleBlur}
+          style={{ height: "2.9rem", fontSize: 14 }}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
                 aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
+                onClick={handleClickShowPasswordConfirm}
+                onMouseDown={handleMouseDownPasswordConfirm}
                 edge="end"
               >
-                {showPassword ? (
+                {showPasswordConfirm ? (
                   <IoIosEyeOff size={28} />
                 ) : (
                   <IoIosEye size={28} />
@@ -135,7 +145,7 @@ function ResetPasswordForm({ token }) {
             </InputAdornment>
           }
         />
-        <span className="text-red-500 text-md font-medium">
+        <span className="text-red-500 text-sm font-medium">
           {touched.passwordConfirm && errors.passwordConfirm}
         </span>
       </FormRowInput>
@@ -143,7 +153,12 @@ function ResetPasswordForm({ token }) {
       <ThemeProvider theme={theme}>
         <Button
           type="submit"
-          sx={{ marginTop: "20px" }}
+          sx={{
+            marginTop: "20px",
+            height: "3rem",
+            fontSize: "14px",
+            textTransform: "none",
+          }}
           variant="contained"
           color="success"
           className="w-auto h-14"

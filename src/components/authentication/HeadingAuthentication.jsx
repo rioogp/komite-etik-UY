@@ -6,7 +6,7 @@ function HeadingAuthentication({ title, margin, type }) {
     <>
       <Heading type="secondary">Kode Etik</Heading>
       <Heading type="secondary">Universitas Yarsi</Heading>
-      <span className={margin}>
+      <span className={`${margin} text-sm`}>
         You can reach us anytime via&nbsp;
         <LinkRoute type="primary">yarsi.ac.id</LinkRoute>
       </span>

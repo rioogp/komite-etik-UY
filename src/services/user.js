@@ -1,14 +1,9 @@
 import axios from "axios";
-
-const API_URL = process.env.REACT_APP_API_URL;
+import axiosInstance from "../utils/axiosInstance";
 
 export async function getUser() {
   try {
-    const response = await axios.get(`${API_URL}/users/user`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response = await axiosInstance.get(`/users/user`);
     return response.data.data;
   } catch (err) {
     throw new Error(err);
@@ -17,7 +12,7 @@ export async function getUser() {
 
 export async function getUsers() {
   try {
-    const response = await axios.get(`${API_URL}/users`);
+    const response = await axiosInstance.get(`/users`);
     return response.data.data.users;
   } catch (err) {
     throw new Error(err);
@@ -26,16 +21,11 @@ export async function getUsers() {
 
 export async function updatePhotoProfile(formData) {
   try {
-    const response = await axios.patch(
-      `${API_URL}/users/updatePhoto`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
+    const response = await axiosInstance.patch(`/users/updatePhoto`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
 
     return response.data.data;
   } catch (err) {
@@ -45,13 +35,12 @@ export async function updatePhotoProfile(formData) {
 
 export async function updateName({ name }) {
   try {
-    const response = await axios.patch(
-      `${API_URL}/users/updateName`,
+    const response = await axiosInstance.patch(
+      `/users/updateName`,
       { name },
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );
@@ -67,13 +56,12 @@ export async function updatePassword({
   passwordConfirm,
 }) {
   try {
-    const response = await axios.patch(
-      `${API_URL}/users/updatePassword`,
+    const response = await axiosInstance.patch(
+      `/users/updatePassword`,
       { currentPassword, password, passwordConfirm },
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );
@@ -92,13 +80,12 @@ export async function createUser({
   password,
 }) {
   try {
-    const response = await axios.post(
-      `${API_URL}/users`,
+    const response = await axiosInstance.post(
+      `/users`,
       { name, username, email, instance, role, password },
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );
@@ -118,13 +105,12 @@ export async function updateUser({
   id,
 }) {
   try {
-    const response = await axios.patch(
-      `${API_URL}/users/${id}`,
+    const response = await axiosInstance.patch(
+      `/users/${id}`,
       { name, username, email, instance, role, password },
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );
@@ -136,11 +122,7 @@ export async function updateUser({
 
 export async function getUserById(id) {
   try {
-    const response = await axios.get(`${API_URL}/users/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response = await axiosInstance.get(`/users/${id}`);
     return response.data.data.user;
   } catch (err) {
     throw new Error(err);
@@ -149,11 +131,7 @@ export async function getUserById(id) {
 
 export async function deleteUser(id) {
   try {
-    const response = await axios.delete(`${API_URL}/users/${id}`, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const response = await axiosInstance.delete(`/users/${id}`);
     return response.data;
   } catch (err) {
     throw new Error(err);

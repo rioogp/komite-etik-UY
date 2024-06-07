@@ -9,7 +9,9 @@ function EditProfileForm({ name }) {
     <ThemeProvider theme={theme}>
       <div className="flex flex-col gap-4 w-full">
         <div className="mt-10">
-          <Heading type="primary">Profil Akun</Heading>
+          <Heading type="custom" fontSize="text-xl md:text-2xl mb-8">
+            Profil Akun
+          </Heading>
           <Divider color="black" />
         </div>
         <EditNameForm name={name} />

@@ -1,8 +1,6 @@
-function SectionColContainer({ children, items }) {
+function SectionColContainer({ children, style }) {
   return (
-    <section
-      className={`flex flex-col ${items} justify-center gap-8 px-2 sm:px-8 md:px-24`}
-    >
+    <section className={`flex flex-col justify-center gap-8 ${style}`}>
       {children}
     </section>
   );

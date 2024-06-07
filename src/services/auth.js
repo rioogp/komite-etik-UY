@@ -1,6 +1,4 @@
-import axios from "axios";
-
-const API_URL = process.env.REACT_APP_API_URL;
+import axiosInstance from "../utils/axiosInstance";
 
 export async function signup({
   name,
@@ -11,8 +9,8 @@ export async function signup({
   passwordConfirm,
 }) {
   try {
-    const response = await axios.post(
-      `${API_URL}/users/signUp`,
+    const response = await axiosInstance.post(
+      `/users/signUp`,
       {
         name,
         email,
@@ -35,8 +33,8 @@ export async function signup({
 
 export async function login({ emailOrUsername, password }) {
   try {
-    const response = await axios.post(
-      `${API_URL}/users/login`,
+    const response = await axiosInstance.post(
+      `/users/login`,
       {
         emailOrUsername,
         password,
@@ -55,7 +53,7 @@ export async function login({ emailOrUsername, password }) {
 
 export async function verifyEmail(token) {
   try {
-    const response = await axios.get(`${API_URL}/users/verify-email/${token}`);
+    const response = await axiosInstance.get(`/users/verify-email/${token}`);
     return response.data;
   } catch (err) {
     if (err.response) {
@@ -72,8 +70,8 @@ export async function verifyEmail(token) {
 
 export async function resendVerification({ email }) {
   try {
-    const response = await axios.post(
-      `${API_URL}/users/resend-verify-email`,
+    const response = await axiosInstance.post(
+      `/users/resend-verify-email`,
       {
         email,
       },
@@ -91,8 +89,8 @@ export async function resendVerification({ email }) {
 
 export async function forgotPassword({ email }) {
   try {
-    const response = await axios.post(
-      `${API_URL}/users/forgotPassword`,
+    const response = await axiosInstance.post(
+      `/users/forgotPassword`,
       {
         email,
       },
@@ -111,8 +109,8 @@ export async function forgotPassword({ email }) {
 
 export async function resetPassword({ token, password, passwordConfirm }) {
   try {
-    const response = await axios.patch(
-      `${API_URL}/users/resetPassword/${token}`,
+    const response = await axiosInstance.patch(
+      `/users/resetPassword/${token}`,
       {
         password,
         passwordConfirm,

@@ -60,34 +60,37 @@ function ModalWindow({ children, title, subtitle }) {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: 1050,
+            width: 800,
             maxWidth: "90vw",
-            height: 900,
+            height: 670,
             bgcolor: "background.paper",
             borderRadius: "15px",
             boxShadow: 24,
-            px: 7,
-            py: 3,
             display: "flex",
             flexDirection: "column",
+            overflow: "auto",
+            "@media (max-width: 767.95px)": {
+              height: 600,
+            },
           }}
           className="flex flex-col gap-16"
         >
-          <div className="flex flex-row justify-between items-baseline w-full">
+          <div className="flex flex-row justify-between items-baseline w-full px-5 md:px-10 pt-5">
             <Box className="flex flex-col justify-center items-start gap-5">
-              <Heading type="custom" fontSize="text-5xl">
+              <Heading type="custom" fontSize="text-2xl md:text-3xl">
                 {title}
               </Heading>
-              <span className="text-xl text-slate-600">{subtitle}</span>
+              <span className="text-sm md:text-base text-slate-600">
+                {subtitle}
+              </span>
             </Box>
             <IconButton aria-label="close" onClick={handleClose}>
-              <IoMdClose size={42} />
+              <IoMdClose size={32} />
             </IconButton>
           </div>
           <Box
             sx={{
               maxHeight: "calc(100% - 120px)",
-              overflow: "auto",
             }}
           >
             {cloneElement(children, { onClose: handleClose })}

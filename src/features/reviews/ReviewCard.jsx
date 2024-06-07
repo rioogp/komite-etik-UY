@@ -26,18 +26,19 @@ function ReviewCard({ review }) {
     <motion.div variants={item}>
       <Card
         sx={{
-          width: 380,
+          width: 310,
           borderRadius: "10px",
           padding: "5px",
+          boxShadow: "0px 4px 3px rgba(0, 0, 0, 0.3)",
         }}
         variant="outlined"
       >
         <CardContent className="flex flex-col gap-2 items-start">
           <div className="flex flex-row items-center gap-3">
-            <CgProfile size={36} />
+            <CgProfile size={30} />
 
             <Typography
-              variant="h6"
+              variant="h7"
               sx={{
                 color: "black",
                 fontWeight: "bold",
@@ -46,16 +47,16 @@ function ReviewCard({ review }) {
               {name}
             </Typography>
           </div>
-          {description.length > 173 ? (
+          {description.length > 161 ? (
             <>
-              <Collapse collapsedSize={150} in={expanded}>
+              <Collapse collapsedSize={118} in={expanded}>
                 <Typography
                   sx={{
                     color: "black",
                     fontWeight: "100",
                     maxWidth: 330,
                     marginTop: "15px",
-                    fontSize: isMediumScreen ? "16px" : "18px",
+                    fontSize: isMediumScreen ? "12px" : "14px",
                     display: "-webkit-box",
                     WebkitBoxOrient: "vertical",
                     overflow: "hidden",
@@ -81,7 +82,7 @@ function ReviewCard({ review }) {
                   fontFamily: "'Inter', sans-serif",
                   textTransform: "none",
                   padding: "0",
-                  fontSize: "16px",
+                  fontSize: "14px",
                 }}
               >
                 {expanded ? "Show less " : "Show more "}
@@ -99,7 +100,7 @@ function ReviewCard({ review }) {
                 fontWeight: "100",
                 maxWidth: 330,
                 marginTop: "15px",
-                fontSize: isMediumScreen ? "16px" : "18px",
+                fontSize: isMediumScreen ? "12px" : "14px",
                 display: "-webkit-box",
                 WebkitBoxOrient: "vertical",
                 overflow: "hidden",
@@ -112,7 +113,11 @@ function ReviewCard({ review }) {
             </Typography>
           )}
 
-          <Typography component="span" className="text-lg text-slate-500">
+          <Typography
+            component="span"
+            sx={{ fontSize: "12px" }}
+            className="text-slate-500"
+          >
             {createdAt}
           </Typography>
         </CardContent>

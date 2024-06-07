@@ -7,34 +7,34 @@ import { container } from "../../utils/variants";
 
 const tasks = [
   {
-    title: "Task 1",
+    title: "Pengajuan Belum Dipublikasikan",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Pengajuan belum pernah dipublikasikan sebelumnya, juga belum pernah diajukan ke jurnal lain untuk dipertimbangkan (atau penjelasannya telah diberikan di Komentar kepada Editor).",
   },
   {
-    title: "Task 2",
+    title: "Format Dokumen",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Semua file yang diserahkan harus dalam format file dokumen PDF (Portable Document Format) untuk menjaga integritas dan konsistensi dokumen, serta memudahkan proses pengarsipan dan distribusi.",
   },
   {
-    title: "Task 3",
+    title: "URL Untuk Refrensi",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Demi menghormati hak cipta dan memberikan atribusi yang sesuai kepada pemilik konten, URL (Uniform Resource Locator) untuk referensi telah dimasukkan jika memungkinkan, memastikan bahwa karya asli dapat dirujuk dengan benar dan pembaca dapat mengakses sumber asli jika diperlukan.",
   },
   {
-    title: "Task 4",
+    title: "Format Penulisan",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Teksnya diberi spasi tunggal; menggunakan font 12 poin; menggunakan huruf miring, bukan garis bawah (kecuali dengan alamat URL); dan semua ilustrasi, gambar, dan tabel ditempatkan di dalam teks pada titik yang tepat, bukan di bagian akhir.",
   },
   {
-    title: "Task 5",
+    title: "Mematuhi Gaya dan Bibliografi",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Untuk memastikan konsistensi dan keseragaman dalam penulisan, teks telah disusun dengan cermat mengikuti persyaratan gaya dan bibliografi yang diuraikan secara rinci dalam Pedoman Penulis, mencakup aspek-aspek seperti format kutipan, penggunaan font, spasi, margin, dan pengorganisasian daftar pustaka.",
   },
   {
-    title: "Task 6",
+    title: "Pernyataan Privasi",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      "Nama dan alamat email yang dimasukkan dalam situs jurnal ini akan digunakan secara eksklusif untuk tujuan jurnal ini dan tidak akan disediakan untuk tujuan lain apa pun atau kepada pihak lain mana pun.",
   },
 ];
 
@@ -45,15 +45,19 @@ function Task() {
   });
 
   return (
-    <SectionColContainer items="items-center">
-      <Heading type="custom" fontSize="text-4xl md:text-5xl" color="text-black">
-        Tugas Komite Etik
+    <SectionColContainer style="px-2 md:px-16 items-center">
+      <Heading
+        type="custom"
+        fontSize="text-2xl md:text-4xl"
+        color="text-black"
+        center="text-center"
+      >
+        Daftar Periksa Persiapan Pengajuan
       </Heading>
-      <p className="text-slate-500 text-xl md:text-2xl max-w-[90rem] text-center mb-16 md:mb-24">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
+      <p className="text-slate-500 text-md md:text-lg max-w-[70rem] text-center mb-5 md:mb-24">
+        Sebagai bagian dari proses penyerahan, penulis diminta untuk memeriksa
+        kepatuhan kiriman mereka terhadap semua item berikut, dan kiriman dapat
+        dikembalikan kepada penulis yang tidak mematuhi pedoman ini.
       </p>
       <AnimatePresence>
         <motion.div
@@ -61,7 +65,7 @@ function Task() {
           variants={container}
           initial="hidden"
           animate={inView ? "show" : "hidden"}
-          className="flex flex-row flex-wrap gap-x-16 gap-y-14 md:gap-y-36 justify-center items-center"
+          className="flex flex-row flex-wrap  gap-x-5 sm:gap-x-16 gap-y-14 md:gap-y-36 justify-center items-start"
         >
           {tasks.map((task, index) => (
             <Item

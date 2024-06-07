@@ -11,11 +11,11 @@ function CardItem() {
     <motion.div variants={item}>
       <Card
         sx={{
-          maxWidth: 380,
+          maxWidth: 320,
           bgcolor: "#006A74",
           borderRadius: "10px",
-          paddingY: "15px",
-          paddingX: "5px",
+          paddingY: "10px",
+          paddingX: "2px",
         }}
         variant="outlined"
       >
@@ -23,23 +23,23 @@ function CardItem() {
           <div className="flex flex-col gap-3">
             <Heading
               type="custom"
-              fontSize="text-2xl sm:text-3xl"
+              fontSize="text-xl sm:text-2xl"
               color="text-white"
             >
               Pertanyaan
             </Heading>
             <Typography
-              sx={{ color: "white", fontWeight: "100", fontSize: "18px" }}
+              sx={{ color: "white", fontWeight: "100", fontSize: "14px" }}
               component="div"
             >
               Apa tujuan utama dari adanya kode etik yang diatur di website
               Universitas YARSI?
             </Typography>
           </div>
-          <span className="bg-white text-center text-color-primary font-semibold p-2 rounded-md">
+          <span className="bg-white text-center text-sm text-color-primary font-semibold p-2 rounded-md">
             Jawaban
           </span>
-          <div className="flex gap-5 justify-center items-start">
+          <div className="flex gap-3 justify-center items-start">
             <IoIosCheckmarkCircle
               className="basis-1/2"
               color="white"
@@ -49,7 +49,8 @@ function CardItem() {
               sx={{
                 color: "white",
                 fontWeight: "100",
-                maxWidth: 285,
+                fontSize: "14px",
+                maxWidth: 240,
                 marginTop: "15px",
               }}
               component="div"

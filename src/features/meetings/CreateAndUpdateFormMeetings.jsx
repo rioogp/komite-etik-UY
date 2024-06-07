@@ -87,9 +87,9 @@ function CreateAndUpdateFormMeeting({ id, onClose }) {
 
   return (
     <Form type="modal" onSubmit={handleSubmit}>
-      <div className="flex flex-row justify-between gap-6">
+      <div className="flex flex-col md:flex-row justify-between gap-6">
         <FormRowInput>
-          <span className="font-medium text-lg">Nama Pertemuan</span>
+          <span className="font-medium text-sm">Nama Pertemuan</span>
           <TextField
             id="nameMeeting"
             variant="outlined"
@@ -98,15 +98,24 @@ function CreateAndUpdateFormMeeting({ id, onClose }) {
             onChange={handleChange}
             onBlur={handleBlur}
             error={touched.nameMeeting && Boolean(errors.nameMeeting)}
+            InputProps={{
+              sx: {
+                height: "2.8rem",
+                fontSize: 14,
+                "@media (max-width: 767.95px)": {
+                  fontSize: 12,
+                },
+              },
+            }}
           />
-          <span className="text-red-500 text-md font-medium">
+          <span className="text-red-500 text-sm font-medium">
             {touched.nameMeeting && errors.nameMeeting}
           </span>
         </FormRowInput>
 
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <FormRowInput>
-            <span className="font-medium text-lg">Tanggal Pertemuan</span>
+            <span className="font-medium text-sm">Tanggal Pertemuan</span>
             <DatePicker
               id="meetingSchedule"
               variant="outlined"
@@ -114,9 +123,22 @@ function CreateAndUpdateFormMeeting({ id, onClose }) {
               onChange={(value) => setFieldValue("meetingSchedule", value)}
               onBlur={handleBlur}
               error={touched.meetingSchedule && Boolean(errors.meetingSchedule)}
-              slotProps={{ textField: { placeholder: "Pilih tanggal" } }}
+              slotProps={{
+                textField: {
+                  placeholder: "Pilih tanggal",
+                  inputProps: {
+                    style: {
+                      height: "0.8rem",
+                      fontSize: 13,
+                      "@media (max-width: 767.95px)": {
+                        fontSize: 11,
+                      },
+                    },
+                  },
+                },
+              }}
             />
-            <span className="text-red-500 text-md font-medium">
+            <span className="text-red-500 text-sm font-medium">
               {touched.meetingSchedule && errors.meetingSchedule}
             </span>
           </FormRowInput>
@@ -125,10 +147,10 @@ function CreateAndUpdateFormMeeting({ id, onClose }) {
       <ThemeProvider theme={theme}>
         <Button
           type="submit"
-          sx={{ marginTop: "20px" }}
+          sx={{ marginTop: "20px", fontSize: 12 }}
           variant="contained"
           color="success"
-          className="w-44 h-12"
+          className="w-36 h-10"
           disabled={isWorking}
         >
           {isWorking ? "Loading..." : "Ajukan"}

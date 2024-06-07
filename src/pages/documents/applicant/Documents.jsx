@@ -16,6 +16,7 @@ function Documents() {
         buttonAddTitle="Ajukan"
         modalTitle="Pengajuan Penelitian"
         modalSubtitle="Ajukan penelitian yang ingin diajukan"
+        position="justify-end"
       >
         <CreateUpdateFormDocuments />
       </HeadDashboard>

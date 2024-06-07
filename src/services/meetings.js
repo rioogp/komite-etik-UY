@@ -1,13 +1,11 @@
 import axios from "axios";
-
-const API_URL = process.env.REACT_APP_API_URL;
+import axiosInstance from "../utils/axiosInstance";
 
 export async function getMeetings() {
   try {
-    const response = await axios.get(`${API_URL}/meetings`, {
+    const response = await axiosInstance.get(`/meetings`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
 
@@ -19,8 +17,8 @@ export async function getMeetings() {
 
 export async function createMeeting({ nameMeeting, meetingSchedule }) {
   try {
-    const response = await axios.post(
-      `${API_URL}/meetings`,
+    const response = await axiosInstance.post(
+      `/meetings`,
       {
         nameMeeting,
         meetingSchedule,
@@ -28,7 +26,6 @@ export async function createMeeting({ nameMeeting, meetingSchedule }) {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );
@@ -40,10 +37,9 @@ export async function createMeeting({ nameMeeting, meetingSchedule }) {
 
 export async function deleteMeeting(id) {
   try {
-    const response = await axios.delete(`${API_URL}/meetings/${id}`, {
+    const response = await axiosInstance.delete(`/meetings/${id}`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
     return response;
@@ -54,8 +50,8 @@ export async function deleteMeeting(id) {
 
 export async function updateMeeting({ nameMeeting, meetingSchedule }, id) {
   try {
-    const response = await axios.put(
-      `${API_URL}/meetings/${id}`,
+    const response = await axiosInstance.put(
+      `/meetings/${id}`,
       {
         nameMeeting,
         meetingSchedule,
@@ -63,7 +59,6 @@ export async function updateMeeting({ nameMeeting, meetingSchedule }, id) {
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );

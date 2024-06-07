@@ -20,20 +20,20 @@ function DocumentsApplicantTable() {
     <>
       <TableStyle>
         <TableStyle.Header>
-          <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
+          <TableCell sx={{ color: "gray", fontSize: "0.9rem" }}>
             Nomor
           </TableCell>
-          <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
+          <TableCell sx={{ color: "gray", fontSize: "0.9rem" }}>
             Nama Pengaju
           </TableCell>
-          <TableCell sx={{ color: "gray", fontSize: "1.2rem" }}>
+          <TableCell sx={{ color: "gray", fontSize: "0.9rem" }}>
             Nama Penelitian
           </TableCell>
 
-          <TableCell sx={{ color: "gray", fontSize: "1.2rem" }} align="center">
+          <TableCell sx={{ color: "gray", fontSize: "0.9rem" }} align="center">
             Reviewer
           </TableCell>
-          <TableCell sx={{ color: "gray", fontSize: "1.2rem" }} align="center">
+          <TableCell sx={{ color: "gray", fontSize: "0.9rem" }} align="center">
             Aksi
           </TableCell>
         </TableStyle.Header>
