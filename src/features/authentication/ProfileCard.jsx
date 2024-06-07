@@ -10,7 +10,7 @@ function ProfileCard({ user }) {
       <div className="flex flex-col justify-center items-center gap-5">
         <Avatar
           alt="User Image"
-          src={user.photoURL}
+          src={user.user.photo}
           sx={{ width: 120, height: 120 }}
         />
         <div className="text-center flex flex-col gap-3">

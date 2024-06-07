@@ -2,14 +2,15 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updatePhotoProfile } from "../../services/user";
 import toast from "react-hot-toast";
 
-export function useUpdatePhotoProfile() {
+export function useUpdatePhotoProfile(onClose) {
   const queryClient = useQueryClient();
 
-  const { mutate: updatePhoto, isLoading: isUpdating } = useMutation({
+  const { mutate: updatePhoto, isPending: isUpdating } = useMutation({
     mutationFn: updatePhotoProfile,
-    onSuccess: () => {
-      queryClient.invalidateQueries("user");
+    onSuccess: async () => {
+      await queryClient.invalidateQueries("user");
       toast.success("Foto profil berhasil diperbarui!");
+      onClose();
     },
 
     onError: () => {

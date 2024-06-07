@@ -18,7 +18,7 @@ function AboutUs() {
           <Heading type="custom" fontSize="text-2xl md:text-3xl">
             Apa itu web K-Etik?
           </Heading>
-          <p className="text-lg md:text-xl leading-relaxed text-gray-600">
+          <p className="text-base md:text-lg leading-relaxed text-gray-600">
             Website Kode Etik Universitas YARSI adalah platform resmi yang
             menyediakan informasi lengkap mengenai pedoman etika yang harus
             diikuti oleh seluruh civitas akademika universitas. Situs ini
@@ -42,13 +42,13 @@ function AboutUs() {
           <Heading type="custom" fontSize="text-2xl md:text-3xl">
             Penyusun
           </Heading>
-          <p className="text-lg md:text-xl leading-relaxed text-gray-600">
+          <p className="text-base md:text-lg leading-relaxed text-gray-600">
             Komite Etik Penelitian Universitas YARSI disusun berdasarkan Surat
             Keputusan Rektor Universitas YARSI Nomor: 039/REK/KEP/VIII/2019
             tanggal 19 Agustus 2019 tentang Komite Etik Penelitian Universitas
             YARSI yang beranggotakan sebagai berikut:
           </p>
-          <ol class="list-decimal px-7 text-lg md:text-xl flex flex-col gap-10 text-gray-600">
+          <ol className="list-decimal px-7 text-base md:text-lg flex flex-col gap-10 text-gray-600">
             <li>
               Prof. dr. Hj. Qomariah RS., MS., PKK., AIFM., Sp.KKLP - Ketua
             </li>
@@ -81,7 +81,7 @@ function AboutUs() {
         <div className="flex flex-col gap-24">
           <div className="text-center flex flex-col gap-5">
             <span className="text-color-secondary font-bold text-md">
-              Who Makes Website
+              Who Makes The Website
             </span>
             <h1 className="font-bold text-3xl md:text-4xl">Meet Our Team</h1>
           </div>

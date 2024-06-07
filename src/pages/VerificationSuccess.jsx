@@ -29,10 +29,12 @@ function VerificationSuccess() {
   }, [countdown, navigate]);
 
   return (
-    <section className="my-20 mx-[35rem] text-center">
-      <h1 className="text-3xl font-bold mb-4">Verification Success</h1>
-      <p className="text-lg">
-        You will be redirected to the login page in {countdown} seconds...
+    <section className="my-20 mx-[1rem] md:mx-[6rem] lg:mx-[25rem] text-center">
+      <h1 className="text-xl md:text-2xl font-bold mb-4">
+        Verifikasi Berhasil
+      </h1>
+      <p className="text-sm md:text-base">
+        Anda akan dialihkan ke halaman login dalam beberapa saat...
       </p>
     </section>
   );

@@ -70,7 +70,7 @@ export const steps = [
     title: "Perbaikan",
     icon: (
       <svg
-        className="ms-[1.5px] w-[30px] h-[30px] text-gray-800 dark:text-white bg-gray-400 rounded-full p-2"
+        className="ms-[1.2px] w-[30px] h-[30px] text-gray-800 dark:text-white bg-gray-400 rounded-full p-2"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="100"

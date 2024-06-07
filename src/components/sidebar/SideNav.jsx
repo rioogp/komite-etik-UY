@@ -23,6 +23,7 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 function SideNav({ onItemClick }) {
   const { logout, role } = useContext(AuthContext);
   const { user, isLoading } = useUser();
+
   const { isLoading: isLoadingUnread, unreadNotifications } =
     useUnreadNotifications();
   const { markAsRead } = useMarkAsRead();
@@ -172,7 +173,7 @@ function SideNav({ onItemClick }) {
             <span className="text-sm">Profile</span>
             <div className="flex flex-row gap-3 items-center">
               <Image
-                src="https://cdn.pixabay.com/photo/2017/07/18/23/23/user-2517433_1280.png"
+                src={user?.user.photo ? user.user.photo : "/default.png"}
                 alt="profile"
                 type="profile"
               />
