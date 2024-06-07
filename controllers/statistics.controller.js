@@ -19,12 +19,14 @@ exports.getStatistics = catchAsync(async (req, res, next) => {
   const uploadedFilesCount = await getUploadedFilesCount();
   const completedDocumentsCount = await getCompletedDocumentsCount();
 
+  const percentageCompleted = `${((completedDocumentsCount / uploadedFilesCount) * 100).toFixed(1)}%`;
+
   res.status(200).json({
     status: 'success',
     data: {
       activeUsersCount,
       uploadedFilesCount,
-      completedDocumentsCount,
+      percentageCompleted,
     },
   });
 });

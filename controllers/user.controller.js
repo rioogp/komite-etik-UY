@@ -1,10 +1,20 @@
 /* eslint-disable import/order */
 /* eslint-disable import/no-extraneous-dependencies */
+const { Storage } = require('@google-cloud/storage');
+const path = require('path');
 const User = require('../models/user.model');
 const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
 const multer = require('multer');
 const sharp = require('sharp');
+
+const serviceKeyPath = path.resolve(__dirname, '../config/service.json');
+
+const storageBucket = new Storage({
+  keyFilename: serviceKeyPath,
+});
+
+const bucket = storageBucket.bucket('komite_etik');
 
 const multerStorage = multer.memoryStorage();
 
@@ -20,18 +30,31 @@ const upload = multer({ storage: multerStorage, fileFilter: multerFilter });
 
 exports.uploadUserPhoto = upload.single('photo');
 
-exports.resizeUserPhoto = (req, res, next) => {
+exports.resizeUserPhoto = async (req, res, next) => {
   if (!req.file) return next();
 
   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
 
-  sharp(req.file.buffer)
+  const resizedBuffer = await sharp(req.file.buffer)
     .resize(500, 500)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
-    .toFile(`public/img/users/${req.file.filename}`);
+    .toBuffer();
 
-  next();
+  try {
+    const file = bucket.file(req.file.filename);
+    await file.save(resizedBuffer, {
+      metadata: { contentType: 'image/jpeg' },
+      public: true,
+    });
+
+    const publicUrl = `https://storage.googleapis.com/${bucket.name}/${req.file.filename}`;
+    req.file.publicUrl = publicUrl;
+
+    next();
+  } catch (err) {
+    return next(new AppError('Error uploading image', 500));
+  }
 };
 
 exports.getAllUsers = catchAsync(async (req, res) => {
@@ -143,13 +166,14 @@ exports.createUser = catchAsync(async (req, res, next) => {
 });
 
 exports.updatePhoto = catchAsync(async (req, res, next) => {
+  if (!req.file) {
+    return next(new AppError('No photo provided', 400));
+  }
+
   const user = await User.findByIdAndUpdate(
     req.user.id,
-    { photo: req.file.filename },
-    {
-      new: true,
-      runValidators: true,
-    },
+    { photo: req.file.publicUrl },
+    { new: true, runValidators: true },
   );
 
   if (!user) {
