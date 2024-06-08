@@ -8,7 +8,7 @@ const catchAsync = require('../utils/catchAsync');
 const multer = require('multer');
 const sharp = require('sharp');
 
-const serviceKeyPath = path.resolve(__dirname, '../config/service.json');
+const serviceKeyPath = path.resolve(__dirname, '../service.json');
 
 const storageBucket = new Storage({
   keyFilename: serviceKeyPath,
@@ -76,13 +76,10 @@ exports.getUser = catchAsync(async (req, res, next) => {
     return next(new AppError('No user found with that ID', 404));
   }
 
-  const photoURL = `http://127.0.0.1:8000/img/users/${user.photo}`;
-
   res.status(200).json({
     status: 'success',
     data: {
       user,
-      photoURL,
     },
   });
 });

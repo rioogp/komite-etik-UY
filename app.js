@@ -3,16 +3,17 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
-
+// eslint-disable-next-line node/no-unpublished-require
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger-output.json');
 const globalErrorHandler = require('./controllers/error.controller');
 const userRouter = require('./routes/user.routes');
 const reviewRouter = require('./routes/review.routes');
 const meetingRouter = require('./routes/meeting.routes');
 const documentRouter = require('./routes/document.routes');
 const notificationRouter = require('./routes/notification.routes');
-const statisticsoOuter = require('./routes/statistics.routes');
+const statisticsRouter = require('./routes/statistics.routes');
 const AppError = require('./utils/appError');
-const path = require('path');
 
 const app = express();
 
@@ -34,7 +35,9 @@ app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/meetings', meetingRouter);
 app.use('/api/v1/documents', documentRouter);
 app.use('/api/v1/notifications', notificationRouter);
-app.use('/api/v1/statistics', statisticsoOuter);
+app.use('/api/v1/statistics', statisticsRouter);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));

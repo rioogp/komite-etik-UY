@@ -1,0 +1,1098 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "K-Etik API",
+    "description": "This is the documentation for the K-Etik API"
+  },
+  "host": "localhost:8000",
+  "tags": [
+    {
+      "name": "User",
+      "description": "User related endpoints"
+    },
+    {
+      "name": "Document",
+      "description": "Document related endpoints"
+    },
+    {
+      "name": "Meeting",
+      "description": "Meeting related endpoints"
+    },
+    {
+      "name": "Notification",
+      "description": "Notification related endpoints"
+    },
+    {
+      "name": "Review",
+      "description": "Review related endpoints"
+    },
+    {
+      "name": "Statistics",
+      "description": "Statistics related endpoints"
+    }
+  ],
+  "schemes": ["http"],
+  "paths": {
+    "/api/v1/users/signUp": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "signUp",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "example": "Example"
+                },
+                "email": {
+                  "type": "string",
+                  "example": "example@example.com"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "example"
+                },
+                "instance": {
+                  "type": "string",
+                  "example": "Universitas Example"
+                },
+                "password": {
+                  "type": "string",
+                  "example": "example123"
+                },
+                "passwordConfirm": {
+                  "type": "string",
+                  "example": "example123"
+                },
+                "role": {
+                  "type": "string",
+                  "example": "user"
+                }
+              },
+              "required": [
+                "name",
+                "email",
+                "username",
+                "instance",
+                "password",
+                "passwordConfirm",
+                "role"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/users/verify-email/{token}": {
+      "get": {
+        "tags": ["User"],
+        "operationId": "verify-email",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Email verification successful"
+          },
+          "400": {
+            "description": "Invalid or expired verification token"
+          }
+        }
+      }
+    },
+    "/api/v1/users/login": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "login",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "emailOrUsername": {
+                  "example": "example@example.com"
+                },
+                "password": {
+                  "example": "example123"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Please enter a valid email/username and password"
+          },
+          "401": {
+            "description": "Incorrect email/username or password"
+          },
+          "404": {
+            "description": "Please verify your email address"
+          }
+        }
+      }
+    },
+    "/api/v1/users/resend-verify-email": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "resend-verify-email",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "example@example.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "User with this email address does not exist"
+          },
+          "400": {
+            "description": "Email is already verified"
+          }
+        }
+      }
+    },
+    "api/v1/users/forgotPassword": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "forgotPassword",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "example@example.com"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "There is no user with that email address"
+          },
+          "500": {
+            "description": "There was an error sending the email. Try again later!"
+          }
+        }
+      }
+    },
+    "/api/v1/users/resetPassword/{token}": {
+      "patch": {
+        "tags": ["User"],
+        "operationId": "resetPassword",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "password": {
+                  "example": "example123"
+                },
+                "passwordConfirm": {
+                  "example": "example123"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Token is invalid or has expired"
+          }
+        }
+      }
+    },
+    "/api/v1/users/updatePassword": {
+      "patch": {
+        "tags": ["User"],
+        "operationId": "updatePassword",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "currentPassword": {
+                  "example": "example123"
+                },
+                "password": {
+                  "example": "example1122"
+                },
+                "passwordConfirm": {
+                  "example": "example1122"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Your current password is wrong"
+          }
+        }
+      }
+    },
+    "/api/v1/users/updateName": {
+      "patch": {
+        "tags": ["User"],
+        "operationId": "updateName",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "Example Doe"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/users/updatePhoto": {
+      "patch": {
+        "tags": ["User"],
+        "operationId": "updatePhoto",
+        "consumes": ["multipart/form-data"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "Authorization token"
+          },
+          {
+            "name": "photo",
+            "in": "formData",
+            "type": "file",
+            "required": true,
+            "description": "The photo file to upload"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "No photo provided"
+          },
+          "404": {
+            "description": "No user found with that ID"
+          }
+        }
+      }
+    },
+    "/api/v1/users": {
+      "post": {
+        "tags": ["User"],
+        "operationId": "createUser",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "Example"
+                },
+                "username": {
+                  "example": "example"
+                },
+                "email": {
+                  "example": "example@example.com"
+                },
+                "instance": {
+                  "example": "Universitas Example"
+                },
+                "role": {
+                  "example": "reviewer"
+                },
+                "password": {
+                  "example": "example123"
+                }
+              },
+              "required": [
+                "name",
+                "username",
+                "email",
+                "instance",
+                "role",
+                "password"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "User created successfully"
+          }
+        }
+      },
+      "get": {
+        "tags": ["User"],
+        "operationId": "getAllUsers",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/users/user": {
+      "get": {
+        "tags": ["User"],
+        "operationId": "getUser",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/users/{id}": {
+      "get": {
+        "tags": ["User"],
+        "operationId": "getUserById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "No user found with that ID"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["User"],
+        "operationId": "updateUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "Example"
+                },
+                "username": {
+                  "example": "example"
+                },
+                "email": {
+                  "example": "example@example.com"
+                },
+                "instance": {
+                  "example": "Universitas Example"
+                },
+                "role": {
+                  "example": "reviewer"
+                },
+                "password": {
+                  "example": "example123"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User updated successfully"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["User"],
+        "operationId": "deleteUser",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User deleted successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/meetings": {
+      "post": {
+        "tags": ["Meeting"],
+        "operationId": "createMeeting",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nameMeeting": {
+                  "example": "Example"
+                },
+                "meetingSchedule": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              },
+              "required": ["nameMeeting", "meetingSchedule"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Meeting created successfully"
+          },
+          "403": {
+            "description": "Only Ketua can create a meeting"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Meeting"],
+        "operationId": "getMeetings",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Only Ketua, Admin, and Reviewer can view meetings"
+          }
+        }
+      }
+    },
+    "/api/v1/meetings/{id}": {
+      "get": {
+        "tags": ["Meeting"],
+        "operationId": "getMeeting",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "403": {
+            "description": "Only Ketua, Admin, and Reviewer can view meetings"
+          },
+          "404": {
+            "description": "No meeting found with that ID"
+          }
+        }
+      },
+      "put": {
+        "tags": ["Meeting"],
+        "operationId": "updateMeeting",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nameMeeting": {
+                  "example": "Example"
+                },
+                "meetingSchedule": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Meeting updated successfully"
+          },
+          "403": {
+            "description": "Only Ketua can update a meeting"
+          },
+          "404": {
+            "description": "No meeting found with that ID"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Meeting"],
+        "operationId": "deleteMeeting",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Meeting deleted successfully"
+          },
+          "403": {
+            "description": "Only Ketua can delete a meeting"
+          },
+          "404": {
+            "description": "No meeting found with that ID"
+          }
+        }
+      }
+    },
+    "/api/v1/notifications": {
+      "get": {
+        "tags": ["Notification"],
+        "operationId": "getNotifications",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/notifications/mark-as-read": {
+      "patch": {
+        "tags": ["Notification"],
+        "operationId": "markAsRead",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "All notifications marked as read"
+          }
+        }
+      }
+    },
+    "/api/v1/notifications/unread-notifications": {
+      "get": {
+        "tags": ["Notification"],
+        "operationId": "unreadNotifications",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/reviews": {
+      "get": {
+        "tags": ["Review"],
+        "operationId": "getReviews",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Review"],
+        "operationId": "createReview",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "Example Review"
+                },
+                "description": {
+                  "example": "Example Description"
+                }
+              },
+              "required": ["name", "description"]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Review created successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/statistics": {
+      "get": {
+        "tags": ["Statistics"],
+        "operationId": "getStatistics",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/documents": {
+      "post": {
+        "tags": ["Document"],
+        "operationId": "uploadDocuments",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          },
+          {
+            "name": "researchName",
+            "in": "formData",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "files",
+            "in": "formData",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "file"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Documents uploaded successfully"
+          }
+        }
+      },
+      "get": {
+        "tags": ["Document"],
+        "operationId": "getDocuments",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "type": "string",
+            "enum": ["terbaru", "terlama"],
+            "default": "terbaru"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/documents/user": {
+      "get": {
+        "tags": ["Document"],
+        "operationId": "getDocumentsByUser",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "type": "string",
+            "enum": ["terbaru", "terlama"],
+            "default": "terbaru"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/v1/documents/{documentId}": {
+      "get": {
+        "tags": ["Document"],
+        "operationId": "getDocument",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          },
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Document"],
+        "operationId": "updateDocuments",
+        "consumes": ["multipart/form-data"],
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          },
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "files",
+            "in": "formData",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "file"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document updated successfully"
+          }
+        }
+      }
+    },
+    "/api/v1/documents/{documentId}/reviewers": {
+      "patch": {
+        "tags": ["Document"],
+        "operationId": "addReviewers",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          },
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reviewers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "example": "Example Reviewer"
+                  }
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Reviewers added successfully"
+          }
+        }
+      }
+    },
+    "/documents/{documentId}/status": {
+      "patch": {
+        "tags": ["Document"],
+        "operationId": "updateReviewerStatus",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the document"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": ["Layak", "Tidak Layak", "Perbaikan"],
+                  "description": "Status of the reviewer's decision"
+                },
+                "message": {
+                  "type": "string",
+                  "description": "Message from the reviewer",
+                  "example": "Example Message"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Reviewer status updated successfully"
+          }
+        }
+      }
+    },
+    "/documents/{documentId}/status/send": {
+      "patch": {
+        "tags": ["Document"],
+        "operationId": "sendStatusNotification",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "ID of the document"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "required": true,
+            "type": "string",
+            "description": "Authorization token"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string",
+                  "enum": ["Layak", "Tidak Layak", "Perbaikan"],
+                  "description": "Status of the document"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the file status"
+          }
+        }
+      }
+    }
+  }
+}
