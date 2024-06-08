@@ -10,7 +10,7 @@ const AppError = require('../utils/appError');
 const User = require('../models/user.model');
 const Notification = require('../models/notification.model');
 
-const serviceKeyPath = path.resolve(__dirname, '../config/service.json');
+const serviceKeyPath = path.resolve(__dirname, '../service.json');
 
 const storageBucket = new Storage({
   keyFilename: serviceKeyPath,

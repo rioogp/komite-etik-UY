@@ -8,7 +8,7 @@ const catchAsync = require('../utils/catchAsync');
 const multer = require('multer');
 const sharp = require('sharp');
 
-const serviceKeyPath = path.resolve(__dirname, '../config/service.json');
+const serviceKeyPath = path.resolve(__dirname, '../service.json');
 
 const storageBucket = new Storage({
   keyFilename: serviceKeyPath,

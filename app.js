@@ -12,7 +12,6 @@ const documentRouter = require('./routes/document.routes');
 const notificationRouter = require('./routes/notification.routes');
 const statisticsoOuter = require('./routes/statistics.routes');
 const AppError = require('./utils/appError');
-const path = require('path');
 
 const app = express();
 
