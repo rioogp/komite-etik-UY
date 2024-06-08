@@ -162,7 +162,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   const user = await User.findOne({ email: req.body.email });
 
   if (!user) {
-    return next(new AppError('There is no user with email address.', 404));
+    return next(new AppError('There is no user with that email address', 404));
   }
 
   user.createPasswordResetToken();
@@ -211,20 +211,6 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
   user.passwordConfirm = req.body.passwordConfirm;
   user.passwordResetToken = undefined;
   user.passwordResetExpires = undefined;
-  await user.save();
-
-  createSendToken(user, 200, res);
-});
-
-exports.updatePassword = catchAsync(async (req, res, next) => {
-  const user = await User.findById(req.user.id).select('+password');
-
-  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
-    return next(new AppError('Your current password is wrong.', 401));
-  }
-
-  user.password = req.body.password;
-  user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
 
   createSendToken(user, 200, res);
