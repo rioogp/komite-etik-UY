@@ -1,12 +1,15 @@
 import HeadDashboard from "../../../components/HeadDashboard";
 import ChairDocumentsTable from "../../../features/documents/ketua/ChairDocumentsTable";
+import usePageTitle from "../../../hooks/usePageTitle";
 
 function DocumentsChair() {
+  usePageTitle("Konfirmasi Berkas | Komite Etik");
+
   return (
     <main>
       <HeadDashboard
         title="Pengajuan Proposal"
-        subtitle="Daftar pengajuan proposal di bawah ini"
+        subtitle="Daftar pengajuan penelitian di bawah ini"
         filters="filters"
       />
       <ChairDocumentsTable />

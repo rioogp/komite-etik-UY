@@ -7,7 +7,11 @@ function MembersTable() {
   const { isLoading, users } = useUsers();
 
   if (isLoading) {
-    return <CircularProgress />;
+    return (
+      <div className="w-full h-full text-center">
+        <CircularProgress />
+      </div>
+    );
   }
 
   const members = users.filter((user) => {

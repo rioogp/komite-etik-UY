@@ -1,14 +1,16 @@
 import Footer from "../../components/Footer";
 import Hero from "../../components/Hero";
 import MainContainer from "../../components/MainContainer";
+import usePageTitle from "../../hooks/usePageTitle";
 import GeneralQuestions from "./GeneralQuestions";
-import Rules from "./Rules";
 
 function RulesAndQuestions() {
+  usePageTitle("Pertanyaan Umum | Komite Etik");
+
   return (
     <MainContainer>
       <Hero
-        title="Peraturan & Pertanyaan"
+        title="Pertanyaan Umum"
         title2="Komite Etik Universitas Yarsi"
         typeImage="peraturan"
       />

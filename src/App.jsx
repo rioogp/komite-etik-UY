@@ -11,7 +11,6 @@ import DashboardLayout from "./components/DashboardLayout";
 import VerificationUser from "./pages/VerificationUser";
 import MeetingSchedule from "./pages/MeetingSchedule";
 import Notification from "./pages/Notification";
-import Settings from "./pages/Settings";
 import TitleProvider from "./contexts/TitleContext";
 import HomeLayout from "./components/HomeLayout";
 import Homepage from "./pages/homepage/Homepage";
@@ -20,6 +19,8 @@ import VerificationSuccess from "./pages/VerificationSuccess";
 import Reviews from "./pages/Reviews";
 import AuthProvider from "./contexts/AuthContext";
 import { FaCheck } from "react-icons/fa6";
+import { VscError } from "react-icons/vsc";
+
 import Documents from "./pages/documents/applicant/Documents";
 import Home from "./pages/Home";
 import ApplicantDocuments from "./pages/documents/admin/ApplicantDocuments";
@@ -30,6 +31,7 @@ import DocumentsChair from "./pages/documents/ketua/DocumentsChair";
 import UpdateProfile from "./pages/UpdateProfile";
 import AboutUs from "./pages/AboutUs";
 import MemberData from "./pages/MemberData";
+import TaskAndJob from "./pages/TaskAndJob";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -83,7 +85,6 @@ function App() {
               />
               <Route path="/admin/members" element={<MemberData />} />
               <Route path="/notifikasi" element={<Notification />} />
-              <Route path="/pengaturan" element={<Settings />} />
             </Route>
             <Route element={<HomeLayout />}>
               <Route index element={<Homepage />} />
@@ -95,6 +96,7 @@ function App() {
                 element={<RulesAndQuestions />}
               />
               <Route path="/ulasan" element={<Reviews />} />
+              <Route path="/tugas-dan-fungsi" element={<TaskAndJob />} />
               <Route path="*" />
             </Route>
           </Routes>
@@ -109,13 +111,22 @@ function App() {
           success: {
             duration: 3000,
             icon: (
-              <div className="w-8 h-8 bg-[#00897c] rounded-md flex justify-center items-center">
+              <div className="w-6 h-6 bg-[#00897c] rounded-md flex justify-center items-center">
                 <FaCheck />
               </div>
             ),
           },
           error: {
             duration: 5000,
+            icon: (
+              <div className="w-8 h-8 bg-[#f44336] rounded-md flex justify-center items-center">
+                <VscError color="white" size={24} />
+              </div>
+            ),
+            style: {
+              backgroundColor: "#f44336",
+              color: "white",
+            },
           },
           style: {
             fontSize: "14px",

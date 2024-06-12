@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import toast from "react-hot-toast";
 
 const useTokenValidation = (token, logout) => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const useTokenValidation = (token, logout) => {
         if (currentTime > expirationTime) {
           logout();
           navigate("/login");
+          toast.error("Sesi anda sudah berakhir, silahkan masuk kembali.");
         }
       } catch (error) {
         logout();

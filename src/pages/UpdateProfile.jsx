@@ -5,10 +5,12 @@ import { IoMdArrowBack } from "react-icons/io";
 import { useUser } from "../features/authentication/useUser";
 import EditProfileForm from "../features/authentication/EditProfileForm";
 import { useNavigate } from "react-router-dom";
+import usePageTitle from "../hooks/usePageTitle";
 
 function UpdateProfile() {
   const { user, isLoading } = useUser();
   const navigate = useNavigate();
+  usePageTitle("Perbarui Profil | Komite Etik");
 
   if (isLoading) {
     return <div>Loading...</div>;

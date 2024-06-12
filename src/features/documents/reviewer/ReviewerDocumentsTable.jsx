@@ -1,4 +1,4 @@
-import { TableCell } from "@mui/material";
+import { CircularProgress, TableCell } from "@mui/material";
 import TableStyle from "../../../components/Table";
 import ReviewerDocumentsRow from "./ReviewerDocumentsRow";
 import { useContext } from "react";
@@ -8,9 +8,13 @@ import useFilteredDocuments from "../../../hooks/useFilteredDocuments";
 function ReviewerDocumentsTable() {
   const { documents, isLoading } = useFilteredDocuments(false);
   const { userId } = useContext(AuthContext);
-  console.log(userId);
+
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-full h-full text-center">
+        <CircularProgress />
+      </div>
+    );
   }
 
   const filteredDocuments = documents.filter((doc) =>

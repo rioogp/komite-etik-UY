@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import Heading from "../components/Heading";
 import toast from "react-hot-toast";
 import { useVerification } from "../features/authentication/useVerification";
+import usePageTitle from "../hooks/usePageTitle";
 
 function VerificationUser() {
   const [timer, setTimer] = useState(60);
   const { resendVerification } = useVerification();
   const email = localStorage.getItem("email");
+  usePageTitle("Verifikasi Pengguna | Komite Etik");
 
   useEffect(() => {
     const interval = setInterval(() => {

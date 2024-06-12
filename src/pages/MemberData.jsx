@@ -1,8 +1,11 @@
 import HeadDashboard from "../components/HeadDashboard";
 import CreateUpdateFormMember from "../features/members/CreateUpdateFormMember";
 import MembersTable from "../features/members/MembersTable";
+import usePageTitle from "../hooks/usePageTitle";
 
 function MemberData() {
+  usePageTitle("Data Anggota | Komite Etik");
+
   return (
     <main>
       <HeadDashboard

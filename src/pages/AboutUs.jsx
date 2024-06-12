@@ -3,8 +3,11 @@ import Heading from "../components/Heading";
 import Hero from "../components/Hero";
 import MainContainer from "../components/MainContainer";
 import SectionColContainer from "../components/SectionColContainer";
+import usePageTitle from "../hooks/usePageTitle";
 
 function AboutUs() {
+  usePageTitle("Tentang | Komite Etik");
+
   return (
     <MainContainer>
       <Hero

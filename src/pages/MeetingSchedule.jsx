@@ -6,6 +6,7 @@ import HeadDashboard from "../components/HeadDashboard";
 import CreateAndUpdateFormMeeting from "../features/meetings/CreateAndUpdateFormMeetings";
 import { useContext } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import { CircularProgress } from "@mui/material";
 
 function MeetingSchedule() {
   const { isLoading, meetings } = useMeetings();
@@ -13,7 +14,11 @@ function MeetingSchedule() {
   usePageTitle("Jadwal Pertemuan | Komite Etik");
 
   if (isLoading || !meetings) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-full h-full flex justify-center items-center">
+        <CircularProgress />
+      </div>
+    );
   }
 
   return (

@@ -16,6 +16,7 @@ export function useSignup() {
     },
 
     onError: (err) => {
+      console.log(err);
       if (err.message.includes("username")) {
         toast.error("Username sudah terdaftar");
       } else if (err.message.includes("email")) {

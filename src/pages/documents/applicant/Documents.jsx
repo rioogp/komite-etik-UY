@@ -11,7 +11,7 @@ function Documents() {
       <HeadDashboard
         title="Berkas Penelitian"
         subtitle="Berkas penelitian yang sudah diunggah di bawah ini"
-        add="add"
+        add
         filters="filters"
         buttonAddTitle="Ajukan"
         modalTitle="Pengajuan Penelitian"

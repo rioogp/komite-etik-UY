@@ -1,12 +1,15 @@
 import HeadDashboard from "../../../components/HeadDashboard";
 import DocumentsReviewerTable from "../../../features/documents/admin/DocumentsReviewerTable";
+import usePageTitle from "../../../hooks/usePageTitle";
 
 function ReviewerDocuments() {
+  usePageTitle("Berkas Reviewer | Komite Etik");
+
   return (
     <main>
       <HeadDashboard
         title="Pengajuan Proposal"
-        subtitle="Daftar pengajuan proposal di bawah ini"
+        subtitle="Daftar pengajuan penelitian di bawah ini"
         filters="filters"
       />
       <DocumentsReviewerTable />
