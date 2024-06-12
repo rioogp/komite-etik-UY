@@ -97,7 +97,7 @@ function DocumentsRow({ data, index }) {
               </Button>
             </ModalComponent.OpenButton>
             <ModalComponent.ModalWindow
-              title="Detail Progres Penelitian"
+              title="Detil Kemajuan Penelitian"
               subtitle="Detail kemajuan proposal tersedia untuk ditinjau di bawah ini"
             >
               <StepProgressBarDocument

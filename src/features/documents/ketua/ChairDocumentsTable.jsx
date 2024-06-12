@@ -1,4 +1,4 @@
-import { TableCell } from "@mui/material";
+import { CircularProgress, TableCell } from "@mui/material";
 import TableStyle from "../../../components/Table";
 import ChairDocumentsRow from "./ChairDocumentsRow";
 import useFilteredDocuments from "../../../hooks/useFilteredDocuments";
@@ -7,7 +7,11 @@ function ChairDocumentsTable() {
   const { documents, isLoading } = useFilteredDocuments(false);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-full h-full text-center">
+        <CircularProgress />
+      </div>
+    );
   }
 
   const filteredDocuments = documents.filter(

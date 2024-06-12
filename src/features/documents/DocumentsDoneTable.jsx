@@ -1,4 +1,4 @@
-import { TableCell } from "@mui/material";
+import { CircularProgress, TableCell } from "@mui/material";
 import TableStyle from "../../components/Table";
 import DocumentsDoneRow from "./DocumentsDoneRow";
 import useFilteredDocuments from "../../hooks/useFilteredDocuments";
@@ -7,7 +7,11 @@ function DocumentsDoneTable() {
   const { documents, isLoading } = useFilteredDocuments();
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="w-full h-full text-center">
+        <CircularProgress />
+      </div>
+    );
   }
 
   const filteredDocuments = documents.filter(

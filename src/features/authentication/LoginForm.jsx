@@ -2,6 +2,7 @@ import LinkRoute from "../../components/LinkRoute";
 import HeadingAuthentication from "../../components/authentication/HeadingAuthentication";
 import {
   Button,
+  CircularProgress,
   IconButton,
   InputAdornment,
   OutlinedInput,
@@ -141,7 +142,7 @@ function LoginForm() {
           className="w-auto h-12"
           disabled={isPending}
         >
-          {isPending ? "Loading..." : "Login"}
+          {isPending ? <CircularProgress size={16} /> : "Login"}
         </Button>
       </ThemeProvider>
     </Form>

@@ -64,7 +64,7 @@ function SideNav({ onItemClick }) {
         <span>Notifikasi</span>
         <div className="flex justify-end items-end w-5/12">
           {isLoadingUnread ? (
-            <CircularProgress />
+            <CircularProgress size={16} />
           ) : unreadNotifications === 0 ? (
             ""
           ) : (
@@ -87,7 +87,7 @@ function SideNav({ onItemClick }) {
         <span>Notifikasi</span>
         <div className="flex justify-end items-end w-5/12">
           {isLoadingUnread ? (
-            <CircularProgress />
+            <CircularProgress size={16} />
           ) : unreadNotifications === 0 ? (
             ""
           ) : (
@@ -117,7 +117,7 @@ function SideNav({ onItemClick }) {
         <span>Notifikasi</span>
         <div className="flex justify-end items-end w-5/12">
           {isLoadingUnread ? (
-            <CircularProgress />
+            <CircularProgress size={16} />
           ) : unreadNotifications === 0 ? (
             ""
           ) : (
@@ -139,7 +139,7 @@ function SideNav({ onItemClick }) {
         <span>Notifikasi</span>
         <div className="flex justify-end items-end w-5/12">
           {isLoadingUnread ? (
-            <CircularProgress />
+            <CircularProgress size={16} />
           ) : unreadNotifications === 0 ? (
             ""
           ) : (

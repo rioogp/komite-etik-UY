@@ -41,7 +41,7 @@ function EditPhotoProfileForm({ user, onClose }) {
           <Avatar
             alt="User Image"
             src={preview}
-            sx={{ width: 300, height: 300 }}
+            sx={{ width: 250, height: 250 }}
           />
         </label>
         <input

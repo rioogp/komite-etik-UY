@@ -29,6 +29,7 @@ export async function updatePhotoProfile(formData) {
 
     return response.data.data;
   } catch (err) {
+    console.log(err.message);
     throw new Error(err);
   }
 }

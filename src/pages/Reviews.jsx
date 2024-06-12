@@ -3,8 +3,11 @@ import MainContainer from "../components/MainContainer";
 import Footer from "../components/Footer";
 import ReviewsInput from "../features/reviews/ReviewsInput";
 import ReviewsDisplay from "../features/reviews/ReviewsDisplay";
+import usePageTitle from "../hooks/usePageTitle";
 
 function Reviews() {
+  usePageTitle("Ulasan | Komite Etik");
+
   return (
     <MainContainer>
       <Hero

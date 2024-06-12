@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import Heading from "../../components/Heading";
 import CountUp from "react-countup";
 import { useStatistics } from "../../features/statistics/useStatistics";
@@ -24,9 +23,7 @@ function BriefInformation() {
               label="Pengguna Aktif"
             />
             <InfoBox
-              number={parseFloat(
-                statistics.percentageCompleted.replace("%", "")
-              )}
+              number={statistics.percentageCompleted.replace("%", "")}
               label="Persentase Selesai"
               isPercentage
             />
@@ -49,7 +46,7 @@ function InfoBox({ number, label, isPercentage }) {
         duration={2}
         start={0}
         suffix={isPercentage ? "%" : ""}
-        decimals={isPercentage ? 1 : 0}
+        decimals={0}
         decimal=","
         separator=""
       >

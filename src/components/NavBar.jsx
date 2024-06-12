@@ -72,8 +72,8 @@ function NavBar() {
             : "bg-transparent"
         }`}
       >
-        <Logo style="hidden sm:flex" />
-        <div className="flex xl:hidden">
+        <Logo style="flex" />
+        <div className="flex  xl:hidden">
           <button
             type="button"
             className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
@@ -88,7 +88,7 @@ function NavBar() {
         </div>
 
         <Drawer
-          anchor={isSmallScreen ? "left" : "top"}
+          anchor="top"
           open={isMenuOpen}
           onClose={handleToggleMenu}
           PaperProps={{
@@ -129,7 +129,12 @@ function NavBar() {
                 onClick={() => navigate("/peraturan-dan-pertanyaan")}
               />
             </StyledListItem>
-
+            <StyledListItem button onClick={handleToggleMenu}>
+              <ListItemText
+                primary="Tugas & Fungsi"
+                onClick={() => navigate("/peraturan-dan-pertanyaan")}
+              />
+            </StyledListItem>
             <StyledListItem button onClick={handleToggleMenu}>
               <ListItemText
                 onClick={() => navigate("/ulasan")}
@@ -143,7 +148,7 @@ function NavBar() {
               />
             </StyledListItem>
             {token ? (
-              <div className="flex">
+              <div className="flex gap-5 px-3">
                 <Button
                   variant="outlined"
                   color="info"
@@ -207,7 +212,11 @@ function NavBar() {
               Peraturan & Pertanyaan
             </NavLinkRoute>
           </li>
-
+          <li>
+            <NavLinkRoute style={style} to="/tugas-dan-fungsi">
+              Tugas & Fungsi
+            </NavLinkRoute>
+          </li>
           <li>
             <NavLinkRoute style={style} to="/ulasan">
               Ulasan

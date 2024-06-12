@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useVerification } from "../features/authentication/useVerification";
+import usePageTitle from "../hooks/usePageTitle";
 
 function VerificationSuccess() {
   const navigate = useNavigate();
   const [countdown, setCountdown] = useState(5);
   const { token } = useParams();
   const { verifyEmail } = useVerification();
+  usePageTitle("Verifikasi Berhasil | Komite Etik");
 
   useEffect(() => {
     verifyEmail(token);

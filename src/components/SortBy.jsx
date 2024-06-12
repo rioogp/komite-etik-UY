@@ -61,13 +61,13 @@ function SortBy() {
       >
         <MenuItem
           onClick={() => handleMenuItemClick("Terlama")}
-          sx={{ fontSize: "18px", fontWeight: "600" }}
+          sx={{ fontSize: "14px", fontWeight: "600" }}
         >
           Terlama
         </MenuItem>
         <MenuItem
           onClick={() => handleMenuItemClick("Terbaru")}
-          sx={{ fontSize: "18px", fontWeight: "600" }}
+          sx={{ fontSize: "14px", fontWeight: "600" }}
         >
           Terbaru
         </MenuItem>

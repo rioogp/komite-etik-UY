@@ -10,7 +10,7 @@ function ApplicantDocuments() {
     <main>
       <HeadDashboard
         title="Pengajuan Proposal"
-        subtitle="Daftar pengajuan proposal di bawah ini"
+        subtitle="Daftar pengajuan penelitian di bawah ini"
         filters="filters"
       />
       <DocumentsApplicantTable />
