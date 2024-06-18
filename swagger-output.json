@@ -9,27 +9,27 @@
   "tags": [
     {
       "name": "User",
-      "description": "User related endpoints"
+      "description": "Endpoints related to user management"
     },
     {
       "name": "Document",
-      "description": "Document related endpoints"
+      "description": "Endpoints related to document operations"
     },
     {
       "name": "Meeting",
-      "description": "Meeting related endpoints"
+      "description": "Endpoints related to meeting management"
     },
     {
       "name": "Notification",
-      "description": "Notification related endpoints"
+      "description": "Endpoints related to notification management"
     },
     {
       "name": "Review",
-      "description": "Review related endpoints"
+      "description": "Endpoints related to review operations"
     },
     {
       "name": "Statistics",
-      "description": "Statistics related endpoints"
+      "description": "Endpoints related to statistical data analysis"
     }
   ],
   "schemes": ["http"],
@@ -1089,7 +1089,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully updated the file status"
+            "description": "Successfully updated status document"
           }
         }
       }
