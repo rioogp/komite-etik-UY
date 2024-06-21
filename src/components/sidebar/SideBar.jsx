@@ -33,7 +33,6 @@ function SideBar() {
         nav.style.width = nav.offsetWidth + "px";
         nav.style.zIndex = 50;
 
-        // Menambahkan padding top pada elemen di bawah navigasi
         const mainContent = document.querySelector("main");
         if (mainContent) {
           mainContent.style.paddingTop = `${initialHeight + offset}px`;
@@ -43,7 +42,6 @@ function SideBar() {
         nav.style.left = "auto";
         nav.style.width = "100%";
 
-        // Menghapus padding top pada elemen di bawah navigasi
         const mainContent = document.querySelector("main");
         if (mainContent) {
           mainContent.style.paddingTop = "0";

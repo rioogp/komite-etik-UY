@@ -1,7 +1,7 @@
-import { Step, StepLabel, Stepper } from "@mui/material";
+import { CircularProgress, Step, StepLabel, Stepper } from "@mui/material";
 import { steps } from "../../utils/constants";
 import { useDocument } from "./useDocument";
-import { styled } from "@mui/material/styles";
+import zIndex from "@mui/material/styles/zIndex";
 
 const stepStyle = {
   padding: 2,
@@ -11,7 +11,16 @@ const stepStyle = {
       borderColor: "black",
       marginLeft: "4px",
       height: "90px",
-      marginY: "-24px",
+      marginY: "-29px",
+      zIndex: -1,
+      position: "relative",
+      "@media (max-width: 768px)": {
+        marginY: "-36px",
+      },
+      "@media (max-width: 640px)": {
+        marginY: "-45px",
+        height: "110px",
+      },
       backgroundColor: "black",
     },
   },
@@ -21,9 +30,22 @@ const stepStyle = {
       borderColor: "black",
       marginLeft: "4px",
       height: "90px",
-      marginY: "-26px",
+      marginY: "-35px",
+      zIndex: -1,
+      position: "relative",
+      "@media (max-width: 768px)": {
+        marginY: "-36px",
+      },
+      "@media (max-width: 640px)": {
+        marginY: "-45px",
+        height: "110px",
+      },
       backgroundColor: "black",
     },
+  },
+  "& .step-icon": {
+    zIndex: 1,
+    position: "relative",
   },
 };
 
@@ -38,7 +60,11 @@ function StepProgressBarDocument({ id, createdAt }) {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-full h-full text-center">
+        <CircularProgress />
+      </div>
+    );
   }
 
   const currentStepIndex = steps.findIndex(
@@ -73,7 +99,7 @@ function StepProgressBarDocument({ id, createdAt }) {
           <span className="font-bold">{formattedDate}</span>
         </p>
       </div>
-      <div className="mt-[-10px] overflow-auto">
+      <div className="mt-[-10px] overflow-auto relative">
         <Stepper
           orientation="vertical"
           activeStep={currentStepIndex}
@@ -81,13 +107,12 @@ function StepProgressBarDocument({ id, createdAt }) {
         >
           {filteredSteps.map((label, index) => (
             <Step key={label}>
-              <StepLabel
-                style={{ marginTop: "-20px", zIndex: "999" }}
-                icon={label.icon}
-              >
+              <StepLabel style={{ marginTop: "-20px" }} icon={label.icon}>
                 <div className="flex flex-col gap-1 pt-5">
-                  <span className="font-bold text-md">{label.title}</span>
-                  <div className="max-w-[42rem] text-sm">
+                  <span className="font-bold text-sm md:text-base">
+                    {label.title}
+                  </span>
+                  <div className="max-w-[42rem] text-xs md:text-sm">
                     {label.description}
                   </div>
                 </div>
