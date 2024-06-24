@@ -20,6 +20,8 @@ import { theme } from "../../utils/theme";
 import { useCreateUser } from "../authentication/useCreateUser";
 import { useUpdateUser } from "../authentication/useUpdateUser";
 import { useUserById } from "../authentication/useUserById";
+import HandleCreate from "../../components/HandleCreate";
+import HandleUpdate from "../../components/HandleUpdate";
 
 function CreateUpdateFormMember({ onClose, id }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -69,23 +71,31 @@ function CreateUpdateFormMember({ onClose, id }) {
     ) => {
       try {
         id
-          ? updateUser(
-              { name, username, email, instance, role, password, id },
-              {
-                onSettled: () => {
-                  resetForm();
-                  onClose();
-                },
-              }
+          ? HandleUpdate(
+              "Anggota",
+              "Apakah anda yakin ingin mengubah data anggota ini?",
+              "Ya",
+              () =>
+                updateUser(
+                  { name, username, email, instance, role, password, id },
+                  {
+                    onSettled: () => {
+                      resetForm();
+                      onClose();
+                    },
+                  }
+                )
             )
-          : createUser(
-              { name, username, email, instance, role, password },
-              {
-                onSettled: () => {
-                  resetForm();
-                  onClose();
-                },
-              }
+          : HandleCreate(() =>
+              createUser(
+                { name, username, email, instance, role, password },
+                {
+                  onSettled: () => {
+                    resetForm();
+                    onClose();
+                  },
+                }
+              )
             );
       } catch (error) {
         if (
@@ -115,7 +125,11 @@ function CreateUpdateFormMember({ onClose, id }) {
   }, [user, setValues]);
 
   if (isLoading) {
-    return <CircularProgress />;
+    return (
+      <div className="w-full h-full text-center">
+        <CircularProgress />
+      </div>
+    );
   }
 
   return (
@@ -240,7 +254,7 @@ function CreateUpdateFormMember({ onClose, id }) {
             style={{
               height: "2.8rem",
               fontSize: 14,
-              color: "#a8a5a2",
+              color: "#585858",
               "@media (max-width: 767.95px)": {
                 fontSize: 12,
               },

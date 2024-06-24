@@ -5,13 +5,20 @@ import { useUsers } from "../../authentication/useUsers";
 import * as Yup from "yup";
 import { ThemeProvider } from "@emotion/react";
 import { theme } from "../../../utils/theme";
-import { Button, MenuItem, OutlinedInput, Select } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  MenuItem,
+  OutlinedInput,
+  Select,
+} from "@mui/material";
 import { useUpdateReviewers } from "./useUpdateReviewers";
 import { useState } from "react";
+import HandleUpdate from "../../../components/HandleUpdate";
 
-function EditReviewerFormDocuments({ id }) {
+function EditReviewerFormDocuments({ id, onClose }) {
   const { isLoading, users } = useUsers();
-  const { updateReviewers, isUpdating } = useUpdateReviewers();
+  const { updateReviewers, isUpdating } = useUpdateReviewers(onClose);
   const [placeholderValue, setPlaceholderValue] = useState("Pilih Reviewer");
 
   const { values, handleSubmit, handleChange, handleBlur, touched, errors } =
@@ -26,11 +33,17 @@ function EditReviewerFormDocuments({ id }) {
       }),
       onSubmit: ({ reviewers }, { setSubmitting, setErrors, resetForm }) => {
         try {
-          updateReviewers(
-            { reviewers, id },
-            {
-              onSettled: () => resetForm(),
-            }
+          HandleUpdate(
+            "Reviewer",
+            "Apakah anda yakin ingin menugaskan reviewer ini?",
+            "Ya",
+            () =>
+              updateReviewers(
+                { reviewers, id },
+                {
+                  onSettled: () => resetForm(),
+                }
+              )
           );
         } catch (error) {
           if (
@@ -48,9 +61,12 @@ function EditReviewerFormDocuments({ id }) {
     });
 
   if (isLoading) {
-    return null;
+    return (
+      <div className="w-full h-full text-center">
+        <CircularProgress />
+      </div>
+    );
   }
-
   const reviewers = users.filter((user) => user.role === "reviewer");
 
   return (
@@ -73,7 +89,7 @@ function EditReviewerFormDocuments({ id }) {
               height: "2.8rem",
               fontSize: 14,
               color: "#6e6d6c",
-              "@media (max-width: 767.95px)": {
+              "@media (maxWidth: 767.95px)": {
                 fontSize: 12,
               },
             }}
@@ -88,7 +104,7 @@ function EditReviewerFormDocuments({ id }) {
               style={{
                 height: "2.8rem",
                 fontSize: 14,
-                "@media (max-width: 767.95px)": {
+                "@media (maxWidth: 767.95px)": {
                   fontSize: 12,
                 },
               }}
@@ -100,7 +116,7 @@ function EditReviewerFormDocuments({ id }) {
                 style={{
                   height: "2.8rem",
                   fontSize: 14,
-                  "@media (max-width: 767.95px)": {
+                  "@media (maxWidth: 767.95px)": {
                     fontSize: 12,
                   },
                 }}

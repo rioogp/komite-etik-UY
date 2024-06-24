@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-hot-toast";
 import { createMeeting as createMeetingApi } from "../../services/meetings";
 
-export function useCreateMeeting() {
+export function useCreateMeeting(onClose) {
   const queryClient = useQueryClient();
 
   const { mutate: createMeeting, isPending: isCreating } = useMutation({
@@ -10,6 +10,7 @@ export function useCreateMeeting() {
     onSuccess: () => {
       toast.success("Pertemuan berhasil ditambahkan!");
       queryClient.invalidateQueries("reviews");
+      onClose();
     },
     onError: (err) => {
       toast.error("Gagal membuat pertemuan!");

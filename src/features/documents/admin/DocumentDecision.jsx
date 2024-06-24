@@ -4,6 +4,7 @@ import { theme } from "../../../utils/theme";
 import { Button } from "@mui/material";
 import { useSendStatus } from "../useSendStatus";
 import { useNavigate } from "react-router-dom";
+import HandleUpdate from "../../../components/HandleUpdate";
 
 function DocumentDecision({ reviewers, id }) {
   const { sendStatus, isUpdating } = useSendStatus();
@@ -47,7 +48,15 @@ function DocumentDecision({ reviewers, id }) {
             color="success"
             className="w-44 h-12"
             disabled={isUpdating}
-            onClick={() => sendStatus({ status: "Tidak Layak", id })}
+            onClick={() =>
+              HandleUpdate(
+                "Berkas",
+                "Apakah Anda yakin ingin mengembalikan berkas ini kepada pengaju sebagai 'Tidak Layak'?",
+
+                "Ya",
+                () => sendStatus({ status: "Tidak Layak", id })
+              )
+            }
           >
             Kirim Ke Pengaju (Tidak Layak)
           </Button>
@@ -58,7 +67,15 @@ function DocumentDecision({ reviewers, id }) {
             color="success"
             className="w-44 h-12"
             disabled={isUpdating}
-            onClick={() => sendStatus({ status: "Perbaikan", id })}
+            onClick={() =>
+              HandleUpdate(
+                "Berkas",
+                "Apakah Anda yakin ingin mengembalikan berkas ini kepada pengaju sebagai 'Perbaikan'?",
+
+                "Ya",
+                () => sendStatus({ status: "Perbaikan", id })
+              )
+            }
           >
             Kirim Ke Pengaju (Perbaikan)
           </Button>
@@ -69,10 +86,17 @@ function DocumentDecision({ reviewers, id }) {
             color="success"
             className="w-44 h-12"
             disabled={isUpdating}
-            onClick={() => {
-              sendStatus({ status: "Sedang Ditandatangani", id });
-              navigate("/admin/berkas/konfirmasi-berkas");
-            }}
+            onClick={() =>
+              HandleUpdate(
+                "Berkas",
+                "Apakah Anda ingin menandatangani berkas ini?",
+                "Ya",
+                () => {
+                  sendStatus({ status: "Sedang Ditandatangani", id });
+                  navigate("/admin/berkas/konfirmasi-berkas");
+                }
+              )
+            }
           >
             Tandatangani Dokumen
           </Button>

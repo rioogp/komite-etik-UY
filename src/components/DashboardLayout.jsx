@@ -23,7 +23,7 @@ function DashboardLayout() {
           </main>
         </div>
       ) : (
-        <Navigate to="/login" />
+        <Navigate to="/" />
       )}
     </>
   );

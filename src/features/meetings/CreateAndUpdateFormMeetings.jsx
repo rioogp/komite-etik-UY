@@ -12,6 +12,8 @@ import * as Yup from "yup";
 import { useCreateMeeting } from "./useCreateMeeting";
 import { formatMeetingSchedule } from "../../utils/helpers";
 import { useUpdateMeeting } from "./useUpdateMeeting";
+import HandleCreate from "../../components/HandleCreate";
+import HandleUpdate from "../../components/HandleUpdate";
 
 const validationSchema = Yup.object({
   nameMeeting: Yup.string().required("Nama pertemuan wajib diisi").trim(),
@@ -19,8 +21,8 @@ const validationSchema = Yup.object({
 });
 
 function CreateAndUpdateFormMeeting({ id, onClose }) {
-  const { createMeeting, isCreating } = useCreateMeeting();
-  const { updateMeeting, isUpdating } = useUpdateMeeting();
+  const { createMeeting, isCreating } = useCreateMeeting(onClose);
+  const { updateMeeting, isUpdating } = useUpdateMeeting(onClose);
   const isWorking = isCreating || isUpdating;
   console.log(id);
   const {
@@ -47,29 +49,31 @@ function CreateAndUpdateFormMeeting({ id, onClose }) {
 
         console.log(isoFormattedMeetingSchedule);
         id
-          ? updateMeeting(
-              {
-                newMeetingData: {
+          ? HandleUpdate("", "", "", () =>
+              updateMeeting(
+                {
+                  newMeetingData: {
+                    nameMeeting,
+                    meetingSchedule: isoFormattedMeetingSchedule,
+                  },
+                  id,
+                },
+                {
+                  onSettled: () => resetForm(),
+                }
+              )
+            )
+          : HandleCreate(() =>
+              createMeeting(
+                {
                   nameMeeting,
                   meetingSchedule: isoFormattedMeetingSchedule,
                 },
-                id,
-              },
-              {
-                onSettled: () => resetForm(),
-              }
-            )
-          : createMeeting(
-              {
-                nameMeeting,
-                meetingSchedule: isoFormattedMeetingSchedule,
-              },
-              {
-                onSettled: () => resetForm(),
-              }
+                {
+                  onSettled: () => resetForm(),
+                }
+              )
             );
-
-        onClose();
       } catch (error) {
         if (
           error.response &&

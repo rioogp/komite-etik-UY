@@ -19,6 +19,7 @@ import { useUser } from "../../features/authentication/useUser";
 import { useUnreadNotifications } from "../../features/notifications/useUnreadNotifications";
 import { useMarkAsRead } from "../../features/notifications/useMarkAsRead";
 import { IoDocumentTextOutline } from "react-icons/io5";
+import HandleLogout from "../HandleLogout";
 
 function SideNav({ onItemClick }) {
   const { logout, role } = useContext(AuthContext);
@@ -35,11 +36,6 @@ function SideNav({ onItemClick }) {
     isActive || isNotificationPage
       ? "flex items-center gap-3 font-semibold text-sm py-3 px-6 transition-colors duration-300 bg-white text-black rounded-md"
       : "flex items-center gap-3 font-semibold text-sm py-3 px-6 transition-colors duration-300 hover:text-white hover:bg-color-secondary rounded-md";
-
-  function handleLogout() {
-    logout();
-    navigate("/", { replace: true });
-  }
 
   const handleNotificationClick = (e) => {
     e.preventDefault();
@@ -189,7 +185,7 @@ function SideNav({ onItemClick }) {
           </li>
           <li>
             <Button
-              onClick={handleLogout}
+              onClick={() => HandleLogout(logout)}
               sx={{
                 marginTop: "20px",
                 fontWeight: "600",

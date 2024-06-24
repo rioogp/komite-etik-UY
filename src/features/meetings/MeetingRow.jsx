@@ -9,6 +9,7 @@ import ModalComponent from "../../components/ModalComponent";
 import CreateAndUpdateFormMeeting from "./CreateAndUpdateFormMeetings";
 import { useContext } from "react";
 import { AuthContext } from "../../contexts/AuthContext";
+import HandleDelete from "../../components/HandleDelete";
 
 function MeetingRow({ meeting, index }) {
   const { isPending, deleteMeeting } = useDeleteMeeting();
@@ -92,7 +93,7 @@ function MeetingRow({ meeting, index }) {
                 "&:hover": { backgroundColor: "#004d54" },
               }}
               disabled={isPending}
-              onClick={() => deleteMeeting(meeting._id)}
+              onClick={() => HandleDelete(() => deleteMeeting(meeting._id))}
             >
               <LuTrash2 size={24} />
             </Button>

@@ -9,6 +9,8 @@ import { useFormik } from "formik";
 import { IoMdClose } from "react-icons/io";
 import { useCreateDocument } from "./useCreateDocument";
 import { useUpdateDocument } from "./useUpdateDocument";
+import HandleCreate from "../../components/HandleCreate";
+import HandleUpdate from "../../components/HandleUpdate";
 
 function CreateUpdateFormDocuments({ id, onClose }) {
   const { createDocument, isCreating } = useCreateDocument(onClose);
@@ -112,8 +114,12 @@ function CreateUpdateFormDocuments({ id, onClose }) {
         });
 
         id
-          ? updateDocument({ formData, id }, { onSettled: () => resetForm() })
-          : createDocument(formData, { onSettled: () => resetForm() });
+          ? HandleUpdate("", "", "", () =>
+              updateDocument({ formData, id }, { onSettled: () => resetForm() })
+            )
+          : HandleCreate(() =>
+              createDocument(formData, { onSettled: () => resetForm() })
+            );
       } catch (error) {
         console.error("Error in onSubmit:", error);
       } finally {

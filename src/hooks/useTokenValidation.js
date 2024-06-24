@@ -15,12 +15,12 @@ const useTokenValidation = (token, logout) => {
 
         if (currentTime > expirationTime) {
           logout();
-          navigate("/login");
+          navigate("/");
           toast.error("Sesi anda sudah berakhir, silahkan masuk kembali.");
         }
       } catch (error) {
         logout();
-        navigate("/login");
+        navigate("/");
       }
     }
   }, [token, logout, navigate]);

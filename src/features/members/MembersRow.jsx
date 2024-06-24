@@ -6,6 +6,7 @@ import { FaRegTrashAlt } from "react-icons/fa";
 import ModalComponent from "../../components/ModalComponent";
 import CreateUpdateFormMember from "./CreateUpdateFormMember";
 import { useDeleteUser } from "../authentication/useDeleteUser";
+import HandleDelete from "../../components/HandleDelete";
 
 function MembersRow({ data, index }) {
   const { deleteUser, isPending } = useDeleteUser();
@@ -70,7 +71,7 @@ function MembersRow({ data, index }) {
               "&:hover": { backgroundColor: "#004d54" },
             }}
             disabled={isPending}
-            onClick={() => deleteUser(data._id)}
+            onClick={() => HandleDelete(() => deleteUser(data._id))}
           >
             <FaRegTrashAlt size={22} />
           </Button>

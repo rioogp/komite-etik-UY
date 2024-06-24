@@ -12,8 +12,13 @@ function Form({ type, onSubmit, children }) {
     formStyles = modalStyles;
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSubmit(e);
+  };
+
   return (
-    <form className={`${formStyles}`} onSubmit={onSubmit}>
+    <form className={`${formStyles}`} onSubmit={handleSubmit}>
       {children}
     </form>
   );

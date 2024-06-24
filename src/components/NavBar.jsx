@@ -12,13 +12,13 @@ import {
   styled,
   ListItemIcon,
   IconButton,
-  useMediaQuery,
 } from "@mui/material";
 import { theme } from "../utils/theme";
 import { AuthContext } from "../contexts/AuthContext";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
 import useTokenValidation from "../hooks/useTokenValidation";
+import HandleLogout from "./HandleLogout";
 
 const StyledListItem = styled(ListItem)(({ theme }) => ({
   "&:hover": {
@@ -29,7 +29,6 @@ const StyledListItem = styled(ListItem)(({ theme }) => ({
 function NavBar() {
   const { logout, token } = useContext(AuthContext);
   const navigate = useNavigate();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const style =
     "text-white hover:text-slate-200 w-fit transition duration-300 text-sm";
@@ -121,7 +120,10 @@ function NavBar() {
               </IconButton>
             </ListItemIcon>
             <StyledListItem button onClick={handleToggleMenu}>
-              <ListItemText primary="Dashboard" onClick={() => navigate("/")} />
+              <ListItemText
+                primary="Dashboard"
+                onClick={() => navigate("/home")}
+              />
             </StyledListItem>
             <StyledListItem button onClick={handleToggleMenu}>
               <ListItemText
@@ -166,7 +168,7 @@ function NavBar() {
                   sx={{
                     textTransform: "none",
                   }}
-                  onClick={() => logout()}
+                  onClick={() => HandleLogout(logout)}
                   className="w-28 h-12"
                 >
                   Logout
@@ -203,7 +205,7 @@ function NavBar() {
 
         <ul className="gap-5 hidden xl:flex">
           <li>
-            <NavLinkRoute style={style} to="/">
+            <NavLinkRoute style={style} to="/home">
               Dashboard
             </NavLinkRoute>
           </li>
@@ -250,7 +252,7 @@ function NavBar() {
                   fontSize: "11.5px",
                   textTransform: "none",
                 }}
-                onClick={() => logout()}
+                onClick={() => HandleLogout(logout)}
                 className="w-24 h-9"
               >
                 Logout

@@ -66,7 +66,7 @@ function DocumentsDoneRow({ data, index }) {
             "&:hover": { backgroundColor: "#455952" },
           }}
           onClick={() => {
-            window.location.href = data.documents[0];
+            window.location.href = data.documents;
           }}
         >
           <FiDownload size={16} className="text-white" />
