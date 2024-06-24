@@ -6,7 +6,7 @@ const getActiveUsersCount = async () => await User.countDocuments();
 
 const getUploadedFilesCount = async () => {
   const documents = await Document.find();
-  return documents.reduce((acc, doc) => acc + doc.documents.length, 0);
+  return documents.length;
 };
 
 const getCompletedDocumentsCount = async () => {
@@ -19,7 +19,12 @@ exports.getStatistics = catchAsync(async (req, res, next) => {
   const uploadedFilesCount = await getUploadedFilesCount();
   const completedDocumentsCount = await getCompletedDocumentsCount();
 
-  const percentageCompleted = `${Math.round((completedDocumentsCount / uploadedFilesCount) * 100)}%`;
+  let percentageCompleted;
+  if (uploadedFilesCount === 0) {
+    percentageCompleted = '0%';
+  } else {
+    percentageCompleted = `${Math.round((completedDocumentsCount / uploadedFilesCount) * 100)}%`;
+  }
   res.status(200).json({
     status: 'success',
     data: {
