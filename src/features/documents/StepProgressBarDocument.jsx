@@ -1,7 +1,6 @@
 import { CircularProgress, Step, StepLabel, Stepper } from "@mui/material";
 import { steps } from "../../utils/constants";
 import { useDocument } from "./useDocument";
-import zIndex from "@mui/material/styles/zIndex";
 
 const stepStyle = {
   padding: 2,
@@ -66,6 +65,7 @@ function StepProgressBarDocument({ id, createdAt }) {
       </div>
     );
   }
+  console.log(document);
 
   const currentStepIndex = steps.findIndex(
     (step) => step.title === document.status
@@ -120,6 +120,21 @@ function StepProgressBarDocument({ id, createdAt }) {
             </Step>
           ))}
         </Stepper>
+        {document.status === "Perbaikan" && (
+          <div className="p-3 bg-yellow-100 rounded-md mb-5">
+            <p className="font-semibold text-base md:text-lg">
+              Pesan Reviewer:
+            </p>
+            {document.reviewers.map((reviewer, index) => (
+              <div key={index} className="mt-2 flex flex-col gap-3">
+                <p className="font-medium text-sm md:text-base">
+                  {reviewer.name}:
+                </p>
+                <p className="text-xs md:text-base">{reviewer.message}</p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

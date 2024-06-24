@@ -13,9 +13,10 @@ import {
   TextField,
 } from "@mui/material";
 import { useUpdateStatusReviewers } from "./useUpdateStatusReviewers";
+import HandleUpdate from "../../../components/HandleUpdate";
 
-function UpdateStatusFormDocuments({ id }) {
-  const { updateStatus, isUpdating } = useUpdateStatusReviewers();
+function UpdateStatusFormDocuments({ id, onClose }) {
+  const { updateStatus, isUpdating } = useUpdateStatusReviewers(onClose);
 
   const { values, handleSubmit, handleChange, handleBlur, touched, errors } =
     useFormik({
@@ -32,9 +33,15 @@ function UpdateStatusFormDocuments({ id }) {
         { setSubmitting, setErrors, resetForm }
       ) => {
         try {
-          updateStatus(
-            { status, message, id },
-            { onSettled: () => resetForm() }
+          HandleUpdate(
+            "Status",
+            "Apakah anda yakin untuk status yang sudah anda berikan pada berkas ini?",
+            "Ya",
+            () =>
+              updateStatus(
+                { status, message, id },
+                { onSettled: () => resetForm() }
+              )
           );
         } catch (error) {
           if (
@@ -103,7 +110,7 @@ function UpdateStatusFormDocuments({ id }) {
               sx={{
                 height: "2.8rem",
                 fontSize: 14,
-                color: "#a8a5a2",
+                color: "black",
                 "& .MuiOutlinedInput-root": {
                   "@media (max-width: 767.95px)": {
                     fontSize: 12,
