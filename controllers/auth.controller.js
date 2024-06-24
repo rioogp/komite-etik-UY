@@ -52,8 +52,9 @@ const sendVerificationEmail = async (user, message, res, next) => {
   } catch (error) {
     user.verificationToken = undefined;
     user.verificationExpires = undefined;
+    console.log(error.message);
     return next(
-      AppError('Failed to send verification email. Please try again.', 500),
+      new AppError('Failed to send verification email. Please try again.', 500),
     );
   }
 };

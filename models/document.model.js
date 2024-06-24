@@ -19,7 +19,7 @@ const documentSchema = new mongoose.Schema({
     minlength: 1,
   },
   documents: {
-    type: [String],
+    type: String,
     required: [true, 'Documents must be provided'],
   },
   reviewers: [

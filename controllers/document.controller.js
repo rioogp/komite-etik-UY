@@ -88,7 +88,7 @@ exports.uploadDocuments = catchAsync(async (req, res, next) => {
         nameUser: name,
         researchName: researchName,
         status: 'Sedang Diproses',
-        documents: [publicUrl],
+        documents: publicUrl,
         createdBy: _id,
       });
 
@@ -130,7 +130,7 @@ exports.updateDocuments = catchAsync(async (req, res, next) => {
     document.reviewers = [];
   }
 
-  const oldZipName = document.documents[0].split('/').pop();
+  const oldZipName = document.documents.split('/').pop();
   const oldZipFile = bucket.file(oldZipName);
 
   const [zipExists] = await oldZipFile.exists();
@@ -173,7 +173,7 @@ exports.updateDocuments = catchAsync(async (req, res, next) => {
       const publicUrl = `https://storage.googleapis.com/${bucket.name}/${zipFileName}`;
 
       document.status = status;
-      document.documents = [publicUrl];
+      document.documents = publicUrl;
       await document.save();
 
       await oldZipFile.delete();
