@@ -2,7 +2,7 @@
   "name": "komite-etik-be",
   "version": "1.0.0",
   "description": "Komite Etik Back-end",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
@@ -50,5 +50,8 @@
     "eslint-plugin-react": "^7.34.1",
     "prettier": "^3.2.5",
     "swagger-ui-express": "^5.0.1"
+  },
+  "engines": {
+    "node": "20.x"
   }
 }

@@ -42,10 +42,7 @@ router.patch(
   updatePhoto,
 );
 
-router
-  .route('/')
-  .get(getAllUsers)
-  .post(authorize, restrictTo('admin'), createUser);
+router.route('/').get(getAllUsers).post(createUser);
 
 router.route('/user').get(authorize, getUser);
 
