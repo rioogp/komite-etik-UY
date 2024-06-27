@@ -10,11 +10,10 @@ function Hero({ title, title2, typeImage, button, desc }) {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const isMediumScreen = useMediaQuery(theme.breakpoints.between("sm", "md"));
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
-  const image = `${
+  const image =
     typeImage !== "homepage"
-      ? 'bg-[url("gedung-contrast.png")]'
-      : 'bg-[url("gedung-contrast2.png")]'
-  }`;
+      ? 'bg-[url("/gedung-contrast.png")]'
+      : 'bg-[url("/gedung-contrast2.png")]';
 
   function textAnimation(text, duration) {
     return text.map((el, i) => (
@@ -35,7 +34,7 @@ function Hero({ title, title2, typeImage, button, desc }) {
   const text = title.split(" ");
   const text2 = title2 && title2.split(" ");
   const description =
-    `Di Universitas Yarsi, kami berkomitmen untuk menjunjung tinggi
+    `Di Universitas YARSI, kami berkomitmen untuk menjunjung tinggi
   nilai-nilai etika dan moral dalam setiap aspek kehidupan dan kegiatan
   akademik kami. Kode Etik Universitas Yarsi menjadi pedoman bagi semua
   anggota komunitas kami, baik mahasiswa, dosen, maupun staff, untuk
@@ -91,7 +90,7 @@ function Hero({ title, title2, typeImage, button, desc }) {
               className="w-36 sm:w-44 md:w-48 h-8 md:h-11 flex gap-3 justify-center items-center"
               onClick={() => navigate("/home")}
             >
-              Get Started <IoIosArrowRoundForward size={25} />
+              Mulai <IoIosArrowRoundForward size={25} />
             </Button>
           </ThemeProvider>
         )}

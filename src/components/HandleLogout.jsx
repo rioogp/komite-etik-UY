@@ -20,7 +20,7 @@ function HandleLogout(logout) {
       </div>
     ),
     showCancelButton: true,
-    confirmButtonText: "Logout",
+    confirmButtonText: "Keluar",
     cancelButtonText: "Batal",
     customClass: {
       popup: "rounded-lg shadow-lg w-[25rem]",

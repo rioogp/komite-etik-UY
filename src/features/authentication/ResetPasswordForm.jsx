@@ -85,9 +85,9 @@ function ResetPasswordForm({ token }) {
       />
 
       <FormRowInput>
-        <span className="font-medium text-sm">Password</span>
+        <span className="font-medium text-sm">Kata Sandi</span>
         <OutlinedInput
-          placeholder="Masukkan password"
+          placeholder="Masukkan kata sandi"
           id="password"
           type={showPassword ? "text" : "password"}
           value={values.password}
@@ -118,10 +118,10 @@ function ResetPasswordForm({ token }) {
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-sm">Konfirmasi Password</span>
+        <span className="font-medium text-sm">Konfirmasi Kata Sandi</span>
         <OutlinedInput
           id="passwordConfirm"
-          placeholder="Masukkan konfirmasi password"
+          placeholder="Masukkan konfirmasi kata sandi"
           type={showPasswordConfirm ? "text" : "password"}
           value={values.passwordConfirm}
           error={touched.passwordConfirm && Boolean(errors.passwordConfirm)}

@@ -30,7 +30,7 @@ function UpdateProfile() {
 
         <div>
           <Heading type="custom" fontSize="text-3xl">
-            Profile
+            Profil
           </Heading>
           <span className="text-color-primary text-sm md:text-md font-medium">
             Jadikan profil Anda lebih menarik

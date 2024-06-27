@@ -90,7 +90,10 @@ function AboutUs() {
           </div>
           <div className="flex flex-wrap gap-y-10 gap-x-3 items-center justify-evenly px-10">
             <div className="flex flex-col items-start justify-center gap-14">
-              <img class="object-cover h-44 w-72 rounded-3xl" src="/ahay.jpg" />
+              <img
+                class="object-cover object-[center_-20px]	h-44 w-72 rounded-3xl"
+                src="/hafidz.png"
+              />
               <span className="font-bold text-xl">
                 Hafidz Putra Herlyansyah
               </span>
@@ -99,7 +102,10 @@ function AboutUs() {
               </span>
             </div>
             <div className="flex flex-col flex-wrap items-start justify-center gap-10">
-              <img class="object-cover h-44 w-72 rounded-3xl" src="/ahay.jpg" />
+              <img
+                class="object-cover h-44 w-72 rounded-3xl"
+                src="/resthi.png"
+              />
               <span className="font-bold text-xl max-w-[16rem]">
                 Paramaresthi Windriyani, S.Kom., M.Eng.
               </span>
@@ -108,7 +114,7 @@ function AboutUs() {
               </span>
             </div>
             <div className="flex flex-col items-start justify-center gap-14">
-              <img class="object-cover h-44 w-72 rounded-3xl" src="/ahay.jpg" />
+              <img class="object-cover h-44 w-72 rounded-3xl" src="/rio.png" />
               <span className="font-bold text-xl">Rio Griya Putra</span>
               <span className="font-bold text-md text-color-secondary">
                 UI/UX Designer

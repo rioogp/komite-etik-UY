@@ -15,7 +15,9 @@ function BriefInformation() {
       </span>
       <div className="flex flex-row gap-40 flex-wrap items-center justify-center">
         {isLoading ? (
-          <CircularProgress />
+          <div className="w-full h-full text-center">
+            <CircularProgress />
+          </div>
         ) : (
           <>
             <InfoBox
@@ -23,9 +25,9 @@ function BriefInformation() {
               label="Pengguna Aktif"
             />
             <InfoBox
-              number={statistics.percentageCompleted.replace("%", "")}
+              number={statistics.percentageCompleted}
               label="Persentase Selesai"
-              isPercentage
+              isPercentage="percentage"
             />
             <InfoBox
               number={statistics.uploadedFilesCount}
@@ -49,6 +51,7 @@ function InfoBox({ number, label, isPercentage }) {
         decimals={0}
         decimal=","
         separator=""
+        delay={0}
       >
         {({ countUpRef }) => (
           <>

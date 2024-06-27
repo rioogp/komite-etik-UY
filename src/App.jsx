@@ -91,10 +91,7 @@ function App() {
               <Route index element={<Navigate replace to="homepage" />} />
               <Route path="/homepage" element={<Homepage />} />
               <Route path="/tentang" element={<AboutUs />} />
-              <Route
-                path="/peraturan-dan-pertanyaan"
-                element={<RulesAndQuestions />}
-              />
+              <Route path="/pertanyaan" element={<RulesAndQuestions />} />
               <Route path="/ulasan" element={<Reviews />} />
               <Route path="/tugas-dan-fungsi" element={<TaskAndJob />} />
               <Route path="*" />

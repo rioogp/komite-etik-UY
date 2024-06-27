@@ -13,7 +13,7 @@ function TaskAndJob() {
     <MainContainer>
       <Hero
         title="Tugas dan Fungsi"
-        title2="Universitas Yarsi"
+        title2="Universitas YARSI"
         desc="Semua tentang Tugas dan Fungsi Komite Etik Universitas YARSI"
         typeImage="homepage"
       />

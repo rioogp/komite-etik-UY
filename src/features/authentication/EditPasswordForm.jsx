@@ -90,9 +90,9 @@ function EditPasswordForm() {
   return (
     <Form type="base" onSubmit={handleSubmit}>
       <FormRowInput>
-        <span className="font-medium text-sm">Password Lama</span>
+        <span className="font-medium text-sm">Kata Sandi Lama</span>
         <OutlinedInput
-          placeholder="Masukkan password"
+          placeholder="Masukkan kata sandi"
           id="currentPassword"
           type={showCurrentPassword ? "text" : "password"}
           value={values.currentPassword}
@@ -123,9 +123,9 @@ function EditPasswordForm() {
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-sm">Password Baru</span>
+        <span className="font-medium text-sm">Kata Sandi Baru</span>
         <OutlinedInput
-          placeholder="Masukkan password"
+          placeholder="Masukkan kata sandi baru"
           id="password"
           type={showPassword ? "text" : "password"}
           value={values.password}
@@ -156,9 +156,9 @@ function EditPasswordForm() {
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-sm">Konfirmasi Password Baru</span>
+        <span className="font-medium text-sm">Konfirmasi Kata Sandi Baru</span>
         <OutlinedInput
-          placeholder="Masukkan konfirmasi password baru"
+          placeholder="Masukkan konfirmasi kata sandi baru"
           id="confirmPassword"
           type={showPasswordConfirm ? "text" : "password"}
           value={values.confirmPassword}

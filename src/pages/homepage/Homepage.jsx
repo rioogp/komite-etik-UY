@@ -13,7 +13,7 @@ function Homepage() {
     <MainContainer>
       <Hero
         title="Komite Etik"
-        title2="Universitas Yarsi"
+        title2="Universitas YARSI"
         typeImage="homepage"
       />
       <BriefInformation />

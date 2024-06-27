@@ -24,7 +24,7 @@ function ProfileCard({ user }) {
       </div>
       <Divider style={{ background: "white", width: "auto" }} />
       <div className="flex flex-col gap-6 px-8">
-        <span className="text-white text-lg md:text-xl">Contact</span>
+        <span className="text-white text-lg md:text-xl">Kontak</span>
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-start">
             <MdOutlineEmail size={22} color="white" />

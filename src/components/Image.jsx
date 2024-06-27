@@ -1,4 +1,4 @@
-function Image({ type, src, alt }) {
+function Image({ type, src, alt, onLoad }) {
   const style = {
     auth: "hidden w-3/6 xl:block object-cover h-full",
     logo: "h-14 w-full object-contain",
@@ -8,7 +8,7 @@ function Image({ type, src, alt }) {
     home: "w-auto h-auto",
   };
 
-  return <img src={src} alt={alt} className={style[type]} />;
+  return <img src={src} alt={alt} className={style[type]} onLoad={onLoad} />;
 }
 
 export default Image;
