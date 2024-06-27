@@ -127,14 +127,14 @@ function NavBar() {
             </StyledListItem>
             <StyledListItem button onClick={handleToggleMenu}>
               <ListItemText
-                primary="Peraturan & Pertanyaan"
-                onClick={() => navigate("/peraturan-dan-pertanyaan")}
+                primary="Pertanyaan"
+                onClick={() => navigate("/pertanyaan")}
               />
             </StyledListItem>
             <StyledListItem button onClick={handleToggleMenu}>
               <ListItemText
                 primary="Tugas & Fungsi"
-                onClick={() => navigate("/peraturan-dan-pertanyaan")}
+                onClick={() => navigate("/tugas-dan-fungsi")}
               />
             </StyledListItem>
             <StyledListItem button onClick={handleToggleMenu}>
@@ -160,7 +160,7 @@ function NavBar() {
                   onClick={() => navigate("/update-profile")}
                   className="w-38 h-12"
                 >
-                  Update Profile
+                  Ubah Profil
                 </Button>
                 <Button
                   variant="contained"
@@ -171,7 +171,7 @@ function NavBar() {
                   onClick={() => HandleLogout(logout)}
                   className="w-28 h-12"
                 >
-                  Logout
+                  Keluar
                 </Button>
               </div>
             ) : (
@@ -185,7 +185,7 @@ function NavBar() {
                   onClick={() => navigate("/register")}
                   className="w-28 h-12"
                 >
-                  Sign Up
+                  Daftar
                 </Button>
                 <Button
                   variant="contained"
@@ -196,7 +196,7 @@ function NavBar() {
                   onClick={() => navigate("/login")}
                   className="w-28 h-12"
                 >
-                  Sign In
+                  Masuk
                 </Button>
               </div>
             )}
@@ -210,8 +210,8 @@ function NavBar() {
             </NavLinkRoute>
           </li>
           <li>
-            <NavLinkRoute style={style} to="/peraturan-dan-pertanyaan">
-              Peraturan & Pertanyaan
+            <NavLinkRoute style={style} to="/pertanyaan">
+              Pertanyaan
             </NavLinkRoute>
           </li>
           <li>
@@ -243,7 +243,7 @@ function NavBar() {
                 className="w-26 h-9"
                 onClick={() => navigate("/update-profile")}
               >
-                Update Profile
+                Ubah Profil
               </Button>
               <Button
                 variant="contained"
@@ -255,7 +255,7 @@ function NavBar() {
                 onClick={() => HandleLogout(logout)}
                 className="w-24 h-9"
               >
-                Logout
+                Keluar
               </Button>
             </>
           ) : (
@@ -270,7 +270,7 @@ function NavBar() {
                 onClick={() => navigate("/register")}
                 className="w-24 h-9"
               >
-                Sign Up
+                Daftar
               </Button>
               <Button
                 variant="contained"
@@ -282,7 +282,7 @@ function NavBar() {
                 onClick={() => navigate("/login")}
                 className="w-24 h-9"
               >
-                Sign In
+                Masuk
               </Button>
             </>
           )}

@@ -166,8 +166,11 @@ function SideNav({ onItemClick }) {
             <Divider style={{ background: "white", width: "auto" }} />
           </li>
           <li className="flex flex-col gap-3">
-            <span className="text-sm">Profile</span>
-            <div className="flex flex-row gap-3 items-center">
+            <span className="text-sm">Profil</span>
+            <div
+              className="flex flex-row gap-3 items-center cursor-pointer"
+              onClick={() => navigate("/update-profile")}
+            >
               <Image
                 src={user?.user.photo ? user.user.photo : "/default.png"}
                 alt="profile"
@@ -197,7 +200,7 @@ function SideNav({ onItemClick }) {
               className="w-full h-9 flex gap-2 justify-center items-center"
             >
               <CiLogout size={18} />
-              Logout
+              Keluar
             </Button>
           </li>
         </ThemeProvider>

@@ -11,7 +11,7 @@ function RulesAndQuestions() {
     <MainContainer>
       <Hero
         title="Pertanyaan Umum"
-        title2="Komite Etik Universitas Yarsi"
+        title2="Komite Etik Universitas YARSI"
         typeImage="peraturan"
       />
       {/* <Rules /> */}

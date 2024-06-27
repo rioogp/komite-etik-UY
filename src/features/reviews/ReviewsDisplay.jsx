@@ -19,7 +19,7 @@ function ReviewsDisplay() {
   if (isLoading) {
     return (
       <div className="w-full text-center">
-        <CircularProgress size={60} />
+        <CircularProgress size={50} />
       </div>
     );
   }

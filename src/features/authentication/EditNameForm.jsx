@@ -25,7 +25,7 @@ function EditNameForm({ name }) {
   return (
     <Form onSubmit={handleSubmit}>
       <FormRowInput>
-        <span className="font-medium text-sm">Nama</span>
+        <span className="font-medium text-sm">Nama Lengkap</span>
         <TextField
           id="name"
           value={values.name}

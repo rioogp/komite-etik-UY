@@ -67,7 +67,7 @@ function LoginForm() {
 
   return (
     <Form type="regular" onSubmit={handleSubmit}>
-      <HeadingAuthentication title="Login" type="primary" margin="mb-8" />
+      <HeadingAuthentication title="Masuk" type="primary" margin="mb-8" />
 
       <FormRowInput>
         <span className="font-medium text-sm">Email/Username</span>
@@ -87,9 +87,9 @@ function LoginForm() {
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-sm">Password</span>
+        <span className="font-medium text-sm">Kata Sandi</span>
         <OutlinedInput
-          placeholder="Masukkan password"
+          placeholder="Masukkan kata sandi"
           id="password"
           type={showPassword ? "text" : "password"}
           value={values.password}
@@ -126,7 +126,7 @@ function LoginForm() {
         </LinkRoute>
       </span>
       <LinkRoute type="secondary" to="/forgot-password">
-        Forgot Password
+        Lupa Kata Sandi
       </LinkRoute>
       <ThemeProvider theme={theme}>
         <Button

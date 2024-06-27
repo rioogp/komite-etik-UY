@@ -55,8 +55,8 @@ function Footer() {
               Menu
             </Heading>
             <div className="flex flex-col gap-6">
-              <LinkRoute type="footer" to="/peraturan-dan-pertanyaan">
-                Pertanyaan & Peraturan
+              <LinkRoute type="footer" to="/pertanyaan">
+                Pertanyaan
               </LinkRoute>
               <LinkRoute type="footer" to="/ulasan">
                 Ulasan

@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import NotificationItem from "./NotificationItem";
 import { useNotifications } from "./useNotifications";
 
@@ -5,7 +6,11 @@ function NotificationList() {
   const { isLoading, notifications } = useNotifications();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-full h-full text-center">
+        <CircularProgress />
+      </div>
+    );
   }
 
   console.log(notifications);
