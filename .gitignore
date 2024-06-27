@@ -7,3 +7,4 @@ service.json
 logs/
 *.log
 
+.vercel
