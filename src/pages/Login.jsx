@@ -3,7 +3,7 @@ import LoginForm from "../features/authentication/LoginForm";
 import usePageTitle from "../hooks/usePageTitle";
 
 function Login() {
-  usePageTitle("Login | Komite Etik");
+  usePageTitle("Masuk | Komite Etik");
 
   return (
     <AuthenticationLayout>

@@ -5,7 +5,7 @@ import usePageTitle from "../hooks/usePageTitle";
 
 function ResetPassword() {
   const { token } = useParams();
-  usePageTitle("Ubah Password | Komite Etik");
+  usePageTitle("Ubah Kata Sandi | Komite Etik");
 
   return (
     <AuthenticationLayout>

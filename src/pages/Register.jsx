@@ -3,7 +3,7 @@ import RegisterForm from "../features/authentication/RegisterForm";
 import usePageTitle from "../hooks/usePageTitle";
 
 function Register() {
-  usePageTitle("Registrasi | Komite Etik");
+  usePageTitle("Daftar | Komite Etik");
 
   return (
     <AuthenticationLayout>
