@@ -48,7 +48,7 @@ function ForgotPasswordForm() {
   return (
     <Form type="regular" onSubmit={handleSubmit}>
       <HeadingAuthentication
-        title="Lupa Password"
+        title="Lupa Kata Sandi"
         type="primary"
         margin="mb-10"
       />

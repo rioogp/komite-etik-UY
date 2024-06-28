@@ -1,4 +1,4 @@
-import { Button, Divider } from "@mui/material";
+import { Button, CircularProgress, Divider } from "@mui/material";
 import Heading from "../components/Heading";
 import ProfileCard from "../features/authentication/ProfileCard";
 import { IoMdArrowBack } from "react-icons/io";
@@ -13,7 +13,11 @@ function UpdateProfile() {
   usePageTitle("Perbarui Profil | Komite Etik");
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="w-dvw h-dvh flex justify-center items-center">
+        <CircularProgress size={50} />
+      </div>
+    );
   }
 
   return (

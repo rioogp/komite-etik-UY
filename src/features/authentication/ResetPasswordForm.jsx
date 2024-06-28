@@ -79,7 +79,7 @@ function ResetPasswordForm({ token }) {
   return (
     <Form type="regular" onSubmit={handleSubmit}>
       <HeadingAuthentication
-        title="Ubah Password"
+        title="Ubah Kata Sandi"
         type="primary"
         margin="mb-10"
       />
