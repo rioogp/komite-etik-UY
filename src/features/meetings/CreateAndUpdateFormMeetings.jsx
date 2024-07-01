@@ -24,7 +24,7 @@ function CreateAndUpdateFormMeeting({ id, onClose }) {
   const { createMeeting, isCreating } = useCreateMeeting(onClose);
   const { updateMeeting, isUpdating } = useUpdateMeeting(onClose);
   const isWorking = isCreating || isUpdating;
-  console.log(id);
+
   const {
     handleSubmit,
     handleBlur,
@@ -80,7 +80,6 @@ function CreateAndUpdateFormMeeting({ id, onClose }) {
           error.response.data &&
           error.response.data.errors
         ) {
-          console.log(error.response.data.errors);
           setErrors(error.response.data.errors);
         }
       } finally {

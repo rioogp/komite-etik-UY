@@ -14,7 +14,7 @@ function ReviewsDisplay() {
     initialInView: true,
   });
 
-  const { reviews, isLoading, error } = useReviews();
+  const { reviews, isLoading } = useReviews();
 
   if (isLoading) {
     return (
@@ -22,10 +22,6 @@ function ReviewsDisplay() {
         <CircularProgress size={50} />
       </div>
     );
-  }
-
-  if (error) {
-    return <div>Error: {error.message}</div>;
   }
 
   if (!reviews || reviews.length === 0) {

@@ -60,14 +60,12 @@ function ResetPasswordForm({ token }) {
               onSettled: () => resetForm(),
             }
           );
-          console.log(values);
         } catch (error) {
           if (
             error.response &&
             error.response.data &&
             error.response.data.errors
           ) {
-            console.log(error.response.data.errors);
             setErrors(error.response.data.errors);
           }
         } finally {
@@ -164,7 +162,7 @@ function ResetPasswordForm({ token }) {
           className="w-auto h-14"
           disabled={isPending}
         >
-          {isPending ? "Loading..." : "Ubah Password"}
+          {isPending ? "Loading..." : "Ubah Kata Sandi"}
         </Button>
       </ThemeProvider>
     </Form>

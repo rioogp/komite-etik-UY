@@ -18,8 +18,6 @@ function ChairDocumentsTable() {
     (doc) => doc.status === "Sedang Ditandatangani"
   );
 
-  console.log(filteredDocuments);
-
   return (
     <>
       <TableStyle>

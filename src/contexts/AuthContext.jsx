@@ -1,11 +1,13 @@
 import React, { createContext, useState, useEffect } from "react";
 import { jwtDecode } from "jwt-decode"; // Perhatikan impor ini harus sesuai
 import { getCookie } from "../utils/helpers";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const AuthContext = createContext();
 
-function setCookie(name, value) {
-  document.cookie = name + "=" + (value || "") + "; path=/";
+function setCookie(name, value, days = 1) {
+  const expires = new Date(Date.now() + days * 86400000).toUTCString();
+  document.cookie = `${name}=${value}; expires=${expires}; path=/; SameSite=Strict`;
 }
 
 function deleteCookie(name) {
@@ -21,6 +23,7 @@ function decodeToken(token) {
 }
 
 function AuthProvider({ children }) {
+  const queryClient = useQueryClient();
   const initialToken = getCookie("token");
   const decoded = decodeToken(initialToken);
 
@@ -53,6 +56,7 @@ function AuthProvider({ children }) {
     setUserId("");
     setRole("");
     deleteCookie("token");
+    queryClient.clear();
   };
 
   return (

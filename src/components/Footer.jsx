@@ -21,7 +21,7 @@ function Footer() {
             fontSize="text-xl md:text-3xl"
             color="text-slate-800"
           >
-            Universitas Yarsi
+            Universitas YARSI
           </Heading>
         </div>
         <Divider />

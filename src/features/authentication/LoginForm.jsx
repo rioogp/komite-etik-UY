@@ -49,14 +49,12 @@ function LoginForm() {
               onSettled: () => resetForm(),
             }
           );
-          console.log(values);
         } catch (error) {
           if (
             error.response &&
             error.response.data &&
             error.response.data.errors
           ) {
-            console.log(error.response.data.errors);
             setErrors(error.response.data.errors);
           }
         } finally {
@@ -142,7 +140,7 @@ function LoginForm() {
           className="w-auto h-12"
           disabled={isPending}
         >
-          {isPending ? <CircularProgress size={16} /> : "Login"}
+          {isPending ? <CircularProgress size={16} /> : "Masuk"}
         </Button>
       </ThemeProvider>
     </Form>

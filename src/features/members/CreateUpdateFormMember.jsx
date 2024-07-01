@@ -306,9 +306,9 @@ function CreateUpdateFormMember({ onClose, id }) {
       </FormRowInput>
 
       <FormRowInput>
-        <span className="font-medium text-sm">Password</span>
+        <span className="font-medium text-sm">Kata Sandi</span>
         <OutlinedInput
-          placeholder="Masukkan password"
+          placeholder="Masukkan kata sandi"
           id="password"
           type={showPassword ? "text" : "password"}
           value={values.password}
