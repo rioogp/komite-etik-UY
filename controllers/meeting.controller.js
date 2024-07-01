@@ -1,6 +1,8 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const Meeting = require('../models/meeting.model');
+const User = require('../models/user.model');
+const Notification = require('../models/notification.model');
 
 const createSendMeeting = (meeting, statusCode, res) => {
   res.status(statusCode).json({
@@ -11,6 +13,9 @@ const createSendMeeting = (meeting, statusCode, res) => {
 
 exports.createMeeting = catchAsync(async (req, res, next) => {
   const { role, _id } = req.user;
+  const admin = await User.findOne({ role: 'admin' });
+  const reviewers = await User.find({ role: 'reviewer' });
+
   const meeting = await Meeting.create({
     emailUser: req.user.email,
     nameMeeting: req.body.nameMeeting,
@@ -21,6 +26,35 @@ exports.createMeeting = catchAsync(async (req, res, next) => {
   if (!Meeting.canCreateAndChange(role)) {
     return next(new AppError('Only Ketua can create a meeting', 403));
   }
+
+  const date = new Date(meeting.meetingSchedule);
+  const formattedDate = date.toLocaleDateString('id-ID', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  });
+
+  const notificationPromises = [
+    Notification.create({
+      name: 'Jadwal Pertemuan Berhasil Dibuat',
+      description: `Jadwal pertemuan berhasil dibuat, pertemuan dijadwalkan pada ${formattedDate}.`,
+      user: req.user._id,
+    }),
+    Notification.create({
+      name: 'Jadwal Pertemuan Baru',
+      description: `Jadwal pertemuan '${meeting.nameMeeting}' telah dibuat oleh ketua, pertemuan dijadwalkan pada ${formattedDate}.`,
+      user: admin._id,
+    }),
+    ...reviewers.map((reviewer) =>
+      Notification.create({
+        name: 'Jadwal Pertemuan Baru',
+        description: `Jadwal pertemuan '${meeting.nameMeeting}' telah dibuat oleh ketua, pertemuan dijadwalkan pada  ${formattedDate}.`,
+        user: reviewer._id,
+      }),
+    ),
+  ];
+
+  await Promise.all(notificationPromises);
 
   createSendMeeting(meeting, 201, res);
 });
