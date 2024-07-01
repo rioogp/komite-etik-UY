@@ -1,5 +1,4 @@
 import { CircularProgress, TableCell } from "@mui/material";
-// import Table from "../../components/table/Table";
 import TableStyle from "../../../components/Table";
 import DocumentsApplicantRow from "./DocumentsApplicantRow";
 import useFilteredDocuments from "../../../hooks/useFilteredDocuments";

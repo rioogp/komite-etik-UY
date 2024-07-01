@@ -9,7 +9,7 @@ function ApplicantDocuments() {
   return (
     <main>
       <HeadDashboard
-        title="Pengajuan Proposal"
+        title="Pengajuan Penelitian"
         subtitle="Daftar pengajuan penelitian di bawah ini"
         filters="filters"
       />
